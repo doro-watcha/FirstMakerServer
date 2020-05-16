@@ -1,7 +1,7 @@
 module.exports = {
-  host     : 'gongjangdb.cqbtkdnpve3b.ap-northeast-2.rds.amazonaws.com',
-  user     : 'gongjangjang',
-  password : 'd00m?CH!T',
+  host     : '127.0.0.1',
+  user     : 'root',
+  password : 'gusgh0705',
   port     : '3306',
-  database : 'android'
+  database : 'daehakga'
 };
