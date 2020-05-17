@@ -31,6 +31,8 @@ router.post('/set', function(req,res){
 
 router.post('/graph', function(req, res){
 
+    console.log("fuck")
+
     var query = conn.query(`SELECT subject,score,grade from score`, function(err, result) {
 
         console.log(result)
@@ -59,9 +61,12 @@ router.post('/graph', function(req, res){
 
         var total = new_korean + new_math + new_tamgu - new_english + new_history
 
-        res.send(total)
+        var object = {
+            "total" : total,
+            "success" : true
+        }
 
-        
+        res.send(object)
     })
 })
 
@@ -76,7 +81,12 @@ router.post('/list', function(req, res) {
         console.log(err)
         console.log(result)
 
-        res.send(result)
+        var object = {
+            "list" : result,
+            "success" : true
+        }
+
+        res.send(object)
 
     })
 })
@@ -93,7 +103,12 @@ router.post('/predict', function(req,res){
 
         console.log(result)
 
-        res.send(result)
+        var object = {
+            "value" : result,
+            "success" : true
+        }
+
+        res.send(object)
     })
 
 })
