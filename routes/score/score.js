@@ -94,8 +94,9 @@ router.post('/predict', function(req,res){
 
     var name = req.body.name
     var major = req.body.major
+    var type = req.body.type
 
-    var query = conn.query(`SELECT strong_val , safe_val, dangerous_val, sniping_val FROM university WHERE name=`+mysql.escape(name) +`AND major=`+mysql.escape(major), function (err, result){
+    var query = conn.query(`SELECT strong_val , safe_val, dangerous_val, sniping_val FROM university WHERE name=`+mysql.escape(name) +`AND major=`+mysql.escape(major)+`AND type=`+mysql.escape(type), function (err, result){
 
         console.log(result)
 

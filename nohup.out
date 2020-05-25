@@ -1,0 +1,620 @@
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m17.208 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.398 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.120 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.038 ms - 106[0m
+fuck
+249
+249
+[0mPOST /score/graph [32m200 [0m0.678 ms - 28[0m
+null
+[ RowDataPacket { major: '간호대학', name: '고려대' },
+  RowDataPacket { major: '경영학과', name: '고려대' },
+  RowDataPacket { major: '경제학과', name: '고려대' },
+  RowDataPacket { major: '교육학과', name: '고려대' },
+  RowDataPacket { major: '국어교육과', name: '고려대' },
+  RowDataPacket { major: '국어국문학과', name: '고려대' },
+  RowDataPacket { major: '노어노문학과', name: '고려대' },
+  RowDataPacket { major: '독어독문학과', name: '고려대' },
+  RowDataPacket { major: '미디어학부', name: '고려대' },
+  RowDataPacket { major: '보건정책관리학부', name: '고려대' },
+  RowDataPacket { major: '불어불문학과', name: '고려대' },
+  RowDataPacket { major: '사학과', name: '고려대' },
+  RowDataPacket { major: '사회학과', name: '고려대' },
+  RowDataPacket { major: '서어서문학과', name: '고려대' },
+  RowDataPacket { major: '식품자원경제학과', name: '고려대' },
+  RowDataPacket { major: '심리학과', name: '고려대' },
+  RowDataPacket { major: '언어학과', name: '고려대' },
+  RowDataPacket { major: '역사교육과', name: '고려대' },
+  RowDataPacket { major: '영어교육과', name: '고려대' },
+  RowDataPacket { major: '영어영문학과', name: '고려대' },
+  RowDataPacket { major: '일어일문학과', name: '고려대' },
+  RowDataPacket { major: '자유전공학부', name: '고려대' },
+  RowDataPacket { major: '정치외교학과', name: '고려대' },
+  RowDataPacket { major: '지리교육과', name: '고려대' },
+  RowDataPacket { major: '철학과', name: '고려대' },
+  RowDataPacket { major: '컴퓨터학과', name: '고려대' },
+  RowDataPacket { major: '통계학과', name: '고려대' },
+  RowDataPacket { major: '한국사학과', name: '고려대' },
+  RowDataPacket { major: '한문학과', name: '고려대' },
+  RowDataPacket { major: '행정학과', name: '고려대' },
+  RowDataPacket { major: '중어중문학과', name: '고려대' } ]
+[0mPOST /score/list [32m200 [0m1.624 ms - 1488[0m
+{ major: '간호대학', name: '고려대', type: 0 }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.136 ms - 106[0m
+fuck
+249
+249
+[0mPOST /score/graph [32m200 [0m0.423 ms - 28[0m
+null
+[ RowDataPacket { major: '간호대학', name: '고려대' },
+  RowDataPacket { major: '경영학과', name: '고려대' },
+  RowDataPacket { major: '경제학과', name: '고려대' },
+  RowDataPacket { major: '교육학과', name: '고려대' },
+  RowDataPacket { major: '국어교육과', name: '고려대' },
+  RowDataPacket { major: '국어국문학과', name: '고려대' },
+  RowDataPacket { major: '노어노문학과', name: '고려대' },
+  RowDataPacket { major: '독어독문학과', name: '고려대' },
+  RowDataPacket { major: '미디어학부', name: '고려대' },
+  RowDataPacket { major: '보건정책관리학부', name: '고려대' },
+  RowDataPacket { major: '불어불문학과', name: '고려대' },
+  RowDataPacket { major: '사학과', name: '고려대' },
+  RowDataPacket { major: '사회학과', name: '고려대' },
+  RowDataPacket { major: '서어서문학과', name: '고려대' },
+  RowDataPacket { major: '식품자원경제학과', name: '고려대' },
+  RowDataPacket { major: '심리학과', name: '고려대' },
+  RowDataPacket { major: '언어학과', name: '고려대' },
+  RowDataPacket { major: '역사교육과', name: '고려대' },
+  RowDataPacket { major: '영어교육과', name: '고려대' },
+  RowDataPacket { major: '영어영문학과', name: '고려대' },
+  RowDataPacket { major: '일어일문학과', name: '고려대' },
+  RowDataPacket { major: '자유전공학부', name: '고려대' },
+  RowDataPacket { major: '정치외교학과', name: '고려대' },
+  RowDataPacket { major: '지리교육과', name: '고려대' },
+  RowDataPacket { major: '철학과', name: '고려대' },
+  RowDataPacket { major: '컴퓨터학과', name: '고려대' },
+  RowDataPacket { major: '통계학과', name: '고려대' },
+  RowDataPacket { major: '한국사학과', name: '고려대' },
+  RowDataPacket { major: '한문학과', name: '고려대' },
+  RowDataPacket { major: '행정학과', name: '고려대' },
+  RowDataPacket { major: '중어중문학과', name: '고려대' } ]
+[0mPOST /score/list [32m200 [0m1.453 ms - 1488[0m
+{ major: '간호대학', name: '고려대', type: 0 }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.084 ms - 106[0m
+fuck
+249
+249
+[0mPOST /score/graph [32m200 [0m0.356 ms - 28[0m
+null
+[ RowDataPacket { major: '가정교육과', name: '고려대' },
+  RowDataPacket { major: '간호대학', name: '고려대' },
+  RowDataPacket { major: '건축학과', name: '고려대' },
+  RowDataPacket { major: '건축사회환경공학부', name: '고려대' },
+  RowDataPacket { major: '기계공학부', name: '고려대' },
+  RowDataPacket { major: '물리학과', name: '고려대' },
+  RowDataPacket { major: '바이오시스템의과학부', name: '고려대' },
+  RowDataPacket { major: '바이오의공학부', name: '고려대' },
+  RowDataPacket { major: '보건환경융합과학부', name: '고려대' },
+  RowDataPacket { major: '사이버국방학과', name: '고려대' },
+  RowDataPacket { major: '산업경영공학부', name: '고려대' },
+  RowDataPacket { major: '생명공학부', name: '고려대' },
+  RowDataPacket { major: '생명과학부', name: '고려대' },
+  RowDataPacket { major: '수학과', name: '고려대' },
+  RowDataPacket { major: '수학교육과', name: '고려대' },
+  RowDataPacket { major: '식품공학과', name: '고려대' },
+  RowDataPacket { major: '신소재공학부', name: '고려대' },
+  RowDataPacket { major: '의예과', name: '고려대' },
+  RowDataPacket { major: '전기전자공학부', name: '고려대' },
+  RowDataPacket { major: '지구환경과학과', name: '고려대' },
+  RowDataPacket { major: '컴퓨터학과', name: '고려대' },
+  RowDataPacket { major: '화공생명공학과', name: '고려대' },
+  RowDataPacket { major: '화학과', name: '고려대' },
+  RowDataPacket { major: '환경생태공학부', name: '고려대' } ]
+[0mPOST /score/list [32m200 [0m5.322 ms - 1210[0m
+{ major: '사이버국방학과', name: '고려대', type: 1 }
+[ RowDataPacket {
+    strong_val: 540.4,
+    safe_val: 533.8,
+    dangerous_val: 530.4,
+    sniping_val: 524.8 } ]
+[0mPOST /score/predict [32m200 [0m0.981 ms - 106[0m
+fuck
+160
+160
+[0mPOST /score/graph [32m200 [0m0.333 ms - 28[0m
+fuck
+198
+219
+[0mPOST /score/graph [32m200 [0m0.349 ms - 28[0m
+null
+[ RowDataPacket { major: '가정교육과', name: '고려대' },
+  RowDataPacket { major: '간호대학', name: '고려대' },
+  RowDataPacket { major: '건축학과', name: '고려대' },
+  RowDataPacket { major: '건축사회환경공학부', name: '고려대' },
+  RowDataPacket { major: '기계공학부', name: '고려대' },
+  RowDataPacket { major: '물리학과', name: '고려대' },
+  RowDataPacket { major: '바이오시스템의과학부', name: '고려대' },
+  RowDataPacket { major: '바이오의공학부', name: '고려대' },
+  RowDataPacket { major: '보건환경융합과학부', name: '고려대' },
+  RowDataPacket { major: '사이버국방학과', name: '고려대' },
+  RowDataPacket { major: '산업경영공학부', name: '고려대' },
+  RowDataPacket { major: '생명공학부', name: '고려대' },
+  RowDataPacket { major: '생명과학부', name: '고려대' },
+  RowDataPacket { major: '수학과', name: '고려대' },
+  RowDataPacket { major: '수학교육과', name: '고려대' },
+  RowDataPacket { major: '식품공학과', name: '고려대' },
+  RowDataPacket { major: '신소재공학부', name: '고려대' },
+  RowDataPacket { major: '의예과', name: '고려대' },
+  RowDataPacket { major: '전기전자공학부', name: '고려대' },
+  RowDataPacket { major: '지구환경과학과', name: '고려대' },
+  RowDataPacket { major: '컴퓨터학과', name: '고려대' },
+  RowDataPacket { major: '화공생명공학과', name: '고려대' },
+  RowDataPacket { major: '화학과', name: '고려대' },
+  RowDataPacket { major: '환경생태공학부', name: '고려대' } ]
+[0mPOST /score/list [32m200 [0m1.226 ms - 1210[0m
+{ major: '사이버국방학과', name: '고려대', type: 1 }
+[ RowDataPacket {
+    strong_val: 540.4,
+    safe_val: 533.8,
+    dangerous_val: 530.4,
+    sniping_val: 524.8 } ]
+[0mPOST /score/predict [32m200 [0m1.059 ms - 106[0m
+fuck
+180
+199
+[0mPOST /score/graph [32m200 [0m0.337 ms - 28[0m
+null
+[ RowDataPacket { major: '간호대학', name: '고려대' },
+  RowDataPacket { major: '경영학과', name: '고려대' },
+  RowDataPacket { major: '경제학과', name: '고려대' },
+  RowDataPacket { major: '교육학과', name: '고려대' },
+  RowDataPacket { major: '국어교육과', name: '고려대' },
+  RowDataPacket { major: '국어국문학과', name: '고려대' },
+  RowDataPacket { major: '노어노문학과', name: '고려대' },
+  RowDataPacket { major: '독어독문학과', name: '고려대' },
+  RowDataPacket { major: '미디어학부', name: '고려대' },
+  RowDataPacket { major: '보건정책관리학부', name: '고려대' },
+  RowDataPacket { major: '불어불문학과', name: '고려대' },
+  RowDataPacket { major: '사학과', name: '고려대' },
+  RowDataPacket { major: '사회학과', name: '고려대' },
+  RowDataPacket { major: '서어서문학과', name: '고려대' },
+  RowDataPacket { major: '식품자원경제학과', name: '고려대' },
+  RowDataPacket { major: '심리학과', name: '고려대' },
+  RowDataPacket { major: '언어학과', name: '고려대' },
+  RowDataPacket { major: '역사교육과', name: '고려대' },
+  RowDataPacket { major: '영어교육과', name: '고려대' },
+  RowDataPacket { major: '영어영문학과', name: '고려대' },
+  RowDataPacket { major: '일어일문학과', name: '고려대' },
+  RowDataPacket { major: '자유전공학부', name: '고려대' },
+  RowDataPacket { major: '정치외교학과', name: '고려대' },
+  RowDataPacket { major: '지리교육과', name: '고려대' },
+  RowDataPacket { major: '철학과', name: '고려대' },
+  RowDataPacket { major: '컴퓨터학과', name: '고려대' },
+  RowDataPacket { major: '통계학과', name: '고려대' },
+  RowDataPacket { major: '한국사학과', name: '고려대' },
+  RowDataPacket { major: '한문학과', name: '고려대' },
+  RowDataPacket { major: '행정학과', name: '고려대' },
+  RowDataPacket { major: '중어중문학과', name: '고려대' } ]
+[0mPOST /score/list [32m200 [0m1.414 ms - 1488[0m
+{ major: '보건정책관리학부', name: '고려대', type: 0 }
+[ RowDataPacket {
+    strong_val: 684.2,
+    safe_val: 679.1,
+    dangerous_val: 673.5,
+    sniping_val: 670.6 } ]
+[0mPOST /score/predict [32m200 [0m1.057 ms - 106[0m
+fuck
+249
+249
+[0mPOST /score/graph [32m200 [0m0.332 ms - 28[0m
+null
+[ RowDataPacket { major: '간호대학', name: '고려대' },
+  RowDataPacket { major: '경영학과', name: '고려대' },
+  RowDataPacket { major: '경제학과', name: '고려대' },
+  RowDataPacket { major: '교육학과', name: '고려대' },
+  RowDataPacket { major: '국어교육과', name: '고려대' },
+  RowDataPacket { major: '국어국문학과', name: '고려대' },
+  RowDataPacket { major: '노어노문학과', name: '고려대' },
+  RowDataPacket { major: '독어독문학과', name: '고려대' },
+  RowDataPacket { major: '미디어학부', name: '고려대' },
+  RowDataPacket { major: '보건정책관리학부', name: '고려대' },
+  RowDataPacket { major: '불어불문학과', name: '고려대' },
+  RowDataPacket { major: '사학과', name: '고려대' },
+  RowDataPacket { major: '사회학과', name: '고려대' },
+  RowDataPacket { major: '서어서문학과', name: '고려대' },
+  RowDataPacket { major: '식품자원경제학과', name: '고려대' },
+  RowDataPacket { major: '심리학과', name: '고려대' },
+  RowDataPacket { major: '언어학과', name: '고려대' },
+  RowDataPacket { major: '역사교육과', name: '고려대' },
+  RowDataPacket { major: '영어교육과', name: '고려대' },
+  RowDataPacket { major: '영어영문학과', name: '고려대' },
+  RowDataPacket { major: '일어일문학과', name: '고려대' },
+  RowDataPacket { major: '자유전공학부', name: '고려대' },
+  RowDataPacket { major: '정치외교학과', name: '고려대' },
+  RowDataPacket { major: '지리교육과', name: '고려대' },
+  RowDataPacket { major: '철학과', name: '고려대' },
+  RowDataPacket { major: '컴퓨터학과', name: '고려대' },
+  RowDataPacket { major: '통계학과', name: '고려대' },
+  RowDataPacket { major: '한국사학과', name: '고려대' },
+  RowDataPacket { major: '한문학과', name: '고려대' },
+  RowDataPacket { major: '행정학과', name: '고려대' },
+  RowDataPacket { major: '중어중문학과', name: '고려대' } ]
+[0mPOST /score/list [32m200 [0m3.293 ms - 1488[0m
+{ major: '보건정책관리학부', name: '고려대', type: 0 }
+[ RowDataPacket {
+    strong_val: 684.2,
+    safe_val: 679.1,
+    dangerous_val: 673.5,
+    sniping_val: 670.6 } ]
+[0mPOST /score/predict [32m200 [0m1.048 ms - 106[0m
+fuck
+249
+249
+[0mPOST /score/graph [32m200 [0m0.340 ms - 28[0m
+null
+[ RowDataPacket { major: '간호대학', name: '고려대' },
+  RowDataPacket { major: '경영학과', name: '고려대' },
+  RowDataPacket { major: '경제학과', name: '고려대' },
+  RowDataPacket { major: '교육학과', name: '고려대' },
+  RowDataPacket { major: '국어교육과', name: '고려대' },
+  RowDataPacket { major: '국어국문학과', name: '고려대' },
+  RowDataPacket { major: '노어노문학과', name: '고려대' },
+  RowDataPacket { major: '독어독문학과', name: '고려대' },
+  RowDataPacket { major: '미디어학부', name: '고려대' },
+  RowDataPacket { major: '보건정책관리학부', name: '고려대' },
+  RowDataPacket { major: '불어불문학과', name: '고려대' },
+  RowDataPacket { major: '사학과', name: '고려대' },
+  RowDataPacket { major: '사회학과', name: '고려대' },
+  RowDataPacket { major: '서어서문학과', name: '고려대' },
+  RowDataPacket { major: '식품자원경제학과', name: '고려대' },
+  RowDataPacket { major: '심리학과', name: '고려대' },
+  RowDataPacket { major: '언어학과', name: '고려대' },
+  RowDataPacket { major: '역사교육과', name: '고려대' },
+  RowDataPacket { major: '영어교육과', name: '고려대' },
+  RowDataPacket { major: '영어영문학과', name: '고려대' },
+  RowDataPacket { major: '일어일문학과', name: '고려대' },
+  RowDataPacket { major: '자유전공학부', name: '고려대' },
+  RowDataPacket { major: '정치외교학과', name: '고려대' },
+  RowDataPacket { major: '지리교육과', name: '고려대' },
+  RowDataPacket { major: '철학과', name: '고려대' },
+  RowDataPacket { major: '컴퓨터학과', name: '고려대' },
+  RowDataPacket { major: '통계학과', name: '고려대' },
+  RowDataPacket { major: '한국사학과', name: '고려대' },
+  RowDataPacket { major: '한문학과', name: '고려대' },
+  RowDataPacket { major: '행정학과', name: '고려대' },
+  RowDataPacket { major: '중어중문학과', name: '고려대' } ]
+[0mPOST /score/list [32m200 [0m1.454 ms - 1488[0m
+null
+[ RowDataPacket { major: '간호대학', name: '고려대' },
+  RowDataPacket { major: '경영학과', name: '고려대' },
+  RowDataPacket { major: '경제학과', name: '고려대' },
+  RowDataPacket { major: '교육학과', name: '고려대' },
+  RowDataPacket { major: '국어교육과', name: '고려대' },
+  RowDataPacket { major: '국어국문학과', name: '고려대' },
+  RowDataPacket { major: '노어노문학과', name: '고려대' },
+  RowDataPacket { major: '독어독문학과', name: '고려대' },
+  RowDataPacket { major: '미디어학부', name: '고려대' },
+  RowDataPacket { major: '보건정책관리학부', name: '고려대' },
+  RowDataPacket { major: '불어불문학과', name: '고려대' },
+  RowDataPacket { major: '사학과', name: '고려대' },
+  RowDataPacket { major: '사회학과', name: '고려대' },
+  RowDataPacket { major: '서어서문학과', name: '고려대' },
+  RowDataPacket { major: '식품자원경제학과', name: '고려대' },
+  RowDataPacket { major: '심리학과', name: '고려대' },
+  RowDataPacket { major: '언어학과', name: '고려대' },
+  RowDataPacket { major: '역사교육과', name: '고려대' },
+  RowDataPacket { major: '영어교육과', name: '고려대' },
+  RowDataPacket { major: '영어영문학과', name: '고려대' },
+  RowDataPacket { major: '일어일문학과', name: '고려대' },
+  RowDataPacket { major: '자유전공학부', name: '고려대' },
+  RowDataPacket { major: '정치외교학과', name: '고려대' },
+  RowDataPacket { major: '지리교육과', name: '고려대' },
+  RowDataPacket { major: '철학과', name: '고려대' },
+  RowDataPacket { major: '컴퓨터학과', name: '고려대' },
+  RowDataPacket { major: '통계학과', name: '고려대' },
+  RowDataPacket { major: '한국사학과', name: '고려대' },
+  RowDataPacket { major: '한문학과', name: '고려대' },
+  RowDataPacket { major: '행정학과', name: '고려대' },
+  RowDataPacket { major: '중어중문학과', name: '고려대' } ]
+[0mPOST /score/list [32m200 [0m1.349 ms - 1488[0m
+{ major: '보건정책관리학부', name: '고려대', type: 0 }
+[ RowDataPacket {
+    strong_val: 684.2,
+    safe_val: 679.1,
+    dangerous_val: 673.5,
+    sniping_val: 670.6 } ]
+[0mPOST /score/predict [32m200 [0m1.096 ms - 106[0m
+fuck
+249
+249
+[0mPOST /score/graph [32m200 [0m5.950 ms - 28[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m12.314 ms - 106[0m
+null
+[ RowDataPacket { major: '간호대학', name: '고려대' },
+  RowDataPacket { major: '경영학과', name: '고려대' },
+  RowDataPacket { major: '경제학과', name: '고려대' },
+  RowDataPacket { major: '교육학과', name: '고려대' },
+  RowDataPacket { major: '국어교육과', name: '고려대' },
+  RowDataPacket { major: '국어국문학과', name: '고려대' },
+  RowDataPacket { major: '노어노문학과', name: '고려대' },
+  RowDataPacket { major: '독어독문학과', name: '고려대' },
+  RowDataPacket { major: '미디어학부', name: '고려대' },
+  RowDataPacket { major: '보건정책관리학부', name: '고려대' },
+  RowDataPacket { major: '불어불문학과', name: '고려대' },
+  RowDataPacket { major: '사학과', name: '고려대' },
+  RowDataPacket { major: '사회학과', name: '고려대' },
+  RowDataPacket { major: '서어서문학과', name: '고려대' },
+  RowDataPacket { major: '식품자원경제학과', name: '고려대' },
+  RowDataPacket { major: '심리학과', name: '고려대' },
+  RowDataPacket { major: '언어학과', name: '고려대' },
+  RowDataPacket { major: '역사교육과', name: '고려대' },
+  RowDataPacket { major: '영어교육과', name: '고려대' },
+  RowDataPacket { major: '영어영문학과', name: '고려대' },
+  RowDataPacket { major: '일어일문학과', name: '고려대' },
+  RowDataPacket { major: '자유전공학부', name: '고려대' },
+  RowDataPacket { major: '정치외교학과', name: '고려대' },
+  RowDataPacket { major: '지리교육과', name: '고려대' },
+  RowDataPacket { major: '철학과', name: '고려대' },
+  RowDataPacket { major: '컴퓨터학과', name: '고려대' },
+  RowDataPacket { major: '통계학과', name: '고려대' },
+  RowDataPacket { major: '한국사학과', name: '고려대' },
+  RowDataPacket { major: '한문학과', name: '고려대' },
+  RowDataPacket { major: '행정학과', name: '고려대' },
+  RowDataPacket { major: '중어중문학과', name: '고려대' } ]
+[0mPOST /score/list [32m200 [0m1.996 ms - 1488[0m
+null
+[ RowDataPacket { major: '간호대학', name: '고려대' },
+  RowDataPacket { major: '경영학과', name: '고려대' },
+  RowDataPacket { major: '경제학과', name: '고려대' },
+  RowDataPacket { major: '교육학과', name: '고려대' },
+  RowDataPacket { major: '국어교육과', name: '고려대' },
+  RowDataPacket { major: '국어국문학과', name: '고려대' },
+  RowDataPacket { major: '노어노문학과', name: '고려대' },
+  RowDataPacket { major: '독어독문학과', name: '고려대' },
+  RowDataPacket { major: '미디어학부', name: '고려대' },
+  RowDataPacket { major: '보건정책관리학부', name: '고려대' },
+  RowDataPacket { major: '불어불문학과', name: '고려대' },
+  RowDataPacket { major: '사학과', name: '고려대' },
+  RowDataPacket { major: '사회학과', name: '고려대' },
+  RowDataPacket { major: '서어서문학과', name: '고려대' },
+  RowDataPacket { major: '식품자원경제학과', name: '고려대' },
+  RowDataPacket { major: '심리학과', name: '고려대' },
+  RowDataPacket { major: '언어학과', name: '고려대' },
+  RowDataPacket { major: '역사교육과', name: '고려대' },
+  RowDataPacket { major: '영어교육과', name: '고려대' },
+  RowDataPacket { major: '영어영문학과', name: '고려대' },
+  RowDataPacket { major: '일어일문학과', name: '고려대' },
+  RowDataPacket { major: '자유전공학부', name: '고려대' },
+  RowDataPacket { major: '정치외교학과', name: '고려대' },
+  RowDataPacket { major: '지리교육과', name: '고려대' },
+  RowDataPacket { major: '철학과', name: '고려대' },
+  RowDataPacket { major: '컴퓨터학과', name: '고려대' },
+  RowDataPacket { major: '통계학과', name: '고려대' },
+  RowDataPacket { major: '한국사학과', name: '고려대' },
+  RowDataPacket { major: '한문학과', name: '고려대' },
+  RowDataPacket { major: '행정학과', name: '고려대' },
+  RowDataPacket { major: '중어중문학과', name: '고려대' } ]
+[0mPOST /score/list [32m200 [0m17.234 ms - 1488[0m
+events.js:174
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (net.js:1280:14)
+    at listenInCluster (net.js:1328:12)
+    at Server.listen (net.js:1415:7)
+    at Function.listen (/home/ec2-user/src/node_modules/express/lib/application.js:618:24)
+    at Object.<anonymous> (/home/ec2-user/src/app.js:61:5)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+Emitted 'error' event at:
+    at emitErrorNT (net.js:1307:8)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:834:11)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m2.185 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.157 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.011 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m18.129 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.370 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.137 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.018 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.057 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.133 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.053 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.098 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.035 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m18.056 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.384 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.119 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.114 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m1.079 ms - 106[0m
+fuck
+249
+249
+[0mPOST /score/graph [32m200 [0m0.672 ms - 28[0m
+null
+[ RowDataPacket { major: '간호대학', name: '고려대' },
+  RowDataPacket { major: '경영학과', name: '고려대' },
+  RowDataPacket { major: '경제학과', name: '고려대' },
+  RowDataPacket { major: '교육학과', name: '고려대' },
+  RowDataPacket { major: '국어교육과', name: '고려대' },
+  RowDataPacket { major: '국어국문학과', name: '고려대' },
+  RowDataPacket { major: '노어노문학과', name: '고려대' },
+  RowDataPacket { major: '독어독문학과', name: '고려대' },
+  RowDataPacket { major: '미디어학부', name: '고려대' },
+  RowDataPacket { major: '보건정책관리학부', name: '고려대' },
+  RowDataPacket { major: '불어불문학과', name: '고려대' },
+  RowDataPacket { major: '사학과', name: '고려대' },
+  RowDataPacket { major: '사회학과', name: '고려대' },
+  RowDataPacket { major: '서어서문학과', name: '고려대' },
+  RowDataPacket { major: '식품자원경제학과', name: '고려대' },
+  RowDataPacket { major: '심리학과', name: '고려대' },
+  RowDataPacket { major: '언어학과', name: '고려대' },
+  RowDataPacket { major: '역사교육과', name: '고려대' },
+  RowDataPacket { major: '영어교육과', name: '고려대' },
+  RowDataPacket { major: '영어영문학과', name: '고려대' },
+  RowDataPacket { major: '일어일문학과', name: '고려대' },
+  RowDataPacket { major: '자유전공학부', name: '고려대' },
+  RowDataPacket { major: '정치외교학과', name: '고려대' },
+  RowDataPacket { major: '지리교육과', name: '고려대' },
+  RowDataPacket { major: '철학과', name: '고려대' },
+  RowDataPacket { major: '컴퓨터학과', name: '고려대' },
+  RowDataPacket { major: '통계학과', name: '고려대' },
+  RowDataPacket { major: '한국사학과', name: '고려대' },
+  RowDataPacket { major: '한문학과', name: '고려대' },
+  RowDataPacket { major: '행정학과', name: '고려대' },
+  RowDataPacket { major: '중어중문학과', name: '고려대' } ]
+[0mPOST /score/list [32m200 [0m1.709 ms - 1488[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[ RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8 } ]
+[0mPOST /score/predict [32m200 [0m17.520 ms - 106[0m
