@@ -1,9 +1,9 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
+import createError from 'http-errors'
+import express from 'express'
+import path from 'path'
+import cookieParser from 'cookie-parser'
+import logger from 'morgan'
+import bodyParser from 'body-parser'
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/user/login');

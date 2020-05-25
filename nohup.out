@@ -618,3 +618,44 @@ null
     dangerous_val: 682.8,
     sniping_val: 680.8 } ]
 [0mPOST /score/predict [32m200 [0m17.520 ms - 106[0m
+[0mGET / [36m304 [0m161.731 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.937 ms - -[0m
+[0mGET / [36m304 [0m8.889 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.315 ms - -[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[
+  RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8
+  }
+]
+[0mPOST /score/predict [32m200 [0m12.307 ms - 106[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[
+  RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8
+  }
+]
+[0mPOST /score/predict [32m200 [0m1.914 ms - 106[0m
+nohup: list: No such file or directory
+[0mGET / [36m304 [0m12.983 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.346 ms - -[0m
+[0mGET / [36m304 [0m8.568 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.286 ms - -[0m
+[0mGET / [36m304 [0m12.465 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.313 ms - -[0m
+{ name: '고려대', type: '0', major: '간호대학' }
+[
+  RowDataPacket {
+    strong_val: 690.5,
+    safe_val: 685.5,
+    dangerous_val: 682.8,
+    sniping_val: 680.8
+  }
+]
+[0mPOST /score/predict [32m200 [0m5.022 ms - 106[0m
