@@ -1,6 +1,6 @@
-var UniversityController = require ( './university' )
+import universityController from  './university' 
 
 module.exports = {
 
-    UniversityController
+    universityController
 }

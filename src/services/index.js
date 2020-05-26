@@ -1,4 +1,4 @@
-var universityService = require ( './university')
+import universityService from './university'
 
 
 module.exports = {

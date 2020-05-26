@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var dbconfig = require('../database.js');
 var conn = mysql.createConnection(dbconfig);
 
-var { universityController } = require ( '../../controllers' )
+import { universityController } from '../../controllers'
 
 var app = express();
 
@@ -115,7 +115,9 @@ router.post('/predict', function(req,res){
 
 })
 
-router.post('/get', function(req, res) {
+router.post('/get2',(req, res)  => {
+    console.log("good")
+
     universityController.predict(req,res)
 })
 
