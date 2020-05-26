@@ -1,7 +1,13 @@
 "use strict";
 
-var universityService = require('./university');
+var _university = _interopRequireDefault(require("./university"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
 
 module.exports = {
-  universityService: universityService
+  universityService: _university.default
 };

@@ -12,11 +12,11 @@ var _morgan = _interopRequireDefault(require("morgan"));
 
 var _bodyParser = _interopRequireDefault(require("body-parser"));
 
+var _swaggerDoc = _interopRequireDefault(require("./swaggerDoc"));
+
+var _index = _interopRequireDefault(require("./routes/index"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var indexRouter = require('./routes/index');
-
-var universityRouter = require('./routes/university/university');
 
 var app = (0, _express.default)(); // view engine setup
 
@@ -33,8 +33,8 @@ app.use(_express.default.static(_path.default.join(__dirname, 'public')));
 app.use(_bodyParser.default.urlencoded({
   extended: false
 }));
-app.use('/', indexRouter);
-app.use('/university', universityRouter); // catch 404 and forward to error handler
+app.use('/', _index.default);
+(0, _swaggerDoc.default)(app); // catch 404 and forward to error handler
 
 app.use(function (req, res, next) {
   next((0, _httpErrors.default)(404));

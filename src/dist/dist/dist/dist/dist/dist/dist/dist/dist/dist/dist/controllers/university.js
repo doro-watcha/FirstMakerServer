@@ -5,13 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _services = _interopRequireDefault(require("../services"));
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    default: obj
-  };
-}
+var _services = require("../services");
 
 class UniversityController {
   static async predict(req, res) {
@@ -21,7 +15,7 @@ class UniversityController {
     console.log(name);
     console.log(major);
     console.log(type);
-    const result = await _services.default.findByMajor(name, major, type);
+    const result = await _services.universityService.findByMajor(name, major, type);
     const response = {
       success: true,
       data: {

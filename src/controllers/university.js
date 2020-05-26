@@ -1,4 +1,4 @@
-import universityService from '../services'
+import { universityService } from '../services'
 
 export default class UniversityController {
 
