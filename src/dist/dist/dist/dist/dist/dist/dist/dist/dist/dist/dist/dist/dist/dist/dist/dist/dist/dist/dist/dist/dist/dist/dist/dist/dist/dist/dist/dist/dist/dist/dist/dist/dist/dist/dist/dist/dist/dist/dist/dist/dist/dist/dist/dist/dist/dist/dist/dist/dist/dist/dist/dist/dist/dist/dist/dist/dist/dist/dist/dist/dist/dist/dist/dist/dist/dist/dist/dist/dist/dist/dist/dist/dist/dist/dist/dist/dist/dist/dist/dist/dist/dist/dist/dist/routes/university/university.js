@@ -81,6 +81,7 @@ router.post('/predict', function (req, res) {
   });
 });
 router.post('/get', function (req, res) {
+  console.log("good");
   universityController.predict(req, res);
 });
 module.exports = router;

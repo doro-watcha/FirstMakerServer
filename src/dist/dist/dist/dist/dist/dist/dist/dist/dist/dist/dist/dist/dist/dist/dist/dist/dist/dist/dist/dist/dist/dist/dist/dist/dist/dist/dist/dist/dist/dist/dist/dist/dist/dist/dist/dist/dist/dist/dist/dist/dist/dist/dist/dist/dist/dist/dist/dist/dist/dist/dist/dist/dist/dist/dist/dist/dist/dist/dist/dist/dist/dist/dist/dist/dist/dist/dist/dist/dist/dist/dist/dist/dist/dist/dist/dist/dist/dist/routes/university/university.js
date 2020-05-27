@@ -1,5 +1,7 @@
 "use strict";
 
+var _controllers = require("../../controllers");
+
 var mysql = require('mysql');
 
 var express = require('express');
@@ -9,11 +11,6 @@ var bodyParser = require('body-parser');
 var dbconfig = require('../database.js');
 
 var conn = mysql.createConnection(dbconfig);
-
-var {
-  universityController
-} = require('../../controllers');
-
 var app = express();
 var router = express.Router();
 router.post('/get', function (req, res) {
@@ -80,8 +77,9 @@ router.post('/predict', function (req, res) {
     res.send(object);
   });
 });
-router.post('/get', function (req, res) {
+router.post('/get2', (req, res) => {
   console.log("good");
-  universityController.predict(req, res);
+
+  _controllers.universityController.predict(req, res);
 });
 module.exports = router;

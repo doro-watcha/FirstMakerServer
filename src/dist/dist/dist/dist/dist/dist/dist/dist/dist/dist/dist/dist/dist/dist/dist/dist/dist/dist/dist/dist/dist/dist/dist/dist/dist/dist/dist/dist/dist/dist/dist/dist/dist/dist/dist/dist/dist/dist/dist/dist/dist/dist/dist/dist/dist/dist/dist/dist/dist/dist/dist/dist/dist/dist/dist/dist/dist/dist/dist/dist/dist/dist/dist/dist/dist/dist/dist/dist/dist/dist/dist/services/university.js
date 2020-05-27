@@ -7,12 +7,25 @@ exports.default = void 0;
 
 var _models = require("../models");
 
+let instance = null;
+
 class UniversityService {
+  constructor() {
+    if (!instance) {
+      console.log('University Service 생성' + this);
+      instance = this;
+    }
+
+    return instance;
+  }
+
   async findByMajor(name, major, type) {
     console.log("fuck");
     return await _models.University.findOne({
       where: {
-        name
+        name,
+        major,
+        type
       }
     });
   }

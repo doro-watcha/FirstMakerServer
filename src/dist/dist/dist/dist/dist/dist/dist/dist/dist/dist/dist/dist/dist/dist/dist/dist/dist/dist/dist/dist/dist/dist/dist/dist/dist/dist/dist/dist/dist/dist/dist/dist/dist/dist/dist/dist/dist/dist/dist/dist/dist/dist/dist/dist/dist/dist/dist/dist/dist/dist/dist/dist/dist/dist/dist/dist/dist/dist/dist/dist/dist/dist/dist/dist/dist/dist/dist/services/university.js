@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _models = require("../models");
 
+var _validatorExtras = require("sequelize/types/lib/utils/validator-extras");
+
 let instance = null;
 
 class UniversityService {

@@ -31,12 +31,13 @@ var router = express.Router();
  *             type: object
  *             properties:
  *               name:
- *                  type: integer
- *                  description: 대학 이름
+ *                 type: integer
+ *                 description: 대학 이름
  *               line:
- *                  type : integer
- *                  description : 문/이과 ( 문 = 0 , 이 = 1)               
+ *                 type : integer
+ *                 description : 문/이과 ( 문 = 0 , 이 = 1)               
  *             required:
+ *                  name,line
  *     responses:
  *       SUCCESS:
  *         content:
@@ -72,5 +73,8 @@ router.get('/', function (req, res) {
 
 router.post('/predict', function (req, res) {
   _controllers.universityController.predict(req, res);
+});
+router.post('/admin', function (req, res) {
+  _controllers.universityController.findAll();
 });
 module.exports = router;

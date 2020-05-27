@@ -21,6 +21,17 @@ class UniversityController {
     res.send(response);
   }
 
+  static async findAll(req, res) {
+    const result = await _services.universityService.findAll();
+    const response = {
+      success: true,
+      data: {
+        result
+      }
+    };
+    res.send(response);
+  }
+
   static async predict(req, res) {
     const name = req.body.name;
     const major = req.body.major;

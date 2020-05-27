@@ -64,31 +64,71 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
   _controllers.scoreController.setScore(req, res);
-}); // 대학 list 보여줄때 자신의 점수 계산해서 던져주는 api
+});
+/**
+ * @swagger
+ * 
+ * /score/translate:
+ *   post:
+ *     tags:
+ *       - score
+ *     security:
+ *       - bearerAuth: []
+ *     summary: 내 점수 변환
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               korean:
+ *                 type: integer
+ *                 description: 국어점수
+ *               english:
+ *                 type: integer
+ *                 description: 영어등급
+ *               math:
+ *                 type: integer
+ *                 description: 수학점수
+ *               history:
+ *                 type: integer
+ *                 description : 역사등급
+ *               tamgu1:
+ *                 type : integer
+ *                 description : 탐구 1 점수
+ *               tamgu2:
+ *                 type : integer
+ *                 description : 탐구 2 점수
+ *             required: korean, english, math, history, tamgu1, tamgu2
+ *     responses:
+ *       SUCCESS:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: integer
+ *                   example : 583
+ *               required:
+ *                 - success
+ *                 - data
+ *       'ecode: 201':
+ *         description: 유효하지 않은 토큰
+ *       'ecode: 100':
+ *         description: Request Body Validation 실패
+ *       'ecode: 422':
+ *         description: 존재하지 않는 태그일 경우
+ *       'ecode: 700':
+ *         description: 서버 에러
+ */
+// 대학 list 보여줄때 자신의 점수 계산해서 던져주는 api
 
 router.post('/translate', function (req, res) {
-  console.log("fuck");
-  var korean = req.body.korean;
-  var math = req.body.math;
-  var english = req.body.english;
-  var history = req.body.history;
-  var tamgu1 = req.body.tamgu1;
-  var tamgu2 = req.body.tamgu2;
-  var new_korean = parseInt(korean.score * 357.1 / 200);
-  var new_math = parseInt(math.score * 357.1 / 200);
-  var new_tamgu = parseInt((tamgu1.score + tamgu2.score) * 285.7 / 200);
-  var new_english = english.grade * 2 - 3;
-  var new_history = 0;
-  if (history.grade < 4) new_history = 10;else if (history.grade > 3 && history.grade < 8) {
-    new_history = 10 - 0.2 * (history.grade - 3);
-  } else new_history = 9;
-  console.log(new_korean);
-  console.log(new_math);
-  var total = new_korean + new_math + new_tamgu - new_english + new_history;
-  var object = {
-    "total": total,
-    "success": true
-  };
-  res.send(object);
+  _controllers.scoreController.translateScore(req, res);
 });
 module.exports = router;

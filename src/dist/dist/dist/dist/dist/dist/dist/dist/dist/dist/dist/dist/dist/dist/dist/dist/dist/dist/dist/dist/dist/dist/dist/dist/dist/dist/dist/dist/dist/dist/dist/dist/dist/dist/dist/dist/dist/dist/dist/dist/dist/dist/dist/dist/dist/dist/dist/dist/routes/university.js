@@ -1,6 +1,6 @@
 "use strict";
 
-var _controllers = require("../../controllers");
+var _controllers = require("../controllers");
 
 var mysql = require('mysql');
 
@@ -8,7 +8,7 @@ var express = require('express');
 
 var bodyParser = require('body-parser');
 
-var dbconfig = require('../database.js');
+var dbconfig = require('./database.js');
 
 var conn = mysql.createConnection(dbconfig);
 var app = express();
@@ -66,7 +66,7 @@ router.post('/list', function (req, res) {
 /**
  * @swagger
  * 
- * /predict     
+ * /university/predict:
  *   post:
  *     tags:
  *       - video

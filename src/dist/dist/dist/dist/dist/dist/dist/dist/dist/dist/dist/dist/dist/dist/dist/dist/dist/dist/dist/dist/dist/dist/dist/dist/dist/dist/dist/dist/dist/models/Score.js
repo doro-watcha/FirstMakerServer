@@ -16,7 +16,7 @@ function _interopRequireDefault(obj) {
 class Score extends _sequelize.default.Model {
   static init(sequelize) {
     return super.init({
-      accountId: {
+      user_id: {
         type: _sequelize.default.INTEGER,
         defaultValue: -1
       },

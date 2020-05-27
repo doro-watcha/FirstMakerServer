@@ -80,7 +80,8 @@ router.post('/predict', function (req, res) {
     res.send(object);
   });
 });
-router.post('/get', function (req, res) {
+router.post('/get2', function (req, res) {
+  console.log("good");
   universityController.predict(req, res);
 });
 module.exports = router;

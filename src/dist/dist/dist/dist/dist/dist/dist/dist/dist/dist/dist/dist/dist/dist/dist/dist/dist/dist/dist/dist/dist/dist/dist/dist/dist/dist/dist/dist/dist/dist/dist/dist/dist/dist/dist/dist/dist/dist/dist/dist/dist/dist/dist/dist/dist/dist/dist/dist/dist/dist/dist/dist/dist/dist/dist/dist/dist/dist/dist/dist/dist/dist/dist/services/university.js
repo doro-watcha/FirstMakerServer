@@ -7,8 +7,6 @@ exports.default = void 0;
 
 var _models = require("../models");
 
-var _validatorExtras = require("sequelize/types/lib/utils/validator-extras");
-
 let instance = null;
 
 class UniversityService {
@@ -29,7 +27,7 @@ class UniversityService {
         major,
         type
       },
-      attributes: [strong_val, safe_val, dangerous_val, sniping_val]
+      attributes: ["strong_val", safe_val, dangerous_val, sniping_val]
     });
   }
 

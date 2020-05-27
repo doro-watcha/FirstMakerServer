@@ -69,7 +69,7 @@ const schema = {
     },
     accountId: {
       type: 'integer',
-      example: '3'
+      example: 3
     },
     subject: {
       type: 'string',

@@ -28,9 +28,7 @@ class ScoreService {
     });
   }
 
-  async setScore(score) {
-    return await _models.Score.bulkCreate();
-  }
+  async setScore(score) {}
 
 }
 

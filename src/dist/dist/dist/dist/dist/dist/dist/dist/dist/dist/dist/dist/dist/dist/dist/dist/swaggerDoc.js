@@ -6,7 +6,7 @@ var _swaggerJsdoc = _interopRequireDefault(require("swagger-jsdoc"));
 
 var _University = require("./models/University");
 
-var _Score = require("./modesl/Score");
+var _Score = require("./models/Score");
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {

@@ -18,3 +18,4 @@ router.get('/', function (req, res) {
 router.post('/', function (req, res) {
   _controllers.scoreController.setScore(req, res);
 });
+module.exports = router;

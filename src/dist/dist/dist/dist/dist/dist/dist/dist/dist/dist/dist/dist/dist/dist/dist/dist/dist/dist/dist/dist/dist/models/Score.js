@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.schema = exports.default = void 0;
 
 var _sequelize = _interopRequireDefault(require("sequelize"));
 
@@ -56,6 +56,42 @@ class Score extends _sequelize.default.Model {
     });
   }
 
-}
+} // swagger schema
+
 
 exports.default = Score;
+const schema = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'integer',
+      example: 3
+    },
+    accountId: {
+      type: 'integer',
+      example: '3'
+    },
+    subject: {
+      type: 'string',
+      example: 'koean'
+    },
+    type: {
+      type: 'string',
+      example: '나'
+    },
+    score: {
+      type: 'integer',
+      example: 133
+    },
+    grade: {
+      type: 'integer',
+      example: '1'
+    },
+    percentile: {
+      type: 'integer',
+      example: '94'
+    }
+  },
+  required: ['id', 'subject', 'type', 'score', 'grade', 'percentile']
+};
+exports.schema = schema;

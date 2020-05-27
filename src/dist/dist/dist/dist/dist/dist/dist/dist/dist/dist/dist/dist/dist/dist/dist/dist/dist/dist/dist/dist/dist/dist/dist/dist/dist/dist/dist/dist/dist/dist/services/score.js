@@ -20,11 +20,10 @@ class ScoreService {
   }
 
   async findByAccountId(accountId) {
-    return await _models.Score.findOne({
+    return await _models.Score.findAll({
       where: {
-        "id": 0
-      },
-      attributes: ["subject", "score", "grade", "percentile", "type"]
+        "user_id": 0
+      }
     });
   }
 

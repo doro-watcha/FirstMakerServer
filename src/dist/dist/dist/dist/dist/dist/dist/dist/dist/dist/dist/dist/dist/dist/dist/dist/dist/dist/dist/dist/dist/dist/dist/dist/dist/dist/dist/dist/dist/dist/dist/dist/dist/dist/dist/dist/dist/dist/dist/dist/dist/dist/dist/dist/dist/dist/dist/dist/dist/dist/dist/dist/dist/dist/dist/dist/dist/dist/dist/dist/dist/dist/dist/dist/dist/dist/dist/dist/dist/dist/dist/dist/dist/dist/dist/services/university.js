@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
 var _models = require("../models");
 
 class UniversityService {
@@ -13,3 +18,7 @@ class UniversityService {
   }
 
 }
+
+var _default = new UniversityService();
+
+exports.default = _default;

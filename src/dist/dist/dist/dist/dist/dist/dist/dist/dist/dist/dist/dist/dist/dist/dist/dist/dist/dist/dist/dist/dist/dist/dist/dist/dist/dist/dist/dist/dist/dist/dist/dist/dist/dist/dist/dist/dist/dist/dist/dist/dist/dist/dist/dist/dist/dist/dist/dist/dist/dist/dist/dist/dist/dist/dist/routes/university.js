@@ -63,6 +63,72 @@ router.post('/list', function (req, res) {
     res.send(object);
   });
 });
+/**
+ * @swagger
+ * 
+ * /predict     
+ *   post:
+ *     tags:
+ *       - video
+ *     security:
+ *       - bearerAuth: []
+ *     summary: 비디오 생성
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               partId:
+ *                 type: integer
+ *                 description: 파트 ID
+ *               description:
+ *                 type: string
+ *                 description: 영상 설명
+ *               tags:
+ *                 type: string
+ *                 description: 태그 목록
+ *               video:
+ *                 type: file
+ *                 description: 비디오 파일
+ *               posterImg:
+ *                 type: file
+ *                 description: 썸네일 이미지 파일
+ *             required:
+ *               - partId
+ *               - video
+ *               - posterImg
+ *     responses:
+ *       SUCCESS:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     video:
+ *                       $ref: '#/components/schemas/Video'
+ *                   required:
+ *                     - video
+ *               required:
+ *                 - success
+ *                 - data
+ *       'ecode: 201':
+ *         description: 유효하지 않은 토큰
+ *       'ecode: 100':
+ *         description: Request Body Validation 실패
+ *       'ecode: 422':
+ *         description: 존재하지 않는 태그일 경우
+ *       'ecode: 700':
+ *         description: 서버 에러
+ */
+
 router.post('/predict', function (req, res) {
   console.log(req.body);
   var name = req.body.name;

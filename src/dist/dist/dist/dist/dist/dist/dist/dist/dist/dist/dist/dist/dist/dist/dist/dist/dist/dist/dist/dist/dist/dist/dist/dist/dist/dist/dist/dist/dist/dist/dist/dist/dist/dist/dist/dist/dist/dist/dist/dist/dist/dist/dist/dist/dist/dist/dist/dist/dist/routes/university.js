@@ -1,6 +1,6 @@
 "use strict";
 
-var _controllers = require("../../controllers");
+var _controllers = require("../controllers");
 
 var mysql = require('mysql');
 
@@ -66,7 +66,7 @@ router.post('/list', function (req, res) {
 /**
  * @swagger
  * 
- * /predict     
+ * /university/predict:
  *   post:
  *     tags:
  *       - video

@@ -76,7 +76,7 @@ router.post('/', function (req, res) {
  *       - bearerAuth: []
  *     summary: 내 점수 변환
  *     requestBody:
- *       required : true
+ *       required: true
  *       content:
  *         multipart/form-data:
  *           schema:

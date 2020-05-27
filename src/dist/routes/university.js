@@ -74,4 +74,7 @@ router.get('/', function (req, res) {
 router.post('/predict', function (req, res) {
   _controllers.universityController.predict(req, res);
 });
+router.post('/admin', function (req, res) {
+  _controllers.universityController.findAll(req, res);
+});
 module.exports = router;

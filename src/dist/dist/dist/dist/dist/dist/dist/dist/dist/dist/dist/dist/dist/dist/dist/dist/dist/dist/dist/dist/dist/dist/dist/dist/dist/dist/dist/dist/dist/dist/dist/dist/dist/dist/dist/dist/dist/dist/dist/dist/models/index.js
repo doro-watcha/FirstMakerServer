@@ -19,7 +19,7 @@ const config = _dbConfig.default[env];
 const sequelize = new _sequelize.default(config.database, config.username, config.password, config);
 const models = {
   University: _University.default.init(sequelize, _sequelize.default),
-  Score: ScmoreModel.init(sequelize, _sequelize.default)
+  Score: _Score.default.init(sequelize, _sequelize.default)
 };
 Object.values(models);
 module.exports = { ...models,

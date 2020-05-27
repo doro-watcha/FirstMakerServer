@@ -115,7 +115,7 @@ const options = {
     }
   },
   basePath: '/',
-  apis: ['./src/routes/*.js']
+  apis: ['./routes/*.js']
 };
 const specs = (0, _swaggerJsdoc.default)(options);
 const uiOptions = {

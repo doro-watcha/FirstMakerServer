@@ -76,6 +76,7 @@ router.post('/', function (req, res) {
  *       - bearerAuth: []
  *     summary: 내 점수 변환
  *     requestBody:
+ *       required: true
  *       content:
  *         multipart/form-data:
  *           schema:
@@ -99,7 +100,7 @@ router.post('/', function (req, res) {
  *               tamgu2:
  *                 type : integer
  *                 description : 탐구 2 점수
- *             required:
+ *             required: korean, english, math, history, tamgu1, tamgu2
  *     responses:
  *       SUCCESS:
  *         content:
@@ -112,7 +113,7 @@ router.post('/', function (req, res) {
  *                   example: true
  *                 data:
  *                   type: integer
- *                   sample : 583
+ *                   example : 583
  *               required:
  *                 - success
  *                 - data

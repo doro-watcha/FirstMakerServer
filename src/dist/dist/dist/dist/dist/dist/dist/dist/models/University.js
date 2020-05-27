@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.schema = exports.default = void 0;
 
 var _sequelize = _interopRequireDefault(require("sequelize"));
 
@@ -68,6 +68,54 @@ class University extends _sequelize.default.Model {
     });
   }
 
-}
+} // swagger schema
+
 
 exports.default = University;
+const schema = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'integer',
+      example: 3
+    },
+    line: {
+      type: 'integer',
+      example: 0
+    },
+    group: {
+      type: 'string',
+      example: '0'
+    },
+    name: {
+      type: 'string',
+      example: '고려대'
+    },
+    major: {
+      type: 'string',
+      example: '간호대학'
+    },
+    majorCode: {
+      type: 'integer',
+      example: 35
+    },
+    strong_val: {
+      type: 'float',
+      example: 690.5
+    },
+    safe_val: {
+      type: 'float',
+      example: 685.5
+    },
+    dangerous_val: {
+      type: 'float',
+      example: 680.6
+    },
+    sniping_val: {
+      type: 'float',
+      example: 665.5
+    }
+  },
+  required: ['major', 'name']
+};
+exports.schema = schema;

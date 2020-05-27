@@ -69,7 +69,7 @@ const schema = {
     },
     accountId: {
       type: 'integer',
-      example: '3'
+      example: 0
     },
     subject: {
       type: 'string',
@@ -85,11 +85,11 @@ const schema = {
     },
     grade: {
       type: 'integer',
-      example: '1'
+      example: 1
     },
     percentile: {
       type: 'integer',
-      example: '94'
+      example: 94
     }
   },
   required: ['id', 'subject', 'type', 'score', 'grade', 'percentile']

@@ -40,6 +40,10 @@ class UniversityService {
     });
   }
 
+  async findList() {
+    return await _models.University.findAll({});
+  }
+
 }
 
 var _default = new UniversityService();

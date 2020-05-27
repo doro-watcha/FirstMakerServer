@@ -22,7 +22,6 @@ var router = _express.default.Router();
  *       - bearerAuth: []
  *     summary: 내 점수 정보
  *     requestBody:
- *       required: true
  *       content:
  *         multipart/form-data:
  *           schema:
@@ -41,6 +40,23 @@ var router = _express.default.Router();
  *                   example: true
  *                 data:
  *                   type: object
+ *                   properties:
+ *                      result:
+ *                         subject:
+ *                           type: string
+ *                           example : "korean"
+ *                         type:
+ *                           type: string
+ *                           example : "나"
+ *                         grade:
+ *                           type : integer
+ *                           example : 1
+ *                         score:
+ *                           type : integer
+ *                           example : 133
+ *                         percentile:
+ *                           type : integer
+ *                           example : 94
  *               required:
  *                 - success
  *                 - data

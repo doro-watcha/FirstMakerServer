@@ -9,7 +9,7 @@ var _services = require("../services");
 
 class ScoreService {
   static async getScore(req, res) {
-    const accountId = req.query.accountId;
+    const accountId = 0;
     const result = await _services.scoreService.findByAccountId(accountId);
     const response = {
       data: {

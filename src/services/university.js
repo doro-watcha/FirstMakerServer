@@ -26,6 +26,11 @@ class UniversityService {
             where : { name , line}
         })
     }
+    async findAll() {
+        return await University.findAll({
+
+        })
+    }
 }
 
 export default new UniversityService()
