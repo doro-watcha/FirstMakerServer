@@ -3,11 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "babel app.js --out-file new_app.js --presets=es2015",
-    "start" : "node new_app.js"
+    "build": "babel src -d src/dist",
+    "start": "babel src/new_app.js"
   },
   "dependencies": {
-    "@babel/core": "^7.9.6",
     "babel": "^6.23.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
@@ -22,11 +21,14 @@
     "mysql": "^2.17.1",
     "mysql2": "^2.1.0",
     "sequelize": "^5.21.10",
-    "sha256": "^0.2.0"
+    "sha256": "^0.2.0",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-preset-es2015": "^6.24.1"
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.6"
   }
 }
