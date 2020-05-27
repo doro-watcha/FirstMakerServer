@@ -26,7 +26,8 @@ class UniversityService {
         name,
         major,
         type
-      }
+      },
+      attributes: ["strong_val", "safe_val", "dangerous_val", "sniping_val"]
     });
   }
 

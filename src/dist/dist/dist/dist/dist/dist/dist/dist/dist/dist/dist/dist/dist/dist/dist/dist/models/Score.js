@@ -3,60 +3,14 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.schema = exports.default = void 0;
 
-var _sequelize = _interopRequireWildcard(require("sequelize"));
+var _sequelize = _interopRequireDefault(require("sequelize"));
 
-function _getRequireWildcardCache() {
-  if (typeof WeakMap !== "function") return null;
-  var cache = new WeakMap();
-
-  _getRequireWildcardCache = function () {
-    return cache;
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
   };
-
-  return cache;
-}
-
-function _interopRequireWildcard(obj) {
-  if (obj && obj.__esModule) {
-    return obj;
-  }
-
-  if (obj === null || typeof obj !== "object" && typeof obj !== "function") {
-    return {
-      default: obj
-    };
-  }
-
-  var cache = _getRequireWildcardCache();
-
-  if (cache && cache.has(obj)) {
-    return cache.get(obj);
-  }
-
-  var newObj = {};
-  var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
-
-  for (var key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
-      var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
-
-      if (desc && (desc.get || desc.set)) {
-        Object.defineProperty(newObj, key, desc);
-      } else {
-        newObj[key] = obj[key];
-      }
-    }
-  }
-
-  newObj.default = obj;
-
-  if (cache) {
-    cache.set(obj, newObj);
-  }
-
-  return newObj;
 }
 
 class Score extends _sequelize.default.Model {
@@ -102,6 +56,42 @@ class Score extends _sequelize.default.Model {
     });
   }
 
-}
+} // swagger schema
+
 
 exports.default = Score;
+const schema = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'integer',
+      example: 3
+    },
+    accountId: {
+      type: 'integer',
+      example: '3'
+    },
+    subject: {
+      type: 'string',
+      example: 'koean'
+    },
+    type: {
+      type: 'string',
+      example: '나'
+    },
+    score: {
+      type: 'integer',
+      example: 133
+    },
+    grade: {
+      type: 'integer',
+      example: '1'
+    },
+    percentile: {
+      type: 'integer',
+      example: '94'
+    }
+  },
+  required: ['id', 'subject', 'type', 'score', 'grade', 'percentile']
+};
+exports.schema = schema;

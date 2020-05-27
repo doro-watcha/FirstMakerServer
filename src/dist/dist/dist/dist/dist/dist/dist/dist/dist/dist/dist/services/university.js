@@ -31,6 +31,15 @@ class UniversityService {
     });
   }
 
+  async findList(name, line) {
+    return await _models.University.findAll({
+      where: {
+        name,
+        line
+      }
+    });
+  }
+
 }
 
 var _default = new UniversityService();

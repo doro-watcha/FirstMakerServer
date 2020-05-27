@@ -24,9 +24,11 @@ class ScoreService {
       where: {
         accountId
       },
-      attributes: ["subject", "score", "grade", "percentile", "type"]
+      attributes: ["subject", "type", "score", "grade", "percentile"]
     });
   }
+
+  async setScore(score) {}
 
 }
 

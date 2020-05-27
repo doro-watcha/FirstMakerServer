@@ -36,19 +36,19 @@ class University extends _sequelize.default.Model {
         type: _sequelize.default.INTEGER,
         defaultValue: -1
       },
-      strongValue: {
+      strong_val: {
         type: _sequelize.default.FLOAT,
         allowNull: false
       },
-      safeValue: {
+      safe_val: {
         type: _sequelize.default.FLOAT,
         allowNull: false
       },
-      dangerousValue: {
+      dangerous_val: {
         type: _sequelize.default.FLOAT,
         allowNull: false
       },
-      snipingValue: {
+      sniping_val: {
         type: _sequelize.default.FLOAT,
         allowNull: false
       },

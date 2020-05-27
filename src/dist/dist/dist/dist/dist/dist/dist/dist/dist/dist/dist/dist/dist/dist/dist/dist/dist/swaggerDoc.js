@@ -102,7 +102,8 @@ const options = {
     },
     components: {
       schemas: {
-        University: _University.schema
+        University: _University.schema,
+        Score
       },
       securitySchemes: {
         bearerAuth: {

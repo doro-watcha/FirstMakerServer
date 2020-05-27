@@ -12,11 +12,18 @@ class UniversityService {
 		return instance
 	}
 
-    async findByMajor (name , major, type) {
+    async findByMajor (name , major, line) {
         console.log("fuck")
         return await University.findOne({
-            where : { name , major , type },
+            where : { name , major , line },
             attributes : [ "strong_val" , "safe_val" , "dangerous_val", "sniping_val"]
+        })
+    }
+
+    async findList ( name , line ) {
+
+        return await University.findAll({
+            where : { name , line}
         })
     }
 }

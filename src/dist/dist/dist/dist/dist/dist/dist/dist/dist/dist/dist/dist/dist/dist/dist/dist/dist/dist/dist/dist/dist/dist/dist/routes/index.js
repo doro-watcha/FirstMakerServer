@@ -2,6 +2,8 @@
 
 var _university = _interopRequireDefault(require("./university"));
 
+var _score = _interopRequireDefault(require("./score"));
+
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
     default: obj
@@ -19,4 +21,5 @@ router.get('/', function (req, res, next) {
   });
 });
 router.use('/university', _university.default);
+router.use('/score', _score.default);
 module.exports = router;

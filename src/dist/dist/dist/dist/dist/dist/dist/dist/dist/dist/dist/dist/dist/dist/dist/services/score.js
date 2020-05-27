@@ -5,13 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _models = _interopRequireDefault(require("../models"));
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    default: obj
-  };
-}
+var _models = require("../models");
 
 let instance = null;
 
@@ -25,14 +19,16 @@ class ScoreService {
     return instance;
   }
 
-  async findById(id) {
-    return await _models.default.findOne({
+  async findByAccountId(accountId) {
+    return await _models.Score.findAll({
       where: {
-        "accountId": id
+        accountId
       },
-      attributes: ["subject", "score", "grade", "percentile", "type"]
+      attributes: ["subject", "type", "score", "grade", "percentile"]
     });
   }
+
+  async setScore(score) {}
 
 }
 

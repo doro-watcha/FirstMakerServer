@@ -16,7 +16,7 @@ function _interopRequireDefault(obj) {
 class University extends _sequelize.default.Model {
   static init(sequelize) {
     return super.init({
-      type: {
+      line: {
         type: _sequelize.default.INTEGER,
         allowNull: false
       },

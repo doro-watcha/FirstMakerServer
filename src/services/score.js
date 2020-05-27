@@ -14,8 +14,12 @@ class ScoreService {
 
     async findByAccountId (accountId) {
         return await Score.findAll({
-            where : { accountId }
+            where : { accountId },
+            attributes : ["subject","type","score","grade","percentile"]
         })
+    }
+
+    async setScore ( score ) {
     }
 }
 

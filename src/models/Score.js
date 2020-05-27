@@ -49,4 +49,41 @@ export default class Score extends Sequelize.Model {
 
         )
     }
+    
+}
+
+// swagger schema
+export const schema = {
+	type: 'object',
+	properties: {
+		id: {
+			type: 'integer',
+			example: 3,
+		},
+		accountId: {
+			type: 'integer',
+			example: 0,
+		},
+		subject: {
+			type: 'string',
+			example: 'koean',
+		},
+		type: {
+			type: 'string',
+            example: '나',
+		},
+		score: {
+			type: 'integer',
+			example: 133,
+		},
+		grade: {
+			type: 'integer',
+			example: 1,
+		},
+		percentile: {
+            type: 'integer',
+            example : 94
+        }
+	},
+	required: ['id', 'subject', 'type','score','grade','percentile'],
 }

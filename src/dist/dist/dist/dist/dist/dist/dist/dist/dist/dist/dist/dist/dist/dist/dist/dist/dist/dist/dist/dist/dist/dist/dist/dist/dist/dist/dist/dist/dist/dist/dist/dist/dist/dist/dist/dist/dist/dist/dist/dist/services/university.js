@@ -7,8 +7,6 @@ exports.default = void 0;
 
 var _models = require("../models");
 
-var _validatorExtras = require("sequelize/types/lib/utils/validator-extras");
-
 let instance = null;
 
 class UniversityService {
@@ -25,8 +23,11 @@ class UniversityService {
     console.log("fuck");
     return await _models.University.findOne({
       where: {
-        name
-      }
+        name,
+        major,
+        type
+      },
+      attributes: ["strong_val", "safe_val", "dangerous_val", "sniping_val"]
     });
   }
 

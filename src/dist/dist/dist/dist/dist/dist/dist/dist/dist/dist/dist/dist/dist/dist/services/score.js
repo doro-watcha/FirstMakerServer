@@ -19,14 +19,16 @@ class ScoreService {
     return instance;
   }
 
-  async findById(id) {
+  async findByAccountId(accountId) {
     return await _models.Score.findAll({
       where: {
-        "accountId": id
+        accountId
       },
-      attributes: ["subject", "score", "grade", "percentile", "type"]
+      attributes: ["subject", "type", "score", "grade", "percentile"]
     });
   }
+
+  async setScore(score) {}
 
 }
 

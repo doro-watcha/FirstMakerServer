@@ -2,6 +2,7 @@ import swaggerUi from 'swagger-ui-express'
 import swaggerJsDoc from 'swagger-jsdoc'
 
 import { schema as University } from './models/University'
+import { schema as Score} from './models/Score'
 
 const ApiResponse = {
 	type: 'object',
@@ -96,7 +97,8 @@ const options = {
 		},
 		components: {
 			schemas: {
-                University
+				University,
+				Score
 			},
 			securitySchemes: {
 				bearerAuth: {

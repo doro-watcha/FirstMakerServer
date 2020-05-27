@@ -11,6 +11,65 @@ function _interopRequireDefault(obj) {
 }
 
 var router = _express.default.Router();
+/**
+ * @swagger
+ * 
+ * /score:
+ *   get:
+ *     tags:
+ *       - score
+ *     security:
+ *       - bearerAuth: []
+ *     summary: 내 점수 정보
+ *     requestBody:
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *             required:
+ *     responses:
+ *       SUCCESS:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                      result:
+ *                         subject:
+ *                           type: string
+ *                           example : "korean"
+ *                         type:
+ *                           type: string
+ *                           example : "나"
+ *                         grade:
+ *                           type : integer
+ *                           example : 1
+ *                         score:
+ *                           type : integer
+ *                           example : 133
+ *                         percentile:
+ *                           type : integer
+ *                           example : 94
+ *               required:
+ *                 - success
+ *                 - data
+ *       'ecode: 201':
+ *         description: 유효하지 않은 토큰
+ *       'ecode: 100':
+ *         description: Request Body Validation 실패
+ *       'ecode: 422':
+ *         description: 존재하지 않는 태그일 경우
+ *       'ecode: 700':
+ *         description: 서버 에러
+ */
+
 
 router.get('/', function (req, res) {
   _controllers.scoreController.getScore(req, res);
