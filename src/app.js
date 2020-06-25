@@ -9,6 +9,8 @@ import bodyParser from 'body-parser'
 import swaggerDoc from './swaggerDoc'
 
 import indexRouter from './routes/index'
+import models from './models/index'
+
 
 
 var app = express();
@@ -43,6 +45,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 app.listen(3000);
 module.exports = app;

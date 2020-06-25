@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "babel src -d src/dist",
+    "build": "babel src/dist -d src/dist",
     "start": "babel src/new_app.js"
   },
   "dependencies": {

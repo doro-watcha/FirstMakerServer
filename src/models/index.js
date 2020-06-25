@@ -3,6 +3,7 @@ import dbConfig from '../config/db-config'
 
 import UniversityModel from './University'
 import ScoreModel from './Score'
+import UserModel from './User'
 
 const env = process.env.NODE_ENV || 'development'
 const config = dbConfig[env]
@@ -11,7 +12,8 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 
 const models = {
   University : UniversityModel.init(sequelize, Sequelize),
-  Score : ScoreModel.init(sequelize, Sequelize)
+  Score : ScoreModel.init(sequelize, Sequelize),
+  User : UserModel.init(sequelize, Sequelize)
 }
 
 Object.values(models)
