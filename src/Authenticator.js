@@ -27,8 +27,6 @@ class Authenticator {
 		const jwtStrategy = new JWTStrategy(jwtStrategyOption, async (req, payload, done) => {
 			try {
 
-        console.log(payload.id)
-        console.log(payload.userId)
 				const user = await userService.findOne({ id: payload.id })
 
 				if (user) done(null, user)
@@ -48,11 +46,8 @@ class Authenticator {
 
 	authenticate(req, res, next) {
 
-    console.log("fuckfuckfuck")
 		instance.passport.authenticate('jwt', { session: false }, (error, user) => {
     
-      
-      console.log("zxcvzxcvzxcv1")
 
 			// [ERROR] INVALID_TOKEN
 			if (!user) {
@@ -61,20 +56,15 @@ class Authenticator {
       }
       
 
-      console.log("zxcvzxcvzxcv2")
-
 			// [ERROR] Internal Server Error
 			if (error) {
 				return res.send(createErrorResponse())
       }
       
 
-      console.log("zxcvzxcvzxcv3")
-
 			req.user = user
       next()
       
-      console.log("zxcvzxcvzxcv4")
 		})(req, res, next)
 	}
 

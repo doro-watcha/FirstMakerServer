@@ -71,20 +71,10 @@ module.exports = {
 			ko: '사용자 없음',
 			en: 'User not found',
 		},
-		VIDEO_NOT_FOUND: {
-			status: 403,
-			ko: '비디오 없음',
-			en: 'Video not found',
-		},
 		COMMENT_NOT_FOUND: {
 			status: 404,
 			ko: '댓글 없음',
 			en: 'Comment not found',
-		},
-		MUSIC_NOT_FOUND: {
-			status: 405,
-			ko: '노래 없음',
-			en: 'Music not found',
 		},
 		BOOKMARK_NOT_FOUND: {
 			status: 406,
@@ -101,16 +91,6 @@ module.exports = {
 			ko: '알림 유형 없음',
 			en: 'Notification type not found',
 		},
-		ARTIST_NOT_FOUND: {
-			status: 410,
-			ko: '아티스트 없음',
-			en: 'Artist not found',
-		},
-		USER_DEVICE_NOT_FOUND: {
-			status: 412,
-			ko: '기기 없음',
-			en: 'User device not found',
-		},
 		LIKE_NOT_FOUND: {
 			status: 413,
 			ko: '좋아요 없음',
@@ -120,51 +100,6 @@ module.exports = {
 			status: 418,
 			ko: '사용자 알림 수신 설정 없음',
 			en: 'User notification setting not found',
-		},
-		NEWS_NOT_FOUND: {
-			status: 420,
-			ko: '게시물 없음',
-			en: 'News not found',
-		},
-		PART_NOT_FOUND: {
-			status: 421,
-			ko: '파트 없음',
-			en: 'Part not found',
-		},
-		TAG_NOT_FOUND: {
-			status: 422,
-			ko: '태그 없음',
-			en: 'Tag not found',
-		},
-		PROMO_NOT_FOUND: {
-			status: 423,
-			ko: '프로모 없음',
-			en: 'Promo not found',
-		},
-		SOCIAL_CHANNEL_NOT_FOUND: {
-			status: 424,
-			ko: '소셜 채널 없음',
-			en: 'Social channel not found',
-		},
-		SOCIAL_CHANNEL_VIDEO_NOT_FOUND: {
-			status: 425,
-			ko: '소셜 채널 비디오 없음',
-			en: 'Social channel video not found',
-		},
-		USER_PAYMENT_METHOD_NOT_FOUND: {
-			status: 426,
-			ko: '사용자 결제 수단 없음',
-			en: 'User payment method not found',
-		},
-		CHALLENGE_ENTRY_NOT_FOUND: {
-			status: 427,
-			ko: '챌린지 참가 없음',
-			en: 'Challenge entry not found',
-		},
-		PAYMENT_NOT_FOUND: {
-			status: 428,
-			ko: '결제 없음',
-			en: 'Payment not found',
 		},
 		// 409
 		USER_ALREADY_EXISTS: {
@@ -182,46 +117,11 @@ module.exports = {
 			ko: '이미 좋아요 존재',
 			en: 'Like already exists',
 		},
-		TAG_ALREADY_EXISTS: {
-			status: 506,
-			ko: '이미 태그 존재',
-			en: 'Tag already exists',
-		},
-		SOCIAL_CHANNEL_ALREADY_EXISTS: {
-			status: 507,
-			ko: '이미 소셜 채널 존재',
-			en: 'Social channel already exists',
-		},
-		SOCIAL_CHANNEL_VIDEO_ALREADY_EXISTS: {
-			status: 508,
-			ko: '이미 등록된 비디오',
-			en: 'Social channel video already exists',
-		},
-		DUAL_SUBMISSION_IN_SAME_PART: {
-			status: 509,
-			ko: '해당 파트에 이미 비디오를 제출함',
-			en: 'Video has already been submitted to this part.',
-		},
-		USER_PAYMENT_METHOD_ALREADY_EXISTS: {
-			status: 510,
-			ko: '이미 결제 수단 존재',
-			en: 'User payment method already exists',
-		},
-		PROMO_ALREADY_EXISTS: {
-			status: 511,
-			ko: '이미 프로모 존재',
-			en: 'Promo already exists',
-		},
 		// 410
 		USER_DELETED: {
 			status: 600,
 			ko: '이미 탈퇴한 사용자입니다.',
 			en: 'This user has deleted their account.',
-		},
-		VIDEO_DELETED: {
-			status: 601,
-			ko: '삭제된 영상입니다.',
-			en: 'This video has been deleted.',
 		},
 		COMMENT_DELETED: {
 			status: 602,
