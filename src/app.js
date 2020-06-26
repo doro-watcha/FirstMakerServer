@@ -1,4 +1,4 @@
-  
+import Authenticator from './Authenticator'
 import createError from 'http-errors'
 import express from 'express'
 import path from 'path'
@@ -9,7 +9,7 @@ import bodyParser from 'body-parser'
 import swaggerDoc from './swaggerDoc'
 
 import indexRouter from './routes/index'
-import models from './models/index'
+import models from './models'
 
 
 
@@ -29,6 +29,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
 swaggerDoc(app)
+
+models.sequelize
+	.sync({ alter: true })
+	.then(() => {
+		// initialize passport
+		const passport = Authenticator.initialize(app)
+    app.use(passport.initialize())
+
+    console.log("good")
+
+		app.listen(process.env.PORT, () => console.log(`App listening on port 3000`))
+	})
+	.catch((error) => {
+    console.log("bad")
+		console.error(error.message)
+	})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

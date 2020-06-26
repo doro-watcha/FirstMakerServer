@@ -38,18 +38,18 @@ export default class University extends Sequelize.Model {
 							type : Sequelize.FLOAT,
 												allowNull : false,
 										},
-										sniping_val : {
-												type : Sequelize.FLOAT,
-												allowNull : false,
-										},
+						sniping_val : {
+								type : Sequelize.FLOAT,
+								allowNull : false,
+						},
 						createdAt: {
 							type: Sequelize.DATE,
-							allowNull: false,
+							allowNull: true,
 							defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
 						},
 						updatedAt: {
 							type: Sequelize.DATE,
-							allowNull: false,
+							allowNull: true,
 							defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
 							onUpdate: Sequelize.literal('CURRENT_TIMESTAMP'),
 						},

@@ -1,4 +1,5 @@
 import Sequelize from 'sequelize'
+import bycrypt from 'bcrypt'
 
 export default class User extends Sequelize.Model {
 
@@ -10,23 +11,31 @@ export default class User extends Sequelize.Model {
 							type: Sequelize.STRING,
 							allowNull: false,
 						},
+						userId : {
+							type : Sequelize.STRING,
+							allowNull : false,
+						},
+						password : {
+							type : Sequelize.STRING,
+							allowNull : false
+						},
 						email: {
 							type: Sequelize.STRING,
-							allowNull: false,
+							allowNull: true,
 						},
 						highSchool: {    
 							type: Sequelize.STRING,
-							allowNull : false,
+							allowNull : true,
 						},
 						line: {
 							type: Sequelize.INTEGER,
-							allwoNull: false,
+							allwoNull: true,
 						},
 						graduateYear: {
 							type: Sequelize.INTEGER,
 							defaultValue: -1,
 						},
-						isVerfieid : {
+						isVerified : {
 							type : Sequelize.BOOLEAN,
 							defaultValue: false
 						},
@@ -52,9 +61,19 @@ export default class User extends Sequelize.Model {
                 sequelize,
             },
         )
-    }
+		}
+		
+		static hashPassword(unencryptedPwd) {
+			return bycrypt.hashSync(unencryptedPwd, 8)
+		}
+
+		isValidPassword(unencryptedPwd) {
+			return bycrypt.compareSync(unencryptedPwd, this.password)
+		}
 
 }
+
+
 
 // swagger schema
 export const schema = {
@@ -92,6 +111,5 @@ export const schema = {
 			type : 'integer',
 			example : 3
 		}
-		
 	}
 }

@@ -12,11 +12,11 @@ export default class Score extends Sequelize.Model {
                 },
                 type: {
                     type: Sequelize.STRING,
-                    allowNull: false,
+                    allowNull: true,
                 },
                 subject: {
                     type: Sequelize.STRING,
-                    allowNull: false,
+                    allowNull: true,
                 },
                 score: {    
                     type: Sequelize.INTEGER,
@@ -32,12 +32,12 @@ export default class Score extends Sequelize.Model {
                 },
                 createdAt: {
                     type: Sequelize.DATE,
-                    allowNull: false,
+                    allowNull: true,
                     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
                 },
                 updatedAt: {
                     type: Sequelize.DATE,
-                    allowNull: false,
+                    allowNull: true,
                     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
                     onUpdate: Sequelize.literal('CURRENT_TIMESTAMP'),
                 },
@@ -69,7 +69,7 @@ export const schema = {
 			example: 'koean',
 		},
 		type: {
-			type: 'string',
+			type: 'strig',
             example: '나',
 		},
 		score: {
@@ -83,6 +83,17 @@ export const schema = {
 		percentile: {
             type: 'integer',
             example : 94
+        },
+        createdAt: {
+            type: Sequelize.DATE,
+            allowNull: false,
+            defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        },
+        updatedAt: {
+            type: Sequelize.DATE,
+            allowNull: false,
+            defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+            onUpdate: Sequelize.literal('CURRENT_TIMESTAMP'),
         }
 	},
 	required: ['id', 'subject', 'type','score','grade','percentile'],
