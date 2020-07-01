@@ -59,27 +59,25 @@ class AuthController {
 
   static async signUp(req, res) {
     try {
-      // // validation
-      // const result = await Joi.validate(req.body, {
-      // 	userId: Joi.string()
-      // 		.required(),
-      // 	password: Joi.string()
-      // 		.regex(passwordRegex)
-      // 		.required()
-      // })
-      const name = req.body.name;
-      const userId = req.body.userId;
-      const password = req.body.password; // check if user already exists
+      // validation
+      const result = await _joi.default.validate(req.body, {
+        email: _joi.default.string().required(),
+        password: _joi.default.string().regex(_variables.passwordRegex).required()
+      });
+      const {
+        email,
+        password
+      } = result; // check if user already exists
 
       const user = await _services.userService.findOne({
-        userId
+        email
       }); // [ERROR] USER_ALREADY_EXISTS
 
       if (user) throw Error('USER_ALREADY_EXISTS'); // create user
 
       const newUser = await _services.userService.create({
         name: name,
-        userId,
+        email,
         password
       }); // create response
 
@@ -97,20 +95,11 @@ class AuthController {
 
   static async signIn(req, res) {
     try {
-      // // validation
-      // const result = await Joi.validate(req.body, {
-      // 	userId: Joi.string()
-      // 		.required(),
-      // 	password: Joi.string()
-      // 		.regex(passwordRegex)
-      // 		.required()
-      // })
-      // const { userId, password } = result
-      const userId = req.body.userId;
+      const email = req.body.email;
       const password = req.body.password; // get user info
 
       let user = await _services.userService.findOne({
-        userId
+        email
       }); // [ERROR] USER_NOT_FOUND
 
       if (!user) throw Error('USER_NOT_FOUND'); // [ERROR] PASSWORD_MISMATCH
@@ -119,7 +108,7 @@ class AuthController {
 
       const token = _jsonwebtoken.default.sign({
         id: user.id,
-        userId: user.userId
+        email: user.email
       }, 'token-secret-staging', {
         expiresIn: '60 days'
       }); // create response

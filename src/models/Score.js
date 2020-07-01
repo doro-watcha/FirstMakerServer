@@ -6,29 +6,65 @@ export default class Score extends Sequelize.Model {
     static init(sequelize) {
         return super.init(
             {
-                accountId : {
-                    type : Sequelize.INTEGER,
-                    defaultValue : -1
-                },
                 type: {
                     type: Sequelize.STRING,
                     allowNull: true,
                 },
-                subject: {
-                    type: Sequelize.STRING,
-                    allowNull: true,
-                },
-                score: {    
+                korean_score: {    
                     type: Sequelize.INTEGER,
-                    defaultValue : -1,
+                    defaultValue : 0,
                 },
-                grade: {
+                korean_grade: {
                     type : Sequelize.INTEGER,
-                    defaultVale : -1
+                    defaultVale : 0
                 },
-                percentile : {
+                korean_percentile : {
                     type : Sequelize.INTEGER,
-                    defaultValue : -1
+                    defaultValue : 0
+                },
+                english_grade : {
+                    type : Sequelize.INTEGER,
+                    defaultValue : 0
+                },
+                math_score: {    
+                    type: Sequelize.INTEGER,
+                    defaultValue : 0,
+                },
+                math_grade: {
+                    type : Sequelize.INTEGER,
+                    defaultVale : 0
+                },
+                math_percentile : {
+                    type : Sequelize.INTEGER,
+                    defaultValue : 0
+                },
+                tamgu1_score: {    
+                    type: Sequelize.INTEGER,
+                    defaultValue : 0,
+                },
+                tamgu1_grade: {
+                    type : Sequelize.INTEGER,
+                    defaultVale : 0
+                },
+                tamgu1_percentile : {
+                    type : Sequelize.INTEGER,
+                    defaultValue : 0
+                },
+                tamgu2_score: {    
+                    type: Sequelize.INTEGER,
+                    defaultValue : 0,
+                },
+                tamgu2_grade: {
+                    type : Sequelize.INTEGER,
+                    defaultVale : 0
+                },
+                tamgu2_percentile : {
+                    type : Sequelize.INTEGER,
+                    defaultValue : 0
+                },
+                history_grade : {
+                    type : Sequelize.INTEGER,
+                    defaultValue : 0
                 },
                 createdAt: {
                     type: Sequelize.DATE,
@@ -49,6 +85,13 @@ export default class Score extends Sequelize.Model {
 
         )
     }
+
+    static associate(models) {
+        this.belongsTo(models.User, {
+          foreignKey: 'userId',
+          as: 'user',
+        })
+      }
     
 }
 
@@ -60,7 +103,7 @@ export const schema = {
 			type: 'integer',
 			example: 3,
 		},
-		accountId: {
+		userId: {
 			type: 'integer',
 			example: 0,
 		},

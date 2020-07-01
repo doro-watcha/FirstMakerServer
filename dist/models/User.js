@@ -18,17 +18,13 @@ class User extends _sequelize.default.Model {
         type: _sequelize.default.STRING,
         allowNull: false
       },
-      userId: {
+      email: {
         type: _sequelize.default.STRING,
-        allowNull: false
+        allowNull: true
       },
       password: {
         type: _sequelize.default.STRING,
         allowNull: false
-      },
-      email: {
-        type: _sequelize.default.STRING,
-        allowNull: true
       },
       highSchool: {
         type: _sequelize.default.STRING,
@@ -38,13 +34,13 @@ class User extends _sequelize.default.Model {
         type: _sequelize.default.INTEGER,
         allwoNull: true
       },
+      gender: {
+        type: _sequelize.default.STRING,
+        allowNull: true
+      },
       graduateYear: {
         type: _sequelize.default.INTEGER,
         defaultValue: -1
-      },
-      isVerified: {
-        type: _sequelize.default.BOOLEAN,
-        defaultValue: false
       },
       predictTimes: {
         type: _sequelize.default.INTEGER,
@@ -74,6 +70,16 @@ class User extends _sequelize.default.Model {
     return _bcrypt.default.compareSync(unencryptedPwd, this.password);
   }
 
+  static associate(models) {
+    this.hasMany(models.PaymentRecord, {
+      foreignKey: 'userId',
+      as: 'paymentRecord'
+    }), this.hasMany(models.Score, {
+      foreignKey: 'userId',
+      as: 'score'
+    });
+  }
+
 } // swagger schema
 
 
@@ -93,6 +99,10 @@ const schema = {
       type: 'string',
       example: 'Bol4@gmail.com'
     },
+    password: {
+      type: 'string',
+      example: 'password'
+    },
     highSchool: {
       type: 'string',
       example: '볼사고등학교'
@@ -101,13 +111,13 @@ const schema = {
       type: 'integer',
       example: '0'
     },
+    gender: {
+      type: 'string',
+      example: '남'
+    },
     graduateYear: {
       type: 'integer',
       example: '2013'
-    },
-    isVerfieid: {
-      type: 'boolean',
-      example: false
     },
     predictTimes: {
       type: 'integer',

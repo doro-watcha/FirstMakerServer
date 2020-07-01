@@ -10,6 +10,10 @@ var _Score = _interopRequireDefault(require("./Score"));
 
 var _User = _interopRequireDefault(require("./User"));
 
+var _PaymentRecord = _interopRequireDefault(require("./PaymentRecord"));
+
+var _Report = _interopRequireDefault(require("./Report"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const env = process.env.NODE_ENV || 'development';
@@ -18,7 +22,9 @@ const sequelize = new _sequelize.default(config.database, config.username, confi
 const models = {
   University: _University.default.init(sequelize, _sequelize.default),
   Score: _Score.default.init(sequelize, _sequelize.default),
-  User: _User.default.init(sequelize, _sequelize.default)
+  User: _User.default.init(sequelize, _sequelize.default),
+  PaymentRecord: _PaymentRecord.default.init(sequelize, _sequelize.default),
+  Report: _Report.default.init(sequelize, _sequelize.default)
 };
 Object.values(models);
 module.exports = { ...models,

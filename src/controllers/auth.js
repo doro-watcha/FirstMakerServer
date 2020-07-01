@@ -47,22 +47,19 @@ export default class AuthController {
   static async signUp(req, res) {
 
 		try {
-			// // validation
-			// const result = await Joi.validate(req.body, {
-			// 	userId: Joi.string()
-			// 		.required(),
-			// 	password: Joi.string()
-			// 		.regex(passwordRegex)
-			// 		.required()
-			// })
-      
-      const name = req.body.name
-      const userId = req.body.userId
-      const password = req.body.password
-
+			// validation
+			const result = await Joi.validate(req.body, {
+				email: Joi.string()
+					.required(),
+				password: Joi.string()
+					.regex(passwordRegex)
+					.required()
+			})
+		
+			const { email , password } = result 
 			// check if user already exists
 			const user = await userService.findOne({
-				userId
+				email
 			})
 
 			// [ERROR] USER_ALREADY_EXISTS
@@ -71,7 +68,7 @@ export default class AuthController {
 			// create user
 			const newUser = await userService.create({
 				name: name,
-				userId,
+				email,
 				password
 			})
 
@@ -93,23 +90,13 @@ export default class AuthController {
 
 
 		try {
-			// // validation
-			// const result = await Joi.validate(req.body, {
-			// 	userId: Joi.string()
-			// 		.required(),
-			// 	password: Joi.string()
-			// 		.regex(passwordRegex)
-			// 		.required()
-			// })
-
-      // const { userId, password } = result
       
-      const userId = req.body.userId
+      const email = req.body.email
       const password = req.body.password
 
 			// get user info
 			let user = await userService.findOne({
-				userId
+				email
 			})
 
 			// [ERROR] USER_NOT_FOUND
@@ -119,7 +106,7 @@ export default class AuthController {
 			if (!user.isValidPassword(password)) throw Error('PASSWORD_MISMATCH')
 
 			// issue token
-			const token = jwt.sign({ id: user.id, userId: user.userId }, 'token-secret-staging', {
+			const token = jwt.sign({ id: user.id, email: user.email }, 'token-secret-staging', {
 				expiresIn: '60 days',
 			})
 

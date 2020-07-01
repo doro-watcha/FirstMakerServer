@@ -37,8 +37,6 @@ class Authenticator {
     };
     const jwtStrategy = new _passportJwt.Strategy(jwtStrategyOption, async (req, payload, done) => {
       try {
-        console.log(payload.id);
-        console.log(payload.userId);
         const user = await _services.userService.findOne({
           id: payload.id
         });
@@ -57,27 +55,22 @@ class Authenticator {
   }
 
   authenticate(req, res, next) {
-    console.log("fuckfuckfuck");
     instance.passport.authenticate('jwt', {
       session: false
     }, (error, user) => {
-      console.log("zxcvzxcvzxcv1"); // [ERROR] INVALID_TOKEN
-
+      // [ERROR] INVALID_TOKEN
       if (!user) {
         const response = (0, _functions.createErrorResponse)(new Error('INVALID_TOKEN'));
         return res.send(response);
-      }
+      } // [ERROR] Internal Server Error
 
-      console.log("zxcvzxcvzxcv2"); // [ERROR] Internal Server Error
 
       if (error) {
         return res.send((0, _functions.createErrorResponse)());
       }
 
-      console.log("zxcvzxcvzxcv3");
       req.user = user;
       next();
-      console.log("zxcvzxcvzxcv4");
     })(req, res, next);
   }
 

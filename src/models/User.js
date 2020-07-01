@@ -11,17 +11,13 @@ export default class User extends Sequelize.Model {
 							type: Sequelize.STRING,
 							allowNull: false,
 						},
-						userId : {
-							type : Sequelize.STRING,
-							allowNull : false,
+						email: {
+							type: Sequelize.STRING,
+							allowNull: true,
 						},
 						password : {
 							type : Sequelize.STRING,
 							allowNull : false
-						},
-						email: {
-							type: Sequelize.STRING,
-							allowNull: true,
 						},
 						highSchool: {    
 							type: Sequelize.STRING,
@@ -31,13 +27,13 @@ export default class User extends Sequelize.Model {
 							type: Sequelize.INTEGER,
 							allwoNull: true,
 						},
+						gender : {
+							type : Sequelize.STRING,
+							allowNull : true
+						},
 						graduateYear: {
 							type: Sequelize.INTEGER,
 							defaultValue: -1,
-						},
-						isVerified : {
-							type : Sequelize.BOOLEAN,
-							defaultValue: false
 						},
 						predictTimes : {
 							type : Sequelize.INTEGER,
@@ -69,6 +65,17 @@ export default class User extends Sequelize.Model {
 
 		isValidPassword(unencryptedPwd) {
 			return bycrypt.compareSync(unencryptedPwd, this.password)
+		}	
+
+		static associate(models) {
+			this.hasMany(models.PaymentRecord, {
+				foreignKey: 'userId',
+				as: 'paymentRecord'
+			}),
+			this.hasMany(models.Score, {
+				foreignKey: 'userId',
+				as: 'score'
+			})
 		}
 
 }
@@ -91,6 +98,10 @@ export const schema = {
 			type : 'string',
 			example : 'Bol4@gmail.com'
 		},
+		password : {
+			type : 'string',
+			example : 'password'
+		},
 		highSchool : {
 			type : 'string',
 			example : '볼사고등학교'
@@ -99,14 +110,15 @@ export const schema = {
 			type : 'integer',
 			example : '0'
 		},
+		gender : {
+			type : 'string',
+			example : '남'
+		},
 		graduateYear : {
 			type : 'integer',
 			example : '2013'
 		},
-		isVerfieid : {
-			type : 'boolean',
-			example : false
-		},
+
 		predictTimes : {
 			type : 'integer',
 			example : 3
