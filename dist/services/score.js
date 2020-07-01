@@ -19,16 +19,46 @@ class ScoreService {
     return instance;
   }
 
-  async findByAccountId(accountId) {
-    return await _models.Score.findAll({
+  async create(modelObj) {
+    return await _models.Score.create(modelObj);
+  }
+
+  async findByUserId(userId) {
+    return await _models.Score.findOne({
       where: {
-        accountId
-      },
-      attributes: ["subject", "type", "score", "grade", "percentile"]
+        userId: userId
+      }
     });
   }
 
-  async setScore(score) {}
+  async updateById(userId, score) {
+    await _models.Score.update(score, {
+      where: {
+        userId
+      }
+    });
+    const updatedScore = await _models.Score.findOne({
+      where: {
+        userId
+      }
+    });
+    if (updatedScore === null) throw Error('SCORE_NOT_FOUND');
+    return updatedScore;
+  }
+
+  async deleteById(userId) {
+    const score = await _models.Score.findOne({
+      where: {
+        userId
+      }
+    });
+
+    if (score == null) {
+      throw Error('SCORE_NOT_FOUND');
+    } else {
+      await score.destroy();
+    }
+  }
 
 }
 

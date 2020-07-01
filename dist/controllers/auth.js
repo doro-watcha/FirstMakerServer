@@ -38,8 +38,7 @@ class AuthController {
       // user info from middlewawre: Authenticator.authenticate
       const {
         user
-      } = req;
-      console.log("fuck"); // get user info
+      } = req; // get user info
 
       const foundUser = await _services.userService.findOne({
         id: user.id
@@ -66,7 +65,9 @@ class AuthController {
         name: _joi.default.string(),
         highSchool: _joi.default.string(),
         line: _joi.default.string(),
-        graduateYear: _joi.default.number()
+        graduateYear: _joi.default.number(),
+        telephone: _joi.default.string(),
+        gender: _joi.default.string()
       });
       const {
         email,
@@ -74,7 +75,9 @@ class AuthController {
         name,
         highSchool,
         line,
-        graduateYear
+        graduateYear,
+        telephone,
+        gender
       } = result; // check if user already exists
 
       const user = await _services.userService.findOne({
@@ -89,7 +92,9 @@ class AuthController {
         password,
         highSchool,
         line,
-        graduateYear
+        graduateYear,
+        telephone,
+        gender
       }); // create response
 
       const response = {
@@ -106,8 +111,14 @@ class AuthController {
 
   static async signIn(req, res) {
     try {
-      const email = req.body.email;
-      const password = req.body.password; // get user info
+      const result = await _joi.default.validate(req.body, {
+        email: _joi.default.string().required(),
+        password: _joi.default.string().regex(_variables.passwordRegex).required()
+      });
+      const {
+        email,
+        password
+      } = result; // get user info
 
       let user = await _services.userService.findOne({
         email

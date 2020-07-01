@@ -10,17 +10,50 @@ class ScoreService {
 			instance = this
 		}
 		return instance
-	}
+    }
+    
+    async create ( modelObj) {
+        return await Score.create(modelObj)
+    }
 
-    async findByAccountId (accountId) {
-        return await Score.findAll({
-            where : { accountId },
-            attributes : ["subject","type","score","grade","percentile"]
+    async findByUserId (userId) {
+        return await Score.findOne({
+            where : { userId : userId  }
         })
     }
 
-    async setScore ( score ) {
+    async updateById ( userId , score) {
+
+        await Score.update(score, {
+            where: { userId },
+        })
+
+        const updatedScore = await Score.findOne({
+            where: { userId },
+        })
+        if (updatedScore === null) throw Error('SCORE_NOT_FOUND')
+
+        return updatedScore
+
     }
+
+    async deleteById ( userId ) {
+
+		const score = await Score.findOne({
+			where: {
+				userId
+			}
+        })
+        
+        if ( score == null ) {
+            throw Error ('SCORE_NOT_FOUND')
+
+        } else {
+
+            await score.destroy()
+        }
+    }
+
 }
 
 export default new ScoreService()

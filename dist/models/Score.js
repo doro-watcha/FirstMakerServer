@@ -72,6 +72,10 @@ class Score extends _sequelize.default.Model {
         type: _sequelize.default.INTEGER,
         defaultValue: 0
       },
+      userId: {
+        type: _sequelize.default.INTEGER,
+        defaultValue: 0
+      },
       createdAt: {
         type: _sequelize.default.DATE,
         allowNull: true,
@@ -85,13 +89,6 @@ class Score extends _sequelize.default.Model {
       }
     }, {
       sequelize
-    });
-  }
-
-  static associate(models) {
-    this.belongsTo(models.User, {
-      foreignKey: 'userId',
-      as: 'user'
     });
   }
 

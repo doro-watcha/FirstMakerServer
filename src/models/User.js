@@ -75,10 +75,6 @@ export default class User extends Sequelize.Model {
 			this.hasMany(models.PaymentRecord, {
 				foreignKey: 'userId',
 				as: 'paymentRecord'
-			}),
-			this.hasMany(models.Score, {
-				foreignKey: 'userId',
-				as: 'score'
 			})
 		}
 
@@ -105,7 +101,7 @@ export const schema = {
 		telephone : {
 			type : 'string',
 			example : "010-7270-5880"
-		}
+		},
 		password : {
 			type : 'string',
 			example : 'password'

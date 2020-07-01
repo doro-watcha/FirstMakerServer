@@ -28,7 +28,7 @@ export default class AuthController {
 			const foundUser = await userService.findOne({
 				id: user.id,
 			})
-			
+
 			// create response
 			const response = {
 				success: true,
@@ -55,11 +55,13 @@ export default class AuthController {
 				name : Joi.string(),
 				highSchool : Joi.string(),
 				line : Joi.string(),
-				graduateYear : Joi.number()
+				graduateYear : Joi.number(),
+				telephone : Joi.string(),
+				gender : Joi.string()
 
 			})
 		
-			const { email , password , name , highSchool , line, graduateYear } = result 
+			const { email , password , name , highSchool , line, graduateYear , telephone, gender } = result 
 			// check if user already exists
 			const user = await userService.findOne({
 				email
@@ -75,7 +77,9 @@ export default class AuthController {
 				password,
 				highSchool,
 				line,
-				graduateYear
+				graduateYear,
+				telephone ,
+				gender
 			})
 
 			// create response

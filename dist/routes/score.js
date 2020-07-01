@@ -2,11 +2,17 @@
 
 var _controllers = require("../controllers");
 
-var _express = _interopRequireDefault(require("express"));
+var _express = require("express");
+
+var _Authenticator = _interopRequireDefault(require("../Authenticator"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var router = _express.default.Router();
+const {
+  authenticate,
+  getUserInfo
+} = _Authenticator.default;
+const router = (0, _express.Router)();
 /**
  * @swagger
  * 
@@ -51,15 +57,19 @@ var router = _express.default.Router();
  *       'ecode: 700':
  *         description: 서버 에러
  */
-// 내 점수 불러오는 api
 
-
-router.get('/', function (req, res) {
-  _controllers.scoreController.getScore(req, res);
+router.get('/:userId', getUserInfo, (req, res) => {
+  _controllers.scoreController.findScore(req, res);
 }); // 내 점수 db에 박는 api
 
-router.post('/', function (req, res) {
-  _controllers.scoreController.setScore(req, res);
+router.post('/', authenticate, (req, res) => {
+  _controllers.scoreController.createScore(req, res);
+});
+router.patch('/:userId', (req, res) => {
+  _controllers.scoreController.updateScore(req, res);
+});
+router.delete('/:userId', function (req, res) {
+  _controllers.scoreController.deleteScore(req, res);
 });
 /**
  * @swagger
@@ -122,9 +132,5 @@ router.post('/', function (req, res) {
  *       'ecode: 700':
  *         description: 서버 에러
  */
-// 대학 list 보여줄때 자신의 점수 계산해서 던져주는 api
 
-router.post('/translate', function (req, res) {
-  _controllers.scoreController.translateScore(req, res);
-});
 module.exports = router;

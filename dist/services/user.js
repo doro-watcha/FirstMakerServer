@@ -41,6 +41,28 @@ class UserService {
     });
   }
 
+  async updateId(id, user) {
+    return await _models.User.update(user, {
+      where: {
+        id
+      }
+    });
+  }
+
+  async deleteById(id) {
+    const user = await _models.User.findOne({
+      where: {
+        id
+      }
+    });
+
+    if (user == null) {
+      throw Error('USER_NOT_FOUND');
+    } else {
+      await user.destroy();
+    }
+  }
+
 }
 
 var _default = new UserService();

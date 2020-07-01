@@ -96,10 +96,9 @@ module.exports = {
 			ko: '좋아요 없음',
 			en: 'Like not found',
 		},
-		USER_NOTIFICATION_SETTING_NOT_FOUND: {
-			status: 418,
-			ko: '사용자 알림 수신 설정 없음',
-			en: 'User notification setting not found',
+		SCORE_NOT_FOUND: {
+			status : 414,
+			ko : '해당 성적 없음'
 		},
 		// 409
 		USER_ALREADY_EXISTS: {
@@ -107,6 +106,7 @@ module.exports = {
 			ko: '이미 사용자 존재',
 			en: 'User already exists',
 		},
+
 		BOOKMARK_ALREADY_EXISTS: {
 			status: 501,
 			ko: '이미 북마크 존재',

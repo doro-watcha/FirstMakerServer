@@ -29,7 +29,29 @@ class UserService {
 		return await User.findOne({
       where: JSON.parse(JSON.stringify(where))
 		})
-  }
+	}
+	
+	async updateId(id, user) {
+		return await User.update(user, {
+			where :  {id},
+		})
+	}
+
+	async deleteById ( id ) {
+		const user = await User.findOne({
+			where: {
+				id
+			}
+        })
+        
+        if ( user == null ) {
+            throw Error ('USER_NOT_FOUND')
+
+        } else {
+
+            await user.destroy()
+        }
+	}
 }
 
 export default new UserService()

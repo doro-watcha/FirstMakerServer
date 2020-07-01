@@ -66,6 +66,10 @@ export default class Score extends Sequelize.Model {
                     type : Sequelize.INTEGER,
                     defaultValue : 0
                 },
+                userId : {
+                    type : Sequelize.INTEGER,
+                    defaultValue : 0
+                },
                 createdAt: {
                     type: Sequelize.DATE,
                     allowNull: true,
@@ -85,13 +89,6 @@ export default class Score extends Sequelize.Model {
 
         )
     }
-
-    static associate(models) {
-        this.belongsTo(models.User, {
-          foreignKey: 'userId',
-          as: 'user',
-        })
-      }
     
 }
 

@@ -1,7 +1,11 @@
 import { scoreController } from '../controllers'
-import express from 'express'
+import { Router } from 'express'
 
-var router  = express.Router()
+import Authenticator from '../Authenticator'
+
+const { authenticate, getUserInfo } = Authenticator
+
+const router  = Router()
 
 
 /**
@@ -49,14 +53,22 @@ var router  = express.Router()
  *         description: 서버 에러
  */
 
-// 내 점수 불러오는 api
-router.get('/', function(req,res) {
-    scoreController.getScore(req, res)
+
+router.get('/:userId', getUserInfo, (req, res) => {
+    scoreController.findScore(req,res)
 })
 
 // 내 점수 db에 박는 api
-router.post('/', function(req, res) {
-    scoreController.setScore(req,res)
+router.post('/', authenticate , (req, res) => {
+    scoreController.createScore(req,res)
+})
+
+router.patch('/:userId', (req, res) => {
+    scoreController.updateScore(req,res)
+})
+
+router.delete('/:userId', function(req,res) {
+    scoreController.deleteScore(req,res)
 })
 
 /**
@@ -121,10 +133,6 @@ router.post('/', function(req, res) {
  *         description: 서버 에러
  */
 
-// 대학 list 보여줄때 자신의 점수 계산해서 던져주는 api
-router.post('/translate', function(req, res){
-    scoreController.translateScore(req,res)
-})
 
 
 

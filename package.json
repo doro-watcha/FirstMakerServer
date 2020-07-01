@@ -7,7 +7,9 @@
     "start": "babel src/new_app.js"
   },
   "dependencies": {
-    "@hapi/joi": "^15.1.0",
+    "@hapi/formula": "^3.0.0",
+    "@hapi/joi": "^15.1.1",
+    "@hapi/pinpoint": "^2.0.0",
     "aws-sdk": "^2.705.0",
     "axios": "^0.19.2",
     "bcrypt": "^5.0.0",
@@ -26,6 +28,7 @@
     "mysql": "^2.17.1",
     "mysql2": "^2.1.0",
     "nodemailer": "^6.4.10",
+    "parse": "^2.13.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "regenerator-runtime": "^0.13.5",

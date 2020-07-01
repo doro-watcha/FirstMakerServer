@@ -22,6 +22,10 @@ class User extends _sequelize.default.Model {
         type: _sequelize.default.STRING,
         allowNull: true
       },
+      telephone: {
+        type: _sequelize.default.STRING,
+        allowNull: true
+      },
       password: {
         type: _sequelize.default.STRING,
         allowNull: false
@@ -74,9 +78,6 @@ class User extends _sequelize.default.Model {
     this.hasMany(models.PaymentRecord, {
       foreignKey: 'userId',
       as: 'paymentRecord'
-    }), this.hasMany(models.Score, {
-      foreignKey: 'userId',
-      as: 'score'
     });
   }
 
@@ -98,6 +99,10 @@ const schema = {
     email: {
       type: 'string',
       example: 'Bol4@gmail.com'
+    },
+    telephone: {
+      type: 'string',
+      example: "010-7270-5880"
     },
     password: {
       type: 'string',
