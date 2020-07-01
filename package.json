@@ -7,10 +7,9 @@
     "start": "babel src/new_app.js"
   },
   "dependencies": {
-    "@hapi/joi": "^17.1.1",
+    "@hapi/joi": "^15.1.0",
     "aws-sdk": "^2.705.0",
     "axios": "^0.19.2",
-    "babel": "^6.23.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
@@ -29,6 +28,7 @@
     "nodemailer": "^6.4.10",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "regenerator-runtime": "^0.13.5",
     "sequelize": "^5.21.10",
     "sha256": "^0.2.0",
     "swagger-jsdoc": "^4.0.0",
@@ -36,8 +36,10 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.6",
     "@babel/node": "^7.8.7",
-    "@babel/preset-env": "^7.9.6"
+    "@babel/preset-env": "^7.9.6",
+    "@babel/core": "^7.10.4",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-decorators": "^7.10.4"
   }
 }

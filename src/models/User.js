@@ -15,6 +15,10 @@ export default class User extends Sequelize.Model {
 							type: Sequelize.STRING,
 							allowNull: true,
 						},
+						telephone : {
+							type : Sequelize.STRING,
+							allowNull : true
+						},
 						password : {
 							type : Sequelize.STRING,
 							allowNull : false
@@ -24,7 +28,7 @@ export default class User extends Sequelize.Model {
 							allowNull : true,
 						},
 						line: {
-							type: Sequelize.INTEGER,
+							type: Sequelize.STRING,
 							allwoNull: true,
 						},
 						gender : {
@@ -98,6 +102,10 @@ export const schema = {
 			type : 'string',
 			example : 'Bol4@gmail.com'
 		},
+		telephone : {
+			type : 'string',
+			example : "010-7270-5880"
+		}
 		password : {
 			type : 'string',
 			example : 'password'
@@ -107,8 +115,8 @@ export const schema = {
 			example : '볼사고등학교'
 		},
 		line : {
-			type : 'integer',
-			example : '0'
+			type : 'string',
+			example : '문과'
 		},
 		gender : {
 			type : 'string',

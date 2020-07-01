@@ -62,11 +62,19 @@ class AuthController {
       // validation
       const result = await _joi.default.validate(req.body, {
         email: _joi.default.string().required(),
-        password: _joi.default.string().regex(_variables.passwordRegex).required()
+        password: _joi.default.string().regex(_variables.passwordRegex).required(),
+        name: _joi.default.string(),
+        highSchool: _joi.default.string(),
+        line: _joi.default.string(),
+        graduateYear: _joi.default.number()
       });
       const {
         email,
-        password
+        password,
+        name,
+        highSchool,
+        line,
+        graduateYear
       } = result; // check if user already exists
 
       const user = await _services.userService.findOne({
@@ -78,7 +86,10 @@ class AuthController {
       const newUser = await _services.userService.create({
         name: name,
         email,
-        password
+        password,
+        highSchool,
+        line,
+        graduateYear
       }); // create response
 
       const response = {

@@ -31,7 +31,7 @@ class User extends _sequelize.default.Model {
         allowNull: true
       },
       line: {
-        type: _sequelize.default.INTEGER,
+        type: _sequelize.default.STRING,
         allwoNull: true
       },
       gender: {
@@ -108,8 +108,8 @@ const schema = {
       example: '볼사고등학교'
     },
     line: {
-      type: 'integer',
-      example: '0'
+      type: 'string',
+      example: '문과'
     },
     gender: {
       type: 'string',

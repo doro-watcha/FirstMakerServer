@@ -23,14 +23,12 @@ export default class AuthController {
 		try {
 			// user info from middlewawre: Authenticator.authenticate
       const { user } = req
-
-      console.log("fuck")
-      
+    
 			// get user info
 			const foundUser = await userService.findOne({
 				id: user.id,
 			})
-
+			
 			// create response
 			const response = {
 				success: true,
@@ -53,10 +51,15 @@ export default class AuthController {
 					.required(),
 				password: Joi.string()
 					.regex(passwordRegex)
-					.required()
+					.required(),
+				name : Joi.string(),
+				highSchool : Joi.string(),
+				line : Joi.string(),
+				graduateYear : Joi.number()
+
 			})
 		
-			const { email , password } = result 
+			const { email , password , name , highSchool , line, graduateYear } = result 
 			// check if user already exists
 			const user = await userService.findOne({
 				email
@@ -69,7 +72,10 @@ export default class AuthController {
 			const newUser = await userService.create({
 				name: name,
 				email,
-				password
+				password,
+				highSchool,
+				line,
+				graduateYear
 			})
 
 			// create response
@@ -90,10 +96,16 @@ export default class AuthController {
 
 
 		try {
-      
-      const email = req.body.email
-      const password = req.body.password
 
+			const result = await Joi.validate(req.body, {
+				email: Joi.string()
+					.required(),
+				password: Joi.string()
+					.regex(passwordRegex)
+					.required()
+			})
+
+			const { email, password } = result 
 			// get user info
 			let user = await userService.findOne({
 				email
