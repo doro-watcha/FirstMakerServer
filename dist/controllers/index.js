@@ -12,6 +12,8 @@ var _report = _interopRequireDefault(require("./report"));
 
 var _major = _interopRequireDefault(require("./major"));
 
+var _consulting = _interopRequireDefault(require("./consulting"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
@@ -20,5 +22,6 @@ module.exports = {
   authController: _auth.default,
   userController: _user.default,
   reportController: _report.default,
-  majorController: _major.default
+  majorController: _major.default,
+  consultingController: _consulting.default
 };

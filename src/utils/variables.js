@@ -112,6 +112,10 @@ module.exports = {
 			status : 416,
 			ko : '검색 가능 대학 없음'
 		},
+		CONSULTING_NOT_FOUND : {
+			status : 417,
+			ko : '해당 상담 없음'
+		},
 		// 409
 		USER_ALREADY_EXISTS: {
 			status: 500,

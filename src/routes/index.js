@@ -7,6 +7,7 @@ import authRouter from './auth'
 import userRouter from './user'
 import reportRouter from './report'
 import majorRouter from './major'
+import consultingRouter from './consulting'
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -19,6 +20,7 @@ router.use('/auth', authRouter)
 router.use('/user', userRouter)
 router.use('/report', reportRouter)
 router.use('/major', majorRouter)
+router.use('/consulting', consultingRouter)
 
 
 module.exports = router

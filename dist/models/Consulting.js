@@ -12,9 +12,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class Consulting extends _sequelize.default.Model {
   static init(sequelize) {
     return super.init({
-      score: {
-        type: _sequelize.default.FLOAT,
+      title: {
+        type: _sequelize.default.STRING,
         allowNull: true
+      },
+      description: {
+        type: _sequelize.default.STRING,
+        allwoNull: true
       },
       createdAt: {
         type: _sequelize.default.DATE,
@@ -34,8 +38,8 @@ class Consulting extends _sequelize.default.Model {
 
   static associate(models) {
     this.belongsTo(models.User, {
-      foreignKey: 'userId',
-      as: 'user'
+      foreignKey: 'studentId',
+      as: 'student'
     });
   }
 

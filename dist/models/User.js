@@ -77,7 +77,13 @@ class User extends _sequelize.default.Model {
   static associate(models) {
     this.hasMany(models.Report, {
       foreignKey: 'userId',
-      as: 'user'
+      as: 'report'
+    }), this.hasMany(models.Academy, {
+      foreignKey: 'studentId',
+      as: 'academy'
+    }), this.hasMany(models.Consulting, {
+      foreignKey: 'studentId',
+      as: 'consulting'
     });
   }
 

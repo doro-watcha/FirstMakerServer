@@ -7,6 +7,8 @@ import UserModel from './User'
 import PaymentRecordModel from './PaymentRecord'
 import ReportModel from './Report'
 import MajorModel from './Major'
+import ConsultingModel from './Consulting'
+import AcademyModel from './Academy'
 
 const env = process.env.NODE_ENV || 'development'
 const config = dbConfig[env]
@@ -19,14 +21,16 @@ const models = {
   User : UserModel.init(sequelize, Sequelize),
   PaymentRecord : PaymentRecordModel.init(sequelize , Sequelize),
   Report : ReportModel.init(sequelize, Sequelize),
-  Major : MajorModel.init(sequelize , Sequelize)
+  Major : MajorModel.init(sequelize , Sequelize),
+  Consulting : ConsultingModel.init(sequelize, Sequelize),
+  Academy : AcademyModel.init(sequelize, Sequelize)
 }
 
 Object.values(models)
 	.filter((model) => typeof model.associate === 'function')
   .forEach((model) => model.associate(models))
   
-  
+
 module.exports = {
   ...models,
   sequelize,

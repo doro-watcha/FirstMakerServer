@@ -6,9 +6,14 @@ export default class Consulting extends Sequelize.Model {
     static init(sequelize) {
         return super.init(
             {
-              score : {
-                type : Sequelize.FLOAT,
-                allowNull : true
+
+              title : {
+                type : Sequelize.STRING,
+                allowNull : true 
+              },
+              description : {
+                type : Sequelize.STRING,
+                allwoNull : true
               },
               createdAt: {
                   type: Sequelize.DATE,
@@ -32,8 +37,8 @@ export default class Consulting extends Sequelize.Model {
 
     static associate(models) {
       this.belongsTo(models.User, {
-        foreignKey: 'userId',
-        as: 'user',
+        foreignKey: 'studentId',
+        as: 'student',
       })
 
     }

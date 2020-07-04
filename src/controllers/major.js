@@ -1,4 +1,4 @@
-import { majorService, universityService } from '../services'
+import { majorService } from '../services'
 import Joi from '@hapi/joi'
 
 import { createErrorResponse } from '../utils/functions'

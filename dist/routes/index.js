@@ -12,6 +12,8 @@ var _report = _interopRequireDefault(require("./report"));
 
 var _major = _interopRequireDefault(require("./major"));
 
+var _consulting = _interopRequireDefault(require("./consulting"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var express = require('express');
@@ -30,4 +32,5 @@ router.use('/auth', _auth.default);
 router.use('/user', _user.default);
 router.use('/report', _report.default);
 router.use('/major', _major.default);
+router.use('/consulting', _consulting.default);
 module.exports = router;

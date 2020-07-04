@@ -10,6 +10,8 @@ var _report = _interopRequireDefault(require("./report"));
 
 var _major = _interopRequireDefault(require("./major"));
 
+var _consulting = _interopRequireDefault(require("./consulting"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
@@ -17,5 +19,6 @@ module.exports = {
   scoreService: _score.default,
   userService: _user.default,
   reportService: _report.default,
-  majorService: _major.default
+  majorService: _major.default,
+  consultingService: _consulting.default
 };

@@ -32,7 +32,12 @@ class Academy extends _sequelize.default.Model {
     });
   }
 
-  static associate(models) {}
+  static associate(models) {
+    this.belongsTo(models.User, {
+      foreignKey: 'studentId',
+      as: 'student'
+    });
+  }
 
 } // swagger schema
 
