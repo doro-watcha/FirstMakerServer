@@ -79,10 +79,6 @@ router.get('/', authenticate, (req, res) => {
  *                 data:
  *                   type: object
  *                   properties:
- *                     user:
- *                       $ref: '#/components/schemas/User'
- *                   required:
- *                     - user
  *               required:
  *                 - success
  *                 - data
@@ -135,8 +131,12 @@ router.post('/signup', (req, res) => {
  *                   properties:
  *                     token:
  *                       type: string
+ *                       example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJnb2Rkb3JvQG5hdmVyLmNvbSIsImlhdCI6MTU5Mzg3NDE4NCwiZXhwIjoxNTk5MDU4MTg0fQ.GxyJn0tqpsUApxOrpr-0d9gH3LR3fCQi0riIgsu38OQ
+ *                     user:
+ *                       $ref: '#/components/schemas/User'
  *                   required:
  *                     - token
+ *                     - user
  *               required:
  *                 - success
  *                 - data
