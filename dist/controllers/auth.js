@@ -62,7 +62,7 @@ class AuthController {
       const result = await _joi.default.validate(req.body, {
         email: _joi.default.string().required(),
         password: _joi.default.string().regex(_variables.passwordRegex).required(),
-        name: _joi.default.string(),
+        name: _joi.default.string().required(),
         highSchool: _joi.default.string(),
         line: _joi.default.string(),
         graduateYear: _joi.default.number(),
@@ -86,7 +86,7 @@ class AuthController {
 
       if (user) throw Error('USER_ALREADY_EXISTS'); // create user
 
-      const newUser = await _services.userService.create({
+      const success = await _services.userService.create({
         name: name,
         email,
         password,
@@ -98,10 +98,7 @@ class AuthController {
       }); // create response
 
       const response = {
-        success: true,
-        data: {
-          user: newUser
-        }
+        success: success
       };
       res.send(response);
     } catch (e) {
@@ -139,7 +136,8 @@ class AuthController {
       const response = {
         success: true,
         data: {
-          token
+          token,
+          user
         }
       };
       res.send(response);

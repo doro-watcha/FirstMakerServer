@@ -18,7 +18,10 @@ export default class University extends Sequelize.Model {
 							type : Sequelize.INTEGER,
 							defaultValue : 0
 						},
-
+						group : {
+							type : Sequelize.STRING,
+							allowNull : true 
+						},
 						// 지원 가능 점수중 높은 값
 						max : {
 							type : Sequelize.INTEGER,
@@ -72,6 +75,10 @@ export const schema = {
 		name : {
 			type : 'string',
 			example : '고려대'
+		},
+		group : {
+			type : 'string',
+			example : '가'
 		},
 		min : {
 			type : 'integer',

@@ -27,7 +27,7 @@ class UserService {
 
 		if ( newUser == null ) throw Error('USER_NOT_FOUND')
 		else {
-			return newUser
+			return true
 		}
   }
 

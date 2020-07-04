@@ -52,7 +52,7 @@ export default class AuthController {
 				password: Joi.string()
 					.regex(passwordRegex)
 					.required(),
-				name : Joi.string(),
+				name : Joi.string().required(),
 				highSchool : Joi.string(),
 				line : Joi.string(),
 				graduateYear : Joi.number(),
@@ -71,7 +71,7 @@ export default class AuthController {
 			if (user) throw Error('USER_ALREADY_EXISTS')
 
 			// create user
-			const newUser = await userService.create({
+			const success = await userService.create({
 				name: name,
 				email,
 				password,
@@ -84,10 +84,7 @@ export default class AuthController {
 
 			// create response
 			const response = {
-				success: true,
-				data: {
-					user: newUser,
-				},
+				success: success
 			}
 
 			res.send(response)
@@ -130,7 +127,8 @@ export default class AuthController {
 			const response = {
 				success: true,
 				data: {
-					token
+					token,
+					user
 				},
 			}
 			res.send(response)
