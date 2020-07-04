@@ -55,29 +55,17 @@ export const schema = {
 			type: 'integer',
       example: 3,
     },
-    score : {
-      type : 'float',
-      example :  725.3
+    title : {
+      type : 'string',
+      example :  '상답있어요'
     },
-    userId : {
-      type : 'integer',
-      example : 3
+    description : {
+      type : 'string',
+      example : '대학가자~'
     },
-    university : {
-				$ref: '#/components/schemas/University',
-		
-    },
-
-    createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-    },
-    updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-        onUpdate: Sequelize.literal('CURRENT_TIMESTAMP'),
+    user : {
+      $ref: '#/components/schemas/User'
     }
-	},
+  },
+  required : ['id','title','description','user']
 }

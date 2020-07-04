@@ -29,9 +29,16 @@ class UniversityService {
     }
 
     async update ( id , modelObj ) {
-        return await University.update( modelObj ,{
-            where : { id }
+        await University.update(modelObj, {
+            where: { id },
         })
+
+        const updatedUniversity = await University.findOne({
+            where: { id },
+        })
+        if (updatedUniversity === null) throw Error('UNIVERSITY_NOT_FOUND')
+
+        return updatedUniversity
     }
 
     async delete ( id ) {

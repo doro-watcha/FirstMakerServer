@@ -16,7 +16,7 @@ const router = (0, _express.Router)();
 /**
  * @swagger
  * 
- * /score:
+ * /score/{userId}:
  *   get:
  *     tags:
  *       - score
@@ -60,53 +60,39 @@ const router = (0, _express.Router)();
 
 router.get('/:userId', getUserInfo, (req, res) => {
   _controllers.scoreController.findScore(req, res);
-}); // 내 점수 db에 박는 api
-
-router.post('/', authenticate, (req, res) => {
-  _controllers.scoreController.createScore(req, res);
-});
-router.patch('/:userId', (req, res) => {
-  _controllers.scoreController.updateScore(req, res);
-});
-router.delete('/:userId', function (req, res) {
-  _controllers.scoreController.deleteScore(req, res);
 });
 /**
  * @swagger
- * 
- * /score/translate:
+ *
+ * /score:
  *   post:
  *     tags:
  *       - score
- *     security:
- *       - bearerAuth: []
- *     summary: 내 점수 변환
+ *     summary: 성적 생성
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/x-www-form-urlencoded:
  *           schema:
  *             type: object
  *             properties:
- *               korean:
+ *               score:
  *                 type: integer
- *                 description: 국어점수
- *               english:
+ *                 description: 표준점수
+ *               grade:
  *                 type: integer
- *                 description: 영어등급
- *               math:
+ *                 description: 등급
+ *               percentile:
  *                 type: integer
- *                 description: 수학점수
- *               history:
- *                 type: integer
- *                 description : 역사등급
- *               tamgu1:
- *                 type : integer
- *                 description : 탐구 1 점수
- *               tamgu2:
- *                 type : integer
- *                 description : 탐구 2 점수
- *             required: korean, english, math, history, tamgu1, tamgu2
+ *                 description: 백분위
+ *               type:
+ *                 type: string
+ *                 description: 문/이과
+ *             required:
+ *               - score
+ *               - grade
+ *               - percentile
+ *               - type
  *     responses:
  *       SUCCESS:
  *         content:
@@ -118,8 +104,12 @@ router.delete('/:userId', function (req, res) {
  *                   type: boolean
  *                   example: true
  *                 data:
- *                   type: integer
- *                   example : 583
+ *                   type: object
+ *                   properties:
+ *                     score:
+ *                       $ref: '#/components/schemas/Score'
+ *                   required:
+ *                     - score
  *               required:
  *                 - success
  *                 - data
@@ -127,10 +117,100 @@ router.delete('/:userId', function (req, res) {
  *         description: 유효하지 않은 토큰
  *       'ecode: 100':
  *         description: Request Body Validation 실패
- *       'ecode: 422':
- *         description: 존재하지 않는 태그일 경우
  *       'ecode: 700':
  *         description: 서버 에러
  */
 
+router.post('/', authenticate, (req, res) => {
+  _controllers.scoreController.createScore(req, res);
+});
+/**
+ * @swagger
+ *
+ * /score/{userId}:
+ *   post:
+ *     tags:
+ *       - score
+ *     summary: 성적 수정
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/x-www-form-urlencoded:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               score:
+ *                 type: integer
+ *                 description: 표준점수
+ *               grade:
+ *                 type: integer
+ *                 description: 등급
+ *               percentile:
+ *                 type: integer
+ *                 description: 백분위
+ *               type:
+ *                 type: string
+ *                 description: 문/이과
+ *     responses:
+ *       SUCCESS:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     score:
+ *                       $ref: '#/components/schemas/Score'
+ *                   required:
+ *                     - score
+ *               required:
+ *                 - success
+ *                 - data
+ *       'ecode: 201':
+ *         description: 유효하지 않은 토큰
+ *       'ecode: 100':
+ *         description: Request Body Validation 실패
+ *       'ecode: 700':
+ *         description: 서버 에러
+ */
+
+router.patch('/:userId', (req, res) => {
+  _controllers.scoreController.updateScore(req, res);
+});
+/**
+ * @swagger
+ *
+ * /score/{userId}:
+ *   delete:
+ *     tags:
+ *       - score
+ *     summary: 성적 삭제
+ *     responses:
+ *       SUCCESS:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *               required:
+ *                 - success
+ *       'ecode: 201':
+ *         description: 유효하지 않은 토큰
+ *       'ecode: 100':
+ *         description: Request Body Validation 실패
+ *       'ecode: 700':
+ *         description: 서버 에러
+ */
+
+router.delete('/:userId', function (req, res) {
+  _controllers.scoreController.deleteScore(req, res);
+});
 module.exports = router;

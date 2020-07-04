@@ -15,14 +15,14 @@ export default class University extends Sequelize.Model {
 						},
 						// 지원 가능 점수중 작은값
 						min : {
-							type : Sequelize.FLOAT,
-							defaultValue : 0.0
+							type : Sequelize.INTEGER,
+							defaultValue : 0
 						},
 
 						// 지원 가능 점수중 높은 값
 						max : {
-							type : Sequelize.FLOAT,
-							defaultValue : 0.0
+							type : Sequelize.INTEGER,
+							defaultValue : 0
 						},
 
 						location : {
@@ -69,80 +69,23 @@ export const schema = {
 			type: 'integer',
 			example: 3,
 		},
-		year : {
-			type : 'integer',
-			example : 2020
-		},
-		line: {
-			type: 'integer',
-			example: 0,
-		},
-		group: {
-			type: 'integer',
-			example: '0',
-		},
-		admissionType : {
+		name : {
 			type : 'string',
-			example : '기회균등전형'
+			example : '고려대'
 		},
-		recruitmentNumber : {
+		min : {
 			type : 'integer',
-			example : '35'
+			example : '340'
 		},
-		additionalMember : {
+		max : {
 			type : 'integer',
-			example : '3'
+			example : '660'
 		},
-		finalNumber : {
-			type : 'integer',
-			example : '38'
-		},
-		competitionNumber : {
-			type : 'float',
-			example : 3.5
-		},
-		isNaesinIncluded : {
-			type : 'boolean',
-			example : false
-		},
-
-		name: {
-			type: 'string',
-      example: '고려대',
-		},
-		major: {
-			type: 'string',
-			example: '간호대학',
-		},
-		majorCode: {
-			type: 'integer',
-			example: 35,
-		},
-		strong_val: {
-			type: 'float',
-			example : 690.5
-		},
-		safe_val:{
-			type: 'float',
-			example : 685.5
-		},
-		dangerous_val:{
-			type: 'float',
-			example : 680.6
-		},
-		sniping_val:{
-			type: 'float',
-			example : 665.5
-		},
-		somethingSpecial : {
+		location : {
 			type : 'string',
-			example : '개발하기 너무 싫다'
-		},
-		etc : {
-			type : 'string',
-			example : '리얼로다가'
+			example : '서울'
 		}
-		
+
 	},
-	required: ['major', 'name'],
+	required: ['id','name', 'min', 'max', 'location'],
 }

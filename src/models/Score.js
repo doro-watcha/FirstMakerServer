@@ -97,6 +97,17 @@ export default class Score extends Sequelize.Model {
 
         )
     }
+
+
+    static associate(models) {
+
+        this.belongsTo(models.User, {
+            foreginKey: 'userId',
+            as : 'user'
+        })
+    }
+
+
     
 }
 
@@ -108,41 +119,77 @@ export const schema = {
 			type: 'integer',
 			example: 3,
 		},
-		userId: {
-			type: 'integer',
-			example: 0,
-		},
-		subject: {
-			type: 'string',
-			example: 'koean',
-		},
 		type: {
-			type: 'strig',
-            example: '나',
-		},
-		score: {
-			type: 'integer',
-			example: 133,
-		},
-		grade: {
-			type: 'integer',
-			example: 1,
-		},
-		percentile: {
-            type: 'integer',
-            example : 94
+			type: 'string',
+			example: '가',
         },
-        createdAt: {
-            type: Sequelize.DATE,
-            allowNull: false,
-            defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        korean_score : {
+            type : 'integer',
+            example : 130
         },
-        updatedAt: {
-            type: Sequelize.DATE,
-            allowNull: false,
-            defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-            onUpdate: Sequelize.literal('CURRENT_TIMESTAMP'),
+        korean_grade : {
+            type : 'integer',
+            example : 1
+        },
+        korean_percentile : {
+            type : 'integer',
+            example : 97
+        },
+        math_score : {
+            type : 'integer',
+            example : 130
+        },
+        math_grade : {
+            type : 'integer',
+            example : 1
+        },
+        math_percentile : {
+            type : 'integer',
+            example : 97
+        },
+        english_grade : {
+            type : 'integer',
+            example : 3
+        },
+        history_grade : {
+            type : 'integer',
+            example : 1
+        },
+        tamgu1_score : {
+            type : 'integer',
+            example : 130
+        },
+        tamgu1_grade : {
+            type : 'integer',
+            example : 1
+        },
+        tamgu1_percentile : {
+            type : 'integer',
+            example : 97
+        },
+        tamgu2_score : {
+            type : 'integer',
+            example : 130
+        },
+        tamgu2_grade : {
+            type : 'integer',
+            example : 1
+        },
+        tamgu2_percentile : {
+            type : 'integer',
+            example : 97
+        },
+        total_score : {
+            type : 'integer',
+            example : 880
+        },
+        total_percentile : {
+            type : 'integer',
+            example : 99
+        },
+        user : {
+            $ref: '#/components/schemas/User'
         }
 	},
-	required: ['id', 'subject', 'type','score','grade','percentile'],
+	required: ['id','user']
 }

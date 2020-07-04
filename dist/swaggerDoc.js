@@ -8,6 +8,16 @@ var _University = require("./models/University");
 
 var _Score = require("./models/Score");
 
+var _Major = require("./models/Major");
+
+var _User = require("./models/User");
+
+var _Report = require("./models/Report");
+
+var _PaymentRecord = require("./models/PaymentRecord");
+
+var _Consulting = require("./models/Consulting");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const ApiResponse = {
@@ -101,7 +111,12 @@ const options = {
     components: {
       schemas: {
         University: _University.schema,
-        Score: _Score.schema
+        Score: _Score.schema,
+        Major: _Major.schema,
+        User: _User.schema,
+        Report: _Report.schema,
+        PaymentRecord: _PaymentRecord.schema,
+        Consulting: _Consulting.schema
       },
       securitySchemes: {
         bearerAuth: {
@@ -114,7 +129,7 @@ const options = {
     }
   },
   basePath: '/',
-  apis: ['./routes/*.js']
+  apis: ['./src/routes/*.js']
 };
 const specs = (0, _swaggerJsdoc.default)(options);
 const uiOptions = {

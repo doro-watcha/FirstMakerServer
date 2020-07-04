@@ -54,42 +54,18 @@ const schema = {
       type: 'integer',
       example: 3
     },
-    accountId: {
+    amount: {
       type: 'integer',
-      example: 0
+      example: 97000
     },
-    subject: {
-      type: 'string',
-      example: 'koean'
-    },
-    type: {
-      type: 'strig',
-      example: '나'
-    },
-    score: {
+    predictTimes: {
       type: 'integer',
-      example: 133
+      example: 5
     },
-    grade: {
-      type: 'integer',
-      example: 1
-    },
-    percentile: {
-      type: 'integer',
-      example: 94
-    },
-    createdAt: {
-      type: _sequelize.default.DATE,
-      allowNull: false,
-      defaultValue: _sequelize.default.literal('CURRENT_TIMESTAMP')
-    },
-    updatedAt: {
-      type: _sequelize.default.DATE,
-      allowNull: false,
-      defaultValue: _sequelize.default.literal('CURRENT_TIMESTAMP'),
-      onUpdate: _sequelize.default.literal('CURRENT_TIMESTAMP')
+    user: {
+      $ref: '#/components/schemas/User'
     }
   },
-  required: ['id', 'subject', 'type', 'score', 'grade', 'percentile']
+  required: ['id', 'amount', 'predictTimes', 'user']
 };
 exports.schema = schema;

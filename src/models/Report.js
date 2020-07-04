@@ -56,13 +56,11 @@ export const schema = {
       type : 'float',
       example :  725.3
     },
-    userId : {
-      type : 'integer',
-      example : 3
+    user : {
+      $ref: '#/components/schemas/User'
     },
-    university : {
-				$ref: '#/components/schemas/University',
-		
+    major : {
+				$ref: '#/components/schemas/Major'
     },
 
     createdAt: {
@@ -76,5 +74,6 @@ export const schema = {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
         onUpdate: Sequelize.literal('CURRENT_TIMESTAMP'),
     }
-	},
+  },
+  required : ['id', 'score', 'user', 'major']
 }

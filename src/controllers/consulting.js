@@ -12,16 +12,16 @@ export default class consultingController {
       const result = await Joi.validate (req.body , {
         title : Joi.string().required(),
         description : Joi.string().required(),
-        studentId : Joi.number()
+        userId : Joi.number()
       
       })
 
-      const { title , description , studentId } = result 
+      const { title , description , userId } = result 
 
       const modelObj = {
         title,
         description,
-        studentId
+        studentId : userId
       }
 
       const consulting = await consultingService.create(modelObj)

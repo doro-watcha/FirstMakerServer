@@ -28,9 +28,16 @@ class MajorService {
   }
 
   async update ( id, modelObj ) {
-    return await Major.update (modelObj),{
-      where : { id }
-    }
+
+    await Major.update(modelObj, {
+      where: { id }
+    })
+
+    const updatedMajor = await Major.findOne({
+        where: { id }})
+    if (updatedMajor === null) throw Error('MAJOR_NOT_FOUND')
+
+    return updatedMajor
   }
 
   async delete ( id ) {

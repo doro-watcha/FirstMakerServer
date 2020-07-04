@@ -84,11 +84,11 @@ class ReportService {
 			}
         })
         
-    if ( report == null ) {
-        throw Error ('REPORT_NOT_FOUND')
-    } else {
-        await report.destroy()
-    }
+        if ( report == null ) {
+            throw Error ('REPORT_NOT_FOUND')
+        } else {
+            await report.destroy()
+        }
   }
 }
 

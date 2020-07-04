@@ -3,6 +3,11 @@ import swaggerJsDoc from 'swagger-jsdoc'
 
 import { schema as University } from './models/University'
 import { schema as Score} from './models/Score'
+import { schema as Major} from './models/Major'
+import { schema as User} from './models/User'
+import { schema as Report} from './models/Report'
+import { schema as PaymentRecord} from './models/PaymentRecord'
+import { schema as Consulting} from './models/Consulting'
 
 const ApiResponse = {
 	type: 'object',
@@ -98,7 +103,12 @@ const options = {
 		components: {
 			schemas: {
 				University,
-				Score
+				Score,
+				Major,
+				User,
+				Report,
+				PaymentRecord,
+				Consulting
 			},
 			securitySchemes: {
 				bearerAuth: {
@@ -111,7 +121,7 @@ const options = {
 		},
 	},
 	basePath: '/',
-	apis: ['./routes/*.js'],
+	apis: ['./src/routes/*.js'],
 }
 
 const specs = swaggerJsDoc(options)

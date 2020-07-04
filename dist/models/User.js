@@ -89,6 +89,10 @@ class User extends _sequelize.default.Model {
       foreignKey: 'userId',
       as: 'paymenetRecord'
     });
+    this.hasMany(models.Score, {
+      foreignKey: 'userId',
+      as: 'score'
+    });
   }
 
 } // swagger schema
@@ -138,6 +142,7 @@ const schema = {
       type: 'integer',
       example: 3
     }
-  }
+  },
+  required: ['id', 'email', 'password', 'name', 'telephone']
 };
 exports.schema = schema;

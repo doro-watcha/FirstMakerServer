@@ -88,6 +88,10 @@ export default class User extends Sequelize.Model {
 				foreignKey : 'userId',
 				as : 'paymenetRecord'
 			})
+			this.hasMany(models.Score, {
+				foreignKey : 'userId',
+				as : 'score'
+			})
 		}
 
 }
@@ -139,5 +143,6 @@ export const schema = {
 			type : 'integer',
 			example : 3
 		}
-	}
+	},
+	required : ['id', 'email','password','name','telephone']
 }

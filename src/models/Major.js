@@ -119,85 +119,84 @@ static associate(models) {
 // swagger schema
 export const schema = {
 type: 'object',
-properties: {
-id: {
-  type: 'integer',
-  example: 3,
-},
-year : {
-  type : 'integer',
-  example : 2020
-},
-line: {
-  type: 'integer',
-  example: 0,
-},
-group: {
-  type: 'integer',
-  example: '0',
-},
-admissionType : {
-  type : 'string',
-  example : '기회균등전형'
-},
-recruitmentNumber : {
-  type : 'integer',
-  example : '35'
-},
-additionalMember : {
-  type : 'integer',
-  example : '3'
-},
-finalNumber : {
-  type : 'integer',
-  example : '38'
-},
-competitionNumber : {
-  type : 'float',
-  example : 3.5
-},
-isNaesinIncluded : {
-  type : 'boolean',
-  example : false
-},
+  properties: {
+  id: {
+    type: 'integer',
+    example: 3,
+  },
+  year : {
+    type : 'integer',
+    example : 2020
+  },
+  line: {
+    type: 'integer',
+    example: 0,
+  },
+  group: {
+    type: 'integer',
+    example: '0',
+  },
+  admissionType : {
+    type : 'string',
+    example : '기회균등전형'
+  },
+  recruitmentNumber : {
+    type : 'integer',
+    example : '35'
+  },
+  additionalMember : {
+    type : 'integer',
+    example : '3'
+  },
+  finalNumber : {
+    type : 'integer',
+    example : '38'
+  },
+  competitionNumber : {
+    type : 'float',
+    example : 3.5
+  },
+  isNaesinIncluded : {
+    type : 'boolean',
+    example : false
+  },
 
-name: {
-  type: 'string',
-  example: '고려대',
-},
-major: {
-  type: 'string',
-  example: '간호대학',
-},
-majorCode: {
-  type: 'integer',
-  example: 35,
-},
-strong_val: {
-  type: 'float',
-  example : 690.5
-},
-safe_val:{
-  type: 'float',
-  example : 685.5
-},
-dangerous_val:{
-  type: 'float',
-  example : 680.6
-},
-sniping_val:{
-  type: 'float',
-  example : 665.5
-},
-somethingSpecial : {
-  type : 'string',
-  example : '개발하기 너무 싫다'
-},
-etc : {
-  type : 'string',
-  example : '리얼로다가'
-}
+  name: {
+    type: 'string',
+    example: '지영학과',
+  },
+  majorCode: {
+    type: 'integer',
+    example: 35,
+  },
+  strong_val: {
+    type: 'float',
+    example : 690.5
+  },
+  safe_val:{
+    type: 'float',
+    example : 685.5
+  },
+  dangerous_val:{
+    type: 'float',
+    example : 680.6
+  },
+  sniping_val:{
+    type: 'float',
+    example : 665.5
+  },
+  somethingSpecial : {
+    type : 'string',
+    example : '개발하기 너무 싫다'
+  },
+  etc : {
+    type : 'string',
+    example : '리얼로다가'
+  }, 
+  univ : {
+    $ref: '#/components/schemas/University'
+  }
 
 },
-required: ['major', 'name'],
+required: ['id', 'name', 'univ'],
 }

@@ -164,11 +164,7 @@ const schema = {
     },
     name: {
       type: 'string',
-      example: '고려대'
-    },
-    major: {
-      type: 'string',
-      example: '간호대학'
+      example: '지영학과'
     },
     majorCode: {
       type: 'integer',
@@ -197,8 +193,11 @@ const schema = {
     etc: {
       type: 'string',
       example: '리얼로다가'
+    },
+    univ: {
+      $ref: '#/components/schemas/University'
     }
   },
-  required: ['major', 'name']
+  required: ['id', 'name', 'univ']
 };
 exports.schema = schema;

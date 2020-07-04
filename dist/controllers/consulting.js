@@ -19,17 +19,17 @@ class consultingController {
       const result = await _joi.default.validate(req.body, {
         title: _joi.default.string().required(),
         description: _joi.default.string().required(),
-        studentId: _joi.default.number()
+        userId: _joi.default.number()
       });
       const {
         title,
         description,
-        studentId
+        userId
       } = result;
       const modelObj = {
         title,
         description,
-        studentId
+        studentId: userId
       };
       const consulting = await _services.consultingService.create(modelObj);
       const response = {
