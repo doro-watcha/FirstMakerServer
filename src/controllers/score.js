@@ -106,8 +106,18 @@ export default class scoreController {
                         percentile : score.tamgu2_percentile
                     },
                     history : {
-                        history : score.history_grade
-                    }
+                        grade : score.history_grade
+                    },
+                    foreign : {
+                        grade : score.foreign_grade,
+                        percentile : score.foreign_percentile,
+                        score : score.foreign_score
+                    },
+                    naesin : score.naesin,
+                    naesin_type : score.naesin_type,
+                    line : score.line,
+                    type : score.type 
+
 
                 }
             }
