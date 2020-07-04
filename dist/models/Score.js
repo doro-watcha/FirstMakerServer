@@ -16,6 +16,10 @@ class Score extends _sequelize.default.Model {
         type: _sequelize.default.STRING,
         allowNull: true
       },
+      line: {
+        type: _sequelize.default.STRING,
+        allowNull: true
+      },
       korean_score: {
         type: _sequelize.default.INTEGER,
         defaultValue: 0
@@ -72,6 +76,18 @@ class Score extends _sequelize.default.Model {
         type: _sequelize.default.INTEGER,
         defaultValue: 0
       },
+      foreign_score: {
+        type: _sequelize.default.INTEGER,
+        defaultValue: 0
+      },
+      foreign_grade: {
+        type: _sequelize.default.INTEGER,
+        defaultValue: 0
+      },
+      foreign_percentile: {
+        type: _sequelize.default.INTEGER,
+        defaultValue: 0
+      },
       total_score: {
         type: _sequelize.default.FLOAT,
         defaultValue: 0.0
@@ -79,6 +95,14 @@ class Score extends _sequelize.default.Model {
       total_percentile: {
         type: _sequelize.default.FLOAT,
         defaultValue: 0.0
+      },
+      naesin: {
+        type: _sequelize.default.FLOAT,
+        defaultValue: 0.0
+      },
+      naesin_type: {
+        type: _sequelize.default.STRING,
+        allowNull: true
       },
       userId: {
         type: _sequelize.default.INTEGER,
@@ -121,6 +145,10 @@ const schema = {
     type: {
       type: 'string',
       example: '가'
+    },
+    line: {
+      type: 'string',
+      example: '사회탐구'
     },
     korean_score: {
       type: 'integer',
@@ -177,6 +205,26 @@ const schema = {
     tamgu2_percentile: {
       type: 'integer',
       example: 97
+    },
+    foreign_score: {
+      type: 'integer',
+      example: 130
+    },
+    foreign_grade: {
+      type: 'integer',
+      example: 1
+    },
+    foreign_percentile: {
+      type: 'integer',
+      example: 97
+    },
+    naesin_type: {
+      type: 'string',
+      example: '국수영사'
+    },
+    naesin: {
+      type: 'float',
+      example: '1.3'
     },
     total_score: {
       type: 'integer',

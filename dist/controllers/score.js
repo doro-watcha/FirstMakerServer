@@ -23,7 +23,11 @@ class scoreController {
         tamgu1: _joi.default.object().required(),
         tamgu2: _joi.default.object().required(),
         history: _joi.default.object().required(),
-        type: _joi.default.string().required()
+        foreign: _joi.default.object().required(),
+        type: _joi.default.string().required(),
+        line: _joi.default.string().required(),
+        naesin: _joi.default.number(),
+        naesin_type: _joi.default.string()
       });
       const {
         korean,
@@ -32,7 +36,11 @@ class scoreController {
         tamgu1,
         tamgu2,
         history,
-        type
+        foreign,
+        type,
+        line,
+        naesin,
+        naesin_type
       } = result;
       const {
         user
@@ -53,7 +61,13 @@ class scoreController {
         tamgu2_grade: tamgu2.grade,
         tamgu2_percentile: tamgu2.percentile,
         history_grade: history.grade,
-        type: type
+        foreign_score: foreign.score,
+        foreign_grade: foreign.grade,
+        foreign_percentile: foreign.percentile,
+        type: type,
+        line: line,
+        naesin,
+        naesin_type
       };
       const score = await _services.scoreService.create(modelObj);
       const response = {
@@ -120,7 +134,11 @@ class scoreController {
         tamgu1: _joi.default.object(),
         tamgu2: _joi.default.object(),
         history: _joi.default.object(),
-        type: _joi.default.string()
+        foreign: _joi.default.object(),
+        type: _joi.default.string(),
+        line: _joi.default.string(),
+        naesin_type: _joi.default.string(),
+        naesin: _joi.default.number()
       });
       const {
         korean,
@@ -129,7 +147,11 @@ class scoreController {
         tamgu1,
         tamgu2,
         history,
-        type
+        foreign,
+        type,
+        line,
+        naesin_type,
+        naesin
       } = result;
       const modelObj = {
         userId: userId,
@@ -147,7 +169,13 @@ class scoreController {
         tamgu2_grade: tamgu2.grade,
         tamgu2_percentile: tamgu2.percentile,
         history_grade: history.grade,
-        type: type
+        foreign_score: foreign.score,
+        foreign_grade: foreign.grade,
+        foreign_percentile: foreign.percentile,
+        type,
+        line,
+        naesin_type,
+        naesin
       };
       const score = await _services.scoreService.update(userId, modelObj);
       if (score == null) throw Error('SCORE_NOT_FOUND');

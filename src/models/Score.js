@@ -10,6 +10,10 @@ export default class Score extends Sequelize.Model {
                     type: Sequelize.STRING,
                     allowNull: true,
                 },
+                line: {
+                    type : Sequelize.STRING,
+                    allowNull : true 
+                },
                 korean_score: {    
                     type: Sequelize.INTEGER,
                     defaultValue : 0,
@@ -66,6 +70,18 @@ export default class Score extends Sequelize.Model {
                     type : Sequelize.INTEGER,
                     defaultValue : 0
                 },
+                foreign_score : {
+                    type : Sequelize.INTEGER,
+                    defaultValue : 0
+                },
+                foreign_grade : {
+                    type : Sequelize.INTEGER,
+                    defaultValue : 0
+                },
+                foreign_percentile : {
+                    type : Sequelize.INTEGER,
+                    defaultValue : 0
+                },
                 total_score : {
                     type : Sequelize.FLOAT,
                     defaultValue : 0.0
@@ -73,6 +89,14 @@ export default class Score extends Sequelize.Model {
                 total_percentile : {
                     type : Sequelize.FLOAT,
                     defaultValue : 0.0 
+                },
+                naesin : {
+                    type : Sequelize.FLOAT,
+                    defaultValue : 0.0
+                },
+                naesin_type : {
+                    type : Sequelize.STRING,
+                    allowNull : true 
                 },
                 userId : {
                     type : Sequelize.INTEGER,
@@ -122,6 +146,10 @@ export const schema = {
 		type: {
 			type: 'string',
 			example: '가',
+        },
+        line : {
+            type : 'string',
+            example : '사회탐구'
         },
         korean_score : {
             type : 'integer',
@@ -178,6 +206,26 @@ export const schema = {
         tamgu2_percentile : {
             type : 'integer',
             example : 97
+        },
+        foreign_score : {
+            type : 'integer',
+            example : 130
+        },
+        foreign_grade : {
+            type : 'integer',
+            example : 1
+        },
+        foreign_percentile : {
+            type : 'integer',
+            example : 97
+        },
+        naesin_type : {
+            type : 'string',
+            example : '국수영사'
+        },
+        naesin : {
+            type : 'float',
+            example : '1.3'
         },
         total_score : {
             type : 'integer',

@@ -16,10 +16,14 @@ export default class scoreController {
                 tamgu1 : Joi.object().required(),
                 tamgu2 : Joi.object().required(),
                 history : Joi.object().required(),
-                type : Joi.string().required()
+                foreign : Joi.object().required(),
+                type : Joi.string().required(),
+                line : Joi.string().required(),
+                naesin : Joi.number(),
+                naesin_type : Joi.string()
             })
             
-            const { korean , math , english , tamgu1, tamgu2 , history , type } = result 
+            const { korean , math , english , tamgu1, tamgu2 , history ,foreign, type, line, naesin, naesin_type } = result 
 
             const { user } = req
 
@@ -39,7 +43,13 @@ export default class scoreController {
                 tamgu2_grade : tamgu2.grade,
                 tamgu2_percentile : tamgu2.percentile,
                 history_grade : history.grade,
-                type : type
+                foreign_score : foreign.score,
+                foreign_grade : foreign.grade,
+                foreign_percentile : foreign.percentile,
+                type : type,
+                line : line,
+                naesin,
+                naesin_type
                 
             }
             const score = await scoreService.create( modelObj )
@@ -122,10 +132,14 @@ export default class scoreController {
                 tamgu1 : Joi.object(),
                 tamgu2 : Joi.object(),
                 history : Joi.object(),
-                type : Joi.string()
+                foreign : Joi.object(),
+                type : Joi.string(),
+                line : Joi.string(),
+                naesin_type : Joi.string(),
+                naesin : Joi.number()
             })
 
-            const { korean, math , english ,tamgu1, tamgu2, history, type } = result
+            const { korean, math , english ,tamgu1, tamgu2, history, foreign, type , line , naesin_type , naesin} = result
 
             
             const modelObj = {
@@ -144,7 +158,13 @@ export default class scoreController {
                 tamgu2_grade : tamgu2.grade,
                 tamgu2_percentile : tamgu2.percentile,
                 history_grade : history.grade,
-                type : type
+                foreign_score : foreign.score,
+                foreign_grade : foreign.grade,
+                foreign_percentile : foreign.percentile,
+                type,
+                line,
+                naesin_type,
+                naesin
                 
             }
 
