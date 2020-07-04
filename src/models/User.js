@@ -84,6 +84,10 @@ export default class User extends Sequelize.Model {
 				foreignKey : 'studentId',
 				as : 'consulting'
 			})
+			this.hasMany(models.PaymentRecord, {
+				foreignKey : 'userId',
+				as : 'paymenetRecord'
+			})
 		}
 
 }

@@ -85,6 +85,10 @@ class User extends _sequelize.default.Model {
       foreignKey: 'studentId',
       as: 'consulting'
     });
+    this.hasMany(models.PaymentRecord, {
+      foreignKey: 'userId',
+      as: 'paymenetRecord'
+    });
   }
 
 } // swagger schema

@@ -116,6 +116,10 @@ module.exports = {
 			status : 417,
 			ko : '해당 상담 없음'
 		},
+		PAYMENT_RECORD_NOT_FOUND : {
+			status : 418,
+			ko : '해당 결제 기록 없음'
+		},
 		// 409
 		USER_ALREADY_EXISTS: {
 			status: 500,

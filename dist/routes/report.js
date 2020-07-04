@@ -13,7 +13,7 @@ const {
   getUserInfo
 } = _Authenticator.default;
 const router = (0, _express.Router)();
-router.get('/', (req, res) => {
+router.get('/', authenticate, (req, res) => {
   _controllers.reportController.findList(req, res);
 });
 router.get('/:id', (req, res) => {

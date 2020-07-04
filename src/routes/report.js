@@ -8,7 +8,7 @@ const { authenticate, getUserInfo } = Authenticator
 const router  = Router()
 
 
-router.get('/', (req,res) => {
+router.get('/', authenticate, (req,res) => {
   reportController.findList(req,res)
 })
 

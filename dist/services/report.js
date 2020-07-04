@@ -20,6 +20,22 @@ class ReportService {
   }
 
   async create(modelObj) {
+    const {
+      userId,
+      majorId
+    } = modelObj;
+    const user = await _models.User.findOne({
+      where: {
+        id: userId
+      }
+    });
+    if (user == null) throw Error('USER_NOT_FOUND');
+    const major = await _models.Major.findOne({
+      where: {
+        id: majorId
+      }
+    });
+    if (major == null) throw Error('MAJOR_NOT_FOUND');
     return await _models.Report.create(modelObj);
   }
 
@@ -31,12 +47,15 @@ class ReportService {
     });
   }
 
-  async findAll() {
+  async findAll(userId) {
     let options = {
+      where: {
+        userId
+      },
       attributes: ['id', 'score'],
       include: [{
-        model: _models.University,
-        as: 'university'
+        model: _models.Major,
+        as: 'major'
       }, {
         model: _models.User,
         as: 'user'

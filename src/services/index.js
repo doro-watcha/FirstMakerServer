@@ -4,6 +4,7 @@ import userService from './user'
 import reportService from './report'
 import majorService from './major'
 import consultingService from './consulting'
+import paymentRecordService from './paymentRecord'
 
 module.exports = {
     universityService,
@@ -11,5 +12,6 @@ module.exports = {
     userService,
     reportService,
     majorService,
-    consultingService
+    consultingService,
+    paymentRecordService
 }

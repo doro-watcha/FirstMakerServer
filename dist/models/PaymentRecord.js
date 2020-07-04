@@ -12,11 +12,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class PaymentRecord extends _sequelize.default.Model {
   static init(sequelize) {
     return super.init({
-      date: {
-        type: _sequelize.default.DATE,
-        allowNull: true
-      },
       amount: {
+        type: _sequelize.default.INTEGER,
+        defaultValue: 0
+      },
+      predictTimes: {
         type: _sequelize.default.INTEGER,
         defaultValue: 0
       },

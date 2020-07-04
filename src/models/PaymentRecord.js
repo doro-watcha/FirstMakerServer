@@ -6,15 +6,14 @@ export default class PaymentRecord extends Sequelize.Model {
     static init(sequelize) {
         return super.init(
             {
-              date : {
-                type : Sequelize.DATE,
-                allowNull : true
-              },
               amount : {
                 type : Sequelize.INTEGER,
                 defaultValue : 0
               },
-
+              predictTimes : {
+                type : Sequelize.INTEGER,
+                defaultValue : 0
+              },
               createdAt: {
                   type: Sequelize.DATE,
                   allowNull: true,

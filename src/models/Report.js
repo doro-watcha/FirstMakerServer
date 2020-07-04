@@ -34,7 +34,7 @@ export default class Report extends Sequelize.Model {
         this.belongsTo(models.Major, {
           foreignKey: 'majorId',
           as: 'major',
-        })
+        }),
         this.belongsTo(models.User, {
           foreignKey: 'userId',
           as: 'user'

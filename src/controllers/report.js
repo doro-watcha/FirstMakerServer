@@ -65,7 +65,11 @@ export default class reportController {
   static async findList ( req, res ) {
 
     try {
-      const reports = await reportService.findAll()
+
+      const { user } = req 
+      const reports = await reportService.findAll(user.id)
+
+  
 
       const response = {
         success : true,

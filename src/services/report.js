@@ -1,4 +1,4 @@
-import { Report , University , User } from '../models'
+import { Report , Major , User } from '../models'
 
 let instance = null
 
@@ -13,6 +13,20 @@ class ReportService {
     }
     
     async create ( modelObj) {
+        const { userId , majorId } = modelObj
+
+        const user = await User.findOne({
+            where : { id : userId}
+        })
+
+        if ( user == null ) throw Error('USER_NOT_FOUND')
+
+        const major = await Major.findOne({
+            where : { id : majorId }
+        })
+
+        if ( major == null ) throw Error('MAJOR_NOT_FOUND')
+
         return await Report.create(modelObj)
     }
 
@@ -22,16 +36,18 @@ class ReportService {
         })
     }
 
-    async findAll () {
+    async findAll (userId) {
 
 
 		let options = {
+            where : { userId },
             attributes : ['id','score'],
 			include: [
 				{
-					model: University,
-					as: 'university',
-				},
+					model: Major,
+					as: 'major',
+                },
+                
 				{
 					model: User,
 					as: 'user',

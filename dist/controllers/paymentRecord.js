@@ -13,29 +13,29 @@ var _functions = require("../utils/functions");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-class reportController {
-  static async createReport(req, res) {
+class majorController {
+  static async create(req, res) {
     try {
       const result = await _joi.default.validate(req.body, {
-        score: _joi.default.number(),
-        majorId: _joi.default.number(),
-        userId: _joi.default.number()
+        amount: _joi.default.number().required(),
+        userId: _joi.default.number().required(),
+        predictTimes: _joi.default.number().required()
       });
       const {
-        score,
-        majorId,
-        userId
+        amount,
+        userId,
+        predictTimes
       } = result;
       const modelObj = {
-        score,
-        majorId,
-        userId
+        amount,
+        userId,
+        predictTimes
       };
-      const report = await _services.reportService.create(modelObj);
+      const paymentRecord = await _services.paymentRecordService.create(modelObj);
       const response = {
         success: true,
         data: {
-          report
+          paymentRecord
         }
       };
       res.send(response);
@@ -44,14 +44,14 @@ class reportController {
     }
   }
 
-  static async findReport(req, res) {
+  static async findOne(req, res) {
     try {
       const id = req.params.id;
-      const report = await _services.reportService.findOne(id);
+      const paymentRecord = await _services.paymentRecordService.findOne(id);
       const response = {
         success: true,
         data: {
-          report
+          paymentRecord
         }
       };
       res.send(response);
@@ -65,11 +65,11 @@ class reportController {
       const {
         user
       } = req;
-      const reports = await _services.reportService.findAll(user.id);
+      const paymentRecord = await _services.paymentRecordService.findList(user.id);
       const response = {
         success: true,
         data: {
-          reports
+          paymentRecord
         }
       };
       res.send(response);
@@ -78,29 +78,29 @@ class reportController {
     }
   }
 
-  static async updateReport(req, res) {
+  static async update(req, res) {
     try {
       const id = req.params.id;
       const result = await _joi.default.validate(req.body, {
-        score: _joi.default.number(),
-        majorId: _joi.default.number(),
-        userId: _joi.default.number()
+        amount: _joi.default.number(),
+        userId: _joi.default.number(),
+        predictTimes: _joi.default.number()
       });
       const {
-        score,
-        majorId,
-        userId
+        amount,
+        userId,
+        predictTimes
       } = result;
       const modelObj = {
-        score,
-        majorId,
-        userId
+        amount,
+        userId,
+        predictTimes
       };
-      const updateReport = await _services.reportService.update(id, modelObj);
+      const paymentRecord = await _services.paymentRecordService.update(id, modelObj);
       const response = {
         success: true,
         data: {
-          updateReport
+          paymentRecord
         }
       };
       res.send(response);
@@ -109,12 +109,19 @@ class reportController {
     }
   }
 
-  static async deleteReport(req, res) {
-    try {} catch (e) {
+  static async delete(req, res) {
+    try {
+      const id = req.params.id;
+      await _services.paymentRecordService.delete(id);
+      const response = {
+        success: true
+      };
+      res.send(response);
+    } catch (e) {
       res.send((0, _functions.createErrorResponse)(e));
     }
   }
 
 }
 
-exports.default = reportController;
+exports.default = majorController;

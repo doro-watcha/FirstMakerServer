@@ -5,6 +5,7 @@ import userController from './user'
 import reportController from './report'
 import majorController from './major'
 import consultingController from './consulting'
+import paymentRecordController from './paymentRecord'
 
 module.exports = {
 
@@ -14,5 +15,6 @@ module.exports = {
     userController,
     reportController,
     majorController,
-    consultingController
+    consultingController,
+    paymentRecordController
 }
