@@ -14,6 +14,8 @@ var _PaymentRecord = _interopRequireDefault(require("./PaymentRecord"));
 
 var _Report = _interopRequireDefault(require("./Report"));
 
+var _Major = _interopRequireDefault(require("./Major"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const env = process.env.NODE_ENV || 'development';
@@ -24,9 +26,10 @@ const models = {
   Score: _Score.default.init(sequelize, _sequelize.default),
   User: _User.default.init(sequelize, _sequelize.default),
   PaymentRecord: _PaymentRecord.default.init(sequelize, _sequelize.default),
-  Report: _Report.default.init(sequelize, _sequelize.default)
+  Report: _Report.default.init(sequelize, _sequelize.default),
+  Major: _Major.default.init(sequelize, _sequelize.default)
 };
-Object.values(models);
+Object.values(models).filter(model => typeof model.associate === 'function').forEach(model => model.associate(models));
 module.exports = { ...models,
   sequelize,
   Sequelize: _sequelize.default

@@ -8,87 +8,28 @@ export default class University extends Sequelize.Model {
     static init(sequelize) {
         return super.init (
           {
-						// 연도
-						year : {
-							type : Sequelize.INTEGER,
-							defaultValue : 2020
-						},
-						// 계열
-            line: {
-							type: Sequelize.INTEGER,
-							defaultValue: 0,
-						},
-						// 군별
-						group: {
-							type: Sequelize.INTEGER,
-							defaultValue: 0,
-						},
-						// 모집 전형
-						admissionType : {
+						// 대학 이름 
+						name : {
 							type : Sequelize.STRING,
 							allowNull : true
 						},
-						// 모집 인원
-						recruitmentNumber : {
-							type : Sequelize.INTEGER,
-							defaultValue : 0
-						},
-						// 수시이월 인원
-						additionalMember : {
-							type : Sequelize.INTEGER,
-							defaultValue : 0 
-						},
-						// 최종 모집인원
-						finalNumber : {
-							type : Sequelize.INTEGER,
-							defaultValue : 0
-						},
-						// 경쟁률
-						competitionNumber : {
+						// 지원 가능 점수중 작은값
+						min : {
 							type : Sequelize.FLOAT,
-							allowNull : true
+							defaultValue : 0.0
 						},
-						// 내신 반영 유무
-						isNaesinIncluded : {
-							type : Sequelize.BOOLEAN,
-							defaultValue : false
-						},
-						name: {    
-							type: Sequelize.STRING,
-							allowNull : true,
-						},
-						major: {
-							type: Sequelize.STRING,
-							allwoNull: true,
-						},
-						majorCode: {
-							type: Sequelize.INTEGER,
-							defaultValue: -1,
-						},
-						strong_val: {
+
+						// 지원 가능 점수중 높은 값
+						max : {
 							type : Sequelize.FLOAT,
-							allowNull : true,
+							defaultValue : 0.0
 						},
-						safe_val: {
-							type : Sequelize.FLOAT,
-							allowNull : true,
-						},
-						dangerous_val: {
-							type : Sequelize.FLOAT,
-							allowNull : true,
-						},
-						sniping_val : {
-							type : Sequelize.FLOAT,
-							allowNull : true,
-						},
-						somethingSpecial : {
+
+						location : {
 							type : Sequelize.STRING,
-							allowNull : true
+							allowNull : true 
 						},
-						etc : {
-							type : Sequelize.STRING,
-							allowNull : true
-						},
+						
 						createdAt: {
 							type: Sequelize.DATE,
 							allowNull: true,
@@ -111,9 +52,10 @@ export default class University extends Sequelize.Model {
 		
 
 		static associate(models) {
-			this.hasMany(models.Report, {
-				foreignKey: 'universityId',
-				as: 'report'
+
+			this.hasMany(models.Major, {
+				foreginKey: 'univId',
+				as : 'major'
 			})
 		}
 

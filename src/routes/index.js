@@ -5,6 +5,8 @@ import universityRouter from './university'
 import scoreRouter from './score'
 import authRouter from './auth'
 import userRouter from './user'
+import reportRouter from './report'
+import majorRouter from './major'
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -15,6 +17,8 @@ router.use('/university', universityRouter)
 router.use('/score', scoreRouter)
 router.use('/auth', authRouter)
 router.use('/user', userRouter)
+router.use('/report', reportRouter)
+router.use('/major', majorRouter)
 
 
 module.exports = router

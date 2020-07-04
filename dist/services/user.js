@@ -28,11 +28,27 @@ class UserService {
   async create(user) {
     // hash password
     if (user.password) user.password = _models.User.hashPassword(user.password);
-    return await _models.User.create(user);
+    await _models.User.create(user);
+
+    const newUser = _models.User.findOne({
+      where: {
+        email: user.email
+      },
+      attributes: ['name', 'email']
+    });
+
+    if (newUser == null) throw Error('USER_NOT_FOUND');else {
+      return newUser;
+    }
   }
 
   async findById(id) {
-    return await _models.User.findByPk(id);
+    return await _models.User.findOne({
+      where: {
+        id
+      },
+      attributes: ['name', 'email', 'telephone', 'highschool', 'line', 'gender', 'graduateYear', 'predictTimes']
+    });
   }
 
   async findOne(where) {
@@ -41,15 +57,22 @@ class UserService {
     });
   }
 
-  async updateId(id, user) {
-    return await _models.User.update(user, {
+  async update(id, user) {
+    await _models.User.update(user, {
       where: {
         id
       }
     });
+    const updatedUser = await _models.User.findOne({
+      where: {
+        id
+      }
+    });
+    if (updatedUser === null) throw Error('USER_NOT_FOUND');
+    return updatedUser;
   }
 
-  async deleteById(id) {
+  async delete(id) {
     const user = await _models.User.findOne({
       where: {
         id

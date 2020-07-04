@@ -148,7 +148,7 @@ export default class scoreController {
                 
             }
 
-            const score = await scoreService.updateById(userId, modelObj)
+            const score = await scoreService.update(userId, modelObj)
 
             if ( score == null ) throw Error('SCORE_NOT_FOUND')
 
@@ -177,7 +177,7 @@ export default class scoreController {
 
             const userId = req.params.userId 
 
-            await scoreService.deleteById(userId)
+            await scoreService.delete(userId)
 
             const response = {
                 success : true 

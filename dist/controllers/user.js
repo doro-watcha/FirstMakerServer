@@ -32,7 +32,39 @@ class userController {
   }
 
   static async updateUser(req, res) {
-    try {} catch (e) {
+    try {
+      const id = req.params.id;
+      const result = await _joi.default.validate(req.body, {
+        name: _joi.default.string(),
+        highSchool: _joi.default.string(),
+        line: _joi.default.string(),
+        graduateYear: _joi.default.number(),
+        predictTimes: _joi.default.number(),
+        gender: _joi.default.string()
+      });
+      const {
+        name,
+        highSchool,
+        line,
+        graduateYear,
+        gender
+      } = result;
+      const modelObj = {
+        name: name,
+        highSchool: highSchool,
+        line: line,
+        graduateYear: graduateYear,
+        gender: gender
+      };
+      const user = await _services.userService.update(id, modelObj);
+      const response = {
+        success: true,
+        data: {
+          user
+        }
+      };
+      res.send(response);
+    } catch (e) {
       res.send((0, _functions.createErrorResponse)(e));
     }
   }
@@ -40,7 +72,7 @@ class userController {
   static async deleteUser(req, res) {
     try {
       const id = req.params.id;
-      await _services.userService.deleteById(id);
+      await _services.userService.delete(id);
       const response = {
         success: true
       };

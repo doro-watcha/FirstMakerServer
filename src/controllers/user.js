@@ -34,7 +34,39 @@ export default class userController {
     static async updateUser ( req, res ) {
 
         try {
-  
+
+          const id = req.params.id
+
+          const result = await Joi.validate ( req.body , {
+            name : Joi.string(),
+            highSchool : Joi.string(),
+            line : Joi.string(),
+            graduateYear : Joi.number(),
+            predictTimes : Joi.number(),
+            gender : Joi.string()
+          })
+
+          const { name , highSchool , line, graduateYear , gender } = result 
+
+
+          const modelObj = {
+            name : name, 
+            highSchool : highSchool,
+            line : line ,
+            graduateYear : graduateYear,
+            gender : gender 
+          }
+
+          const user = await userService.update(id, modelObj )
+
+          const response = {
+            success : true ,
+            data : {
+              user 
+            }
+          }
+
+          res.send (response)
         } catch ( e ) {
             res.send( createErrorResponse(e))
         }
@@ -49,7 +81,7 @@ export default class userController {
 
             const id = req.params.id 
 
-            await userService.deleteById(id)
+            await userService.delete(id)
 
             const response = {
                 success : true 

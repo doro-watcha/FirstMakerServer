@@ -100,6 +100,18 @@ module.exports = {
       status: 414,
       ko: '해당 성적 없음'
     },
+    REPORT_NOT_FONUD: {
+      status: 415,
+      ko: '해당 예측 리포트 없음'
+    },
+    MAJOR_NOT_FOUND: {
+      status: 416,
+      ko: '해당 학과 없음'
+    },
+    UNIVERSITY_NOT_FOUND: {
+      status: 416,
+      ko: '검색 가능 대학 없음'
+    },
     // 409
     USER_ALREADY_EXISTS: {
       status: 500,

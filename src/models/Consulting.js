@@ -34,11 +34,8 @@ export default class Consulting extends Sequelize.Model {
       this.belongsTo(models.User, {
         foreignKey: 'userId',
         as: 'user',
-      }),
-      this.belongsTo(models.University,{
-        foreignKey: 'universityId',
-        as : 'university'
       })
+
     }
     
 }

@@ -6,10 +6,16 @@ var _score = _interopRequireDefault(require("./score"));
 
 var _user = _interopRequireDefault(require("./user"));
 
+var _report = _interopRequireDefault(require("./report"));
+
+var _major = _interopRequireDefault(require("./major"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
   universityService: _university.default,
   scoreService: _score.default,
-  userService: _user.default
+  userService: _user.default,
+  reportService: _report.default,
+  majorService: _major.default
 };

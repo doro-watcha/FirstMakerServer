@@ -72,9 +72,9 @@ export default class User extends Sequelize.Model {
 		}	
 
 		static associate(models) {
-			this.hasMany(models.PaymentRecord, {
+			this.hasMany(models.Report, {
 				foreignKey: 'userId',
-				as: 'paymentRecord'
+				as: 'user'
 			})
 		}
 

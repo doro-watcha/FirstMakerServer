@@ -31,7 +31,7 @@ class ScoreService {
     });
   }
 
-  async updateById(userId, score) {
+  async update(userId, score) {
     await _models.Score.update(score, {
       where: {
         userId
@@ -46,7 +46,7 @@ class ScoreService {
     return updatedScore;
   }
 
-  async deleteById(userId) {
+  async delete(userId) {
     const score = await _models.Score.findOne({
       where: {
         userId

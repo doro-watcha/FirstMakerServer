@@ -22,7 +22,7 @@ class ScoreService {
         })
     }
 
-    async updateById ( userId , score) {
+    async update ( userId , score) {
 
         await Score.update(score, {
             where: { userId },
@@ -37,7 +37,7 @@ class ScoreService {
 
     }
 
-    async deleteById ( userId ) {
+    async delete ( userId ) {
 
 		const score = await Score.findOne({
 			where: {

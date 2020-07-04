@@ -19,29 +19,41 @@ class UniversityService {
     return instance;
   }
 
-  async findByMajor(name, major, line) {
-    console.log("fuck");
-    return await _models.University.findOne({
-      where: {
-        name,
-        major,
-        line
-      },
-      attributes: ["strong_val", "safe_val", "dangerous_val", "sniping_val"]
+  async create(modelObj) {
+    return await _models.University.create(modelObj);
+  }
+
+  async findAll() {
+    return await _models.University.findAll({
+      attributes: ['name', 'min', 'max']
     });
   }
 
-  async findList(name, line) {
-    return await _models.University.findAll({
+  async findOne(id) {
+    return await _models.University.findOne({
       where: {
-        name,
-        line
+        id
       }
     });
   }
 
-  async findAll() {
-    return await _models.University.findAll({});
+  async update(id, modelObj) {
+    return await _models.University.update(modelObj, {
+      where: {
+        id
+      }
+    });
+  }
+
+  async delete(id) {
+    const university = await _models.University.findOne({
+      where: {
+        id
+      }
+    });
+    if (university == null) throw Error('UNIVERSITY_NOT_FOUND');else {
+      await university.destroy();
+    }
   }
 
 }

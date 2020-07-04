@@ -139,8 +139,7 @@ class AuthController {
       const response = {
         success: true,
         data: {
-          token,
-          user
+          token
         }
       };
       res.send(response);

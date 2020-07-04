@@ -18,26 +18,46 @@ class UserService {
 		// hash password
 		if (user.password) user.password = User.hashPassword(user.password)
 
-		return await User.create(user)
+		await User.create(user)
+
+		const newUser = User.findOne({
+			where : { email : user.email},
+			attributes : ['name','email']
+		})
+
+		if ( newUser == null ) throw Error('USER_NOT_FOUND')
+		else {
+			return newUser
+		}
   }
 
   async findById(id) {
-		return await User.findByPk(id)
+		return await User.findOne({
+			where : { id },
+			attributes : ['name', 'email','telephone','highschool','line','gender','graduateYear','predictTimes']
+		})
 	}
 
 	async findOne(where) {
 		return await User.findOne({
-      where: JSON.parse(JSON.stringify(where))
+			where: JSON.parse(JSON.stringify(where))
 		})
 	}
 	
-	async updateId(id, user) {
-		return await User.update(user, {
-			where :  {id},
+	async update(id, user) {
+	
+		await User.update(user, {
+			where: { id },
 		})
+		const updatedUser = await User.findOne({
+			where: { id },
+		})
+		if (updatedUser === null) throw Error('USER_NOT_FOUND')
+
+		return updatedUser
 	}
 
-	async deleteById ( id ) {
+	async delete ( id ) {
 		const user = await User.findOne({
 			where: {
 				id

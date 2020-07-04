@@ -10,26 +10,40 @@ class UniversityService {
 			instance = this
 		}
 		return instance
-	}
-
-    async findByMajor (name , major, line) {
-        console.log("fuck")
-        return await University.findOne({
-            where : { name , major , line },
-            attributes : [ "strong_val" , "safe_val" , "dangerous_val", "sniping_val"]
-        })
+    }
+    
+    async create ( modelObj ) {
+        return await University.create(modelObj)
     }
 
-    async findList ( name , line ) {
-
-        return await University.findAll({
-            where : { name , line}
-        })
-    }
     async findAll() {
         return await University.findAll({
-
+            attributes : ['name', 'min','max']
         })
+    }
+
+    async findOne(id) {
+        return await University.findOne({
+            where : {id}
+        })
+    }
+
+    async update ( id , modelObj ) {
+        return await University.update( modelObj ,{
+            where : { id }
+        })
+    }
+
+    async delete ( id ) {
+        const university = await University.findOne({
+            where : { id }
+        })
+
+        if ( university == null ) throw Error('UNIVERSITY_NOT_FOUND')
+        else {
+            await university.destroy()
+        }
+        
     }
 }
 

@@ -149,7 +149,7 @@ class scoreController {
         history_grade: history.grade,
         type: type
       };
-      const score = await _services.scoreService.updateById(userId, modelObj);
+      const score = await _services.scoreService.update(userId, modelObj);
       if (score == null) throw Error('SCORE_NOT_FOUND');
       const response = {
         success: true,
@@ -166,7 +166,7 @@ class scoreController {
   static async deleteScore(req, res) {
     try {
       const userId = req.params.userId;
-      await _services.scoreService.deleteById(userId);
+      await _services.scoreService.delete(userId);
       const response = {
         success: true
       };

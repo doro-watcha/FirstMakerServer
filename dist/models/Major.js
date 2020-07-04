@@ -9,26 +9,83 @@ var _sequelize = _interopRequireDefault(require("sequelize"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-class University extends _sequelize.default.Model {
-  //연도, 계열, 모집군, 전형, 경쟁률, 최초 모집인원, 수시이월 인원, 최종 모집인원, 내신반영 유무, 특이사항, 비고
+class Major extends _sequelize.default.Model {
   static init(sequelize) {
     return super.init({
-      // 대학 이름 
-      name: {
+      // 연도
+      year: {
+        type: _sequelize.default.INTEGER,
+        defaultValue: 2020
+      },
+      // 계열
+      line: {
         type: _sequelize.default.STRING,
         allowNull: true
       },
-      // 지원 가능 점수중 작은값
-      min: {
-        type: _sequelize.default.FLOAT,
-        defaultValue: 0.0
+      // 군별
+      group: {
+        type: _sequelize.default.STRING,
+        allowNull: true
       },
-      // 지원 가능 점수중 높은 값
-      max: {
-        type: _sequelize.default.FLOAT,
-        defaultValue: 0.0
+      // 모집 전형
+      admissionType: {
+        type: _sequelize.default.STRING,
+        allowNull: true
       },
-      location: {
+      // 모집 인원
+      recruitmentNumber: {
+        type: _sequelize.default.INTEGER,
+        defaultValue: 0
+      },
+      // 수시이월 인원
+      additionalMember: {
+        type: _sequelize.default.INTEGER,
+        defaultValue: 0
+      },
+      // 최종 모집인원
+      finalNumber: {
+        type: _sequelize.default.INTEGER,
+        defaultValue: 0
+      },
+      // 경쟁률
+      competitionNumber: {
+        type: _sequelize.default.FLOAT,
+        allowNull: true
+      },
+      // 내신 반영 유무
+      isNaesinIncluded: {
+        type: _sequelize.default.BOOLEAN,
+        defaultValue: false
+      },
+      name: {
+        type: _sequelize.default.STRING,
+        allwoNull: true
+      },
+      majorCode: {
+        type: _sequelize.default.INTEGER,
+        defaultValue: -1
+      },
+      strong_val: {
+        type: _sequelize.default.FLOAT,
+        allowNull: true
+      },
+      safe_val: {
+        type: _sequelize.default.FLOAT,
+        allowNull: true
+      },
+      dangerous_val: {
+        type: _sequelize.default.FLOAT,
+        allowNull: true
+      },
+      sniping_val: {
+        type: _sequelize.default.FLOAT,
+        allowNull: true
+      },
+      somethingSpecial: {
+        type: _sequelize.default.STRING,
+        allowNull: true
+      },
+      etc: {
         type: _sequelize.default.STRING,
         allowNull: true
       },
@@ -49,16 +106,19 @@ class University extends _sequelize.default.Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Major, {
-      foreginKey: 'univId',
-      as: 'major'
+    this.hasMany(models.Report, {
+      foreignKey: 'majorId',
+      as: 'report'
+    }), this.belongsTo(models.University, {
+      foreignKey: 'univId',
+      as: 'univ'
     });
   }
 
 } // swagger schema
 
 
-exports.default = University;
+exports.default = Major;
 const schema = {
   type: 'object',
   properties: {

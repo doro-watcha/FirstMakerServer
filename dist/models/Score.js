@@ -72,6 +72,14 @@ class Score extends _sequelize.default.Model {
         type: _sequelize.default.INTEGER,
         defaultValue: 0
       },
+      total_score: {
+        type: _sequelize.default.FLOAT,
+        defaultValue: 0.0
+      },
+      total_percentile: {
+        type: _sequelize.default.FLOAT,
+        defaultValue: 0.0
+      },
       userId: {
         type: _sequelize.default.INTEGER,
         defaultValue: 0

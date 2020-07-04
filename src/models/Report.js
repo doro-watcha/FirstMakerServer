@@ -28,19 +28,18 @@ export default class Report extends Sequelize.Model {
             },
 
         )
-    }
+      }
 
-    static associate(models) {
-      this.belongsTo(models.User, {
-        foreignKey: 'userId',
-        as: 'user',
-      }),
-      this.belongsTo(models.University,{
-        foreignKey: 'universityId',
-        as : 'university'
-      })
-    }
-    
+      static associate(models) {
+        this.belongsTo(models.Major, {
+          foreignKey: 'majorId',
+          as: 'major',
+        })
+        this.belongsTo(models.User, {
+          foreignKey: 'userId',
+          as: 'user'
+        })
+      }
 }
 
 
