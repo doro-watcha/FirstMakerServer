@@ -85,7 +85,16 @@ router.get('/:userId', getUserInfo, (req, res) => {
  *                 description: 백분위
  *               type:
  *                 type: string
- *                 description: 문/이과
+ *                 description: 가/나형
+ *               line:
+ *                 type: string
+ *                 description: 사회탐구
+ *               naesin:
+ *                 type: float
+ *                 description: 내신 점수
+ *               naesin_type:
+ *                 type: string
+ *                 description: 국수영사
  *             required:
  *               - score
  *               - grade
