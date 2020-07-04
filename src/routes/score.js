@@ -127,7 +127,7 @@ router.post('/', authenticate , (req, res) => {
  * @swagger
  *
  * /score/{userId}:
- *   post:
+ *   patch:
  *     tags:
  *       - score
  *     summary: 성적 수정
