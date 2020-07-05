@@ -69,19 +69,22 @@ class UniversityController {
         name: _joi.default.string(),
         max: _joi.default.number(),
         min: _joi.default.number(),
-        location: _joi.default.string()
+        location: _joi.default.string(),
+        group: _joi.default.string()
       });
       const {
         name,
         max,
         min,
-        location
+        location,
+        group
       } = result;
       const modelObj = {
-        name: name,
-        max: max,
-        min: min,
-        location: location
+        name,
+        max,
+        min,
+        location,
+        group
       };
       await _services.universityService.update(id, modelObj);
       const response = {

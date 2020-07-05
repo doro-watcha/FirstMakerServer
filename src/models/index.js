@@ -9,6 +9,7 @@ import ReportModel from './Report'
 import MajorModel from './Major'
 import ConsultingModel from './Consulting'
 import AcademyModel from './Academy'
+import ReflectionRatioModel from './ReflectionRatio'
 
 const env = process.env.NODE_ENV || 'development'
 const config = dbConfig[env]
@@ -23,7 +24,8 @@ const models = {
   Report : ReportModel.init(sequelize, Sequelize),
   Major : MajorModel.init(sequelize , Sequelize),
   Consulting : ConsultingModel.init(sequelize, Sequelize),
-  Academy : AcademyModel.init(sequelize, Sequelize)
+  Academy : AcademyModel.init(sequelize, Sequelize),
+  ReflectionRatio : ReflectionRatioModel.init(sequelize, Sequelize)
 }
 
 Object.values(models)

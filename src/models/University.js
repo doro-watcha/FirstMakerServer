@@ -59,11 +59,11 @@ export default class University extends Sequelize.Model {
 			this.hasMany(models.Major, {
 				foreginKey: 'univId',
 				as : 'major'
+			}),
+			this.hasMany(models.ReflectionRatio, {
+				foreignKey : 'univId',
+				as : 'reflectionRatio'
 			})
-			// this.hasMany(models.ReflectionRatio, {
-			// 	foreignKey : 'univId',
-			// 	as : 'reflectionRatio'
-			// })
 		}
 
 }

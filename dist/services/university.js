@@ -25,7 +25,7 @@ class UniversityService {
 
   async findAll() {
     return await _models.University.findAll({
-      attributes: ['name', 'min', 'max']
+      attributes: ['name', 'min', 'max', 'group']
     });
   }
 

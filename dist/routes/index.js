@@ -16,6 +16,8 @@ var _consulting = _interopRequireDefault(require("./consulting"));
 
 var _paymentRecord = _interopRequireDefault(require("./paymentRecord"));
 
+var _reflectionRatio = _interopRequireDefault(require("./reflectionRatio"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var express = require('express');
@@ -36,4 +38,5 @@ router.use('/report', _report.default);
 router.use('/major', _major.default);
 router.use('/consulting', _consulting.default);
 router.use('/paymentRecord', _paymentRecord.default);
+router.use('/reflectionRatio', _reflectionRatio.default);
 module.exports = router;

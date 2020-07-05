@@ -120,6 +120,10 @@ module.exports = {
       status: 418,
       ko: '해당 결제 기록 없음'
     },
+    REFLECTION_RATIO_NOT_FOUND: {
+      status: 419,
+      ko: '해당 대학 반영 비율 없음'
+    },
     // 409
     USER_ALREADY_EXISTS: {
       status: 500,

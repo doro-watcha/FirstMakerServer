@@ -77,16 +77,18 @@ export default class UniversityController {
                 name : Joi.string(),
                 max : Joi.number(),
                 min : Joi.number(),
-                location : Joi.string()
+                location : Joi.string(), 
+                group : Joi.string()
             })
 
-            const { name , max , min , location } = result
+            const { name , max , min , location, group } = result
 
             const modelObj = {
-                name : name ,
-                max : max ,
-                min : min ,
-                location : location 
+                name,
+                max,
+                min,
+                location,
+                group
             }
 
            

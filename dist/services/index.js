@@ -14,6 +14,8 @@ var _consulting = _interopRequireDefault(require("./consulting"));
 
 var _paymentRecord = _interopRequireDefault(require("./paymentRecord"));
 
+var _reflectionRatio = _interopRequireDefault(require("./reflectionRatio"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
@@ -23,5 +25,6 @@ module.exports = {
   reportService: _report.default,
   majorService: _major.default,
   consultingService: _consulting.default,
-  paymentRecordService: _paymentRecord.default
+  paymentRecordService: _paymentRecord.default,
+  reflectionRatioService: _reflectionRatio.default
 };

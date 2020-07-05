@@ -20,6 +20,8 @@ var _Consulting = _interopRequireDefault(require("./Consulting"));
 
 var _Academy = _interopRequireDefault(require("./Academy"));
 
+var _ReflectionRatio = _interopRequireDefault(require("./ReflectionRatio"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const env = process.env.NODE_ENV || 'development';
@@ -33,7 +35,8 @@ const models = {
   Report: _Report.default.init(sequelize, _sequelize.default),
   Major: _Major.default.init(sequelize, _sequelize.default),
   Consulting: _Consulting.default.init(sequelize, _sequelize.default),
-  Academy: _Academy.default.init(sequelize, _sequelize.default)
+  Academy: _Academy.default.init(sequelize, _sequelize.default),
+  ReflectionRatio: _ReflectionRatio.default.init(sequelize, _sequelize.default)
 };
 Object.values(models).filter(model => typeof model.associate === 'function').forEach(model => model.associate(models));
 module.exports = { ...models,

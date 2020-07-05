@@ -9,6 +9,7 @@ import reportRouter from './report'
 import majorRouter from './major'
 import consultingRouter from './consulting'
 import paymentRecordRouter from './paymentRecord'
+import reflectionRatioRouter from './reflectionRatio'
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -23,6 +24,7 @@ router.use('/report', reportRouter)
 router.use('/major', majorRouter)
 router.use('/consulting', consultingRouter)
 router.use('/paymentRecord', paymentRecordRouter)
+router.use('/reflectionRatio', reflectionRatioRouter)
 
 
 module.exports = router
