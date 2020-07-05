@@ -60,6 +60,10 @@ export default class University extends Sequelize.Model {
 				foreginKey: 'univId',
 				as : 'major'
 			})
+			// this.hasMany(models.ReflectionRatio, {
+			// 	foreignKey : 'univId',
+			// 	as : 'reflectionRatio'
+			// })
 		}
 
 }

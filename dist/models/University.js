@@ -56,7 +56,10 @@ class University extends _sequelize.default.Model {
     this.hasMany(models.Major, {
       foreginKey: 'univId',
       as: 'major'
-    });
+    }); // this.hasMany(models.ReflectionRatio, {
+    // 	foreignKey : 'univId',
+    // 	as : 'reflectionRatio'
+    // })
   }
 
 } // swagger schema

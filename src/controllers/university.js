@@ -11,19 +11,18 @@ export default class UniversityController {
             name : Joi.string().required(),
             min : Joi.number().required(),
             max : Joi.number().required(),
-            location : Joi.string().required()
+            location : Joi.string().required(),
+            group : Joi.string().required()
         })
 
-        const { name , min , max , location } = result 
-
-        console.log( name )
-        console.log( location )
+        const { name , min , max , location, group } = result 
 
         const modelObj = {
-            name : name, 
-            min : min,
-            max : max, 
-            location : location
+            name,
+            min,
+            max,
+            location,
+            group
         }
 
         const university = await universityService.create(modelObj)

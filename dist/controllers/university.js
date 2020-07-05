@@ -19,21 +19,22 @@ class UniversityController {
       name: _joi.default.string().required(),
       min: _joi.default.number().required(),
       max: _joi.default.number().required(),
-      location: _joi.default.string().required()
+      location: _joi.default.string().required(),
+      group: _joi.default.string().required()
     });
     const {
       name,
       min,
       max,
-      location
+      location,
+      group
     } = result;
-    console.log(name);
-    console.log(location);
     const modelObj = {
-      name: name,
-      min: min,
-      max: max,
-      location: location
+      name,
+      min,
+      max,
+      location,
+      group
     };
     const university = await _services.universityService.create(modelObj);
     const response = {
