@@ -10,6 +10,10 @@ const { authenticate, getUserInfo } = Authenticator
 var router = express.Router();
 
 
+router.get('/', (req,res) => {
+  majorController.findAll(req,res)
+})
+
 /**
  * @swagger
  *

@@ -59,6 +59,21 @@ class majorController {
     }
   }
 
+  static async findAll(req, res) {
+    try {
+      const majors = await _services.majorService.findAll();
+      const response = {
+        success: true,
+        data: {
+          majors
+        }
+      };
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
+  }
+
   static async findList(req, res) {
     try {
       const univId = req.params.univId;

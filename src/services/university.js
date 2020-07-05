@@ -18,7 +18,7 @@ class UniversityService {
 
     async findAll() {
         return await University.findAll({
-            attributes : ['name', 'min','max', 'group']
+            attributes : ['id','location','name', 'min','max', 'group']
         })
     }
 

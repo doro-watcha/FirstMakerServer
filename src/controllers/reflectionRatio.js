@@ -100,18 +100,56 @@ export default class reflectionRatioController {
         "tamgu" : reflectionRatio.totalScore * (reflectionRatio.ratio.tamgu / 100)
       }
 
+
+
+      const new_english = reflectionRatio.gradeToScore.english[score.english.grade-1]
+      const new_tamgu = score.tamgu1.score + score.tamgu2.score
+
       const calculated = {
         "korean" : score.korean.score * ( perfectScore.korean / reflectionRatio.perfectScore.korean),
-
+        "math" : score.math.score * ( perfectScore.math / reflectionRatio.perfectScore.math),
+        "english" : new_english * (perfectScore.english / reflectionRatio.perfectScore.english),
+        "tamgu" : new_tamgu * (perfectScore.tamgu / reflectionRatio.perfectScore.tamgu)
       }
+
+      const extra = {
+        "korean" : calculated.korean * (reflectionRatio.extraRatio.korean / 100 ),
+        "math" : calculated.math * (reflectionRatio.extraRatio.math / 100 ),
+        "english" : calculated.english * (reflectionRatio.extraRatio.english / 100 ),
+        "tamgu" : calculated.tamgu * (reflectionRatio.extraRatio.tamgu / 100),
+        "history" : reflectionRatio.gradeToScore.history[score.history.grade-1]
+      }
+
+      if ( reflectionRatio.metadata.applicationIndicator == "표+백") {
+        console.log("fuckman~")
+      }
+      
 
 
 
       const calculatedScore = {
         "korean" : {
           "score" : calculated.korean,
-          "extra" : 0,
+          "extra" : extra.korean,
           "perfect" : perfectScore.korean
+        },
+        "math" : {
+          "score" : calculated.math,
+          "extra" : extra.math,
+          "perfect" : perfectScore.math
+        },
+        "english" : {
+          "score" : calculated.english,
+          "extra" : extra.english,
+          "perfect" : perfectScore.english
+        },
+        "tamgu" : {
+          "score" : calculated.tamgu,
+          "extra" : extra.tamgu,
+          "perfect" : perfectScore.tamgu
+        },
+        "history" : {
+          "extra" : extra.history 
         }
 
 

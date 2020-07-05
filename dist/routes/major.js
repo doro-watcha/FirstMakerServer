@@ -13,6 +13,9 @@ const {
   getUserInfo
 } = _Authenticator.default;
 var router = express.Router();
+router.get('/', (req, res) => {
+  _controllers.majorController.findAll(req, res);
+});
 /**
  * @swagger
  *

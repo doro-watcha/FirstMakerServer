@@ -49,6 +49,26 @@ export default class majorController {
       res.send(createErrorResponse(e))
     }
   }
+
+  static async findAll( req, res) {
+
+    try {
+      const majors = await majorService.findAll()
+
+      const response = {
+
+        success : true ,
+        data : {
+          majors
+        }
+      }
+      res.send(response)
+
+
+    } catch ( e ) {
+      res.send(createErrorResponse(e))
+    }
+  }
   
 
   static async findList(req,res) {

@@ -15,35 +15,39 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class UniversityController {
   static async createUniversity(req, res) {
-    const result = await _joi.default.validate(req.body, {
-      name: _joi.default.string().required(),
-      min: _joi.default.number().required(),
-      max: _joi.default.number().required(),
-      location: _joi.default.string().required(),
-      group: _joi.default.string().required()
-    });
-    const {
-      name,
-      min,
-      max,
-      location,
-      group
-    } = result;
-    const modelObj = {
-      name,
-      min,
-      max,
-      location,
-      group
-    };
-    const university = await _services.universityService.create(modelObj);
-    const response = {
-      success: true,
-      data: {
-        university
-      }
-    };
-    res.send(response);
+    try {
+      const result = await _joi.default.validate(req.body, {
+        name: _joi.default.string().required(),
+        min: _joi.default.number().required(),
+        max: _joi.default.number().required(),
+        location: _joi.default.string().required(),
+        group: _joi.default.string().required()
+      });
+      const {
+        name,
+        min,
+        max,
+        location,
+        group
+      } = result;
+      const modelObj = {
+        name,
+        min,
+        max,
+        location,
+        group
+      };
+      const university = await _services.universityService.create(modelObj);
+      const response = {
+        success: true,
+        data: {
+          university
+        }
+      };
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
   }
 
   static async findList(req, res) {

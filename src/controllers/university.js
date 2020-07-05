@@ -7,35 +7,40 @@ export default class UniversityController {
 
     static async createUniversity ( req, res) {
 
-        const result = await Joi.validate(req.body , {
-            name : Joi.string().required(),
-            min : Joi.number().required(),
-            max : Joi.number().required(),
-            location : Joi.string().required(),
-            group : Joi.string().required()
-        })
+        try { 
 
-        const { name , min , max , location, group } = result 
+            const result = await Joi.validate(req.body , {
+                name : Joi.string().required(),
+                min : Joi.number().required(),
+                max : Joi.number().required(),
+                location : Joi.string().required(),
+                group : Joi.string().required()
+            })
 
-        const modelObj = {
-            name,
-            min,
-            max,
-            location,
-            group
-        }
+            const { name , min , max , location, group } = result 
 
-        const university = await universityService.create(modelObj)
-
-        const response = {
-
-            success : true,
-            data : {
-                university 
+            const modelObj = {
+                name,
+                min,
+                max,
+                location,
+                group
             }
+
+            const university = await universityService.create(modelObj)
+
+            const response = {
+
+                success : true,
+                data : {
+                    university 
+                }
+            }
+            
+            res.send(response)
+        } catch ( e ) {
+            res.send(createErrorResponse(e))
         }
-        
-        res.send(response)
 
     }
 

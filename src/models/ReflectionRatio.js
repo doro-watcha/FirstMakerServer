@@ -47,6 +47,12 @@ export default class ReflectionRatio extends Sequelize.Model {
       gradeToScore : {
         type : Sequelize.JSON,
         allowNull : true
+      },
+
+      // 표+백 일경우에 백분위를 표준점수 변환
+      percentileToScore : {
+        type : Sequelize.JSON,
+        allowNull : true
       }
     }, 
     {
