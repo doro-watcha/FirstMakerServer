@@ -24,7 +24,6 @@ class scoreController {
         tamgu2: _joi.default.object().required(),
         history: _joi.default.object().required(),
         foreign: _joi.default.object().required(),
-        type: _joi.default.string().required(),
         line: _joi.default.string().required(),
         naesin: _joi.default.number(),
         naesin_type: _joi.default.string()
@@ -37,7 +36,6 @@ class scoreController {
         tamgu2,
         history,
         foreign,
-        type,
         line,
         naesin,
         naesin_type
@@ -47,25 +45,14 @@ class scoreController {
       } = req;
       const modelObj = {
         userId: user.id,
-        korean_score: korean.score,
-        korean_grade: korean.grade,
-        korean_percentile: korean.percentile,
-        english_grade: english.grade,
-        math_score: math.score,
-        math_grade: math.grade,
-        math_percentile: math.percentile,
-        tamgu1_score: tamgu1.score,
-        tamgu1_grade: tamgu1.grade,
-        tamgu1_percentile: tamgu1.percentile,
-        tamgu2_score: tamgu2.score,
-        tamgu2_grade: tamgu2.grade,
-        tamgu2_percentile: tamgu2.percentile,
-        history_grade: history.grade,
-        foreign_score: foreign.score,
-        foreign_grade: foreign.grade,
-        foreign_percentile: foreign.percentile,
-        type: type,
-        line: line,
+        korean,
+        math,
+        english,
+        tamgu1,
+        tamgu2,
+        history,
+        foreign,
+        line,
         naesin,
         naesin_type
       };
@@ -90,41 +77,7 @@ class scoreController {
       const response = {
         success: true,
         data: {
-          korean: {
-            score: score.korean_score,
-            grade: score.korean_grade,
-            percentile: score.korean_percentile
-          },
-          english: {
-            grade: score.english_grade
-          },
-          math: {
-            score: score.math_score,
-            grade: score.math_grade,
-            percentile: score.math_percentile
-          },
-          tamgu1: {
-            score: score.tamgu1_score,
-            grade: score.tamgu1_grade,
-            percentile: score.tamgu1_percentile
-          },
-          tamgu2: {
-            score: score.tamgu2_score,
-            grade: score.tamgu2_grade,
-            percentile: score.tamgu2_percentile
-          },
-          history: {
-            grade: score.history_grade
-          },
-          foreign: {
-            grade: score.foreign_grade,
-            percentile: score.foreign_percentile,
-            score: score.foreign_score
-          },
-          naesin: score.naesin,
-          naesin_type: score.naesin_type,
-          line: score.line,
-          type: score.type
+          score
         }
       };
       res.send(response);
@@ -137,17 +90,16 @@ class scoreController {
     try {
       const userId = req.params.userId;
       const result = await _joi.default.validate(req.body, {
-        korean: _joi.default.object(),
-        math: _joi.default.object(),
-        english: _joi.default.object(),
-        tamgu1: _joi.default.object(),
-        tamgu2: _joi.default.object(),
-        history: _joi.default.object(),
-        foreign: _joi.default.object(),
-        type: _joi.default.string(),
-        line: _joi.default.string(),
-        naesin_type: _joi.default.string(),
-        naesin: _joi.default.number()
+        korean: _joi.default.object().required(),
+        math: _joi.default.object().required(),
+        english: _joi.default.object().required(),
+        tamgu1: _joi.default.object().required(),
+        tamgu2: _joi.default.object().required(),
+        history: _joi.default.object().required(),
+        foreign: _joi.default.object().required(),
+        line: _joi.default.string().required(),
+        naesin: _joi.default.number(),
+        naesin_type: _joi.default.string()
       });
       const {
         korean,
@@ -157,41 +109,29 @@ class scoreController {
         tamgu2,
         history,
         foreign,
-        type,
         line,
-        naesin_type,
-        naesin
+        naesin,
+        naesin_type
       } = result;
       const modelObj = {
-        userId: userId,
-        korean_score: korean.score,
-        korean_grade: korean.grade,
-        korean_percentile: korean.percentile,
-        english_grade: english.grade,
-        math_score: math.score,
-        math_grade: math.grade,
-        math_percentile: math.percentile,
-        tamgu1_score: tamgu1.score,
-        tamgu1_grade: tamgu1.grade,
-        tamgu1_percentile: tamgu1.percentile,
-        tamgu2_score: tamgu2.score,
-        tamgu2_grade: tamgu2.grade,
-        tamgu2_percentile: tamgu2.percentile,
-        history_grade: history.grade,
-        foreign_score: foreign.score,
-        foreign_grade: foreign.grade,
-        foreign_percentile: foreign.percentile,
-        type,
+        userId,
+        korean,
+        math,
+        english,
+        tamgu1,
+        tamgu2,
+        history,
+        foreign,
         line,
-        naesin_type,
-        naesin
+        naesin,
+        naesin_type
       };
       const score = await _services.scoreService.update(userId, modelObj);
       if (score == null) throw Error('SCORE_NOT_FOUND');
       const response = {
         success: true,
         data: {
-          score: score
+          score
         }
       };
       res.send(response);

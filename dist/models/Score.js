@@ -12,89 +12,37 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class Score extends _sequelize.default.Model {
   static init(sequelize) {
     return super.init({
-      type: {
-        type: _sequelize.default.STRING,
-        allowNull: true
-      },
       line: {
         type: _sequelize.default.STRING,
         allowNull: true
       },
-      korean_score: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
+      korean: {
+        type: _sequelize.default.JSON,
+        allowNull: true
       },
-      korean_grade: {
-        type: _sequelize.default.INTEGER,
-        defaultVale: 0
+      math: {
+        type: _sequelize.default.JSON,
+        allowNull: true
       },
-      korean_percentile: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
+      english: {
+        type: _sequelize.default.JSON,
+        allowNull: true
       },
-      english_grade: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
+      tamgu1: {
+        type: _sequelize.default.JSON,
+        allowNull: true
       },
-      math_score: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
+      tamgu2: {
+        type: _sequelize.default.JSON,
+        allowNull: true
       },
-      math_grade: {
-        type: _sequelize.default.INTEGER,
-        defaultVale: 0
+      history: {
+        type: _sequelize.default.JSON,
+        allowNull: true
       },
-      math_percentile: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
-      },
-      tamgu1_score: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
-      },
-      tamgu1_grade: {
-        type: _sequelize.default.INTEGER,
-        defaultVale: 0
-      },
-      tamgu1_percentile: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
-      },
-      tamgu2_score: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
-      },
-      tamgu2_grade: {
-        type: _sequelize.default.INTEGER,
-        defaultVale: 0
-      },
-      tamgu2_percentile: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
-      },
-      history_grade: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
-      },
-      foreign_score: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
-      },
-      foreign_grade: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
-      },
-      foreign_percentile: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
-      },
-      total_score: {
-        type: _sequelize.default.FLOAT,
-        defaultValue: 0.0
-      },
-      total_percentile: {
-        type: _sequelize.default.FLOAT,
-        defaultValue: 0.0
+      foreign: {
+        type: _sequelize.default.JSON,
+        allowNull: true
       },
       naesin: {
         type: _sequelize.default.FLOAT,
@@ -141,98 +89,6 @@ const schema = {
     id: {
       type: 'integer',
       example: 3
-    },
-    type: {
-      type: 'string',
-      example: '가'
-    },
-    line: {
-      type: 'string',
-      example: '사회탐구'
-    },
-    korean_score: {
-      type: 'integer',
-      example: 130
-    },
-    korean_grade: {
-      type: 'integer',
-      example: 1
-    },
-    korean_percentile: {
-      type: 'integer',
-      example: 97
-    },
-    math_score: {
-      type: 'integer',
-      example: 130
-    },
-    math_grade: {
-      type: 'integer',
-      example: 1
-    },
-    math_percentile: {
-      type: 'integer',
-      example: 97
-    },
-    english_grade: {
-      type: 'integer',
-      example: 3
-    },
-    history_grade: {
-      type: 'integer',
-      example: 1
-    },
-    tamgu1_score: {
-      type: 'integer',
-      example: 130
-    },
-    tamgu1_grade: {
-      type: 'integer',
-      example: 1
-    },
-    tamgu1_percentile: {
-      type: 'integer',
-      example: 97
-    },
-    tamgu2_score: {
-      type: 'integer',
-      example: 130
-    },
-    tamgu2_grade: {
-      type: 'integer',
-      example: 1
-    },
-    tamgu2_percentile: {
-      type: 'integer',
-      example: 97
-    },
-    foreign_score: {
-      type: 'integer',
-      example: 130
-    },
-    foreign_grade: {
-      type: 'integer',
-      example: 1
-    },
-    foreign_percentile: {
-      type: 'integer',
-      example: 97
-    },
-    naesin_type: {
-      type: 'string',
-      example: '국수영사'
-    },
-    naesin: {
-      type: 'float',
-      example: '1.3'
-    },
-    total_score: {
-      type: 'integer',
-      example: 880
-    },
-    total_percentile: {
-      type: 'integer',
-      example: 99
     },
     user: {
       $ref: '#/components/schemas/User'

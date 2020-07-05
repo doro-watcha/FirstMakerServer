@@ -14,7 +14,7 @@ const {
 } = _Authenticator.default;
 const router = (0, _express.Router)();
 router.get('/', (req, res) => {
-  _controllers.reflectionRatioController.findByUnivId(req, res);
+  _controllers.reflectionRatioController.calculate(req, res);
 });
 router.get('/:id', (req, res) => {
   _controllers.reflectionRatioController.findOne(req, res);

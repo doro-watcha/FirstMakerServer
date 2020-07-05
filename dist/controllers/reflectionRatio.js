@@ -81,19 +81,40 @@ class reflectionRatioController {
     }
   }
 
-  static async findByUnivId(req, res) {
+  static async calculate(req, res) {
     try {
       const result = await _joi.default.validate(req.query, {
-        univId: _joi.default.number().required()
+        univId: _joi.default.number().required(),
+        userId: _joi.default.number().required()
       });
       const {
-        univId
+        univId,
+        userId
       } = result;
       const reflectionRatio = await _services.reflectionRatioService.findByUnivId(univId);
+      const score = await _services.scoreService.findByUserId(userId);
+      const perfectScore = {
+        "korean": reflectionRatio.totalScore * (reflectionRatio.ratio.korean / 100),
+        "math": reflectionRatio.totalScore * (reflectionRatio.ratio.math / 100),
+        "english": reflectionRatio.totalScore * (reflectionRatio.ratio.english / 100),
+        "tamgu": reflectionRatio.totalScore * (reflectionRatio.ratio.tamgu / 100)
+      };
+      const calculated = {
+        "korean": score.korean.score * (perfectScore.korean / reflectionRatio.perfectScore.korean)
+      };
+      const calculatedScore = {
+        "korean": {
+          "score": calculated.korean,
+          "extra": 0,
+          "perfect": perfectScore.korean
+        }
+      };
       const response = {
         success: true,
         data: {
-          reflectionRatio
+          reflectionRatio,
+          score,
+          calculatedScore
         }
       };
       res.send(response);

@@ -8,7 +8,7 @@ const { authenticate, getUserInfo } = Authenticator
 const router  = Router()
 
 router.get('/', (req,res) => {
-  reflectionRatioController.findByUnivId(req,res)
+  reflectionRatioController.calculate(req,res)
 })
 
 router.get('/:id' , (req,res) => {

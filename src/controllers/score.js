@@ -17,40 +17,27 @@ export default class scoreController {
                 tamgu2 : Joi.object().required(),
                 history : Joi.object().required(),
                 foreign : Joi.object().required(),
-                type : Joi.string().required(),
                 line : Joi.string().required(),
                 naesin : Joi.number(),
                 naesin_type : Joi.string()
             })
             
-            const { korean , math , english , tamgu1, tamgu2 , history ,foreign, type, line, naesin, naesin_type } = result 
+            const { korean , math , english , tamgu1, tamgu2 , history ,foreign, line, naesin, naesin_type } = result 
 
             const { user } = req
 
             const modelObj = {
                 userId : user.id,
-                korean_score : korean.score,
-                korean_grade : korean.grade,
-                korean_percentile : korean.percentile,
-                english_grade : english.grade,
-                math_score : math.score,
-                math_grade : math.grade,
-                math_percentile : math.percentile,
-                tamgu1_score : tamgu1.score,
-                tamgu1_grade : tamgu1.grade,
-                tamgu1_percentile : tamgu1.percentile,
-                tamgu2_score : tamgu2.score,
-                tamgu2_grade : tamgu2.grade,
-                tamgu2_percentile : tamgu2.percentile,
-                history_grade : history.grade,
-                foreign_score : foreign.score,
-                foreign_grade : foreign.grade,
-                foreign_percentile : foreign.percentile,
-                type : type,
-                line : line,
+                korean,
+                math,
+                english,
+                tamgu1,
+                tamgu2,
+                history,
+                foreign,
+                line,
                 naesin,
                 naesin_type
-                
             }
             const score = await scoreService.create( modelObj )
 
@@ -82,43 +69,7 @@ export default class scoreController {
 
                 success : true ,
                 data : {
-                    korean : {
-                        score : score.korean_score,
-                        grade : score.korean_grade,
-                        percentile : score.korean_percentile
-                    },
-                    english : {
-                        grade : score.english_grade
-                    },
-                    math : {
-                        score : score.math_score,
-                        grade : score.math_grade,
-                        percentile : score.math_percentile
-                    },
-                    tamgu1 : {
-                        score : score.tamgu1_score,
-                        grade : score.tamgu1_grade,
-                        percentile : score.tamgu1_percentile
-                    },
-                    tamgu2 : {
-                        score : score.tamgu2_score,
-                        grade : score.tamgu2_grade,
-                        percentile : score.tamgu2_percentile
-                    },
-                    history : {
-                        grade : score.history_grade
-                    },
-                    foreign : {
-                        grade : score.foreign_grade,
-                        percentile : score.foreign_percentile,
-                        score : score.foreign_score
-                    },
-                    naesin : score.naesin,
-                    naesin_type : score.naesin_type,
-                    line : score.line,
-                    type : score.type 
-
-
+                    score
                 }
             }
             res.send(response)
@@ -136,46 +87,32 @@ export default class scoreController {
             const userId = req.params.userId
 
             const result = await Joi.validate(req.body, {
-                korean : Joi.object(),
-                math : Joi.object(),
-                english : Joi.object(),
-                tamgu1 : Joi.object(),
-                tamgu2 : Joi.object(),
-                history : Joi.object(),
-                foreign : Joi.object(),
-                type : Joi.string(),
-                line : Joi.string(),
-                naesin_type : Joi.string(),
-                naesin : Joi.number()
+                korean : Joi.object().required(),
+                math : Joi.object().required(),
+                english : Joi.object().required(),
+                tamgu1 : Joi.object().required(),
+                tamgu2 : Joi.object().required(),
+                history : Joi.object().required(),
+                foreign : Joi.object().required(),
+                line : Joi.string().required(),
+                naesin : Joi.number(),
+                naesin_type : Joi.string()
             })
-
-            const { korean, math , english ,tamgu1, tamgu2, history, foreign, type , line , naesin_type , naesin} = result
-
             
+            const { korean , math , english , tamgu1, tamgu2 , history ,foreign, line, naesin, naesin_type } = result 
+
             const modelObj = {
-                userId : userId,
-                korean_score : korean.score,
-                korean_grade : korean.grade,
-                korean_percentile : korean.percentile,
-                english_grade : english.grade,
-                math_score : math.score,
-                math_grade : math.grade,
-                math_percentile : math.percentile,
-                tamgu1_score : tamgu1.score,
-                tamgu1_grade : tamgu1.grade,
-                tamgu1_percentile : tamgu1.percentile,
-                tamgu2_score : tamgu2.score,
-                tamgu2_grade : tamgu2.grade,
-                tamgu2_percentile : tamgu2.percentile,
-                history_grade : history.grade,
-                foreign_score : foreign.score,
-                foreign_grade : foreign.grade,
-                foreign_percentile : foreign.percentile,
-                type,
+                userId,
+                korean,
+                math,
+                english,
+                tamgu1,
+                tamgu2,
+                history,
+                foreign,
                 line,
-                naesin_type,
-                naesin
-                
+                naesin,
+                naesin_type
             }
 
             const score = await scoreService.update(userId, modelObj)
@@ -185,7 +122,7 @@ export default class scoreController {
             const response = {
                 success : true,
                 data : {
-                    score : score 
+                    score
                 }
             }
 
