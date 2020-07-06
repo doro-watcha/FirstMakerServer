@@ -141,6 +141,34 @@ module.exports = {
 			ko: '이미 좋아요 존재',
 			en: 'Like already exists',
 		},
+		UNIVERSITY_ALREADY_EXISTS: {
+			status : 503,
+			ko : '이미 존재하는 대학입니다'
+		},
+		MAJOR_ALREADY_EXISTS : {
+			status : 504,
+			ko : '이미 존재하는 학과입니다'
+		},
+		SCORE_ALREADY_EXISTS : {
+			status : 505,
+			ko : '이미 성적이 존재합니다'
+		},
+		REPORT_ALREADY_EXISTS : {
+			status : 506,
+			ko : '이미 존재하는 예측 보고서입니다'
+		},
+		REFLECTION_RATIO_ALREADY_EXISTS: {
+			status : 507,
+			ko : '이미 해당 대학의 반영비율이 존재합니다'
+		},
+		PAYMENT_RECORD_ALREADY_EXISTS : {
+			status : 508,
+			ko : '이미 결제 기록이 존재합니다'
+		},
+		CONSULTING_ALREADY_EXISTS : {
+			status : 509,
+			ko : '이미 존재하는 상담입니다'
+		},
 		// 410
 		USER_DELETED: {
 			status: 600,

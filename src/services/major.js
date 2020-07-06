@@ -23,6 +23,13 @@ class MajorService {
     })
   }
 
+
+  async findByName ( name , univId) {
+    return await Major.findOne({
+      where : { name , univId}
+    })
+  }
+
   async findAll() {
     return await Major.findAll({})
   }

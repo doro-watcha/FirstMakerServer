@@ -52,6 +52,8 @@ class reflectionRatioController {
         gradeToScore,
         univId
       };
+      const exist_reflection_ratio = await _services.reflectionRatioService.findByUnivId(univId);
+      if (exist_reflection_ratio != null) throw Error('REFLECTION_RATIO_ALREADY_EXISTS');
       const reflectionRatio = await _services.reflectionRatioService.create(modelObj);
       const response = {
         success: true,
@@ -113,11 +115,12 @@ class reflectionRatioController {
         "english": calculated.english * (reflectionRatio.extraRatio.english / 100),
         "tamgu": calculated.tamgu * (reflectionRatio.extraRatio.tamgu / 100),
         "history": reflectionRatio.gradeToScore.history[score.history.grade - 1]
-      };
+      }; // 표+백 일경우에 재껴줘야함
 
       if (reflectionRatio.metadata.applicationIndicator == "표+백") {
         console.log("fuckman~");
-      }
+      } // 영어가 가감일경우에도 처리해줘야함
+
 
       const calculatedScore = {
         "korean": {

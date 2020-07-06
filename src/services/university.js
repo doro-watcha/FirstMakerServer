@@ -28,6 +28,12 @@ class UniversityService {
         })
     }
 
+    async findByName(name) {
+        return await University.findOne({
+            where : { name }
+        })
+    }
+
     async update ( id , modelObj ) {
         await University.update(modelObj, {
             where: { id },

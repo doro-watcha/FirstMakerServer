@@ -39,6 +39,10 @@ export default class reflectionRatioController {
         univId
       }
 
+      const exist_reflection_ratio = await reflectionRatioService.findByUnivId(univId)
+
+      if ( exist_reflection_ratio != null ) throw Error('REFLECTION_RATIO_ALREADY_EXISTS')
+
       const reflectionRatio = await reflectionRatioService.create(modelObj)
 
       const response = {
@@ -120,9 +124,14 @@ export default class reflectionRatioController {
         "history" : reflectionRatio.gradeToScore.history[score.history.grade-1]
       }
 
+      // 표+백 일경우에 재껴줘야함
+
       if ( reflectionRatio.metadata.applicationIndicator == "표+백") {
         console.log("fuckman~")
       }
+
+      // 영어가 가감일경우에도 처리해줘야함
+
       
 
 

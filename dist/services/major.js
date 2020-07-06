@@ -32,6 +32,15 @@ class MajorService {
     });
   }
 
+  async findByName(name, univId) {
+    return await _models.Major.findOne({
+      where: {
+        name,
+        univId
+      }
+    });
+  }
+
   async findAll() {
     return await _models.Major.findAll({});
   }

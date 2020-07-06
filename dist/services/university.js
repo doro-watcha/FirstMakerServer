@@ -37,6 +37,14 @@ class UniversityService {
     });
   }
 
+  async findByName(name) {
+    return await _models.University.findOne({
+      where: {
+        name
+      }
+    });
+  }
+
   async update(id, modelObj) {
     await _models.University.update(modelObj, {
       where: {

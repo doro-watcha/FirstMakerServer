@@ -56,6 +56,10 @@ class scoreController {
         naesin,
         naesin_type
       };
+
+      const exist_score = _services.scoreService.findByUserId(user.id);
+
+      if (exist_score != null) throw Error('SCORE_ALREADY_EXISTS');
       const score = await _services.scoreService.create(modelObj);
       const response = {
         success: true,

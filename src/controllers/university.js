@@ -19,6 +19,10 @@ export default class UniversityController {
 
             const { name , min , max , location, group } = result 
 
+            const exist_university = await universityService.findByName(name)
+            
+            if ( exist_university != null) throw Error('UNIVERSITY_ALREADY_EXISTS')
+
             const modelObj = {
                 name,
                 min,

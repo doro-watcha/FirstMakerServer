@@ -18,7 +18,7 @@ class ScoreService {
 
     async findByUserId (userId) {
         return await Score.findOne({
-            where : { userId : userId  }
+            where : { userId }
         })
     }
 

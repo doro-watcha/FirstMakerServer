@@ -18,6 +18,8 @@ var _PaymentRecord = require("./models/PaymentRecord");
 
 var _Consulting = require("./models/Consulting");
 
+var _ReflectionRatio = require("./models/ReflectionRatio");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const ApiResponse = {
@@ -116,7 +118,8 @@ const options = {
         User: _User.schema,
         Report: _Report.schema,
         PaymentRecord: _PaymentRecord.schema,
-        Consulting: _Consulting.schema
+        Consulting: _Consulting.schema,
+        ReflectionRatio: _ReflectionRatio.schema
       },
       securitySchemes: {
         bearerAuth: {

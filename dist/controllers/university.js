@@ -30,6 +30,8 @@ class UniversityController {
         location,
         group
       } = result;
+      const exist_university = await _services.universityService.findByName(name);
+      if (exist_university != null) throw Error('UNIVERSITY_ALREADY_EXISTS');
       const modelObj = {
         name,
         min,

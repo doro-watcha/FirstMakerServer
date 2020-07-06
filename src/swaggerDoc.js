@@ -8,6 +8,7 @@ import { schema as User} from './models/User'
 import { schema as Report} from './models/Report'
 import { schema as PaymentRecord} from './models/PaymentRecord'
 import { schema as Consulting} from './models/Consulting'
+import { schema as ReflectionRatio} from './models/ReflectionRatio'
 
 const ApiResponse = {
 	type: 'object',
@@ -108,7 +109,8 @@ const options = {
 				User,
 				Report,
 				PaymentRecord,
-				Consulting
+				Consulting,
+				ReflectionRatio
 			},
 			securitySchemes: {
 				bearerAuth: {
