@@ -132,7 +132,7 @@ const schema = {
     },
     line: {
       type: 'string',
-      example: '문과'
+      example: ''
     },
     group: {
       type: 'integer',

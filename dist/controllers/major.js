@@ -30,10 +30,10 @@ class majorController {
         additionalMember: _joi.default.number().required(),
         competitionNumber: _joi.default.number().required(),
         isNaesinIncluded: _joi.default.boolean().required(),
-        somethingSpecial,
-        etc,
         univId: _joi.default.number().required()
       });
+      const somethingSpecial = req.body.somethingSpecial;
+      const etc = req.body.etc;
       const {
         line,
         group,
@@ -48,8 +48,6 @@ class majorController {
         additionalMember,
         competitionNumber,
         isNaesinIncluded,
-        somethingSpecial,
-        etc,
         univId
       } = result;
       const finalNumber = recruitmentNumber + additionalMember;
@@ -140,10 +138,10 @@ class majorController {
         additionalMember: _joi.default.number(),
         competitionNumber: _joi.default.number(),
         isNaesinIncluded: _joi.default.boolean(),
-        somethingSpecial,
-        etc,
         univId: _joi.default.number()
       });
+      const somethingSpecial = req.body.somethingSpecial;
+      const etc = req.body.etc;
       const {
         line,
         group,
@@ -158,8 +156,6 @@ class majorController {
         additionalMember,
         competitionNumber,
         isNaesinIncluded,
-        somethingSpecial,
-        etc,
         univId
       } = result;
       const finalNumber = recruitmentNumber + additionalMember;
