@@ -23,13 +23,12 @@ export default class majorController {
         additionalMember : Joi.number().required(),
         competitionNumber : Joi.number().required(),
         isNaesinIncluded : Joi.boolean().required(),
+        somethingSpecial : Joi.string(),
+        etc : Joi.string(),
         univId : Joi.number().required()
       })
 
-      const somethingSpecial = req.body.somethingSpecial
-      const etc = req.body.etc
-
-      const { line ,group  , name, strong_val, safe_val, dangerous_val, sniping_val, year, admissionType, recruitmentNumber, additionalMember, competitionNumber, isNaesinIncluded, univId} = result
+      const { line ,group  , name, strong_val, safe_val, dangerous_val, sniping_val, year, admissionType, recruitmentNumber, additionalMember, competitionNumber, isNaesinIncluded, somethingSpecial, etc , univId} = result
 
       const finalNumber = recruitmentNumber + additionalMember
       const modelObj = {
@@ -142,13 +141,12 @@ export default class majorController {
         additionalMember : Joi.number(),
         competitionNumber : Joi.number(),
         isNaesinIncluded : Joi.boolean(),
+        somethingSpecial : Joi.string(),
+        etc : Joi.string(),
         univId : Joi.number()
       })
 
-      const somethingSpecial = req.body.somethingSpecial
-      const etc = req.body.etc
-
-      const { line ,group  , name, strong_val, safe_val, dangerous_val, sniping_val, year, admissionType, recruitmentNumber, additionalMember, competitionNumber, isNaesinIncluded, univId} = result
+      const { line ,group  , name, strong_val, safe_val, dangerous_val, sniping_val, year, admissionType, recruitmentNumber, additionalMember, competitionNumber, isNaesinIncluded, somethingSpecial, etc , univId} = result
 
       const finalNumber = recruitmentNumber + additionalMember
       const modelObj = {
