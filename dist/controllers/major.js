@@ -15,76 +15,78 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class majorController {
   static async createMajor(req, res) {
-    const result = await _joi.default.validate(req.body, {
-      line: _joi.default.string(),
-      group: _joi.default.string(),
-      name: _joi.default.string(),
-      strong_val: _joi.default.number(),
-      safe_val: _joi.default.number(),
-      dangerous_val: _joi.default.number(),
-      sniping_val: _joi.default.number(),
-      year: _joi.default.number(),
-      admissionType: _joi.default.string(),
-      recruitmentNumber: _joi.default.number(),
-      additionalMember: _joi.default.number(),
-      competitionNumber: _joi.default.number(),
-      isNaesinIncluded: _joi.default.boolean(),
-      somethingSpecial: _joi.default.string(),
-      etc: _joi.default.string(),
-      univId: _joi.default.number()
-    });
-    const {
-      line,
-      group,
-      name,
-      strong_val,
-      safe_val,
-      dangerous_val,
-      sniping_val,
-      year,
-      admissionType,
-      recruitmentNumber,
-      additionalMember,
-      competitionNumber,
-      isNaesinIncluded,
-      somethingSpecial,
-      etc,
-      univId
-    } = result;
-    const finalNumber = recruitmentNumber + additionalMember;
-    const modelObj = {
-      line,
-      group,
-      name,
-      strong_val,
-      safe_val,
-      dangerous_val,
-      sniping_val,
-      year,
-      admissionType,
-      recruitmentNumber,
-      additionalMember,
-      finalNumber,
-      competitionNumber,
-      isNaesinIncluded,
-      somethingSpecial,
-      etc,
-      univId
-    };
-    const exist_major = await _services.majorService.findByName(name, univId);
-    if (exist_major != null) throw Error('MAJOR_ALREADY_EXISTS');
-    const majorObj = await _services.majorService.create(modelObj);
-    const response = {
-      success: true,
-      data: {
-        majorObj
-      }
-    };
-    res.send(response);
-  }
-
-  catch(e) {
-    res.send((0, _functions.createErrorResponse)(e));
+    try {
+      const result = await _joi.default.validate(req.body, {
+        line: _joi.default.string().required(),
+        group: _joi.default.string().required(),
+        name: _joi.default.string().required(),
+        strong_val: _joi.default.number().required(),
+        safe_val: _joi.default.number().required(),
+        dangerous_val: _joi.default.number().required(),
+        sniping_val: _joi.default.number().required(),
+        year: _joi.default.number().required(),
+        admissionType: _joi.default.string().required(),
+        recruitmentNumber: _joi.default.number().required(),
+        additionalMember: _joi.default.number().required(),
+        competitionNumber: _joi.default.number().required(),
+        isNaesinIncluded: _joi.default.boolean().required(),
+        somethingSpecial: _joi.default.string(),
+        etc: _joi.default.string(),
+        univId: _joi.default.number().required()
+      });
+      const {
+        line,
+        group,
+        name,
+        strong_val,
+        safe_val,
+        dangerous_val,
+        sniping_val,
+        year,
+        admissionType,
+        recruitmentNumber,
+        additionalMember,
+        competitionNumber,
+        isNaesinIncluded,
+        somethingSpecial,
+        etc,
+        univId
+      } = result;
+      const finalNumber = recruitmentNumber + additionalMember;
+      const modelObj = {
+        line,
+        group,
+        name,
+        strong_val,
+        safe_val,
+        dangerous_val,
+        sniping_val,
+        year,
+        admissionType,
+        recruitmentNumber,
+        additionalMember,
+        finalNumber,
+        competitionNumber,
+        isNaesinIncluded,
+        somethingSpecial,
+        etc,
+        univId
+      };
+      const exist_major = await _services.majorService.findByName(name, univId);
+      const exist_univ = await _services.universityService.findOne(univId);
+      if (exist_major != null) throw Error('MAJOR_ALREADY_EXISTS');
+      if (exist_univ == null) throw Error('UNIVERSITY_NOT_FOUND');
+      const majorObj = await _services.majorService.create(modelObj);
+      const response = {
+        success: true,
+        data: {
+          majorObj
+        }
+      };
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
   }
 
   static async findAll(req, res) {

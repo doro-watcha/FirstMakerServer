@@ -131,8 +131,8 @@ const schema = {
       example: 2020
     },
     line: {
-      type: 'integer',
-      example: 0
+      type: 'string',
+      example: '문과'
     },
     group: {
       type: 'integer',
