@@ -30,8 +30,8 @@ class majorController {
         additionalMember: _joi.default.number().required(),
         competitionNumber: _joi.default.number().required(),
         isNaesinIncluded: _joi.default.boolean().required(),
-        somethingSpecial: _joi.default.string(),
-        etc: _joi.default.string(),
+        somethingSpecial,
+        etc,
         univId: _joi.default.number().required()
       });
       const {
@@ -76,11 +76,11 @@ class majorController {
       const exist_univ = await _services.universityService.findOne(univId);
       if (exist_major != null) throw Error('MAJOR_ALREADY_EXISTS');
       if (exist_univ == null) throw Error('UNIVERSITY_NOT_FOUND');
-      const majorObj = await _services.majorService.create(modelObj);
+      const major = await _services.majorService.create(modelObj);
       const response = {
         success: true,
         data: {
-          majorObj
+          major
         }
       };
       res.send(response);
@@ -140,8 +140,8 @@ class majorController {
         additionalMember: _joi.default.number(),
         competitionNumber: _joi.default.number(),
         isNaesinIncluded: _joi.default.boolean(),
-        somethingSpecial: _joi.default.string(),
-        etc: _joi.default.string(),
+        somethingSpecial,
+        etc,
         univId: _joi.default.number()
       });
       const {
@@ -182,11 +182,11 @@ class majorController {
         etc,
         univId
       };
-      const majorObj = await _services.majorService.update(id, modelObj);
+      const major = await _services.majorService.update(id, modelObj);
       const response = {
         success: true,
         data: {
-          majorObj
+          major
         }
       };
       res.send(response);

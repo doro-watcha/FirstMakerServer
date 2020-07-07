@@ -23,8 +23,8 @@ export default class majorController {
         additionalMember : Joi.number().required(),
         competitionNumber : Joi.number().required(),
         isNaesinIncluded : Joi.boolean().required(),
-        somethingSpecial : Joi.string(),
-        etc : Joi.string(),
+        somethingSpecial,
+        etc,
         univId : Joi.number().required()
       })
 
@@ -59,13 +59,13 @@ export default class majorController {
       if ( exist_univ == null ) throw Error('UNIVERSITY_NOT_FOUND')
       
 
-      const majorObj = await majorService.create(modelObj)
+      const major = await majorService.create(modelObj)
 
       const response = {
 
         success : true ,
         data : {
-          majorObj
+          major
         }
       }
 
@@ -141,8 +141,8 @@ export default class majorController {
         additionalMember : Joi.number(),
         competitionNumber : Joi.number(),
         isNaesinIncluded : Joi.boolean(),
-        somethingSpecial : Joi.string(),
-        etc : Joi.string(),
+        somethingSpecial,
+        etc ,
         univId : Joi.number()
       })
 
@@ -169,12 +169,12 @@ export default class majorController {
         univId
       }
 
-      const majorObj = await majorService.update(id ,modelObj)
+      const major = await majorService.update(id ,modelObj)
 
       const response = {
         success : true ,
         data : {
-          majorObj
+          major
         }
       }
 
