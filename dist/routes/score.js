@@ -76,32 +76,39 @@ router.get('/:userId', getUserInfo, (req, res) => {
  *           schema:
  *             type: object
  *             properties:
- *               score:
- *                 type: integer
- *                 description: 표준점수
- *               grade:
- *                 type: integer
- *                 description: 등급
- *               percentile:
- *                 type: integer
- *                 description: 백분위
- *               type:
+ *               korean:
+ *                 type: json
+ *                 description: 국어 ( score, grade, percentile)
+ *               english:
+ *                 type: json
+ *                 description: 영어 ( grade )
+ *               math:
+ *                 type: json
+ *                 description: 수학 ( score, grade, percentile , type)
+ *               tamgu1:
+ *                 type: json
+ *                 description: 탐구1 ( score, grade, percentile , name )
+ *               tamgu2:
  *                 type: string
- *                 description: 가/나형
- *               line:
- *                 type: string
- *                 description: 사회탐구
+ *                 description: 탐구2 ( score, grade, percentile , name)
  *               naesin:
  *                 type: float
  *                 description: 내신 점수
  *               naesin_type:
  *                 type: string
  *                 description: 국수영사
+ *               line:
+ *                 type: string
+ *                 description: 문과
  *             required:
- *               - score
- *               - grade
- *               - percentile
- *               - type
+ *               - korean
+ *               - english
+ *               - math
+ *               - tamgu1
+ *               - tamgu2
+ *               - history
+ *               - foreign
+ *               - line 
  *     responses:
  *       SUCCESS:
  *         content:
@@ -141,39 +148,37 @@ router.post('/', authenticate, (req, res) => {
  *     tags:
  *       - score
  *     summary: 성적 수정
- *     requestBody:
+  *     requestBody:
  *       required: true
  *       content:
  *         application/x-www-form-urlencoded:
  *           schema:
  *             type: object
  *             properties:
- *               score:
- *                 type: integer
- *                 description: 표준점수
- *               grade:
- *                 type: integer
- *                 description: 등급
- *               percentile:
- *                 type: integer
- *                 description: 백분위
- *               type:
+ *               korean:
+ *                 type: json
+ *                 description: 국어 ( score, grade, percentile)
+ *               english:
+ *                 type: json
+ *                 description: 영어 ( grade )
+ *               math:
+ *                 type: json
+ *                 description: 수학 ( score, grade, percentile , type)
+ *               tamgu1:
+ *                 type: json
+ *                 description: 탐구1 ( score, grade, percentile , name )
+ *               tamgu2:
  *                 type: string
- *                 description: 가/나형
- *               line:
- *                 type: string
- *                 description: 사회탐구
+ *                 description: 탐구2 ( score, grade, percentile , name)
  *               naesin:
  *                 type: float
  *                 description: 내신 점수
  *               naesin_type:
  *                 type: string
  *                 description: 국수영사
- *             required:
- *               - score
- *               - grade
- *               - percentile
- *               - type
+ *               line:
+ *                 type: string
+ *                 description: 문과
  *     responses:
  *       SUCCESS:
  *         content:

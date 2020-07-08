@@ -67,7 +67,8 @@ class AuthController {
         line: _joi.default.string(),
         graduateYear: _joi.default.number(),
         telephone: _joi.default.string(),
-        gender: _joi.default.string()
+        gender: _joi.default.string(),
+        academyId: _joi.default.number()
       });
       const {
         email,
@@ -77,14 +78,19 @@ class AuthController {
         line,
         graduateYear,
         telephone,
-        gender
+        gender,
+        academyId
       } = result; // check if user already exists
 
       const user = await _services.userService.findOne({
         email
       }); // [ERROR] USER_ALREADY_EXISTS
 
-      if (user) throw Error('USER_ALREADY_EXISTS'); // create user
+      if (user) throw Error('USER_ALREADY_EXISTS');
+      const academy = await _services.academyService.findOne({
+        id: academyId
+      });
+      if (!academy) throw Error('ACADEMY_NOT_FOUND'); // create user
 
       const success = await _services.userService.create({
         name: name,
@@ -94,7 +100,8 @@ class AuthController {
         line,
         graduateYear,
         telephone,
-        gender
+        gender,
+        academyId
       }); // create response
 
       const response = {
@@ -143,6 +150,44 @@ class AuthController {
       res.send(response);
     } catch (e) {
       console.log(e);
+      res.send((0, _functions.createErrorResponse)(e));
+    }
+  }
+
+  static async academyIn(req, res) {
+    try {
+      const result = await _joi.default.validate(req.body, {
+        name: _joi.default.string().required(),
+        password: _joi.default.string().regex(_variables.passwordRegex).required()
+      });
+      const {
+        name,
+        password
+      } = result;
+      let academy = await _services.academyService.findOne({
+        name
+      });
+      if (!academy) throw Error('ACADEMY_NOT_FOUND'); // [ERROR] PASSWORD_MISMATCH
+
+      if (!academy.isValidPassword(password)) throw Error('PASSWORD_MISMATCH'); // issue token
+
+      const token = _jsonwebtoken.default.sign({
+        id: academy.id,
+        name: academy.name
+      }, 'token-secret-staging', {
+        expiresIn: '60 days'
+      }); // create response
+
+
+      const response = {
+        success: true,
+        data: {
+          token,
+          academy
+        }
+      };
+      res.send(response);
+    } catch (e) {
       res.send((0, _functions.createErrorResponse)(e));
     }
   }

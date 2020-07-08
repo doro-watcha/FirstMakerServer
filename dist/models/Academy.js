@@ -7,12 +7,18 @@ exports.schema = exports.default = void 0;
 
 var _sequelize = _interopRequireDefault(require("sequelize"));
 
+var _bcrypt = _interopRequireDefault(require("bcrypt"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class Academy extends _sequelize.default.Model {
   static init(sequelize) {
     return super.init({
       name: {
+        type: _sequelize.default.STRING,
+        allowNull: true
+      },
+      password: {
         type: _sequelize.default.STRING,
         allowNull: true
       },
@@ -33,10 +39,18 @@ class Academy extends _sequelize.default.Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.User, {
-      foreignKey: 'studentId',
+    this.hasMany(models.User, {
+      foreignKey: 'academyId',
       as: 'student'
     });
+  }
+
+  static hashPassword(unencryptedPwd) {
+    return _bcrypt.default.hashSync(unencryptedPwd, 8);
+  }
+
+  isValidPassword(unencryptedPwd) {
+    return _bcrypt.default.compareSync(unencryptedPwd, this.password);
   }
 
 } // swagger schema
@@ -50,16 +64,13 @@ const schema = {
       type: 'integer',
       example: 3
     },
-    score: {
-      type: 'float',
-      example: 725.3
+    name: {
+      type: 'string',
+      example: '볼사지영수학학원'
     },
-    userId: {
-      type: 'integer',
-      example: 3
-    },
-    university: {
-      $ref: '#/components/schemas/University'
+    password: {
+      type: 'string',
+      example: 'password'
     },
     createdAt: {
       type: _sequelize.default.DATE,

@@ -30,6 +30,37 @@ export default class userController {
 
     }
 
+    static async searchUser(req,res) {
+
+      try {
+
+        const result = await Joi.validate ( req.query , {
+          academyId : Joi.number()
+        })
+
+        const { academyId } = result 
+
+        const where = {
+          academyId
+        }
+
+        const academy = await userService.findAll(where)
+
+        const response = {
+          success : true ,
+          data : {
+            academy 
+          }
+        }
+
+        res.send(response)
+
+
+      } catch ( e) {
+        res.send(createErrorResponse(e))
+      }
+    }
+
 
     static async updateUser ( req, res ) {
 

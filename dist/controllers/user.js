@@ -31,6 +31,30 @@ class userController {
     }
   }
 
+  static async searchUser(req, res) {
+    try {
+      const result = await _joi.default.validate(req.query, {
+        academyId: _joi.default.number()
+      });
+      const {
+        academyId
+      } = result;
+      const where = {
+        academyId
+      };
+      const academy = await _services.userService.findAll(where);
+      const response = {
+        success: true,
+        data: {
+          academy
+        }
+      };
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
+  }
+
   static async updateUser(req, res) {
     try {
       const id = req.params.id;

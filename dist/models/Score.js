@@ -92,6 +92,73 @@ const schema = {
     },
     user: {
       $ref: '#/components/schemas/User'
+    },
+    line: {
+      type: 'string',
+      example: '문과'
+    },
+    korean: {
+      type: 'json',
+      example: {
+        "score": 134,
+        "grade": 1,
+        "percentile": 98
+      }
+    },
+    math: {
+      type: 'json',
+      example: {
+        "score": 134,
+        "grade": 1,
+        "percentile": 98,
+        "type": "가"
+      }
+    },
+    english: {
+      type: 'json',
+      example: {
+        "grade": 1
+      }
+    },
+    tamgu1: {
+      type: 'json',
+      example: {
+        "score": 86,
+        "grade": 1,
+        "percentile": 98,
+        "name": "윤리와사상"
+      }
+    },
+    tamgu2: {
+      type: 'json',
+      example: {
+        "score": 86,
+        "grade": 1,
+        "percentile": 98,
+        "name": "지구과학1"
+      }
+    },
+    foreign: {
+      type: 'json',
+      example: {
+        "score": 86,
+        "grade": 1,
+        "percentile": 98
+      }
+    },
+    history: {
+      type: 'json',
+      example: {
+        "grade": 1
+      }
+    },
+    naesin: {
+      type: 'float',
+      example: 3.8
+    },
+    naesin_type: {
+      type: 'sting',
+      example: "국수영과"
     }
   },
   required: ['id', 'user']

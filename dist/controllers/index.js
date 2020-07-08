@@ -18,6 +18,8 @@ var _paymentRecord = _interopRequireDefault(require("./paymentRecord"));
 
 var _reflectionRatio = _interopRequireDefault(require("./reflectionRatio"));
 
+var _academy = _interopRequireDefault(require("./academy"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
@@ -29,5 +31,6 @@ module.exports = {
   majorController: _major.default,
   consultingController: _consulting.default,
   paymentRecordController: _paymentRecord.default,
-  reflectionRatioController: _reflectionRatio.default
+  reflectionRatioController: _reflectionRatio.default,
+  academyController: _academy.default
 };

@@ -18,6 +18,8 @@ var _paymentRecord = _interopRequireDefault(require("./paymentRecord"));
 
 var _reflectionRatio = _interopRequireDefault(require("./reflectionRatio"));
 
+var _academy = _interopRequireDefault(require("./academy"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var express = require('express');
@@ -39,4 +41,5 @@ router.use('/major', _major.default);
 router.use('/consulting', _consulting.default);
 router.use('/paymentRecord', _paymentRecord.default);
 router.use('/reflectionRatio', _reflectionRatio.default);
+router.use('/academy', _academy.default);
 module.exports = router;

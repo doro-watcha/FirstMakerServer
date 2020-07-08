@@ -124,6 +124,10 @@ module.exports = {
       status: 419,
       ko: '해당 대학 반영 비율 없음'
     },
+    ACADEMY_NOT_FOUND: {
+      status: 420,
+      ko: '해당 학원 없음'
+    },
     // 409
     USER_ALREADY_EXISTS: {
       status: 500,
@@ -167,6 +171,10 @@ module.exports = {
     CONSULTING_ALREADY_EXISTS: {
       status: 509,
       ko: '이미 존재하는 상담입니다'
+    },
+    ACADEMY_ALREADY_EXISTS: {
+      status: 510,
+      ko: '이미 존재하는 학원입니디ㅏ'
     },
     // 410
     USER_DELETED: {

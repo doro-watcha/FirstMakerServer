@@ -1,4 +1,6 @@
 import Sequelize from 'sequelize'
+import bycrypt from 'bcrypt'
+
 
 export default class Academy extends Sequelize.Model {
 
@@ -7,6 +9,10 @@ export default class Academy extends Sequelize.Model {
         return super.init(
             {
               name : {
+                type : Sequelize.STRING,
+                allowNull : true
+              },
+              password : {
                 type : Sequelize.STRING,
                 allowNull : true
               },
@@ -31,11 +37,19 @@ export default class Academy extends Sequelize.Model {
     }
 
     static associate(models) {
-      this.belongsTo(models.User, {
-        foreignKey: 'studentId',
+      this.hasMany(models.User, {
+        foreignKey: 'academyId',
         as: 'student',
       })
     }
+
+    static hashPassword(unencryptedPwd) {
+			return bycrypt.hashSync(unencryptedPwd, 8)
+		}
+
+		isValidPassword(unencryptedPwd) {
+			return bycrypt.compareSync(unencryptedPwd, this.password)
+		}	
     
 }
 
@@ -49,19 +63,14 @@ export const schema = {
 			type: 'integer',
       example: 3,
     },
-    score : {
-      type : 'float',
-      example :  725.3
+    name : {
+      type : 'string',
+      example :  '볼사지영수학학원'
     },
-    userId : {
-      type : 'integer',
-      example : 3
+    password : {
+      type : 'string',
+      example : 'password'
     },
-    university : {
-				$ref: '#/components/schemas/University',
-		
-    },
-
     createdAt: {
         type: Sequelize.DATE,
         allowNull: false,

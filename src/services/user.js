@@ -43,6 +43,12 @@ class UserService {
 			where: JSON.parse(JSON.stringify(where))
 		})
 	}
+
+	async findAll(where) {
+		return await User.findAll({
+			where : JSON.parse(JSON.stringify(where))
+		})
+	}
 	
 	async update(id, user) {
 	

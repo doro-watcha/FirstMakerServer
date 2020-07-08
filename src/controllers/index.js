@@ -7,6 +7,7 @@ import majorController from './major'
 import consultingController from './consulting'
 import paymentRecordController from './paymentRecord'
 import reflectionRatioController from './reflectionRatio'
+import academyController from './academy'
 
 module.exports = {
 
@@ -18,5 +19,6 @@ module.exports = {
     majorController,
     consultingController,
     paymentRecordController,
-    reflectionRatioController
+    reflectionRatioController,
+    academyController
 }

@@ -57,6 +57,12 @@ class UserService {
     });
   }
 
+  async findAll(where) {
+    return await _models.User.findAll({
+      where: JSON.parse(JSON.stringify(where))
+    });
+  }
+
   async update(id, user) {
     await _models.User.update(user, {
       where: {

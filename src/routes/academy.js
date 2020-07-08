@@ -1,21 +1,84 @@
 import { Router } from 'express'
-import { authController } from '../controllers'
+import { academyController } from '../controllers'
 import Authenticator from '../Authenticator'
 
 const { authenticate } = Authenticator
 
 const router = new Router()
 
+
+
+router.get('/' , (req,res) => {
+  academyController.findAll(req,res)
+})
+
+
 /**
  * @swagger
  *
- * /auth:
+ * /academy/{id}:
  *   get:
  *     tags:
- *       - auth
- *     security:
- *       - bearerAuth: []
- *     summary: 토큰 확인 (자동 로그인)
+ *       - academy
+ *     summary: 학원 id 별 조회 
+ *     responses:
+ *       SUCCESS:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     academy:
+ *                       $ref: '#/components/schemas/Academy'
+ *                   required:
+ *                     - academy
+ *               required:
+ *                 - success
+ *                 - data
+ *       'ecode: 201':
+ *         description: 유효하지 않은 토큰
+ *       'ecode: 100':
+ *         description: Request Body Validation 실패
+ *       'ecode: 700':
+ *         description: 서버 에러
+ */
+
+
+router.get('/:id' , (req,res) => {
+  academyController.findOne(req,res)
+})
+
+
+/**
+ * @swagger
+ *
+ * /academy:
+ *   post:
+ *     tags:
+ *       - academy
+ *     summary: 학원 생성
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/x-www-form-urlencoded:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: 학원 이름
+ *               password:
+ *                 type: string
+ *                 description: 비밀번호
+ *             required:
+ *               - name
+ *               - password
  *     responses:
  *       SUCCESS:
  *         content:
@@ -30,74 +93,24 @@ const router = new Router()
  *                 - success
  *       'ecode: 201':
  *         description: 유효하지 않은 토큰
- *       'ecode: 700':
- *         description: 서버 에러
- */
-
-router.get('/', authenticate, (req, res) => {
-	authController.token(req, res)
-})
-
-/**
- * @swagger
- *
- * /auth/signup:
- *   post:
- *     tags:
- *      - auth
- *     summary: 이메일 회원가입
- *     requestBody:
- *       required: true
- *       content:
- *         application/x-www-form-urlencoded:
- *           schema:
- *             type: object
- *             properties:
- *               email:
- *                 type: string
- *               password:
- *                 type: string
- *                 description: 8-20 문자, 숫자, 특수문자(!@#$%^&) 조합, (영문자, 숫자, 특수문자는 반드시 1개 이상 포함)
- *             required:
- *               - email
- *               - password
- *     responses:
- *       SUCCESS:
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
- *                 data:
- *                   type: object
- *                   properties:
- *               required:
- *                 - success
- *                 - data
  *       'ecode: 100':
  *         description: Request Body Validation 실패
- *       'ecode: 500':
- *         description: 이미 존재하는 이메일일 경우
  *       'ecode: 700':
  *         description: 서버 에러
  */
 
-
-router.post('/signup', (req, res) => {
-	authController.signUp(req, res)
+router.post('/' , (req,res) => {
+  academyController.create(req,res)
 })
 
 /**
  * @swagger
  *
- * /auth/signin:
- *   post:
- *     summary: 이메일 로그인
+ * /academy/{id}:
+ *   patch:
  *     tags:
- *      - auth
+ *       - academy
+ *     summary: 학원 수정
  *     requestBody:
  *       required: true
  *       content:
@@ -105,14 +118,12 @@ router.post('/signup', (req, res) => {
  *           schema:
  *             type: object
  *             properties:
- *               email:
+ *               name:
  *                 type: string
+ *                 description: 학원 이름
  *               password:
  *                 type: string
- *                 description: 8-20 문자, 숫자, 특수문자(!@#$%^&) 조합, (영문자, 숫자, 특수문자는 반드시 1개 이상 포함)
- *             required:
- *               - email
- *               - password
+ *                 description: 비밀번호
  *     responses:
  *       SUCCESS:
  *         content:
@@ -126,34 +137,54 @@ router.post('/signup', (req, res) => {
  *                 data:
  *                   type: object
  *                   properties:
- *                     token:
- *                       type: string
- *                       example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJnb2Rkb3JvQG5hdmVyLmNvbSIsImlhdCI6MTU5Mzg3NDE4NCwiZXhwIjoxNTk5MDU4MTg0fQ.GxyJn0tqpsUApxOrpr-0d9gH3LR3fCQi0riIgsu38OQ
- *                     user:
- *                       $ref: '#/components/schemas/User'
+ *                     academy:
+ *                       $ref: '#/components/schemas/Academy'
  *                   required:
- *                     - token
- *                     - user
+ *                     - academy
  *               required:
  *                 - success
- *                 - data
+ *                 - data 
+ *       'ecode: 201':
+ *         description: 유효하지 않은 토큰
  *       'ecode: 100':
  *         description: Request Body Validation 실패
- *       'ecode: 200':
- *         description: 비밀번호가 틀릴 경우
- *       'ecode: 402':
- *         description: 가입되지 않은 이메일로 로그인할 경우
+ *       'ecode: 700':
+ *         description: 서버 에러
+ */
+router.patch('/:id' , (req,res) => {
+  academyController.update(req,res)
+})
+
+/**
+ * @swagger
+ *
+ * /academy/{id}:
+ *   delete:
+ *     tags:
+ *       - academy
+ *     summary: 학원 삭제
+ *     responses:
+ *       SUCCESS:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *               required:
+ *                 - success
+ *       'ecode: 201':
+ *         description: 유효하지 않은 토큰
+ *       'ecode: 100':
+ *         description: Request Body Validation 실패
  *       'ecode: 700':
  *         description: 서버 에러
  */
 
-router.post('/signin', (req, res) => {
-	authController.signIn(req, res)
-})
-
-
-router.post('/academyIn' , (req,res) => {
-	authController.academyIn(req,res)
+router.delete('/:id' , (req,res) => {
+  academyController.delete(req,res)
 })
 
 module.exports = router

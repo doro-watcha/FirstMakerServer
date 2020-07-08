@@ -7,7 +7,7 @@ dotenv.config()
 
 import { createErrorResponse} from '../utils/functions'
 import { passwordRegex } from '../utils/variables'
-import { userService } from '../services'
+import { userService, academyService } from '../services'
 
 // aws s3
 const s3 = new aws.S3({
@@ -57,11 +57,12 @@ export default class AuthController {
 				line : Joi.string(),
 				graduateYear : Joi.number(),
 				telephone : Joi.string(),
-				gender : Joi.string()
+				gender : Joi.string(),
+				academyId : Joi.number()
 
 			})
 		
-			const { email , password , name , highSchool , line, graduateYear , telephone, gender } = result 
+			const { email , password , name , highSchool , line, graduateYear , telephone, gender, academyId } = result 
 			// check if user already exists
 			const user = await userService.findOne({
 				email
@@ -69,6 +70,12 @@ export default class AuthController {
 
 			// [ERROR] USER_ALREADY_EXISTS
 			if (user) throw Error('USER_ALREADY_EXISTS')
+
+			const academy = await academyService.findOne({
+				id : academyId
+			})
+
+			if ( !academy ) throw Error('ACADEMY_NOT_FOUND')
 
 			// create user
 			const success = await userService.create({
@@ -79,7 +86,8 @@ export default class AuthController {
 				line,
 				graduateYear,
 				telephone ,
-				gender
+				gender,
+				academyId
 			})
 
 			// create response
@@ -134,6 +142,48 @@ export default class AuthController {
 			res.send(response)
 		} catch (e) {
 			console.log(e)
+			res.send(createErrorResponse(e))
+		}
+	}
+
+	static async academyIn (req,res) {
+		try {
+
+			const result = await Joi.validate(req.body, {
+				name: Joi.string()
+					.required(),
+				password: Joi.string()
+					.regex(passwordRegex)
+					.required()
+			})
+
+			const { name , password } = result 
+
+			let academy = await academyService.findOne({
+				name
+			})
+
+			if ( !academy ) throw Error('ACADEMY_NOT_FOUND')
+
+			// [ERROR] PASSWORD_MISMATCH
+			if (!academy.isValidPassword(password)) throw Error('PASSWORD_MISMATCH')
+
+			// issue token
+			const token = jwt.sign({ id: academy.id, name: academy.name }, 'token-secret-staging', {
+				expiresIn: '60 days',
+			})
+
+			// create response
+			const response = {
+				success: true,
+				data: {
+					token,
+					academy
+				},
+			}
+			res.send(response)
+
+		} catch ( e ) {
 			res.send(createErrorResponse(e))
 		}
 	}
