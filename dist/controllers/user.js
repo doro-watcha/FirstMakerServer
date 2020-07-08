@@ -42,11 +42,11 @@ class userController {
       const where = {
         academyId
       };
-      const academy = await _services.userService.findAll(where);
+      const user = await _services.userService.findAll(where);
       const response = {
         success: true,
         data: {
-          academy
+          user
         }
       };
       res.send(response);

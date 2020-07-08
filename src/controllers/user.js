@@ -44,12 +44,12 @@ export default class userController {
           academyId
         }
 
-        const academy = await userService.findAll(where)
+        const user = await userService.findAll(where)
 
         const response = {
           success : true ,
           data : {
-            academy 
+            user 
           }
         }
 

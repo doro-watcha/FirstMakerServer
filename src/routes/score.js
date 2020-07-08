@@ -87,8 +87,14 @@ router.get('/:userId', getUserInfo, (req, res) => {
  *                 type: json
  *                 description: 탐구1 ( score, grade, percentile , name )
  *               tamgu2:
- *                 type: string
+ *                 type: json
  *                 description: 탐구2 ( score, grade, percentile , name)
+ *               foreign:
+ *                 type: json
+ *                 description: 제2외국어 ( score, grade, percentile )
+ *               history:
+ *                 type: json
+ *                 description: 한국사 ( grade )
  *               naesin:
  *                 type: float
  *                 description: 내신 점수
@@ -169,6 +175,12 @@ router.post('/', authenticate , (req, res) => {
  *               tamgu2:
  *                 type: string
  *                 description: 탐구2 ( score, grade, percentile , name)
+ *               foreign:
+ *                 type: json
+ *                 description: 제2외국어 ( score, grade, percentile )
+ *               history:
+ *                 type: json
+ *                 description: 한국사 ( grade )
  *               naesin:
  *                 type: float
  *                 description: 내신 점수
