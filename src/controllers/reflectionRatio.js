@@ -104,10 +104,26 @@ export default class reflectionRatioController {
         "tamgu" : reflectionRatio.totalScore * (reflectionRatio.ratio.tamgu / 100)
       }
 
-
-
       const new_english = reflectionRatio.gradeToScore.english[score.english.grade-1]
+
+
+    
       const new_tamgu = score.tamgu1.score + score.tamgu2.score
+      if ( reflectionRatio.metadata.isForeignIncluded == true ) {
+        if ( score.foreign.score > score.tamgu1.score ) {
+          if ( score.tamgu1.score >= score.tamgu2.score) 
+            new_tamgu = score.foreign.score + score.tamgu1.score
+          else 
+            new_tamgu = score.foreign.score + score.tamgu2.score
+        }
+        else if ( score.foreign.score > score.tamgu2.score ) {
+          if ( score.tamgu1.score >= score.tamgu2.score ) 
+            new_tamgu = score.foreign.score + score.tamgu1.score
+          else 
+            new_tamgu = score.foreign.score + score.tamgu2.score
+        } 
+      }
+
 
       const calculated = {
         "korean" : score.korean.score * ( perfectScore.korean / reflectionRatio.perfectScore.korean),
@@ -116,12 +132,15 @@ export default class reflectionRatioController {
         "tamgu" : new_tamgu * (perfectScore.tamgu / reflectionRatio.perfectScore.tamgu)
       }
 
+      const tamgu_extra = score.tamgu1.score * ( reflectionRatio.extraRatio.tamgu[score.tamgu1.name] / 100 ) + score.tamgu2.score * (reflectionRatio.extraRatio.tamgu[score.tamgu2.name] / 100 )
+      
       const extra = {
         "korean" : calculated.korean * (reflectionRatio.extraRatio.korean / 100 ),
-        "math" : calculated.math * (reflectionRatio.extraRatio.math / 100 ),
+        "math" : calculated.math * (reflectionRatio.extraRatio.math[score.math.type] / 100 ),
         "english" : calculated.english * (reflectionRatio.extraRatio.english / 100 ),
-        "tamgu" : calculated.tamgu * (reflectionRatio.extraRatio.tamgu / 100),
-        "history" : reflectionRatio.gradeToScore.history[score.history.grade-1]
+        "tamgu" : tamgu_extra,
+        "history" : reflectionRatio.gradeToScore.history[score.history.grade-1],
+        "foreign" : score.fo
       }
 
       // 표+백 일경우에 재껴줘야함

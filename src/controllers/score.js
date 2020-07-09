@@ -40,7 +40,7 @@ export default class scoreController {
                 naesin_type
             }
 
-            const exist_score = scoreService.findByUserId(user.id)
+            const exist_score = await scoreService.findByUserId(user.id)
 
             if ( exist_score != null) throw Error('SCORE_ALREADY_EXISTS')
             const score = await scoreService.create( modelObj )

@@ -12,7 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class ReflectionRatio extends _sequelize.default.Model {
   static init(sequelize) {
     return super.init({
-      // 반영지표 ex) 표+백 , 반영과목 ex) 국수영탐, 반영 과목 갯수, 응시 갯수
+      // 반영지표 ex) 표+백 , 반영과목 ex) 국수영탐, 반영 과목 갯수, 응시 갯수, 제2외국어를 포함하는지
       metadata: {
         type: _sequelize.default.JSON,
         allowNull: true
@@ -32,7 +32,7 @@ class ReflectionRatio extends _sequelize.default.Model {
         type: _sequelize.default.JSON,
         allowNull: true
       },
-      // 국수영탐 가산점 비율 
+      // 가산점 비율 
       extraRatio: {
         type: _sequelize.default.JSON,
         allowNull: true
@@ -49,11 +49,6 @@ class ReflectionRatio extends _sequelize.default.Model {
       },
       // 국사, 영어 등급 표준점수 변환
       gradeToScore: {
-        type: _sequelize.default.JSON,
-        allowNull: true
-      },
-      // 표+백 일경우에 백분위를 표준점수 변환
-      percentileToScore: {
         type: _sequelize.default.JSON,
         allowNull: true
       }
@@ -89,7 +84,8 @@ const schema = {
         'applicationIndicator': '표+백',
         'reflectionSubject': '국수영탐',
         'reflectionNumber': 1,
-        'applyingNumber': 1
+        'applyingNumber': 1,
+        'isForeignIncluded': false
       }
     },
     ratio: {
@@ -127,7 +123,13 @@ const schema = {
         'korean': 0,
         'math': 10,
         'english': 0,
-        'tamgu': 0
+        'tamgu': {
+          '물리2': 0,
+          '화학2': 0,
+          '지구과학2': 35,
+          '생물2': 0,
+          '물리1': 0
+        }
       }
     },
     perfectScore: {
@@ -148,15 +150,6 @@ const schema = {
       example: {
         'english': [200, 190, 180, 170, 160, 150, 140, 130, 120, 110],
         'history': [10, 10, 10, 10, 9, 9, 9, 9, 8, 8]
-      }
-    },
-    percentileToScore: {
-      type: 'json',
-      example: {
-        'korean': [12, 2131, 213, 4123, 412, 412],
-        'english': [12, 1234, 14, 13, 123, 4213, 4123, 4213, 4123, 41, 234, 234, 123, 432, 4],
-        'math': [12, 31, 3213, 21, 321, 3123, 1231, 232, 312, 312, 31231],
-        'tamgu': [12, 5, 235, 2352, 4534, 545, 453, 453, 53, 53, 535, 35, 353]
       }
     }
   },
