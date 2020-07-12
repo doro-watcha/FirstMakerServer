@@ -34,7 +34,7 @@ class UserService {
   async findById(id) {
 		return await User.findOne({
 			where : { id },
-			attributes : ['name', 'email','telephone','highschool','line','gender','graduateYear','predictTimes']
+			attributes : ['id','academyId','name', 'email','telephone','highschool','line','gender','graduateYear','predictTimes']
 		})
 	}
 

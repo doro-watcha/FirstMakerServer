@@ -53,6 +53,7 @@ export default class AuthController {
 					.regex(passwordRegex)
 					.required(),
 				name : Joi.string().required(),
+				haknyeon : Joi.string(),
 				highSchool : Joi.string(),
 				line : Joi.string(),
 				graduateYear : Joi.number(),
@@ -62,7 +63,7 @@ export default class AuthController {
 
 			})
 		
-			const { email , password , name , highSchool , line, graduateYear , telephone, gender, academyId } = result 
+			const { email , password , name , haknyeon , highSchool , line, graduateYear , telephone, gender, academyId } = result 
 			// check if user already exists
 			const user = await userService.findOne({
 				email
@@ -79,10 +80,11 @@ export default class AuthController {
 
 			// create user
 			const success = await userService.create({
-				name: name,
+				name,
 				email,
 				password,
 				highSchool,
+				haknyeon,
 				line,
 				graduateYear,
 				telephone ,

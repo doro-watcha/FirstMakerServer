@@ -30,6 +30,10 @@ class User extends _sequelize.default.Model {
         type: _sequelize.default.STRING,
         allowNull: false
       },
+      haknyeon: {
+        type: _sequelize.default.STRING,
+        allowNull: true
+      },
       highSchool: {
         type: _sequelize.default.STRING,
         allowNull: true
@@ -117,6 +121,10 @@ const schema = {
     telephone: {
       type: 'string',
       example: "010-7270-5880"
+    },
+    haknyeon: {
+      type: 'string',
+      example: '3학년'
     },
     password: {
       type: 'string',

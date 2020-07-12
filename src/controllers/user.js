@@ -74,18 +74,22 @@ export default class userController {
             line : Joi.string(),
             graduateYear : Joi.number(),
             predictTimes : Joi.number(),
-            gender : Joi.string()
+            gender : Joi.string(),
+            haknyeon : Joi.string(),
+            academyId : Joi.number()
           })
 
-          const { name , highSchool , line, graduateYear , gender } = result 
+          const { name , highSchool , line, graduateYear , gender , haknyeon, academyId } = result 
 
 
           const modelObj = {
-            name : name, 
-            highSchool : highSchool,
-            line : line ,
-            graduateYear : graduateYear,
-            gender : gender 
+            name,
+            highSchool,
+            line,
+            graduateYear,
+            gender,
+            haknyeon,
+            academyId
           }
 
           const user = await userService.update(id, modelObj )

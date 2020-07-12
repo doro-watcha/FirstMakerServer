@@ -63,6 +63,7 @@ class AuthController {
         email: _joi.default.string().required(),
         password: _joi.default.string().regex(_variables.passwordRegex).required(),
         name: _joi.default.string().required(),
+        haknyeon: _joi.default.string(),
         highSchool: _joi.default.string(),
         line: _joi.default.string(),
         graduateYear: _joi.default.number(),
@@ -74,6 +75,7 @@ class AuthController {
         email,
         password,
         name,
+        haknyeon,
         highSchool,
         line,
         graduateYear,
@@ -93,10 +95,11 @@ class AuthController {
       if (!academy) throw Error('ACADEMY_NOT_FOUND'); // create user
 
       const success = await _services.userService.create({
-        name: name,
+        name,
         email,
         password,
         highSchool,
+        haknyeon,
         line,
         graduateYear,
         telephone,

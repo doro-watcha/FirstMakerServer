@@ -173,7 +173,6 @@ router.patch('/:id', (req, res) => {
  *     tags:
  *       - university
  *     summary: 대학 정보 삭제
-
  *     responses:
  *       SUCCESS:
  *         content:
