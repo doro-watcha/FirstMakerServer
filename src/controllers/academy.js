@@ -34,7 +34,7 @@ export default class academyController {
 
 			// create response
 			const response = {
-				success: success
+				success: true,
 			}
 
 			res.send(response)

@@ -1,7 +1,7 @@
 import passport from 'passport'
 import { ExtractJwt, Strategy as JWTStrategy } from 'passport-jwt'
 
-import { userService } from './services'
+import { userService, academyService } from './services'
 import { createErrorResponse } from './utils/functions'
 
 // singleton instance
@@ -28,8 +28,12 @@ class Authenticator {
 			try {
 
 				const user = await userService.findOne({ id: payload.id })
+				const academy = await academyService.findOne({ id : payload.id})
+
+				console.log( academy)
 
 				if (user) done(null, user)
+				else if ( academy) done ( null , academy)
 				else done(null, false)
 			} catch (e) {
 				done(e, null)
@@ -66,6 +70,25 @@ class Authenticator {
       next()
       
 		})(req, res, next)
+	}
+
+	academyAuthenticate ( req, res, next) {
+		instance.passport.authenticate('jwt', { session : false } , (error, academy) => {
+
+			console.log(academy)
+
+			if ( !academy ) {
+				const response = createErrorResponse(new Error('INVALID_TOKEN'))
+				return res.send(response)
+			}
+
+			if ( error) {
+				return res.send(createErrorResponse())
+			}
+
+			req.academy = academy
+			next()
+		}) (req, res, next)
 	}
 
 	getUserInfo(req, res, next) {

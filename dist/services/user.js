@@ -47,7 +47,7 @@ class UserService {
       where: {
         id
       },
-      attributes: ['id', 'academyId', 'name', 'email', 'telephone', 'highschool', 'line', 'gender', 'graduateYear', 'predictTimes']
+      attributes: ['id', 'academyId', 'name', 'email', 'telephone', 'highSchool', 'line', 'gender', 'graduateYear', 'predictTimes']
     });
   }
 

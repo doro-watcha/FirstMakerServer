@@ -40,7 +40,11 @@ class Authenticator {
         const user = await _services.userService.findOne({
           id: payload.id
         });
-        if (user) done(null, user);else done(null, false);
+        const academy = await _services.academyService.findOne({
+          id: payload.id
+        });
+        console.log(academy);
+        if (user) done(null, user);else if (academy) done(null, academy);else done(null, false);
       } catch (e) {
         done(e, null);
       }
@@ -70,6 +74,26 @@ class Authenticator {
       }
 
       req.user = user;
+      next();
+    })(req, res, next);
+  }
+
+  academyAuthenticate(req, res, next) {
+    instance.passport.authenticate('jwt', {
+      session: false
+    }, (error, academy) => {
+      console.log(academy);
+
+      if (!academy) {
+        const response = (0, _functions.createErrorResponse)(new Error('INVALID_TOKEN'));
+        return res.send(response);
+      }
+
+      if (error) {
+        return res.send((0, _functions.createErrorResponse)());
+      }
+
+      req.academy = academy;
       next();
     })(req, res, next);
   }

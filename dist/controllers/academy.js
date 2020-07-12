@@ -38,7 +38,7 @@ class academyController {
       const success = await _services.academyService.create(modelObj); // create response
 
       const response = {
-        success: success
+        success: true
       };
       res.send(response);
     } catch (e) {

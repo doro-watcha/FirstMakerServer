@@ -104,25 +104,21 @@ export default class reflectionRatioController {
         "tamgu" : reflectionRatio.totalScore * (reflectionRatio.ratio.tamgu / 100)
       }
 
+      // 영어를 등급에서 점수로 변환해준다
       const new_english = reflectionRatio.gradeToScore.english[score.english.grade-1]
 
-
-    
-      const new_tamgu = score.tamgu1.score + score.tamgu2.score
+      // 제 2외국어가 탐구 한 과목으로 대체가 가능하다면 점수가 높을시에만 바꿔준다
       if ( reflectionRatio.metadata.isForeignIncluded == true ) {
-        if ( score.foreign.score > score.tamgu1.score ) {
-          if ( score.tamgu1.score >= score.tamgu2.score) 
-            new_tamgu = score.foreign.score + score.tamgu1.score
-          else 
-            new_tamgu = score.foreign.score + score.tamgu2.score
+        if ( score.tamgu1.score > score.foreign.score ) {
+          if ( score.tamgu1.score > score.tamgu2.score ) score.tamgu2 = score.foreign
+          else if ( score.tamgu1.score < score.tamgu2.score ) score.tamgu1 = score.foreign
         }
-        else if ( score.foreign.score > score.tamgu2.score ) {
-          if ( score.tamgu1.score >= score.tamgu2.score ) 
-            new_tamgu = score.foreign.score + score.tamgu1.score
-          else 
-            new_tamgu = score.foreign.score + score.tamgu2.score
-        } 
+        else if ( score.foreign.score > score.tamgu2.score) {
+          score.tamgu2 = score.foreign
+        }
       }
+
+      const new_tamgu = score.tamgu1.score + score.tamgu2.score 
 
 
       const calculated = {

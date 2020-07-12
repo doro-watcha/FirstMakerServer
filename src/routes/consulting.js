@@ -56,7 +56,7 @@ router.get('/', authenticate , (req, res) =>{
  *   get:
  *     tags:
  *       - consulting
- *     summary: 상담 
+ *     summary: 상담 id 별 조회
  *     requestBody:
  *       required: true
  *       content:

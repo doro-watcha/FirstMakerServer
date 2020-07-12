@@ -56,6 +56,26 @@ class AuthController {
     }
   }
 
+  static async academyToken(req, res) {
+    try {
+      const {
+        academy
+      } = req;
+      const foundAcademy = await _services.academyService.findOne({
+        id: academy.id
+      });
+      const response = {
+        success: true,
+        data: {
+          academy: foundAcademy
+        }
+      };
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
+  }
+
   static async signUp(req, res) {
     try {
       // validation
