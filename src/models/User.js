@@ -47,6 +47,10 @@ export default class User extends Sequelize.Model {
 							type : Sequelize.INTEGER,
 							defaultValue : 0
 						},
+						adminLevel : {
+							type : Sequelize.INTEGER,
+							defaultValue : 0
+						},
 						createdAt: {
 							type: Sequelize.DATE,
 							allowNull: false,
