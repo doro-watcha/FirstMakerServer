@@ -9,7 +9,7 @@ const router = new Router()
 /**
  * @swagger
  *
- * /academy
+ * /academy:
  *   get:
  *     tags:
  *       - academy
