@@ -174,7 +174,7 @@ module.exports = {
     },
     ACADEMY_ALREADY_EXISTS: {
       status: 510,
-      ko: '이미 존재하는 학원입니디ㅏ'
+      ko: '이미 존재하는 학원입니다'
     },
     // 410
     USER_DELETED: {

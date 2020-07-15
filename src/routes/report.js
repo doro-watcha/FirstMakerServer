@@ -150,7 +150,7 @@ router.get('/:id' , (req,res) => {
  */
 
 
-router.post('/', (req,res) => {
+router.post('/', authenticate, (req,res) => {
   reportController.createReport(req,res)
 })
 

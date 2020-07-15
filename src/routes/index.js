@@ -11,6 +11,7 @@ import consultingRouter from './consulting'
 import paymentRecordRouter from './paymentRecord'
 import reflectionRatioRouter from './reflectionRatio'
 import academyRouter from './academy'
+import fileRouter from './file'
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -27,6 +28,7 @@ router.use('/consulting', consultingRouter)
 router.use('/paymentRecord', paymentRecordRouter)
 router.use('/reflectionRatio', reflectionRatioRouter)
 router.use('/academy', academyRouter)
+router.use('/file' , fileRouter)
 
 
 module.exports = router

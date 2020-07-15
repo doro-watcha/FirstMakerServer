@@ -1,5 +1,9 @@
 import { majorService, universityService } from '../services'
 import Joi from '@hapi/joi'
+import mime from 'mime'
+import path from 'path'
+import fs from 'fs'
+
 
 import { createErrorResponse } from '../utils/functions'
 
@@ -205,6 +209,7 @@ export default class majorController {
         res.send(createErrorResponse(e))
     }
   }
+
 
 
 

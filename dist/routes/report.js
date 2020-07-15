@@ -151,7 +151,7 @@ router.get('/:id', (req, res) => {
  *         description: 서버 에러
  */
 
-router.post('/', (req, res) => {
+router.post('/', authenticate, (req, res) => {
   _controllers.reportController.createReport(req, res);
 });
 /**

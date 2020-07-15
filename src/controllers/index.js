@@ -8,6 +8,7 @@ import consultingController from './consulting'
 import paymentRecordController from './paymentRecord'
 import reflectionRatioController from './reflectionRatio'
 import academyController from './academy'
+import fileController from './file'
 
 module.exports = {
 
@@ -20,5 +21,6 @@ module.exports = {
     consultingController,
     paymentRecordController,
     reflectionRatioController,
-    academyController
+    academyController,
+    fileController
 }

@@ -8,18 +8,20 @@ export default class reportController {
   static async createReport ( req, res ) {
 
     try {
+      const { user } = req
       const result = await Joi.validate ( req.body, {
         score : Joi.number(),
-        majorId : Joi.number(),
-        userId : Joi.number()
+        majorId : Joi.number()
       })
 
-      const { score , majorId , userId } = result
+      const { score , majorId  } = result
+
+
 
       const modelObj = {
         score,
         majorId,
-        userId
+        userId : user.id
       }
 
       const report = await reportService.create(modelObj)

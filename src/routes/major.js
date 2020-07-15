@@ -1,5 +1,7 @@
 
-var express = require('express');
+import express from'express'
+import multer from 'multer'
+import path from 'path'
 
 import { majorController } from '../controllers'
 import Authenticator from '../Authenticator'
@@ -7,8 +9,20 @@ import Authenticator from '../Authenticator'
 const { authenticate, getUserInfo } = Authenticator
 
 
-var router = express.Router();
+var router = express.Router()
 
+const upload = multer({
+  storage: multer.diskStorage({
+    // set a localstorage destination
+    destination: (req, file, cb) => {
+      cb(null, '../file/');
+    },
+    // convert a file name
+    filename: (req, file, cb) => {
+      cb(null, "major" + path.extname(file.originalname))
+    },
+  }),
+})
 
 router.get('/', (req,res) => {
   majorController.findAll(req,res)
@@ -281,5 +295,8 @@ router.delete('/:id', (req,res) => {
   majorController.deleteMajor(req,res)
 })
 
+router.post('/file' ,authenticate, upload.fields([{ name: 'excel', maxCount: 1 }]), (req,res) => {
+  majorController.createFile(req,res)
+})
 
 module.exports = router

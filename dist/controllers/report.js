@@ -16,20 +16,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class reportController {
   static async createReport(req, res) {
     try {
+      const {
+        user
+      } = req;
       const result = await _joi.default.validate(req.body, {
         score: _joi.default.number(),
-        majorId: _joi.default.number(),
-        userId: _joi.default.number()
+        majorId: _joi.default.number()
       });
       const {
         score,
-        majorId,
-        userId
+        majorId
       } = result;
       const modelObj = {
         score,
         majorId,
-        userId
+        userId: user.id
       };
       const report = await _services.reportService.create(modelObj);
       const response = {
