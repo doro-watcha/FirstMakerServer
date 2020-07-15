@@ -30,7 +30,6 @@ class UserService {
 			return true
 		}
   }
-
   async findById(id) {
 		return await User.findOne({
 			where : { id },

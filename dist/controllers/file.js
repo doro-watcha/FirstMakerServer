@@ -5,8 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _services = require("../services");
-
 var _joi = _interopRequireDefault(require("@hapi/joi"));
 
 var _mime = _interopRequireDefault(require("mime"));
@@ -24,12 +22,10 @@ class fileController {
     try {
       const files = await _joi.default.validate(req.files, {
         excel: _joi.default.array().min(1).required()
-      });
-      const {
-        user
-      } = req;
-      console.log(user);
-      if (user.id > 0) throw Error('INVALID_REQUEST');
+      }); //const {user} = req
+      //console.log(user)
+      //if ( user.id > 0 ) throw Error('INVALID_REQUEST')
+
       const response = {
         success: true
       };

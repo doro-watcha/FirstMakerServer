@@ -21,7 +21,7 @@ export default class academyController {
         password
       }
 
-      			// check if user already exists
+      // check if user already exists
 			const academy = await academyService.findOne({
 				name
 			})

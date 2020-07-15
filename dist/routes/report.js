@@ -116,13 +116,9 @@ router.get('/:id', (req, res) => {
  *               majorId:
  *                 type: integer
  *                 description: 지원한 전공 ID값
- *               userId:
- *                 type: integer
- *                 description: 유조 ID값
  *             required:
  *               - score
  *               - majorId
- *               - userId
  *     responses:
  *       SUCCESS:
  *         content:

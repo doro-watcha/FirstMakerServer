@@ -1,14 +1,36 @@
 import { Router } from 'express'
 import { fileController } from '../controllers'
 import Authenticator from '../Authenticator'
+import multer from 'multer'
+import path from 'path'
+
+
 
 const { authenticate } = Authenticator
 
 const router = new Router()
 
-router.post('/major', (req, res) => {
+
+
+
+const upload = multer({
+  storage: multer.diskStorage({
+    // set a localstorage destination
+    destination: (req, file, cb) => {
+      cb(null, '../file/');
+    },
+    // convert a file name
+    filename: (req, file, cb) => {
+      cb(null, "major" + path.extname(file.originalname))
+    },
+  }),
+})
+
+
+router.post('/major' ,authenticate, upload.fields([{ name: 'excel', maxCount: 1 }]), (req,res) => {
   fileController.createMajor(req,res)
 })
+
 
 router.get('/major', (req,res) => {
   console.log("tlqkf")

@@ -1,4 +1,4 @@
-import { majorService, universityService } from '../services'
+
 import Joi from '@hapi/joi'
 import mime from 'mime'
 import path from 'path'
@@ -17,11 +17,11 @@ export default class fileController {
           .required(),
       })
 
-      const {user} = req
+      //const {user} = req
 
-      console.log(user)
+      //console.log(user)
 
-      if ( user.id > 0 ) throw Error('INVALID_REQUEST')
+      //if ( user.id > 0 ) throw Error('INVALID_REQUEST')
 
       const response = {
         success : true 
