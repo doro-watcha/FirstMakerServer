@@ -4,14 +4,9 @@ import Authenticator from '../Authenticator'
 import multer from 'multer'
 import path from 'path'
 
-
-
 const { authenticate } = Authenticator
 
 const router = new Router()
-
-
-
 
 const upload = multer({
   storage: multer.diskStorage({
@@ -27,18 +22,19 @@ const upload = multer({
 })
 
 
-router.post('/major' ,authenticate, upload.fields([{ name: 'excel', maxCount: 1 }]), (req,res) => {
-  fileController.createMajor(req,res)
+router.post('/major' , authenticate, upload.fields([{ name: 'excel', maxCount: 1 }]), (req,res) => {
+  console.log("wow")
+  fileController.createMajorFile(req,res)
 })
 
 
 router.get('/major', (req,res) => {
   console.log("tlqkf")
-  fileController.getMajor(req,res)
+  fileController.getMajorFile(req,res)
 })
 
 router.delete('/major', (req,res) => {
-  fileController.deleteMajor(req,res)
+  fileController.deleteMajorFile(req,res)
 })
 
 

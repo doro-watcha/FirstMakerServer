@@ -9,13 +9,15 @@ import { createErrorResponse } from '../utils/functions'
 
 export default class fileController {
 
-  static async createMajor ( req, res ) {
+  static async createMajorFile ( req, res ) {
     try {
       const files = await Joi.validate(req.files, {
         excel: Joi.array()
           .min(1)
           .required(),
       })
+
+      console.log("fuck")
 
       //const {user} = req
 
@@ -32,15 +34,15 @@ export default class fileController {
     }
   }
 
-  static async getMajor ( req, res ) {
+  static async getMajorFile ( req, res ) {
 
     try {
 
       const file = '../file/major.xlsx'
+
+        
       const mimetype = mime.getType(file)
       const filename = path.basename(file)
-
-      if ( !file ) throw Error('INVALID REQUEST')
 
       res.download(file, 'major.xlsx')
 

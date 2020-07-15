@@ -32,15 +32,17 @@ router.post('/major', authenticate, upload.fields([{
   name: 'excel',
   maxCount: 1
 }]), (req, res) => {
-  _controllers.fileController.createMajor(req, res);
+  console.log("wow");
+
+  _controllers.fileController.createMajorFile(req, res);
 });
 router.get('/major', (req, res) => {
   console.log("tlqkf");
 
-  _controllers.fileController.getMajor(req, res);
+  _controllers.fileController.getMajorFile(req, res);
 });
 router.delete('/major', (req, res) => {
-  _controllers.fileController.deleteMajor(req, res);
+  _controllers.fileController.deleteMajorFile(req, res);
 });
 router.post('/university', (req, res) => {
   _controllers.fileController.createUniversity(req, res);
