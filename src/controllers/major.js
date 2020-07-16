@@ -238,7 +238,7 @@ export default class majorController {
 
     try {
 
-      const file = '../files/major.xlsx'
+      const file = '../excelfile/major.xlsx'
       const mimetype = mime.gettype(file)
       const filename = path.basename(file)
 

@@ -14,7 +14,7 @@ const upload = multer({
     destination: (req, file, cb) => {
       cb(null, '../excelfile/');
     },
-    // convert a file name
+    // convert a file nameww
     filename: (req, file, cb) => {
       cb(null, "major" + path.extname(file.originalname))
     },

@@ -38,7 +38,7 @@ class fileController {
 
   static async getMajorFile(req, res) {
     try {
-      const file = '../file/major.xlsx';
+      const file = '../excelfile/major.xlsx';
 
       const mimetype = _mime.default.getType(file);
 

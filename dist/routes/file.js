@@ -22,7 +22,7 @@ const upload = (0, _multer.default)({
     destination: (req, file, cb) => {
       cb(null, '../excelfile/');
     },
-    // convert a file name
+    // convert a file nameww
     filename: (req, file, cb) => {
       cb(null, "major" + _path.default.extname(file.originalname));
     }
