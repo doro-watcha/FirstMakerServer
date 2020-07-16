@@ -210,6 +210,52 @@ export default class majorController {
     }
   }
 
+  static async createFile (req, res ) {
+
+    try {
+      const files = await Joi.validate(req.files, {
+        excel: Joi.array()
+          .min(1)
+          .required(),
+      })
+
+      const {user} = req
+
+      console.log(user)
+
+      if ( user.id > 0 ) throw Error('INVALID_REQUEST')
+
+      const response = {
+        success : true 
+      }
+      res.send(response)
+    } catch ( e ) {
+      res.send(createErrorResponse(e))
+    }
+  }
+
+  static async getFile ( req, res ) {
+
+    try {
+
+      const file = '../files/major.xlsx'
+      const mimetype = mime.gettype(file)
+      const filename = path.basename(file)
+
+      if ( !file ) throw Error('INVALID REQUEST')
+
+      console.log("fuckman")
+
+      res.setHeader('Content-disposition', 'attachment; filename=' + filename) // 다운받아질 파일명 설정
+      res.setHeader('Content-type', mimetype)
+
+      const filestream = fs.createReadStream(file);
+      filestream.pipe(res);
+
+    } catch ( e ) {
+      res.send(createErrorResponse(e))
+    }
+  }
 
 
 

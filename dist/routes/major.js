@@ -2,6 +2,10 @@
 
 var _express = _interopRequireDefault(require("express"));
 
+var _multer = _interopRequireDefault(require("multer"));
+
+var _path = _interopRequireDefault(require("path"));
+
 var _controllers = require("../controllers");
 
 var _Authenticator = _interopRequireDefault(require("../Authenticator"));
@@ -15,6 +19,18 @@ const {
 
 var router = _express.default.Router();
 
+const upload = (0, _multer.default)({
+  storage: _multer.default.diskStorage({
+    // set a localstorage destination
+    destination: (req, file, cb) => {
+      cb(null, '../file/');
+    },
+    // convert a file name
+    filename: (req, file, cb) => {
+      cb(null, "major" + _path.default.extname(file.originalname));
+    }
+  })
+});
 router.get('/', (req, res) => {
   _controllers.majorController.findAll(req, res);
 });
@@ -281,5 +297,11 @@ router.patch('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   _controllers.majorController.deleteMajor(req, res);
+});
+router.post('/file', authenticate, upload.fields([{
+  name: 'excel',
+  maxCount: 1
+}]), (req, res) => {
+  _controllers.majorController.createFile(req, res);
 });
 module.exports = router;

@@ -12,7 +12,7 @@ const upload = multer({
   storage: multer.diskStorage({
     // set a localstorage destination
     destination: (req, file, cb) => {
-      cb(null, '../file/');
+      cb(null, '../excelfile/');
     },
     // convert a file name
     filename: (req, file, cb) => {
@@ -22,7 +22,7 @@ const upload = multer({
 })
 
 
-router.post('/major' , authenticate, upload.fields([{ name: 'excel', maxCount: 1 }]), (req,res) => {
+router.post('/major' , upload.fields([{ name: 'excel', maxCount: 1 }]), (req,res) => {
   console.log("wow")
   fileController.createMajorFile(req,res)
 })

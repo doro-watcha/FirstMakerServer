@@ -20,7 +20,7 @@ const upload = (0, _multer.default)({
   storage: _multer.default.diskStorage({
     // set a localstorage destination
     destination: (req, file, cb) => {
-      cb(null, '../file/');
+      cb(null, '../excelfile/');
     },
     // convert a file name
     filename: (req, file, cb) => {
@@ -28,7 +28,7 @@ const upload = (0, _multer.default)({
     }
   })
 });
-router.post('/major', authenticate, upload.fields([{
+router.post('/major', upload.fields([{
   name: 'excel',
   maxCount: 1
 }]), (req, res) => {

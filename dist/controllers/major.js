@@ -214,6 +214,47 @@ class majorController {
     }
   }
 
+  static async createFile(req, res) {
+    try {
+      const files = await _joi.default.validate(req.files, {
+        excel: _joi.default.array().min(1).required()
+      });
+      const {
+        user
+      } = req;
+      console.log(user);
+      if (user.id > 0) throw Error('INVALID_REQUEST');
+      const response = {
+        success: true
+      };
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
+  }
+
+  static async getFile(req, res) {
+    try {
+      const file = '../files/major.xlsx';
+
+      const mimetype = _mime.default.gettype(file);
+
+      const filename = _path.default.basename(file);
+
+      if (!file) throw Error('INVALID REQUEST');
+      console.log("fuckman");
+      res.setHeader('Content-disposition', 'attachment; filename=' + filename); // 다운받아질 파일명 설정
+
+      res.setHeader('Content-type', mimetype);
+
+      const filestream = _fs.default.createReadStream(file);
+
+      filestream.pipe(res);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
+  }
+
 }
 
 exports.default = majorController;
