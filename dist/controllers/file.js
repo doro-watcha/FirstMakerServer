@@ -64,7 +64,7 @@ class fileController {
           recruitmentUnit: sheetData[i][5],
           majorName: sheetData[i][6]
         };
-        await _services.majorService.create(obj1);
+        await _services.majorService.update(i - 2, obj1);
         let obj2 = {
           year: 2020,
           majorId: i - 2,
@@ -102,7 +102,7 @@ class fileController {
             }
           }
         };
-        await _services.majorDataService.create(obj2);
+        await _services.majorDataService.update(i - 2, obj2);
         let obj3 = {
           year: 2021,
           majorId: i - 2,
@@ -140,7 +140,7 @@ class fileController {
           // }
 
         };
-        await _services.majorDataService.create(obj3);
+        await _services.majorDataService.update(5654 + i - 2, obj3);
       }
 
       const response = {
@@ -220,7 +220,7 @@ class fileController {
           min: sheetData[i][2],
           max: sheetData[i][3]
         };
-        await _services.universityService.create(obj1); //data.push(obj1)
+        await _services.universityService.update(i, obj1); //data.push(obj1)
       }
 
       const response = {
