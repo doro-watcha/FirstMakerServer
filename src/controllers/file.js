@@ -54,7 +54,7 @@ export default class fileController {
           majorName : sheetData[i][6]
         }
 
-       await majorService.update(i-2,obj1)
+       await majorService.create(obj1)
 
         let obj2 = {
           year : 2020,
@@ -95,7 +95,7 @@ export default class fileController {
         }
 
         
-        await majorDataService.update(i-2, obj2)
+        await majorDataService.create(obj2)
 
         let obj3 = {
           year : 2021,
@@ -135,7 +135,7 @@ export default class fileController {
           // }
         }
 
-        await majorDataService.update(5654 + i-2, obj3)
+        await majorDataService.create( obj3)
       }
 
 
@@ -234,7 +234,7 @@ export default class fileController {
           min : sheetData[i][2],
           max : sheetData[i][3]
         }
-        await universityService.update(i,obj1)
+        await universityService.create(obj1)
         //data.push(obj1)
       }
 
