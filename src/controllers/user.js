@@ -1,4 +1,4 @@
-import { userService } from '../services'
+import { userService, reportService, scoreService } from '../services'
 import Joi from '@hapi/joi'
 
 import { createErrorResponse } from '../utils/functions'
@@ -49,7 +49,7 @@ export default class userController {
         const response = {
           success : true ,
           data : {
-            user 
+            user
           }
         }
 

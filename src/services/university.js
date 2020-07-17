@@ -1,4 +1,5 @@
 import { University } from  '../models'
+import sequelize from 'sequelize'
 
 let instance = null
 
@@ -51,6 +52,15 @@ class UniversityService {
         }
         
     }
+
+    async deleteAll ( ) {
+        // let query = `ALTER TABLE Universities AUTO_INCREMENT = 1;`
+        // await sequelize.query(query)
+    
+        return await University.destroy({
+            where : {}
+        })
+      }
 }
 
 export default new UniversityService()

@@ -31,6 +31,11 @@ export default class fileController {
   static async parseMajor(req,res) {
 
     try { 
+
+      await majorService.deleteAll()
+      await majorDataService.deleteAll()
+
+
       
       const path = ('../excelfile/major.xlsx')
 
@@ -54,7 +59,10 @@ export default class fileController {
           majorName : sheetData[i][6]
         }
 
-       await majorService.update(i-2,obj1)
+       await majorService.create(obj1)
+      }
+
+      for ( let i = 3; i < 5657; i++) {
 
         let obj2 = {
           year : 2020,
@@ -95,7 +103,7 @@ export default class fileController {
         }
 
         
-        await majorDataService.update(i-2, obj2)
+        await majorDataService.create(obj2)
 
         let obj3 = {
           year : 2021,
@@ -135,7 +143,7 @@ export default class fileController {
           // }
         }
 
-        await majorDataService.update(5654 + i-2, obj3)
+        await majorDataService.create(obj3)
       }
 
 
@@ -214,9 +222,12 @@ export default class fileController {
 
     try {
 
+  
+      await universityService.deleteAll()
+
       const path = ('../excelfile/university.xlsx')
 
-      let workbook = xlsx.readFile(path, {sheetRows: 38})
+      let workbook = xlsx.readFile(path, {sheetRows: 43})
       let sheetsList = workbook.SheetNames
       let sheetData = xlsx.utils.sheet_to_json(workbook.Sheets[sheetsList[0]], {
            header: 1,
@@ -226,7 +237,7 @@ export default class fileController {
 
 
       let data = []
-      for ( let i = 1 ; i < 38 ; i++) {
+      for ( let i = 1 ; i < 43 ; i++) {
         let obj1 = {
           line : '인문',
           name : sheetData[i][0],
@@ -234,13 +245,25 @@ export default class fileController {
           min : sheetData[i][2],
           max : sheetData[i][3]
         }
-        await universityService.update(i,obj1)
+        await universityService.create(obj1)
+
+        data.push(obj1)
+        // let obj2 = {
+
+        //   line : '자연',
+        //   name : sheetData[i][0],
+        //   group : sheetData[i][4],
+        //   min : sheetData[i][5],
+        //   max : sheetData[i][6]
+        // }
+
+        //await universityService.create(obj2)
         //data.push(obj1)
       }
 
       const response = {
         success : true,
-        //data
+        data
       }
     
       res.send(response)

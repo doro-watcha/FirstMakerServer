@@ -1,7 +1,7 @@
 import moment from 'moment-timezone'
 import sequelize from 'sequelize'
 
-import { User, Academy } from '../models'
+import { User, Academy, Score, Report } from '../models'
 
 let instance = null
 
@@ -40,10 +40,20 @@ class UserService {
 	async findList(where) {
 		return await User.findAll({
 			where : JSON.parse(JSON.stringify(where)),
-			include : {
-				model : Academy,
-				as : 'academy'
-			}
+			include : [
+				{
+					model : Academy,
+					as : 'academy'
+				},
+				{
+					model : Score,
+					as : 'score'
+				},
+				{
+					model : Report,
+					as : 'report'
+				}
+			]
 		})
 	}
 	

@@ -52,10 +52,16 @@ class UserService {
   async findList(where) {
     return await _models.User.findAll({
       where: JSON.parse(JSON.stringify(where)),
-      include: {
+      include: [{
         model: _models.Academy,
         as: 'academy'
-      }
+      }, {
+        model: _models.Score,
+        as: 'score'
+      }, {
+        model: _models.Report,
+        as: 'report'
+      }]
     });
   }
 

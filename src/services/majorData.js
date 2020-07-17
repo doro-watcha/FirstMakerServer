@@ -60,6 +60,13 @@ class MajorDataService {
 
 
   }
+
+  async deleteAll ( ) {
+
+    return await MajorData.destroy({
+      where : {}
+    })
+  }
 }
 
 

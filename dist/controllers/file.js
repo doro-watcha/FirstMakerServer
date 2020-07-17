@@ -38,6 +38,8 @@ class fileController {
 
   static async parseMajor(req, res) {
     try {
+      await _services.majorService.deleteAll();
+      await _services.majorDataService.deleteAll();
       const path = '../excelfile/major.xlsx';
 
       let workbook = _xlsx.default.readFile(path, {
@@ -64,7 +66,10 @@ class fileController {
           recruitmentUnit: sheetData[i][5],
           majorName: sheetData[i][6]
         };
-        await _services.majorService.update(i - 2, obj1);
+        await _services.majorService.create(obj1);
+      }
+
+      for (let i = 3; i < 5657; i++) {
         let obj2 = {
           year: 2020,
           majorId: i - 2,
@@ -102,7 +107,7 @@ class fileController {
             }
           }
         };
-        await _services.majorDataService.update(i - 2, obj2);
+        await _services.majorDataService.create(obj2);
         let obj3 = {
           year: 2021,
           majorId: i - 2,
@@ -140,7 +145,7 @@ class fileController {
           // }
 
         };
-        await _services.majorDataService.update(5654 + i - 2, obj3);
+        await _services.majorDataService.create(obj3);
       }
 
       const response = {
@@ -196,10 +201,11 @@ class fileController {
 
   static async parseUniv(req, res) {
     try {
+      await _services.universityService.deleteAll();
       const path = '../excelfile/university.xlsx';
 
       let workbook = _xlsx.default.readFile(path, {
-        sheetRows: 38
+        sheetRows: 43
       });
 
       let sheetsList = workbook.SheetNames;
@@ -212,7 +218,7 @@ class fileController {
 
       let data = [];
 
-      for (let i = 1; i < 38; i++) {
+      for (let i = 1; i < 43; i++) {
         let obj1 = {
           line: '인문',
           name: sheetData[i][0],
@@ -220,12 +226,21 @@ class fileController {
           min: sheetData[i][2],
           max: sheetData[i][3]
         };
-        await _services.universityService.update(i, obj1); //data.push(obj1)
+        await _services.universityService.create(obj1);
+        data.push(obj1); // let obj2 = {
+        //   line : '자연',
+        //   name : sheetData[i][0],
+        //   group : sheetData[i][4],
+        //   min : sheetData[i][5],
+        //   max : sheetData[i][6]
+        // }
+        //await universityService.create(obj2)
+        //data.push(obj1)
       }
 
       const response = {
-        success: true //data
-
+        success: true,
+        data
       };
       res.send(response);
     } catch (e) {

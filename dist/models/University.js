@@ -20,13 +20,13 @@ class University extends _sequelize.default.Model {
       },
       // 지원 가능 점수중 작은값
       min: {
-        type: _sequelize.default.FLOAT,
-        defaultValue: 0.0
+        type: _sequelize.default.STRING,
+        allowNull: true
       },
       // 지원 가능 점수중 높은 값
       max: {
-        type: _sequelize.default.FLOAT,
-        defaultValue: 0.0
+        type: _sequelize.default.STRING,
+        allowNull: true
       },
       group: {
         type: _sequelize.default.STRING,

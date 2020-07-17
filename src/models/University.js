@@ -15,13 +15,13 @@ export default class University extends Sequelize.Model {
 						},
 						// 지원 가능 점수중 작은값
 						min : {
-							type : Sequelize.FLOAT,
-							defaultValue : 0.0
+							type : Sequelize.STRING,
+							allowNull : true,
 						},
 						// 지원 가능 점수중 높은 값
 						max : {
-							type : Sequelize.FLOAT,
-							defaultValue : 0.0
+							type : Sequelize.STRING,
+							allowNull : true
 						},
 						group : {
 							type : Sequelize.STRING,

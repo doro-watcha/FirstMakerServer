@@ -51,6 +51,13 @@ class MajorService {
             await major.destroy()
         }
     }
+
+    async deleteAll ( ) {
+
+      return await Major.destroy({
+        where : {}
+      })
+    }
   
 }
 

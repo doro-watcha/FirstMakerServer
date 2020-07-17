@@ -57,6 +57,12 @@ class MajorService {
     }
   }
 
+  async deleteAll() {
+    return await _models.Major.destroy({
+      where: {}
+    });
+  }
+
 }
 
 var _default = new MajorService();
