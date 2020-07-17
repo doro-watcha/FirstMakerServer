@@ -12,11 +12,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class Major extends _sequelize.default.Model {
   static init(sequelize) {
     return super.init({
-      // 연도
-      year: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 2020
-      },
       // 계열
       line: {
         type: _sequelize.default.STRING,
@@ -27,65 +22,28 @@ class Major extends _sequelize.default.Model {
         type: _sequelize.default.STRING,
         allowNull: true
       },
+      // 위치
+      location: {
+        type: _sequelize.default.STRING,
+        allowNull: true
+      },
       // 모집 전형
-      admissionType: {
+      recruitmentType: {
         type: _sequelize.default.STRING,
         allowNull: true
       },
-      // 모집 인원
-      recruitmentNumber: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
-      },
-      // 수시이월 인원
-      additionalMember: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
-      },
-      // 최종 모집인원
-      finalNumber: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
-      },
-      // 경쟁률
-      competitionNumber: {
-        type: _sequelize.default.FLOAT,
-        allowNull: true
-      },
-      // 내신 반영 유무
-      isNaesinIncluded: {
-        type: _sequelize.default.BOOLEAN,
-        defaultValue: false
-      },
-      name: {
-        type: _sequelize.default.STRING,
-        allwoNull: true
-      },
-      majorCode: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: -1
-      },
-      strong_val: {
-        type: _sequelize.default.FLOAT,
-        allowNull: true
-      },
-      safe_val: {
-        type: _sequelize.default.FLOAT,
-        allowNull: true
-      },
-      dangerous_val: {
-        type: _sequelize.default.FLOAT,
-        allowNull: true
-      },
-      sniping_val: {
-        type: _sequelize.default.FLOAT,
-        allowNull: true
-      },
-      somethingSpecial: {
+      // 대학 이름
+      univName: {
         type: _sequelize.default.STRING,
         allowNull: true
       },
-      etc: {
+      //모집 단위
+      recruitmentUnit: {
+        type: _sequelize.default.STRING,
+        allowNull: true
+      },
+      //세부 전공
+      majorName: {
         type: _sequelize.default.STRING,
         allowNull: true
       },
@@ -106,13 +64,22 @@ class Major extends _sequelize.default.Model {
   }
 
   static associate(models) {
+    this.hasMany(models.MajorData, {
+      foreignKey: 'majorId',
+      as: 'majorData'
+    });
     this.hasMany(models.Report, {
       foreignKey: 'majorId',
       as: 'report'
-    }), this.belongsTo(models.University, {
-      foreignKey: 'univId',
-      as: 'univ'
     });
+  }
+
+  toJSON() {
+    const object = Object.assign({}, this.dataValues); // delete some (key, value)
+
+    delete object.createdAt;
+    delete object.updatedAt;
+    return object;
   }
 
 } // swagger schema
@@ -126,76 +93,33 @@ const schema = {
       type: 'integer',
       example: 3
     },
-    year: {
-      type: 'integer',
-      example: 2020
-    },
     line: {
       type: 'string',
-      example: ''
+      example: '인문'
     },
     group: {
-      type: 'integer',
-      example: '0'
-    },
-    admissionType: {
       type: 'string',
-      example: '기회균등전형'
+      example: '가나'
     },
-    recruitmentNumber: {
-      type: 'integer',
-      example: '35'
-    },
-    additionalMember: {
-      type: 'integer',
-      example: '3'
-    },
-    finalNumber: {
-      type: 'integer',
-      example: '38'
-    },
-    competitionNumber: {
-      type: 'float',
-      example: 3.5
-    },
-    isNaesinIncluded: {
-      type: 'boolean',
-      example: false
-    },
-    name: {
+    location: {
       type: 'string',
-      example: '지영학과'
+      example: '충남'
     },
-    majorCode: {
-      type: 'integer',
-      example: 35
-    },
-    strong_val: {
-      type: 'float',
-      example: 690.5
-    },
-    safe_val: {
-      type: 'float',
-      example: 685.5
-    },
-    dangerous_val: {
-      type: 'float',
-      example: 680.6
-    },
-    sniping_val: {
-      type: 'float',
-      example: 665.5
-    },
-    somethingSpecial: {
+    recruitmentType: {
       type: 'string',
-      example: '개발하기 너무 싫다'
+      example: '일반전형'
     },
-    etc: {
+    univName: {
       type: 'string',
-      example: '리얼로다가'
+      example: '고려대'
     },
-    univ: {
-      $ref: '#/components/schemas/University'
+    recruitmentUnit: {
+      type: 'string',
+      example: '자율전공'
+    },
+    majorName: {
+      type: 'string',
+      example: '자율전공학부'
     }
   },
   required: ['id', 'name', 'univ']

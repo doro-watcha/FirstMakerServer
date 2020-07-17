@@ -16,11 +16,11 @@ var _consulting = _interopRequireDefault(require("./consulting"));
 
 var _paymentRecord = _interopRequireDefault(require("./paymentRecord"));
 
-var _reflectionRatio = _interopRequireDefault(require("./reflectionRatio"));
-
 var _academy = _interopRequireDefault(require("./academy"));
 
 var _file = _interopRequireDefault(require("./file"));
+
+var _majorData = _interopRequireDefault(require("./majorData"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33,7 +33,7 @@ module.exports = {
   majorController: _major.default,
   consultingController: _consulting.default,
   paymentRecordController: _paymentRecord.default,
-  reflectionRatioController: _reflectionRatio.default,
   academyController: _academy.default,
-  fileController: _file.default
+  fileController: _file.default,
+  majorDataController: _majorData.default
 };

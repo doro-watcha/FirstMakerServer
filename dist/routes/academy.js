@@ -12,6 +12,21 @@ const {
   authenticate
 } = _Authenticator.default;
 const router = new _express.Router();
+router.get('/', (req, res) => {
+  _controllers.academyController.findList(req, res);
+});
+router.get('/:id', (req, res) => {
+  _controllers.academyController.findOne(req, res);
+});
+router.post('/', (req, res) => {
+  _controllers.academyController.create(req, res);
+});
+router.patch('/:id', (req, res) => {
+  _controllers.academyController.update(req, res);
+});
+router.delete('/:id', (req, res) => {
+  _controllers.academyController.delete(req, res);
+});
 /**
  * @swagger
  *
@@ -19,7 +34,7 @@ const router = new _express.Router();
  *   get:
  *     tags:
  *       - academy
- *     summary: 모든 학원 리스트 조회 
+ *     summary: 학원 리스트 조회 
  *     responses:
  *       SUCCESS:
  *         content:
@@ -48,9 +63,6 @@ const router = new _express.Router();
  *         description: 서버 에러
  */
 
-router.get('/', (req, res) => {
-  _controllers.academyController.findAll(req, res);
-});
 /**
  * @swagger
  *
@@ -87,9 +99,6 @@ router.get('/', (req, res) => {
  *         description: 서버 에러
  */
 
-router.get('/:id', (req, res) => {
-  _controllers.academyController.findOne(req, res);
-});
 /**
  * @swagger
  *
@@ -108,12 +117,7 @@ router.get('/:id', (req, res) => {
  *               name:
  *                 type: string
  *                 description: 학원 이름
- *               password:
- *                 type: string
- *                 description: 비밀번호
  *             required:
- *               - name
- *               - password
  *     responses:
  *       SUCCESS:
  *         content:
@@ -134,9 +138,6 @@ router.get('/:id', (req, res) => {
  *         description: 서버 에러
  */
 
-router.post('/', (req, res) => {
-  _controllers.academyController.create(req, res);
-});
 /**
  * @swagger
  *
@@ -155,9 +156,6 @@ router.post('/', (req, res) => {
  *               name:
  *                 type: string
  *                 description: 학원 이름
- *               password:
- *                 type: string
- *                 description: 비밀번호
  *     responses:
  *       SUCCESS:
  *         content:
@@ -186,9 +184,6 @@ router.post('/', (req, res) => {
  *         description: 서버 에러
  */
 
-router.patch('/:id', (req, res) => {
-  _controllers.academyController.update(req, res);
-});
 /**
  * @swagger
  *
@@ -217,7 +212,4 @@ router.patch('/:id', (req, res) => {
  *         description: 서버 에러
  */
 
-router.delete('/:id', (req, res) => {
-  _controllers.academyController.delete(req, res);
-});
 module.exports = router;

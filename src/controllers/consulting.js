@@ -5,23 +5,24 @@ import { createErrorResponse } from '../utils/functions'
 
 export default class consultingController {
 
-  static async createConsulting ( req, res ) {
+  static async create ( req, res ) {
 
     try {
 
+      const { user } = req
+
       const result = await Joi.validate (req.body , {
         title : Joi.string().required(),
-        description : Joi.string().required(),
-        userId : Joi.number()
-      
+        description : Joi.string().required()
+    
       })
 
-      const { title , description , userId } = result 
+      const { title , description } = result 
 
       const modelObj = {
         title,
         description,
-        studentId : userId
+        userId : user.id
       }
 
       const consulting = await consultingService.create(modelObj)
@@ -45,7 +46,7 @@ export default class consultingController {
   static async findList (req, res ) {
 
     try { 
-      const consulting = await consultingService.findAll()
+      const consulting = await consultingService.findList()
 
       const response = {
         success : true ,
@@ -66,7 +67,13 @@ export default class consultingController {
 
       const id = req.params.id
 
-      const consulting = await consultingService.findOne(id)
+
+      const consulting = await consultingService.findOne({
+        
+        id
+      })
+
+      if ( consulting == null ) throw Error('CONSULTING_NOT_FOUND')
 
       const response = {
         success : true,
@@ -82,24 +89,25 @@ export default class consultingController {
     }
   }
 
-  static async updateConsulting(req,res) {
+  static async update(req,res) {
 
     try {
 
+      const { user } = req
       const id = req.params.id
-      const result = await Joi.validate (req,body , {
-        title : Joi.string().required(),
-        description : Joi.string().required(),
-        studentId : Joi.number()
-      
+
+      const result = await Joi.validate (req.body , {
+        title : Joi.string(),
+        description : Joi.string(),
+  
       })
 
-      const { title , description , studentId } = result 
+      const { title , description } = result 
 
       const modelObj = {
         title,
         description,
-        studentId
+        userId : user.id
       }
 
       const consulting = await consultingService.update(id , modelObj)
@@ -117,7 +125,7 @@ export default class consultingController {
     }
   }
 
-  static async deleteConsulting( req, res ) {
+  static async delete( req, res ) {
 
     try { 
 

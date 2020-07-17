@@ -33,19 +33,15 @@ class PaymentRecordService {
     }
   }
 
-  async findList(userId) {
+  async findList(where) {
     return await _models.PaymentRecord.findAll({
-      where: {
-        userId
-      }
+      where: JSON.parse(JSON.stringify(where))
     });
   }
 
-  async findOne(id) {
+  async findOne(where) {
     return await _models.PaymentRecord.findOne({
-      where: {
-        id
-      }
+      where: JSON.parse(JSON.stringify(where))
     });
   }
 

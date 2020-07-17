@@ -16,19 +16,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class majorController {
   static async create(req, res) {
     try {
+      const {
+        user
+      } = req;
       const result = await _joi.default.validate(req.body, {
         amount: _joi.default.number().required(),
-        userId: _joi.default.number().required(),
         predictTimes: _joi.default.number().required()
       });
       const {
         amount,
-        userId,
         predictTimes
       } = result;
       const modelObj = {
+        userId: user.id,
         amount,
-        userId,
         predictTimes
       };
       const paymentRecord = await _services.paymentRecordService.create(modelObj);
@@ -46,8 +47,14 @@ class majorController {
 
   static async findOne(req, res) {
     try {
+      const {
+        user
+      } = req;
       const id = req.params.id;
-      const paymentRecord = await _services.paymentRecordService.findOne(id);
+      const paymentRecord = await _services.paymentRecordService.findOne({
+        userId: user.id,
+        id
+      });
       const response = {
         success: true,
         data: {
@@ -65,7 +72,20 @@ class majorController {
       const {
         user
       } = req;
-      const paymentRecord = await _services.paymentRecordService.findList(user.id);
+      const result = await _joi.default.validate(req.query, {
+        amount: _joi.default.number(),
+        predictTimes: _joi.default.number()
+      });
+      const {
+        amount,
+        predictTimes
+      } = result;
+      const modelObj = {
+        userId: user.id,
+        amount,
+        predictTimes
+      };
+      const paymentRecord = await _services.paymentRecordService.findList(modelObj);
       const response = {
         success: true,
         data: {
@@ -83,17 +103,14 @@ class majorController {
       const id = req.params.id;
       const result = await _joi.default.validate(req.body, {
         amount: _joi.default.number(),
-        userId: _joi.default.number(),
         predictTimes: _joi.default.number()
       });
       const {
         amount,
-        userId,
         predictTimes
       } = result;
       const modelObj = {
         amount,
-        userId,
         predictTimes
       };
       const paymentRecord = await _services.paymentRecordService.update(id, modelObj);

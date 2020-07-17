@@ -120,9 +120,9 @@ module.exports = {
 			status : 418,
 			ko : '해당 결제 기록 없음'
 		},
-		REFLECTION_RATIO_NOT_FOUND : {
+		MAJOR_DATA_NOT_FOUND : {
 			status : 419,
-			ko : '해당 대학 반영 비율 없음'
+			ko : '해당 학과 정보 없음'
 		},
 		ACADEMY_NOT_FOUND : {
 			status : 420,

@@ -14,10 +14,12 @@ var _functions = require("../utils/functions");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class userController {
-  static async findUser(req, res) {
+  static async findOne(req, res) {
     try {
       const id = req.params.id;
-      const user = await _services.userService.findById(id);
+      const user = await _services.userService.findOne({
+        id
+      });
       if (user == null) throw Error('USER_NOT_FOUND');
       const response = {
         success: true,
@@ -31,7 +33,7 @@ class userController {
     }
   }
 
-  static async searchUser(req, res) {
+  static async findList(req, res) {
     try {
       const result = await _joi.default.validate(req.query, {
         academyId: _joi.default.number()
@@ -42,7 +44,7 @@ class userController {
       const where = {
         academyId
       };
-      const user = await _services.userService.findAll(where);
+      const user = await _services.userService.findList(where);
       const response = {
         success: true,
         data: {
@@ -55,7 +57,7 @@ class userController {
     }
   }
 
-  static async updateUser(req, res) {
+  static async update(req, res) {
     try {
       const id = req.params.id;
       const result = await _joi.default.validate(req.body, {
@@ -102,7 +104,7 @@ class userController {
     }
   }
 
-  static async deleteUser(req, res) {
+  static async delete(req, res) {
     try {
       const id = req.params.id;
       await _services.userService.delete(id);

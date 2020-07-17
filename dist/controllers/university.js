@@ -14,30 +14,35 @@ var _functions = require("../utils/functions");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class UniversityController {
-  static async createUniversity(req, res) {
+  static async create(req, res) {
     try {
       const result = await _joi.default.validate(req.body, {
-        name: _joi.default.string().required(),
-        min: _joi.default.number().required(),
-        max: _joi.default.number().required(),
-        location: _joi.default.string().required(),
-        group: _joi.default.string().required()
+        name: _joi.default.string(),
+        min: _joi.default.number(),
+        max: _joi.default.number(),
+        line: _joi.default.string(),
+        location: _joi.default.string(),
+        group: _joi.default.string()
       });
       const {
         name,
         min,
         max,
         location,
-        group
+        group,
+        line
       } = result;
-      const exist_university = await _services.universityService.findByName(name);
+      const exist_university = await _services.universityService.findOne({
+        name
+      });
       if (exist_university != null) throw Error('UNIVERSITY_ALREADY_EXISTS');
       const modelObj = {
         name,
         min,
         max,
         location,
-        group
+        group,
+        line
       };
       const university = await _services.universityService.create(modelObj);
       const response = {
@@ -54,7 +59,31 @@ class UniversityController {
 
   static async findList(req, res) {
     try {
-      const university = await _services.universityService.findAll();
+      const result = await _joi.default.validate(req.query, {
+        name: _joi.default.string(),
+        min: _joi.default.number(),
+        max: _joi.default.number(),
+        location: _joi.default.string(),
+        group: _joi.default.string(),
+        line: _joi.default.string()
+      });
+      const {
+        name,
+        min,
+        max,
+        location,
+        group,
+        line
+      } = result;
+      const modelObj = {
+        name,
+        min,
+        max,
+        location,
+        group,
+        line
+      };
+      const university = await _services.universityService.findList(modelObj);
       if (university == null) throw Error('UNIVERSITY NOT FOUND');
       const response = {
         success: true,
@@ -68,7 +97,26 @@ class UniversityController {
     }
   }
 
-  static async updateUniversity(req, res) {
+  static async findOne(req, res) {
+    try {
+      const id = req.params.id;
+      const university = await _services.universityService.findOne({
+        id
+      });
+      if (university == null) throw Error('UNIVERSITY_NOT_FOUND');
+      const response = {
+        success: true,
+        data: {
+          university
+        }
+      };
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
+  }
+
+  static async update(req, res) {
     try {
       const id = req.params.id;
       const result = await _joi.default.validate(req.body, {
@@ -76,21 +124,24 @@ class UniversityController {
         max: _joi.default.number(),
         min: _joi.default.number(),
         location: _joi.default.string(),
-        group: _joi.default.string()
+        group: _joi.default.string(),
+        line: _joi.default.string()
       });
       const {
         name,
         max,
         min,
         location,
-        group
+        group,
+        line
       } = result;
       const modelObj = {
         name,
         max,
         min,
         location,
-        group
+        group,
+        line
       };
       await _services.universityService.update(id, modelObj);
       const response = {
@@ -102,7 +153,7 @@ class UniversityController {
     }
   }
 
-  static async deleteUniversity(req, res) {
+  static async delete(req, res) {
     try {
       const id = req.params.id;
       await _services.universityService.delete(id);

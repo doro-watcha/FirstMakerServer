@@ -5,8 +5,9 @@ import reportService from './report'
 import majorService from './major'
 import consultingService from './consulting'
 import paymentRecordService from './paymentRecord'
-import reflectionRatioService from './reflectionRatio'
 import academyService from './academy'
+import fileService from './file'
+import majorDataService from './majorData'
 
 module.exports = {
     universityService,
@@ -16,6 +17,7 @@ module.exports = {
     majorService,
     consultingService,
     paymentRecordService,
-    reflectionRatioService,
-    academyService
+    academyService,
+    fileService,
+    majorDataService
 }

@@ -14,7 +14,7 @@ var _functions = require("../utils/functions");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class scoreController {
-  static async createScore(req, res) {
+  static async create(req, res) {
     try {
       const result = await _joi.default.validate(req.body, {
         korean: _joi.default.object().required(),
@@ -56,7 +56,9 @@ class scoreController {
         naesin,
         naesin_type
       };
-      const exist_score = await _services.scoreService.findByUserId(user.id);
+      const exist_score = await _services.scoreService.findOne({
+        userId: user.id
+      });
       if (exist_score != null) throw Error('SCORE_ALREADY_EXISTS');
       const score = await _services.scoreService.create(modelObj);
       const response = {
@@ -71,11 +73,14 @@ class scoreController {
     }
   }
 
-  static async findScore(req, res) {
+  static async findOne(req, res) {
     try {
-      const userId = req.params.userId;
-      const score = await _services.scoreService.findByUserId(userId);
-      if (score == null) throw Error('SCORE_NOT_FOUND');
+      const {
+        user
+      } = req;
+      const score = await _services.scoreService.findOne({
+        userId: user.id
+      });
       const response = {
         success: true,
         data: {
@@ -88,9 +93,11 @@ class scoreController {
     }
   }
 
-  static async updateScore(req, res) {
+  static async update(req, res) {
     try {
-      const userId = req.params.userId;
+      const {
+        user
+      } = req;
       const result = await _joi.default.validate(req.body, {
         korean: _joi.default.object().required(),
         math: _joi.default.object().required(),
@@ -116,7 +123,7 @@ class scoreController {
         naesin_type
       } = result;
       const modelObj = {
-        userId,
+        userId: user.id,
         korean,
         math,
         english,
@@ -128,7 +135,7 @@ class scoreController {
         naesin,
         naesin_type
       };
-      const score = await _services.scoreService.update(userId, modelObj);
+      const score = await _services.scoreService.update(user.id, modelObj);
       if (score == null) throw Error('SCORE_NOT_FOUND');
       const response = {
         success: true,
@@ -142,10 +149,12 @@ class scoreController {
     }
   }
 
-  static async deleteScore(req, res) {
+  static async delete(req, res) {
     try {
-      const userId = req.params.userId;
-      await _services.scoreService.delete(userId);
+      const {
+        user
+      } = req;
+      await _services.scoreService.delete(user.id);
       const response = {
         success: true
       };

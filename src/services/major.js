@@ -16,35 +16,24 @@ class MajorService {
     return await Major.create(modelObj)
   }
 
-  async findList ( univId , line ) {
+	async findList(where) {
+		return await Major.findAll({
+			where : JSON.parse(JSON.stringify(where))
+		})
+	}
 
-    return await Major.findAll({
-      where : { univId , line}
-    })
-  }
-
-
-  async findByName ( name , univId) {
-    return await Major.findOne({
-      where : { name , univId}
-    })
-  }
-
-  async findAll() {
-    return await Major.findAll({})
-  }
+	async findOne(where) {
+		return await Major.findOne({
+			where: JSON.parse(JSON.stringify(where))
+		})
+	}
 
   async update ( id, modelObj ) {
 
-    await Major.update(modelObj, {
+    return await Major.update(modelObj, {
       where: { id }
     })
 
-    const updatedMajor = await Major.findOne({
-        where: { id }})
-    if (updatedMajor === null) throw Error('MAJOR_NOT_FOUND')
-
-    return updatedMajor
   }
 
   async delete ( id ) {

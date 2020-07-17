@@ -24,18 +24,51 @@ const upload = multer({
   }),
 })
 
+
 router.get('/', (req,res) => {
-  majorController.findAll(req,res)
+  majorController.findList(req,res)
 })
+
+router.get('/:id', (req,res) => {
+  majorController.findOne(req,res)
+})
+
+router.post('/', (req,res) => {
+  majorController.create(req,res)
+})
+
+router.patch('/:id', (req, res) => {
+  majorController.update(req,res)
+})
+
+router.delete('/:id', (req,res) => {
+  majorController.major(req,res)
+})
+
 
 /**
  * @swagger
  *
- * /major/{univId}:
+ * /major:
  *   get:
  *     tags:
  *       - major
- *     summary: 대학별 학과 조회 
+ *     summary: 학과 리스트 조회
+ *     parameters:
+ *       - group:
+ *         $ref: '#/components/parameters/group'
+ *       - line:
+ *         $ref: '#/components/parameters/line'
+ *       - location:
+ *         $ref: '#/components/parameters/location'
+ *       - recruitmentType:
+ *         $ref: '#/components/parameters/recruitmentType'
+ *       - recruitmentUnit:
+ *         $ref: '#/components/parameters/recruitmentUnit'
+ *       - univName:
+ *         $ref: '#/components/parameters/univName'
+ *       - majorName:
+ *         $ref: '#/components/parameters/majorName'
  *     responses:
  *       SUCCESS:
  *         content:
@@ -64,9 +97,42 @@ router.get('/', (req,res) => {
  *         description: 서버 에러
  */
 
-router.get('/:univId', authenticate, (req,res) =>{
-  majorController.findList(req,res)
-})
+
+  /**
+ * @swagger
+ *
+ * /major/{id}:
+ *   get:
+ *     tags:
+ *       - major
+ *     summary: 학과 id 별 조회
+ *     responses:
+ *       SUCCESS:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     major:
+ *                       $ref: '#/components/schemas/Major'
+ *                   required:
+ *                     - major
+ *               required:
+ *                 - success
+ *                 - data
+ *       'ecode: 201':
+ *         description: 유효하지 않은 토큰
+ *       'ecode: 100':
+ *         description: Request Body Validation 실패
+ *       'ecode: 700':
+ *         description: 서버 에러
+ */
 
 /**
  * @swagger
@@ -75,7 +141,7 @@ router.get('/:univId', authenticate, (req,res) =>{
  *   post:
  *     tags:
  *       - major
- *     summary: 학과 정보 생성
+ *     summary: 학과 생성
  *     requestBody:
  *       required: true
  *       content:
@@ -83,57 +149,35 @@ router.get('/:univId', authenticate, (req,res) =>{
  *           schema:
  *             type: object
  *             properties:
- *               name:
- *                 type: string
- *                 description: 학과 이름
- *               year:
- *                 type: integer
- *                 description: 해당 년도
- *               line:
- *                 type: string
- *                 description: 문/이과
  *               group:
  *                 type: string
  *                 description: 모집 군별
- *               admissionType:
+ *               line:
+ *                 type: string
+ *                 description: 인문/자연/예체능
+ *               location:
+ *                 type: string
+ *                 description: 예측 가능 횟수
+ *               recruitmentType:
  *                 type: string
  *                 description: 모집 전형
- *               recruitmentNumber:
- *                 type: integer
- *                 description: 최초 모집 인원
- *               additionalMember:
- *                 type: integer
- *                 description: 수시 이월 인원
- *               competitionNumber:
- *                 type: float
- *                 description: 경쟁률
- *               isNaesinIncluded:
- *                 type: boolean
- *                 description: 내신이 포함되는지 아닌지
- *               majorCode:
- *                 type: integer
- *                 description: 학과 코드
- *               strong_val:
+ *               recruitmentUnit:
  *                 type: string
- *                 description: 유력 점수
- *               safe_val:
- *                 type: integer
- *                 description: 안정 점수
- *               dangerous_val:
- *                 type: integer
- *                 description: 불안정 점수
- *               sniping_val:
- *                 type: integer
- *                 description: 스나이퍼 점수
- *               somethingSpecial:
+ *                 description: 모집 단위
+ *               univName:
  *                 type: string
- *                 description: 특이사항
- *               etc:
+ *                 description: 대학 이름
+ *               majorName:
  *                 type: string
- *                 description: 비고
- *               univId:
- *                 type: integer
- *                 description: 대학 Id
+ *                 description: 세부 전공 이름
+ *             required:
+ *               - group
+ *               - line
+ *               - location
+ *               - recruitmentType
+ *               - recruitmentUnit
+ *               - univName
+ *               - majorName
  *     responses:
  *       SUCCESS:
  *         content:
@@ -162,18 +206,15 @@ router.get('/:univId', authenticate, (req,res) =>{
  *         description: 서버 에러
  */
 
-router.post('/', (req,res) => {
-  majorController.createMajor(req,res)
-})
 
-/**
+ /**
  * @swagger
  *
  * /major/{id}:
  *   patch:
  *     tags:
  *       - major
- *     summary: 학과 정보 수정
+ *     summary: 학과 수정
  *     requestBody:
  *       required: true
  *       content:
@@ -181,57 +222,27 @@ router.post('/', (req,res) => {
  *           schema:
  *             type: object
  *             properties:
- *               name:
- *                 type: string
- *                 description: 학과 이름
- *               year:
- *                 type: integer
- *                 description: 해당 년도
- *               line:
- *                 type: string
- *                 description: 문/이과
  *               group:
  *                 type: string
  *                 description: 모집 군별
- *               admissionType:
+ *               line:
+ *                 type: string
+ *                 description: 인문/자연/예체능
+ *               location:
+ *                 type: string
+ *                 description: 예측 가능 횟수
+ *               recruitmentType:
  *                 type: string
  *                 description: 모집 전형
- *               recruitmentNumber:
- *                 type: integer
- *                 description: 최초 모집 인원
- *               additionalMember:
- *                 type: integer
- *                 description: 수시 이월 인원
- *               competitionNumber:
- *                 type: float
- *                 description: 경쟁률
- *               isNaesinIncluded:
- *                 type: boolean
- *                 description: 내신이 포함되는지 아닌지
- *               majorCode:
- *                 type: integer
- *                 description: 학과 코드
- *               strong_val:
+ *               recruitmentUnit:
  *                 type: string
- *                 description: 유력 점수
- *               safe_val:
- *                 type: integer
- *                 description: 안정 점수
- *               dangerous_val:
- *                 type: integer
- *                 description: 불안정 점수
- *               sniping_val:
- *                 type: integer
- *                 description: 스나이퍼 점수
- *               somethingSpecial:
+ *                 description: 모집 단위
+ *               univName:
  *                 type: string
- *                 description: 특이사항
- *               etc:
+ *                 description: 대학 이름
+ *               majorName:
  *                 type: string
- *                 description: 비고
- *               univId:
- *                 type: integer
- *                 description: 대학 Id
+ *                 description: 세부 전공 이름
  *     responses:
  *       SUCCESS:
  *         content:
@@ -259,18 +270,15 @@ router.post('/', (req,res) => {
  *       'ecode: 700':
  *         description: 서버 에러
  */
-router.patch('/:id', (req, res) => {
-  majorController.updateMajor(req,res)
-})
 
-/**
+ /**
  * @swagger
  *
  * /major/{id}:
  *   delete:
  *     tags:
  *       - major
- *     summary: 학과 정보 삭제
+ *     summary: 학과 삭제
  *     responses:
  *       SUCCESS:
  *         content:
@@ -290,13 +298,5 @@ router.patch('/:id', (req, res) => {
  *       'ecode: 700':
  *         description: 서버 에러
  */
-
-router.delete('/:id', (req,res) => {
-  majorController.deleteMajor(req,res)
-})
-
-router.post('/file' ,authenticate, upload.fields([{ name: 'excel', maxCount: 1 }]), (req,res) => {
-  majorController.createFile(req,res)
-})
 
 module.exports = router

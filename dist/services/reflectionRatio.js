@@ -23,19 +23,9 @@ class ReflectionRatioService {
     return await _models.ReflectionRatio.create(modelObj);
   }
 
-  async findOne(id) {
+  async findOne(where) {
     return await _models.ReflectionRatio.findOne({
-      where: {
-        id
-      }
-    });
-  }
-
-  async findByUnivId(univId) {
-    return await _models.ReflectionRatio.findOne({
-      where: {
-        univId
-      }
+      where: JSON.parse(JSON.stringify(where))
     });
   }
 

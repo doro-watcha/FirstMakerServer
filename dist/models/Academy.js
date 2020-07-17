@@ -18,10 +18,6 @@ class Academy extends _sequelize.default.Model {
         type: _sequelize.default.STRING,
         allowNull: true
       },
-      password: {
-        type: _sequelize.default.STRING,
-        allowNull: true
-      },
       createdAt: {
         type: _sequelize.default.DATE,
         allowNull: true,
@@ -51,6 +47,14 @@ class Academy extends _sequelize.default.Model {
 
   isValidPassword(unencryptedPwd) {
     return _bcrypt.default.compareSync(unencryptedPwd, this.password);
+  }
+
+  toJSON() {
+    const object = Object.assign({}, this.dataValues); // delete some (key, value)
+
+    delete object.createdAt;
+    delete object.updatedAt;
+    return object;
   }
 
 } // swagger schema

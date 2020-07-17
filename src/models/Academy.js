@@ -12,10 +12,6 @@ export default class Academy extends Sequelize.Model {
                 type : Sequelize.STRING,
                 allowNull : true
               },
-              password : {
-                type : Sequelize.STRING,
-                allowNull : true
-              },
               createdAt: {
                   type: Sequelize.DATE,
                   allowNull: true,
@@ -49,7 +45,20 @@ export default class Academy extends Sequelize.Model {
 
 		isValidPassword(unencryptedPwd) {
 			return bycrypt.compareSync(unencryptedPwd, this.password)
-		}	
+    }	
+    
+
+		toJSON() {
+			const object = Object.assign({}, this.dataValues)
+		
+			// delete some (key, value)
+		 
+			delete object.createdAt
+			delete object.updatedAt
+	
+			
+			return object
+		}
     
 }
 

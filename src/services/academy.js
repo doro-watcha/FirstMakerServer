@@ -19,7 +19,7 @@ class AcademyService {
 		return await Academy.create(modelObj)
   }
 
-  async findAll (where) {
+  async findList (where) {
     return Academy.findAll({
       where : JSON.parse(JSON.stringify(where))
   })

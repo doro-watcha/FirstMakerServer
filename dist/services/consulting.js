@@ -20,28 +20,25 @@ class ConsultingService {
   }
 
   async create(modelObj) {
-    const {
-      studentId
-    } = modelObj;
-    const student = await _models.User.findOne({
-      where: {
-        id: studentId
-      }
+    return await _models.Consulting.create(modelObj);
+  }
+
+  async findList() {
+    return _models.Consulting.findAll({
+      include: [{
+        model: _models.User,
+        as: 'user'
+      }]
     });
-    if (student == null) throw Error('USER_NOT_FOUND');else {
-      return await _models.Consulting.create(modelObj);
-    }
   }
 
-  async findAll() {
-    return _models.Consulting.findAll();
-  }
-
-  async findOne(id) {
-    return _models.Consulting.findOne({
-      where: {
-        id
-      }
+  async findOne(where) {
+    return await _models.Consulting.findOne({
+      where: JSON.parse(JSON.stringify(where)),
+      include: [{
+        model: _models.User,
+        as: 'user'
+      }]
     });
   }
 

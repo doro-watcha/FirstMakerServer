@@ -1,7 +1,7 @@
 import moment from 'moment-timezone'
 import sequelize from 'sequelize'
 
-import { User, Token } from '../models'
+import { User, Academy } from '../models'
 
 let instance = null
 
@@ -20,32 +20,30 @@ class UserService {
 
 		await User.create(user)
 
-		const newUser = User.findOne({
-			where : { email : user.email},
-			attributes : ['name','email']
-		})
+		const newUser = User.findOne({ email : user.email})
 
 		if ( newUser == null ) throw Error('USER_NOT_FOUND')
 		else {
 			return true
 		}
   }
-  async findById(id) {
-		return await User.findOne({
-			where : { id },
-			attributes : ['id','academyId','name', 'email','telephone','highSchool','line','gender','graduateYear','predictTimes','haknyeon']
-		})
-	}
-
 	async findOne(where) {
 		return await User.findOne({
-			where: JSON.parse(JSON.stringify(where))
+			where: JSON.parse(JSON.stringify(where)),
+			include : {
+				model : Academy,
+				as : 'academy'
+			}
 		})
 	}
 
-	async findAll(where) {
+	async findList(where) {
 		return await User.findAll({
-			where : JSON.parse(JSON.stringify(where))
+			where : JSON.parse(JSON.stringify(where)),
+			include : {
+				model : Academy,
+				as : 'academy'
+			}
 		})
 	}
 	
@@ -56,6 +54,10 @@ class UserService {
 		})
 		const updatedUser = await User.findOne({
 			where: { id },
+			include : {
+				model : Academy,
+				as : 'academy'
+			}
 		})
 		if (updatedUser === null) throw Error('USER_NOT_FOUND')
 

@@ -31,14 +31,29 @@ export default class Report extends Sequelize.Model {
       }
 
       static associate(models) {
-        this.belongsTo(models.Major, {
-          foreignKey: 'majorId',
-          as: 'major',
-        }),
+        
         this.belongsTo(models.User, {
           foreignKey: 'userId',
           as: 'user'
+        }),
+        this.belongsTo(models.Major, {
+          foreignKey: 'majorId',
+          as : 'major'
         })
+      }
+
+      toJSON() {
+        const object = Object.assign({}, this.dataValues)
+      
+        // delete some (key, value)
+       
+        delete object.createdAt
+        delete object.updatedAt
+        
+        delete object.userId
+    
+        
+        return object
       }
 }
 

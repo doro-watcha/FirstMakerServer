@@ -13,10 +13,22 @@ const {
   getUserInfo
 } = _Authenticator.default;
 const router = (0, _express.Router)();
+router.post('/', authenticate, (req, res) => {
+  _controllers.scoreController.create(req, res);
+});
+router.get('/', authenticate, (req, res) => {
+  _controllers.scoreController.findOne(req, res);
+});
+router.patch('/', authenticate, (req, res) => {
+  _controllers.scoreController.update(req, res);
+});
+router.delete('/', authenticate, function (req, res) {
+  _controllers.scoreController.delete(req, res);
+});
 /**
  * @swagger
  * 
- * /score/{userId}:
+ * /score:
  *   get:
  *     tags:
  *       - score
@@ -58,9 +70,6 @@ const router = (0, _express.Router)();
  *         description: 서버 에러
  */
 
-router.get('/:userId', getUserInfo, (req, res) => {
-  _controllers.scoreController.findScore(req, res);
-});
 /**
  * @swagger
  *
@@ -68,6 +77,8 @@ router.get('/:userId', getUserInfo, (req, res) => {
  *   post:
  *     tags:
  *       - score
+ *     security:
+ *       - bearerAuth: []
  *     summary: 성적 생성
  *     requestBody:
  *       required: true
@@ -143,18 +154,17 @@ router.get('/:userId', getUserInfo, (req, res) => {
  *         description: 서버 에러
  */
 
-router.post('/', authenticate, (req, res) => {
-  _controllers.scoreController.createScore(req, res);
-});
 /**
  * @swagger
  *
- * /score/{userId}:
+ * /score:
  *   patch:
  *     tags:
  *       - score
+ *     security:
+ *       - bearerAuth: []
  *     summary: 성적 수정
-  *     requestBody:
+ *     requestBody:
  *       required: true
  *       content:
  *         application/x-www-form-urlencoded:
@@ -219,16 +229,15 @@ router.post('/', authenticate, (req, res) => {
  *         description: 서버 에러
  */
 
-router.patch('/:userId', (req, res) => {
-  _controllers.scoreController.updateScore(req, res);
-});
 /**
  * @swagger
  *
- * /score/{userId}:
+ * /score:
  *   delete:
  *     tags:
  *       - score
+ *     security:
+ *       - bearerAuth: []
  *     summary: 성적 삭제
  *     responses:
  *       SUCCESS:
@@ -250,7 +259,4 @@ router.patch('/:userId', (req, res) => {
  *         description: 서버 에러
  */
 
-router.delete('/:userId', function (req, res) {
-  _controllers.scoreController.deleteScore(req, res);
-});
 module.exports = router;

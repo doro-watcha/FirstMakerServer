@@ -20,17 +20,21 @@ class University extends _sequelize.default.Model {
       },
       // 지원 가능 점수중 작은값
       min: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
+        type: _sequelize.default.FLOAT,
+        defaultValue: 0.0
+      },
+      // 지원 가능 점수중 높은 값
+      max: {
+        type: _sequelize.default.FLOAT,
+        defaultValue: 0.0
       },
       group: {
         type: _sequelize.default.STRING,
         allowNull: true
       },
-      // 지원 가능 점수중 높은 값
-      max: {
-        type: _sequelize.default.INTEGER,
-        defaultValue: 0
+      line: {
+        type: _sequelize.default.STRING,
+        allowNull: true
       },
       location: {
         type: _sequelize.default.STRING,
@@ -52,14 +56,14 @@ class University extends _sequelize.default.Model {
     });
   }
 
-  static associate(models) {
-    this.hasMany(models.Major, {
-      foreginKey: 'univId',
-      as: 'major'
-    }), this.hasMany(models.ReflectionRatio, {
-      foreignKey: 'univId',
-      as: 'reflectionRatio'
-    });
+  static associate(models) {}
+
+  toJSON() {
+    const object = Object.assign({}, this.dataValues); // delete some (key, value)
+
+    delete object.createdAt;
+    delete object.updatedAt;
+    return object;
   }
 
 } // swagger schema
@@ -82,16 +86,20 @@ const schema = {
       example: '가'
     },
     min: {
-      type: 'integer',
+      type: 'float',
       example: '340'
     },
     max: {
-      type: 'integer',
+      type: 'float',
       example: '660'
     },
     location: {
       type: 'string',
       example: '서울'
+    },
+    line: {
+      type: 'string',
+      example: '인문'
     }
   },
   required: ['id', 'name', 'min', 'max', 'location']

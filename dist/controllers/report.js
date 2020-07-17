@@ -14,7 +14,7 @@ var _functions = require("../utils/functions");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class reportController {
-  static async createReport(req, res) {
+  static async create(req, res) {
     try {
       const {
         user
@@ -45,10 +45,12 @@ class reportController {
     }
   }
 
-  static async findReport(req, res) {
+  static async findOne(req, res) {
     try {
       const id = req.params.id;
-      const report = await _services.reportService.findOne(id);
+      const report = await _services.reportService.findOne({
+        id
+      });
       const response = {
         success: true,
         data: {
@@ -66,7 +68,7 @@ class reportController {
       const {
         user
       } = req;
-      const reports = await _services.reportService.findAll(user.id);
+      const reports = await _services.reportService.findList(user.id);
       const response = {
         success: true,
         data: {
@@ -79,7 +81,7 @@ class reportController {
     }
   }
 
-  static async updateReport(req, res) {
+  static async update(req, res) {
     try {
       const id = req.params.id;
       const result = await _joi.default.validate(req.body, {
@@ -110,7 +112,7 @@ class reportController {
     }
   }
 
-  static async deleteReport(req, res) {
+  static async delete(req, res) {
     try {} catch (e) {
       res.send((0, _functions.createErrorResponse)(e));
     }

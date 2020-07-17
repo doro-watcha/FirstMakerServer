@@ -6,6 +6,30 @@ const { authenticate } = Authenticator
 
 const router = new Router()
 
+
+router.get('/' , (req,res) => {
+  academyController.findList(req,res)
+})
+
+router.get('/:id' , (req,res) => {
+  academyController.findOne(req,res)
+})
+
+router.post('/' , (req,res) => {
+  academyController.create(req,res)
+})
+
+router.patch('/:id' , (req,res) => {
+  academyController.update(req,res)
+})
+
+router.delete('/:id' , (req,res) => {
+  academyController.delete(req,res)
+})
+
+
+
+
 /**
  * @swagger
  *
@@ -13,7 +37,7 @@ const router = new Router()
  *   get:
  *     tags:
  *       - academy
- *     summary: 모든 학원 리스트 조회 
+ *     summary: 학원 리스트 조회 
  *     responses:
  *       SUCCESS:
  *         content:
@@ -43,9 +67,6 @@ const router = new Router()
  */
 
 
-router.get('/' , (req,res) => {
-  academyController.findAll(req,res)
-})
 
 
 /**
@@ -85,11 +106,6 @@ router.get('/' , (req,res) => {
  */
 
 
-router.get('/:id' , (req,res) => {
-  academyController.findOne(req,res)
-})
-
-
 /**
  * @swagger
  *
@@ -108,12 +124,7 @@ router.get('/:id' , (req,res) => {
  *               name:
  *                 type: string
  *                 description: 학원 이름
- *               password:
- *                 type: string
- *                 description: 비밀번호
  *             required:
- *               - name
- *               - password
  *     responses:
  *       SUCCESS:
  *         content:
@@ -134,9 +145,6 @@ router.get('/:id' , (req,res) => {
  *         description: 서버 에러
  */
 
-router.post('/' , (req,res) => {
-  academyController.create(req,res)
-})
 
 /**
  * @swagger
@@ -156,9 +164,6 @@ router.post('/' , (req,res) => {
  *               name:
  *                 type: string
  *                 description: 학원 이름
- *               password:
- *                 type: string
- *                 description: 비밀번호
  *     responses:
  *       SUCCESS:
  *         content:
@@ -186,9 +191,6 @@ router.post('/' , (req,res) => {
  *       'ecode: 700':
  *         description: 서버 에러
  */
-router.patch('/:id' , (req,res) => {
-  academyController.update(req,res)
-})
 
 /**
  * @swagger
@@ -217,9 +219,5 @@ router.patch('/:id' , (req,res) => {
  *       'ecode: 700':
  *         description: 서버 에러
  */
-
-router.delete('/:id' , (req,res) => {
-  academyController.delete(req,res)
-})
 
 module.exports = router

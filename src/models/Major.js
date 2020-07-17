@@ -5,11 +5,6 @@ export default class Major extends Sequelize.Model {
   static init(sequelize) {
     return super.init (
       {
-        // 연도
-        year : {
-          type : Sequelize.INTEGER,
-          defaultValue : 2020
-        },
         // 계열
         line: {
           type: Sequelize.STRING,
@@ -20,65 +15,29 @@ export default class Major extends Sequelize.Model {
           type: Sequelize.STRING,
           allowNull : true,
         },
+        // 위치
+        location : {
+          type : Sequelize.STRING,
+          allowNull : true 
+        },
         // 모집 전형
-        admissionType : {
+        recruitmentType : {
           type : Sequelize.STRING,
           allowNull : true
         },
-        // 모집 인원
-        recruitmentNumber : {
-          type : Sequelize.INTEGER,
-          defaultValue : 0
-        },
-        // 수시이월 인원
-        additionalMember : {
-          type : Sequelize.INTEGER,
-          defaultValue : 0 
-        },
-        // 최종 모집인원
-        finalNumber : {
-          type : Sequelize.INTEGER,
-          defaultValue : 0
-        },
-        // 경쟁률
-        competitionNumber : {
-          type : Sequelize.FLOAT,
-          allowNull : true
-        },
-        // 내신 반영 유무
-        isNaesinIncluded : {
-          type : Sequelize.BOOLEAN,
-          defaultValue : false
-        },
-        name: {
-          type: Sequelize.STRING,
-          allwoNull: true,
-        },
-        majorCode: {
-          type: Sequelize.INTEGER,
-          defaultValue: -1,
-        },
-        strong_val: {
-          type : Sequelize.FLOAT,
-          allowNull : true,
-        },
-        safe_val: {
-          type : Sequelize.FLOAT,
-          allowNull : true,
-        },
-        dangerous_val: {
-          type : Sequelize.FLOAT,
-          allowNull : true,
-        },
-        sniping_val : {
-          type : Sequelize.FLOAT,
-          allowNull : true,
-        },
-        somethingSpecial : {
+        // 대학 이름
+        univName : {
           type : Sequelize.STRING,
           allowNull : true
         },
-        etc : {
+        //모집 단위
+        recruitmentUnit : {
+          type : Sequelize.STRING,
+          allowNull : true 
+        },
+        
+        //세부 전공
+        majorName : {
           type : Sequelize.STRING,
           allowNull : true
         },
@@ -104,14 +63,25 @@ export default class Major extends Sequelize.Model {
 
 
 static associate(models) {
-  this.hasMany(models.Report , {
+  this.hasMany(models.MajorData, {
     foreignKey: 'majorId',
-    as: 'report'
-  }),
-  this.belongsTo(models.University, {
-    foreignKey: 'univId',
-    as : 'univ'
+    as: 'majorData',
   })
+  this.hasMany(models.Report, {
+    foreignKey : 'majorId',
+    as : 'report'
+  })
+}
+
+toJSON() {
+  const object = Object.assign({}, this.dataValues)
+
+  // delete some (key, value)
+ 
+  delete object.createdAt
+  delete object.updatedAt
+  
+  return object
 }
 
 }
@@ -124,77 +94,33 @@ type: 'object',
     type: 'integer',
     example: 3,
   },
-  year : {
-    type : 'integer',
-    example : 2020
-  },
-  line: {
+  line : {
     type: 'string',
-    example: '',
+    example : '인문'
   },
-  group: {
-    type: 'integer',
-    example: '0',
-  },
-  admissionType : {
+  group : {
     type : 'string',
-    example : '기회균등전형'
+    example : '가나'
   },
-  recruitmentNumber : {
-    type : 'integer',
-    example : '35'
-  },
-  additionalMember : {
-    type : 'integer',
-    example : '3'
-  },
-  finalNumber : {
-    type : 'integer',
-    example : '38'
-  },
-  competitionNumber : {
-    type : 'float',
-    example : 3.5
-  },
-  isNaesinIncluded : {
-    type : 'boolean',
-    example : false
-  },
-
-  name: {
-    type: 'string',
-    example: '지영학과',
-  },
-  majorCode: {
-    type: 'integer',
-    example: 35,
-  },
-  strong_val: {
-    type: 'float',
-    example : 690.5
-  },
-  safe_val:{
-    type: 'float',
-    example : 685.5
-  },
-  dangerous_val:{
-    type: 'float',
-    example : 680.6
-  },
-  sniping_val:{
-    type: 'float',
-    example : 665.5
-  },
-  somethingSpecial : {
+  location : {
     type : 'string',
-    example : '개발하기 너무 싫다'
+    example : '충남'
   },
-  etc : {
+  recruitmentType : {
     type : 'string',
-    example : '리얼로다가'
-  }, 
-  univ : {
-    $ref: '#/components/schemas/University'
+    example : '일반전형'
+  },
+  univName : {
+    type : 'string',
+    example : '고려대'
+  },
+  recruitmentUnit : {
+    type : 'string',
+    example : '자율전공'
+  },
+  majorName : {
+    type : 'string',
+    example : '자율전공학부'
   }
 
 },

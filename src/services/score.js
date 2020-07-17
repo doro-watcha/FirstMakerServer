@@ -16,12 +16,12 @@ class ScoreService {
         return await Score.create(modelObj)
     }
 
-    async findByUserId (userId) {
-        return await Score.findOne({
-            where : { userId }
-        })
-    }
-
+	async findOne(where) {
+		return await Score.findOne({
+			where: JSON.parse(JSON.stringify(where))
+		})
+	}
+    
     async update ( userId , score) {
 
         await Score.update(score, {

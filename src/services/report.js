@@ -30,13 +30,24 @@ class ReportService {
         return await Report.create(modelObj)
     }
 
-    async findOne (id) {
-        return await Report.findOne({
-            where : { id }
-        })
-    }
+	async findOne(where) {
+		return await Report.findOne({
+            where: JSON.parse(JSON.stringify(where)),
+            include: [
+				{
+					model: Major,
+					as: 'major',
+                },
+                
+				{
+					model: User,
+					as: 'user',
+				},
+			],
+		})
+	}
 
-    async findAll (userId) {
+    async findList (userId) {
 
 
 		let options = {

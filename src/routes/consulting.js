@@ -6,6 +6,31 @@ const { authenticate } = Authenticator
 
 const router = new Router()
 
+
+router.post('/', authenticate,  (req,res) => {
+  consultingController.create(req,res)
+})
+
+
+router.get('/' , (req, res) =>{
+  consultingController.findList(req,res)
+})
+
+
+router.get('/:id' ,  (req,res) => {
+  consultingController.findOne(req,res)
+})
+
+
+router.patch('/:id' , authenticate,  (req,res) => {
+  consultingController.update(req,res)
+})
+
+
+router.delete('/:id', authenticate, (req,res) => {
+  consultingController.delete(req,res)
+})
+
 /**
  * @swagger
  *
@@ -45,9 +70,6 @@ const router = new Router()
  */
 
 
-router.get('/', authenticate , (req, res) =>{
-  consultingController.findList(req,res)
-})
 
 /**
  * @swagger
@@ -100,10 +122,6 @@ router.get('/', authenticate , (req, res) =>{
  *       'ecode: 700':
  *         description: 서버 에러
  */
-
-router.get('/:id' , (req,res) => {
-  consultingController.findOne(req,res)
-})
 
 
 /**
@@ -162,10 +180,6 @@ router.get('/:id' , (req,res) => {
  *         description: 서버 에러
  */
 
-router.post('/', (req,res) => {
-  consultingController.createConsulting(req,res)
-})
-
 /**
  * @swagger
  *
@@ -218,9 +232,6 @@ router.post('/', (req,res) => {
  *         description: 서버 에러
  */
 
-router.patch('/:id' , (req,res) => {
-  consultingController.updateConsulting(req,res)
-})
 
 /**
  * @swagger
@@ -250,9 +261,6 @@ router.patch('/:id' , (req,res) => {
  *         description: 서버 에러
  */
 
-router.delete('/:id', (req,res) => {
-  consultingController.deleteConsulting(req,res)
-})
 
 
 

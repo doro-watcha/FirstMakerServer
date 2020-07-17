@@ -16,18 +16,12 @@ class ReflectionRatioService {
     return await ReflectionRatio.create(modelObj)
   }
 
-  async findOne(id) {
-    return await ReflectionRatio.findOne({
-      where : { id }
-    })
-  }
-  
-  async findByUnivId (univId) {
-    return await ReflectionRatio.findOne({
-      where : { univId}
-    })
-  }
 
+  async findOne(where) {
+		return await ReflectionRatio.findOne({
+			where: JSON.parse(JSON.stringify(where))
+		})
+	}
 
   async update ( id , modelObj) {
 

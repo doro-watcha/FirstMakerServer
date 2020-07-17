@@ -31,10 +31,7 @@ class UserService {
     await _models.User.create(user);
 
     const newUser = _models.User.findOne({
-      where: {
-        email: user.email
-      },
-      attributes: ['name', 'email']
+      email: user.email
     });
 
     if (newUser == null) throw Error('USER_NOT_FOUND');else {
@@ -42,24 +39,23 @@ class UserService {
     }
   }
 
-  async findById(id) {
-    return await _models.User.findOne({
-      where: {
-        id
-      },
-      attributes: ['id', 'academyId', 'name', 'email', 'telephone', 'highSchool', 'line', 'gender', 'graduateYear', 'predictTimes', 'haknyeon']
-    });
-  }
-
   async findOne(where) {
     return await _models.User.findOne({
-      where: JSON.parse(JSON.stringify(where))
+      where: JSON.parse(JSON.stringify(where)),
+      include: {
+        model: _models.Academy,
+        as: 'academy'
+      }
     });
   }
 
-  async findAll(where) {
+  async findList(where) {
     return await _models.User.findAll({
-      where: JSON.parse(JSON.stringify(where))
+      where: JSON.parse(JSON.stringify(where)),
+      include: {
+        model: _models.Academy,
+        as: 'academy'
+      }
     });
   }
 
@@ -72,6 +68,10 @@ class UserService {
     const updatedUser = await _models.User.findOne({
       where: {
         id
+      },
+      include: {
+        model: _models.Academy,
+        as: 'academy'
       }
     });
     if (updatedUser === null) throw Error('USER_NOT_FOUND');

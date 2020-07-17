@@ -37,11 +37,24 @@ export default class Consulting extends Sequelize.Model {
 
     static associate(models) {
       this.belongsTo(models.User, {
-        foreignKey: 'studentId',
-        as: 'student',
+        foreignKey: 'userId',
+        as: 'user',
       })
 
     }
+
+
+		toJSON() {
+			const object = Object.assign({}, this.dataValues)
+		
+			// delete some (key, value)
+		 
+			delete object.createdAt
+			delete object.updatedAt
+	
+			
+			return object
+		}
     
 }
 

@@ -9,16 +9,19 @@ export default class majorController {
 
     try {
 
+      const { user } = req
+
       const result = await Joi.validate(req.body, {
         amount : Joi.number().required(),
-        userId : Joi.number().required(),
         predictTimes : Joi.number().required()
       })
 
-      const { amount , userId, predictTimes } = result
+      const { amount , predictTimes } = result
 
       const modelObj = {
-        amount, userId, predictTimes
+        userId : user.id,
+        amount,
+        predictTimes
       }
 
       const paymentRecord = await paymentRecordService.create(modelObj)
@@ -39,9 +42,13 @@ export default class majorController {
   static async findOne ( req, res ) {
 
     try {
+      const { user } = req
       const id = req.params.id
 
-      const paymentRecord = await paymentRecordService.findOne(id)
+      const paymentRecord = await paymentRecordService.findOne({
+        userId : user.id,
+        id
+      })
 
       const response = {
         success : true ,
@@ -62,7 +69,21 @@ export default class majorController {
 
       const { user } = req 
 
-      const paymentRecord = await paymentRecordService.findList(user.id)
+      const result = await Joi.validate ( req.query, {
+        amount : Joi.number(),
+        predictTimes : Joi.number()
+      })
+
+      const { amount , predictTimes} = result 
+
+      const modelObj = {
+        userId : user.id,
+        amount, 
+        predictTimes 
+      }
+
+
+      const paymentRecord = await paymentRecordService.findList(modelObj)
 
       const response = {
         success : true ,
@@ -86,16 +107,15 @@ export default class majorController {
 
       const result = await Joi.validate ( req.body, {
         amount : Joi.number(),
-        userId : Joi.number(),
         predictTimes : Joi.number()
       })
 
-      const { amount , userId , predictTimes} = result 
+      const { amount , predictTimes} = result 
 
     
 
       const modelObj = {
-        amount , userId , predictTimes 
+        amount , predictTimes 
       }
 
       const paymentRecord = await paymentRecordService.update(id, modelObj)

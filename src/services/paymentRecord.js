@@ -28,17 +28,17 @@ class PaymentRecordService {
 
   }
 
-  async findList (userId) {
-    return await PaymentRecord.findAll({
-      where : { userId }
-    })
+  async findList (where) {
+		return await PaymentRecord.findAll({
+			where: JSON.parse(JSON.stringify(where))
+		})
   }
 
-  async findOne ( id ) {
-    return await PaymentRecord.findOne({
-      where : {id}
-    })
-  }
+	async findOne(where) {
+		return await PaymentRecord.findOne({
+			where: JSON.parse(JSON.stringify(where))
+		})
+	}
 
   async update ( id , modelObj) {
     

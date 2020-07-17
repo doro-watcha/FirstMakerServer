@@ -12,6 +12,21 @@ const {
   authenticate
 } = _Authenticator.default;
 const router = new _express.Router();
+router.post('/', authenticate, (req, res) => {
+  _controllers.consultingController.create(req, res);
+});
+router.get('/', (req, res) => {
+  _controllers.consultingController.findList(req, res);
+});
+router.get('/:id', (req, res) => {
+  _controllers.consultingController.findOne(req, res);
+});
+router.patch('/:id', authenticate, (req, res) => {
+  _controllers.consultingController.update(req, res);
+});
+router.delete('/:id', authenticate, (req, res) => {
+  _controllers.consultingController.delete(req, res);
+});
 /**
  * @swagger
  *
@@ -50,9 +65,6 @@ const router = new _express.Router();
  *         description: 서버 에러
  */
 
-router.get('/', authenticate, (req, res) => {
-  _controllers.consultingController.findList(req, res);
-});
 /**
  * @swagger
  *
@@ -105,9 +117,6 @@ router.get('/', authenticate, (req, res) => {
  *         description: 서버 에러
  */
 
-router.get('/:id', (req, res) => {
-  _controllers.consultingController.findOne(req, res);
-});
 /**
  * @swagger
  *
@@ -164,9 +173,6 @@ router.get('/:id', (req, res) => {
  *         description: 서버 에러
  */
 
-router.post('/', (req, res) => {
-  _controllers.consultingController.createConsulting(req, res);
-});
 /**
  * @swagger
  *
@@ -219,9 +225,6 @@ router.post('/', (req, res) => {
  *         description: 서버 에러
  */
 
-router.patch('/:id', (req, res) => {
-  _controllers.consultingController.updateConsulting(req, res);
-});
 /**
  * @swagger
  *
@@ -250,7 +253,4 @@ router.patch('/:id', (req, res) => {
  *         description: 서버 에러
  */
 
-router.delete('/:id', (req, res) => {
-  _controllers.consultingController.deleteConsulting(req, res);
-});
 module.exports = router;

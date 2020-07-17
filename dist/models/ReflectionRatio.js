@@ -64,6 +64,14 @@ class ReflectionRatio extends _sequelize.default.Model {
     });
   }
 
+  toJSON() {
+    const object = Object.assign({}, this.dataValues); // delete some (key, value)
+
+    delete object.createdAt;
+    delete object.updatedAt;
+    return object;
+  }
+
 } // swagger schema
 
 

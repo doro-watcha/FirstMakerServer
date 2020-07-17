@@ -23,11 +23,9 @@ class ScoreService {
     return await _models.Score.create(modelObj);
   }
 
-  async findByUserId(userId) {
+  async findOne(where) {
     return await _models.Score.findOne({
-      where: {
-        userId
-      }
+      where: JSON.parse(JSON.stringify(where))
     });
   }
 

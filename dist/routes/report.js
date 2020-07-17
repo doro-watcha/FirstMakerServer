@@ -13,6 +13,21 @@ const {
   getUserInfo
 } = _Authenticator.default;
 const router = (0, _express.Router)();
+router.post('/', authenticate, (req, res) => {
+  _controllers.reportController.create(req, res);
+});
+router.get('/:id', (req, res) => {
+  _controllers.reportController.findOne(req, res);
+});
+router.get('/', authenticate, (req, res) => {
+  _controllers.reportController.findList(req, res);
+});
+router.patch('/:id', (req, res) => {
+  _controllers.reportController.update(req.res);
+});
+router.delete('/:id', (req, res) => {
+  _controllers.reportController.delete(req, res);
+});
 /**
  * @swagger
  *
@@ -51,9 +66,6 @@ const router = (0, _express.Router)();
  *         description: 서버 에러
  */
 
-router.get('/', authenticate, (req, res) => {
-  _controllers.reportController.findList(req, res);
-});
 /**
  * @swagger
  *
@@ -92,9 +104,6 @@ router.get('/', authenticate, (req, res) => {
  *         description: 서버 에러
  */
 
-router.get('/:id', (req, res) => {
-  _controllers.reportController.findReport(req, res);
-});
 /**
  * @swagger
  *
@@ -103,6 +112,8 @@ router.get('/:id', (req, res) => {
  *     tags:
  *       - report
  *     summary: 레포트 생성
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -147,9 +158,6 @@ router.get('/:id', (req, res) => {
  *         description: 서버 에러
  */
 
-router.post('/', authenticate, (req, res) => {
-  _controllers.reportController.createReport(req, res);
-});
 /**
  * @swagger
  *
@@ -202,9 +210,6 @@ router.post('/', authenticate, (req, res) => {
  *         description: 서버 에러
  */
 
-router.patch('/:id', (req, res) => {
-  _controllers.reportController.updateReport(req.res);
-});
 /**
  * @swagger
  *
@@ -233,7 +238,4 @@ router.patch('/:id', (req, res) => {
  *         description: 서버 에러
  */
 
-router.delete('/:id', (req, res) => {
-  _controllers.reportController.deleteReport(req, res);
-});
 module.exports = router;

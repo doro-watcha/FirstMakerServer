@@ -40,8 +40,23 @@ export default class PaymentRecord extends Sequelize.Model {
         as: 'user',
       })
     }
+
+		toJSON() {
+			const object = Object.assign({}, this.dataValues)
+		
+			// delete some (key, value)
+		 
+			delete object.createdAt
+      delete object.updatedAt
+      
+      delete object.userId
+	
+			
+			return object
+		}
     
 }
+
 
 
 

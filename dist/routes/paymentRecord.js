@@ -13,6 +13,21 @@ const {
   getUserInfo
 } = _Authenticator.default;
 const router = (0, _express.Router)();
+router.post('/', authenticate, (req, res) => {
+  _controllers.paymentRecordController.create(req, res);
+});
+router.get('/', authenticate, (req, res) => {
+  _controllers.paymentRecordController.findList(req, res);
+});
+router.get('/:id', authenticate, (req, res) => {
+  _controllers.paymentRecordController.findOne(req, res);
+});
+router.patch('/:id', authenticate, (req, res) => {
+  _controllers.paymentRecordController.update(req, res);
+});
+router.delete('/:id', authenticate, (req, res) => {
+  _controllers.paymentRecordController.delete(req, res);
+});
 /**
  * @swagger
  *
@@ -22,7 +37,7 @@ const router = (0, _express.Router)();
  *       - paymentRecord
  *     security:
  *       - bearerAuth: []
- *     summary: 결제 기록 조회
+ *     summary: 결제 기록 리스트 조회
  *     responses:
  *       SUCCESS:
  *         content:
@@ -51,9 +66,6 @@ const router = (0, _express.Router)();
  *         description: 서버 에러
  */
 
-router.get('/', authenticate, (req, res) => {
-  _controllers.paymentRecordController.findList(req, res);
-});
 /**
  * @swagger
  *
@@ -92,9 +104,6 @@ router.get('/', authenticate, (req, res) => {
  *         description: 서버 에러
  */
 
-router.get('/:id', authenticate, (req, res) => {
-  _controllers.paymentRecordController.findOne(req, res);
-});
 /**
  * @swagger
  *
@@ -153,9 +162,6 @@ router.get('/:id', authenticate, (req, res) => {
  *         description: 서버 에러
  */
 
-router.post('/', authenticate, (req, res) => {
-  _controllers.paymentRecordController.create(req, res);
-});
 /**
  * @swagger
  *
@@ -210,9 +216,6 @@ router.post('/', authenticate, (req, res) => {
  *         description: 서버 에러
  */
 
-router.patch('/:id', authenticate, (req, res) => {
-  _controllers.paymentRecordController.update(req, res);
-});
 /**
  * @swagger
  *
@@ -243,7 +246,4 @@ router.patch('/:id', authenticate, (req, res) => {
  *         description: 서버 에러
  */
 
-router.delete('/:id', authenticate, (req, res) => {
-  _controllers.paymentRecordController.delete(req, res);
-});
 module.exports = router;

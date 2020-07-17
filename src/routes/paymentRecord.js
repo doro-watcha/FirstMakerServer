@@ -8,6 +8,30 @@ const { authenticate, getUserInfo } = Authenticator
 const router  = Router()
 
 
+
+router.post('/', authenticate, ( req, res) => {
+  paymentRecordController.create(req,res)
+})
+
+router.get('/', authenticate, (req,res) => {
+  paymentRecordController.findList(req,res)
+})
+
+
+router.get('/:id' , authenticate , (req,res) => {
+  paymentRecordController.findOne(req,res)
+})
+
+
+router.patch('/:id', authenticate , (req,res) => {
+  paymentRecordController.update(req,res)
+})
+
+
+router.delete('/:id', authenticate, (req,res) => {
+  paymentRecordController.delete(req,res)
+})
+
 /**
  * @swagger
  *
@@ -17,7 +41,7 @@ const router  = Router()
  *       - paymentRecord
  *     security:
  *       - bearerAuth: []
- *     summary: 결제 기록 조회
+ *     summary: 결제 기록 리스트 조회
  *     responses:
  *       SUCCESS:
  *         content:
@@ -47,9 +71,6 @@ const router  = Router()
  */
 
 
-router.get('/', authenticate, (req,res) => {
-  paymentRecordController.findList(req,res)
-})
 
 /**
  * @swagger
@@ -88,10 +109,6 @@ router.get('/', authenticate, (req,res) => {
  *       'ecode: 700':
  *         description: 서버 에러
  */
-
-router.get('/:id' , authenticate , (req,res) => {
-  paymentRecordController.findOne(req,res)
-})
 
 
 /**
@@ -152,9 +169,6 @@ router.get('/:id' , authenticate , (req,res) => {
  *         description: 서버 에러
  */
 
-router.post('/', authenticate, ( req, res) => {
-  paymentRecordController.create(req,res)
-})
 
 
 /**
@@ -211,10 +225,6 @@ router.post('/', authenticate, ( req, res) => {
  *         description: 서버 에러
  */
 
-router.patch('/:id', authenticate , (req,res) => {
-  paymentRecordController.update(req,res)
-})
-
 
 /**
  * @swagger
@@ -248,8 +258,5 @@ router.patch('/:id', authenticate , (req,res) => {
 
 
 
-router.delete('/:id', authenticate, (req,res) => {
-  paymentRecordController.delete(req,res)
-})
 
 module.exports = router

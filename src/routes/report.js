@@ -8,6 +8,29 @@ const { authenticate, getUserInfo } = Authenticator
 const router  = Router()
 
 
+router.post('/', authenticate, (req,res) => {
+  reportController.create(req,res)
+})
+
+router.get('/:id' , (req,res) => {
+  reportController.findOne(req,res)
+})
+
+router.get('/', authenticate, (req,res) => {
+  reportController.findList(req,res)
+})
+
+
+router.patch('/:id', (req, res) => {
+  reportController.update(req.res)
+})
+
+
+router.delete('/:id', (req,res) => {
+  reportController.delete(req,res)
+})
+
+
 /**
  * @swagger
  *
@@ -46,9 +69,6 @@ const router  = Router()
  *         description: 서버 에러
  */
 
-router.get('/', authenticate, (req,res) => {
-  reportController.findList(req,res)
-})
 
 /**
  * @swagger
@@ -88,9 +108,6 @@ router.get('/', authenticate, (req,res) => {
  *         description: 서버 에러
  */
 
-router.get('/:id' , (req,res) => {
-  reportController.findReport(req,res)
-})
 
 
 /**
@@ -101,6 +118,8 @@ router.get('/:id' , (req,res) => {
  *     tags:
  *       - report
  *     summary: 레포트 생성
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -146,9 +165,6 @@ router.get('/:id' , (req,res) => {
  */
 
 
-router.post('/', authenticate, (req,res) => {
-  reportController.createReport(req,res)
-})
 
 /**
  * @swagger
@@ -202,10 +218,6 @@ router.post('/', authenticate, (req,res) => {
  *         description: 서버 에러
  */
 
-router.patch('/:id', (req, res) => {
-  reportController.updateReport(req.res)
-})
-
 /**
  * @swagger
  *
@@ -233,10 +245,6 @@ router.patch('/:id', (req, res) => {
  *       'ecode: 700':
  *         description: 서버 에러
  */
-
-router.delete('/:id', (req,res) => {
-  reportController.deleteReport(req,res)
-})
 
 
 module.exports = router

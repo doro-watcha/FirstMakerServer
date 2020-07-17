@@ -25,7 +25,7 @@ class AcademyService {
     return await _models.Academy.create(modelObj);
   }
 
-  async findAll(where) {
+  async findList(where) {
     return _models.Academy.findAll({
       where: JSON.parse(JSON.stringify(where))
     });

@@ -5,7 +5,7 @@ import { createErrorResponse } from '../utils/functions'
 
 export default class scoreController {
 
-    static async createScore ( req, res ) {
+    static async create ( req, res ) {
 
         try {
 
@@ -40,7 +40,7 @@ export default class scoreController {
                 naesin_type
             }
 
-            const exist_score = await scoreService.findByUserId(user.id)
+            const exist_score = await scoreService.findOne({userId : user.id})
 
             if ( exist_score != null) throw Error('SCORE_ALREADY_EXISTS')
             const score = await scoreService.create( modelObj )
@@ -60,35 +60,35 @@ export default class scoreController {
 
 
     }
-    static async findScore ( req, res ) {
 
+    static async findOne(req,res) {
         try {
-            const userId = req.params.userId 
 
-            const score = await scoreService.findByUserId(userId)
+            const { user } = req
 
-            if (score == null) throw Error('SCORE_NOT_FOUND')   
+    
+            const score = await scoreService.findOne({
+                userId : user.id
+            })
 
             const response = {
-
-                success : true ,
+                success : true,
                 data : {
                     score
                 }
             }
             res.send(response)
-
-        } catch ( e) {
-            res.send ( createErrorResponse(e))
+            
+        } catch ( e ) {
+            res.send(createErrorResponse(e))
         }
-
     }
 
 
-    static async updateScore ( req, res ) {
+    static async update ( req, res ) {
 
         try {
-            const userId = req.params.userId
+            const {user} = req
 
             const result = await Joi.validate(req.body, {
                 korean : Joi.object().required(),
@@ -106,7 +106,7 @@ export default class scoreController {
             const { korean , math , english , tamgu1, tamgu2 , history ,foreign, line, naesin, naesin_type } = result 
 
             const modelObj = {
-                userId,
+                userId : user.id,
                 korean,
                 math,
                 english,
@@ -119,7 +119,7 @@ export default class scoreController {
                 naesin_type
             }
 
-            const score = await scoreService.update(userId, modelObj)
+            const score = await scoreService.update(user.id, modelObj)
 
             if ( score == null ) throw Error('SCORE_NOT_FOUND')
 
@@ -142,13 +142,12 @@ export default class scoreController {
 
     }
 
-    static async deleteScore ( req, res ) {
+    static async delete ( req, res ) {
 
         try {
+            const { user } = req
 
-            const userId = req.params.userId 
-
-            await scoreService.delete(userId)
+            await scoreService.delete(user.id)
 
             const response = {
                 success : true 

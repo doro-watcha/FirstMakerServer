@@ -14,22 +14,23 @@ var _functions = require("../utils/functions");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class consultingController {
-  static async createConsulting(req, res) {
+  static async create(req, res) {
     try {
+      const {
+        user
+      } = req;
       const result = await _joi.default.validate(req.body, {
         title: _joi.default.string().required(),
-        description: _joi.default.string().required(),
-        userId: _joi.default.number()
+        description: _joi.default.string().required()
       });
       const {
         title,
-        description,
-        userId
+        description
       } = result;
       const modelObj = {
         title,
         description,
-        studentId: userId
+        userId: user.id
       };
       const consulting = await _services.consultingService.create(modelObj);
       const response = {
@@ -46,7 +47,7 @@ class consultingController {
 
   static async findList(req, res) {
     try {
-      const consulting = await _services.consultingService.findAll();
+      const consulting = await _services.consultingService.findList();
       const response = {
         success: true,
         data: {
@@ -62,7 +63,10 @@ class consultingController {
   static async findOne(req, res) {
     try {
       const id = req.params.id;
-      const consulting = await _services.consultingService.findOne(id);
+      const consulting = await _services.consultingService.findOne({
+        id
+      });
+      if (consulting == null) throw Error('CONSULTING_NOT_FOUND');
       const response = {
         success: true,
         data: {
@@ -75,23 +79,24 @@ class consultingController {
     }
   }
 
-  static async updateConsulting(req, res) {
+  static async update(req, res) {
     try {
+      const {
+        user
+      } = req;
       const id = req.params.id;
-      const result = await _joi.default.validate(req, body, {
-        title: _joi.default.string().required(),
-        description: _joi.default.string().required(),
-        studentId: _joi.default.number()
+      const result = await _joi.default.validate(req.body, {
+        title: _joi.default.string(),
+        description: _joi.default.string()
       });
       const {
         title,
-        description,
-        studentId
+        description
       } = result;
       const modelObj = {
         title,
         description,
-        studentId
+        userId: user.id
       };
       const consulting = await _services.consultingService.update(id, modelObj);
       const response = {
@@ -106,7 +111,7 @@ class consultingController {
     }
   }
 
-  static async deleteConsulting(req, res) {
+  static async delete(req, res) {
     try {
       const id = req.params.id;
       await _services.consultingService.delete(id);

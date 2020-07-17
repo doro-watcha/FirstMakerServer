@@ -89,7 +89,7 @@ export default class User extends Sequelize.Model {
 				as : 'academy'
 			}),
 			this.hasMany(models.Consulting, {
-				foreignKey : 'studentId',
+				foreignKey : 'userId',
 				as : 'consulting'
 			})
 			this.hasMany(models.PaymentRecord, {
@@ -101,6 +101,23 @@ export default class User extends Sequelize.Model {
 				as : 'score'
 			})
 		}
+
+
+toJSON() {
+  const object = Object.assign({}, this.dataValues)
+
+  // delete some (key, value)
+ 
+  delete object.createdAt
+	delete object.updatedAt
+	delete object.password
+
+	delete object.academyId
+
+  
+  return object
+}
+
 
 }
 
@@ -154,7 +171,10 @@ export const schema = {
 		predictTimes : {
 			type : 'integer',
 			example : 3
+		},
+		academy : {
+			$ref: '#/components/schemas/Academy'
 		}
 	},
-	required : ['id', 'email','password','name','telephone']
+	required : ['id', 'email','password','name']
 }

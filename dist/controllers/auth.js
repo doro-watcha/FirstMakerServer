@@ -56,26 +56,6 @@ class AuthController {
     }
   }
 
-  static async academyToken(req, res) {
-    try {
-      const {
-        academy
-      } = req;
-      const foundAcademy = await _services.academyService.findOne({
-        id: academy.id
-      });
-      const response = {
-        success: true,
-        data: {
-          academy: foundAcademy
-        }
-      };
-      res.send(response);
-    } catch (e) {
-      res.send((0, _functions.createErrorResponse)(e));
-    }
-  }
-
   static async signUp(req, res) {
     try {
       // validation
@@ -110,11 +90,7 @@ class AuthController {
         email
       }); // [ERROR] USER_ALREADY_EXISTS
 
-      if (user) throw Error('USER_ALREADY_EXISTS');
-      const academy = await _services.academyService.findOne({
-        id: academyId
-      });
-      if (!academy) throw Error('ACADEMY_NOT_FOUND'); // create user
+      if (user) throw Error('USER_ALREADY_EXISTS'); // create user
 
       const success = await _services.userService.create({
         name,

@@ -6,12 +6,12 @@ import { createErrorResponse } from '../utils/functions'
 export default class userController {
 
 
-    static async findUser ( req, res ) {
+    static async findOne ( req, res ) {
 
         try {
             const id = req.params.id 
 
-            const user = await userService.findById(id)
+            const user = await userService.findOne({id})
 
             if (user == null) throw Error('USER_NOT_FOUND')   
 
@@ -30,12 +30,12 @@ export default class userController {
 
     }
 
-    static async searchUser(req,res) {
+    static async findList(req,res) {
 
       try {
 
         const result = await Joi.validate ( req.query , {
-          academyId : Joi.number()
+          academyId : Joi.number(),
         })
 
         const { academyId } = result 
@@ -44,7 +44,7 @@ export default class userController {
           academyId
         }
 
-        const user = await userService.findAll(where)
+        const user = await userService.findList(where)
 
         const response = {
           success : true ,
@@ -62,7 +62,7 @@ export default class userController {
     }
 
 
-    static async updateUser ( req, res ) {
+    static async update ( req, res ) {
 
         try {
 
@@ -112,7 +112,7 @@ export default class userController {
 
     }
 
-    static async deleteUser ( req, res ) {
+    static async delete ( req, res ) {
 
         try {
 

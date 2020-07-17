@@ -18,7 +18,7 @@ var _PaymentRecord = require("./models/PaymentRecord");
 
 var _Consulting = require("./models/Consulting");
 
-var _ReflectionRatio = require("./models/ReflectionRatio");
+var _MajorData = require("./models/MajorData");
 
 var _Academy = require("./models/Academy");
 
@@ -72,36 +72,92 @@ const parameters = {
       type: 'integer'
     }
   },
-  limit: {
-    name: 'limit',
+  academyId: {
+    name: 'academyId',
     in: 'query',
-    description: 'default = 10, min = 1, max = 50',
+    description: '학원 id별 조회',
+    shcema: {
+      type: 'integer'
+    }
+  },
+  userId: {
+    name: 'userId',
+    in: 'query',
+    description: '유저 id별 조회',
+    shcema: {
+      type: 'integer'
+    }
+  },
+  majorId: {
+    name: 'majorId',
+    in: 'query',
+    description: '학과 id별 조회',
     schema: {
       type: 'integer'
     }
   },
-  sinceId: {
-    name: 'sinceId',
+  location: {
+    name: 'location',
     in: 'query',
-    description: 'min = 0',
-    schema: {
-      type: 'integer'
-    }
-  },
-  maxId: {
-    name: 'maxId',
-    in: 'query',
-    description: 'min = 0',
-    schema: {
-      type: 'integer'
-    }
-  },
-  orderBy: {
-    name: 'orderBy',
-    in: 'query',
-    description: "default = 'desc', valid = ['asc', 'desc']",
+    description: '대학 위치',
     schema: {
       type: 'string'
+    }
+  },
+  group: {
+    name: 'group',
+    in: 'query',
+    description: '모집 군별',
+    schema: {
+      type: 'string'
+    }
+  },
+  line: {
+    name: 'line',
+    in: 'query',
+    description: '인문/자연/예체능',
+    schema: {
+      type: 'string'
+    }
+  },
+  recruitmentType: {
+    name: 'recruitmentType',
+    in: 'query',
+    description: '모집 전형',
+    schema: {
+      type: 'string'
+    }
+  },
+  univName: {
+    name: 'univName',
+    in: 'query',
+    description: '대학 이름',
+    schema: {
+      type: 'string'
+    }
+  },
+  recruitmentUnit: {
+    name: 'recruitmentUnit',
+    in: 'query',
+    description: '모집 단위',
+    schema: {
+      type: 'string'
+    }
+  },
+  majorName: {
+    name: 'majorName',
+    in: 'query',
+    description: '세부 전공',
+    schema: {
+      type: 'string'
+    }
+  },
+  year: {
+    name: 'year',
+    in: 'query',
+    description: '년도',
+    schema: {
+      type: 'integer'
     }
   }
 };
@@ -121,7 +177,7 @@ const options = {
         Report: _Report.schema,
         PaymentRecord: _PaymentRecord.schema,
         Consulting: _Consulting.schema,
-        ReflectionRatio: _ReflectionRatio.schema,
+        MajorData: _MajorData.schema,
         Academy: _Academy.schema
       },
       securitySchemes: {

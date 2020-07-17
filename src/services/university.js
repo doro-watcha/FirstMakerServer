@@ -16,24 +16,17 @@ class UniversityService {
         return await University.create(modelObj)
     }
 
-    async findAll() {
+    async findList(where) {
         return await University.findAll({
-            attributes : ['id','location','name', 'min','max', 'group']
-        })
+			where : JSON.parse(JSON.stringify(where))
+		})
     }
 
-    async findOne(id) {
-        return await University.findOne({
-            where : {id}
-        })
-    }
-
-    async findByName(name) {
-        return await University.findOne({
-            where : { name }
-        })
-    }
-
+	async findOne(where) {
+		return await University.findOne({
+			where: JSON.parse(JSON.stringify(where))
+		})
+	}
     async update ( id , modelObj ) {
         await University.update(modelObj, {
             where: { id },

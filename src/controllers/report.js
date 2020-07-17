@@ -5,7 +5,7 @@ import { createErrorResponse } from '../utils/functions'
 
 export default class reportController {
 
-  static async createReport ( req, res ) {
+  static async create ( req, res ) {
 
     try {
       const { user } = req
@@ -42,13 +42,13 @@ export default class reportController {
   }
   
 
-  static async findReport ( req, res ) {
+  static async findOne ( req, res ) {
 
     try {
 
       const id = req.params.id
 
-      const report = await reportService.findOne(id)
+      const report = await reportService.findOne({id})
 
       const response = {
         success : true,
@@ -69,7 +69,7 @@ export default class reportController {
     try {
 
       const { user } = req 
-      const reports = await reportService.findAll(user.id)
+      const reports = await reportService.findList(user.id)
 
   
 
@@ -88,7 +88,7 @@ export default class reportController {
 
   }
 
-  static async updateReport ( req, res) {
+  static async update ( req, res) {
 
     try {
 
@@ -123,7 +123,7 @@ export default class reportController {
     }
   }
 
-  static async deleteReport ( req, res ) {
+  static async delete ( req, res ) {
 
     try {
 

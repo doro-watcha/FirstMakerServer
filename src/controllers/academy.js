@@ -10,8 +10,7 @@ export default class academyController {
     try {
 
       const result = await Joi.validate(req.body, {
-        name : Joi.string().required(),
-        password : Joi.string().required()
+        name : Joi.string().required()
       })
 
       const { name , password } = result 
@@ -45,10 +44,10 @@ export default class academyController {
     }
   }
 
-  static async findAll ( req, res) {
+  static async findList ( req, res) {
     try { 
 
-      const academy = await academyService.findAll({})
+      const academy = await academyService.findList({})
 
       const response = {
         success : true ,
@@ -69,9 +68,7 @@ export default class academyController {
 
       const id = req.params.id
 
-      const academy = await academyService.findOne({
-        id
-      })
+      const academy = await academyService.findOne({id})
 
       if ( academy == null) throw Error('ACADEMY_NOT_FOUND')
 

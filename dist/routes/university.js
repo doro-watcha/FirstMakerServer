@@ -5,6 +5,21 @@ var _controllers = require("../controllers");
 var express = require('express');
 
 var router = express.Router();
+router.post('/', (req, res) => {
+  _controllers.universityController.create(req, res);
+});
+router.get('/', function (req, res) {
+  _controllers.universityController.findList(req, res);
+});
+router.get('/:id', function (req, res) {
+  _controllers.universityController.findOne(req, res);
+});
+router.patch('/:id', (req, res) => {
+  _controllers.universityController.update(req, res);
+});
+router.delete('/:id', (req, res) => {
+  _controllers.universityController.delete(req, res);
+});
 /**
  * @swagger
  *
@@ -13,6 +28,13 @@ var router = express.Router();
  *     tags:
  *       - university
  *     summary: 대학 리스트 조회
+ *     parameters:
+ *       - location:
+ *         $ref: '#/components/parameters/location'
+ *       - group:
+ *         $ref: '#/components/parameters/group'
+ *       - line:
+ *         $ref: '#/components/parameters/line'
  *     responses:
  *       SUCCESS:
  *         content:
@@ -41,9 +63,42 @@ var router = express.Router();
  *         description: 서버 에러
  */
 
-router.get('/', function (req, res) {
-  _controllers.universityController.findList(req, res);
-});
+/**
+ * @swagger
+ *
+ * /university/{id}:
+ *   get:
+ *     tags:
+ *       - university
+ *     summary: 대학 id별 조회
+ *     responses:
+ *       SUCCESS:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     university:
+ *                       $ref: '#/components/schemas/University'
+ *                   required:
+ *                     - university
+ *               required:
+ *                 - success
+ *                 - data
+ *       'ecode: 201':
+ *         description: 유효하지 않은 토큰
+ *       'ecode: 100':
+ *         description: Request Body Validation 실패
+ *       'ecode: 700':
+ *         description: 서버 에러
+ */
+
 /**
  * @swagger
  *
@@ -71,11 +126,16 @@ router.get('/', function (req, res) {
  *               location:
  *                 type: string
  *                 description: 위치
+ *               group:
+ *                 type: string
+ *                 description: 모집 군별
+ *               line:
+ *                 type: string
+ *                 description: 인문/자연
  *             required:
  *               - name
  *               - min
  *               - max
- *               - location
  *     responses:
  *       SUCCESS:
  *         content:
@@ -104,9 +164,6 @@ router.get('/', function (req, res) {
  *         description: 서버 에러
  */
 
-router.post('/', (req, res) => {
-  _controllers.universityController.createUniversity(req, res);
-});
 /**
  * @swagger
  *
@@ -134,6 +191,12 @@ router.post('/', (req, res) => {
  *               location:
  *                 type: string
  *                 description: 위치
+ *               group:
+ *                 type: string
+ *                 description: 모집 군별
+ *               line:
+ *                 type: string
+ *                 description: 인문/자연
  *     responses:
  *       SUCCESS:
  *         content:
@@ -162,9 +225,6 @@ router.post('/', (req, res) => {
  *         description: 서버 에러
  */
 
-router.patch('/:id', (req, res) => {
-  _controllers.universityController.updateUniversity(req, res);
-});
 /**
  * @swagger
  *
@@ -193,7 +253,4 @@ router.patch('/:id', (req, res) => {
  *         description: 서버 에러
  */
 
-router.delete('/:id', (req, res) => {
-  _controllers.universityController.deleteUniversity(req, res);
-});
 module.exports = router;

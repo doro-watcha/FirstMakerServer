@@ -23,41 +23,24 @@ class MajorService {
     return await _models.Major.create(modelObj);
   }
 
-  async findList(univId, line) {
+  async findList(where) {
     return await _models.Major.findAll({
-      where: {
-        univId,
-        line
-      }
+      where: JSON.parse(JSON.stringify(where))
     });
   }
 
-  async findByName(name, univId) {
+  async findOne(where) {
     return await _models.Major.findOne({
-      where: {
-        name,
-        univId
-      }
+      where: JSON.parse(JSON.stringify(where))
     });
-  }
-
-  async findAll() {
-    return await _models.Major.findAll({});
   }
 
   async update(id, modelObj) {
-    await _models.Major.update(modelObj, {
+    return await _models.Major.update(modelObj, {
       where: {
         id
       }
     });
-    const updatedMajor = await _models.Major.findOne({
-      where: {
-        id
-      }
-    });
-    if (updatedMajor === null) throw Error('MAJOR_NOT_FOUND');
-    return updatedMajor;
   }
 
   async delete(id) {

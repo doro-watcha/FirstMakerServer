@@ -17,8 +17,7 @@ class academyController {
   static async create(req, res) {
     try {
       const result = await _joi.default.validate(req.body, {
-        name: _joi.default.string().required(),
-        password: _joi.default.string().required()
+        name: _joi.default.string().required()
       });
       const {
         name,
@@ -46,9 +45,9 @@ class academyController {
     }
   }
 
-  static async findAll(req, res) {
+  static async findList(req, res) {
     try {
-      const academy = await _services.academyService.findAll({});
+      const academy = await _services.academyService.findList({});
       const response = {
         success: true,
         data: {

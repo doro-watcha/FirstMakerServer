@@ -41,32 +41,6 @@ export default class AuthController {
 			res.send(createErrorResponse(e))
 		}
   }
-	
-	static async academyToken ( req, res) {
-
-		try { 
-
-			const { academy } = req
-			const foundAcademy = await academyService.findOne({
-				id : academy.id
-			})
-
-			const response = {
-				success : true,
-				data : {
-					academy : foundAcademy
-				}
-			}
-
-			res.send(response)
-
-		} catch ( e ) {
-			res.send(createErrorResponse(e))
-		}
-
-
-	}
-
 
   static async signUp(req, res) {
 
@@ -98,12 +72,6 @@ export default class AuthController {
 
 			// [ERROR] USER_ALREADY_EXISTS
 			if (user) throw Error('USER_ALREADY_EXISTS')
-
-			const academy = await academyService.findOne({
-				id : academyId
-			})
-
-			if ( !academy ) throw Error('ACADEMY_NOT_FOUND')
 
 			// create user
 			const success = await userService.create({

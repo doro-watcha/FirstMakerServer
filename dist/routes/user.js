@@ -5,6 +5,57 @@ var _controllers = require("../controllers");
 var express = require('express');
 
 var router = express.Router();
+router.get('/:id', (req, res) => {
+  _controllers.userController.findOne(req, res);
+});
+router.get('/', (req, res) => {
+  _controllers.userController.findList(req, res);
+});
+router.patch('/:id', (req, res) => {
+  _controllers.userController.update(req, res);
+});
+router.delete('/:id', (req, res) => {
+  _controllers.userController.delete(req, res);
+});
+/**
+ * @swagger
+ *
+ * /user:
+ *   get:
+ *     tags:
+ *       - user
+ *     summary: 유저 리스트 조회
+ *     parameters:
+ *       - academyId:
+ *         $ref: '#/components/parameters/academyId'
+ *     responses:
+ *       SUCCESS:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     user:
+ *                       $ref: '#/components/schemas/User'
+ *                   required:
+ *                     - user
+ *               required:
+ *                 - success
+ *                 - data
+ *       'ecode: 201':
+ *         description: 유효하지 않은 토큰
+ *       'ecode: 100':
+ *         description: Request Body Validation 실패
+ *       'ecode: 700':
+ *         description: 서버 에러
+ */
+
 /**
  * @swagger
  *
@@ -41,9 +92,6 @@ var router = express.Router();
  *         description: 서버 에러
  */
 
-router.get('/:id', (req, res) => {
-  _controllers.userController.findUser(req, res);
-});
 /**
  * @swagger
  *
@@ -68,6 +116,12 @@ router.get('/:id', (req, res) => {
  *               line:
  *                 type: string
  *                 description: 문/이과
+ *               graduateYear:
+ *                 type: integer
+ *                 description: 졸업년도
+ *               haknyeon:
+ *                 type: string
+ *                 description: 학년
  *               predictTimes:
  *                 type: integer
  *                 description: 예측 가능 횟수
@@ -77,6 +131,9 @@ router.get('/:id', (req, res) => {
  *               telephone:
  *                 type: integer
  *                 description: 전화번호
+ *               academyId:
+ *                 type: integer
+ *                 description: 학원 id
  * 
  *     responses:
  *       SUCCESS:
@@ -106,9 +163,6 @@ router.get('/:id', (req, res) => {
  *         description: 서버 에러
  */
 
-router.patch('/:id', (req, res) => {
-  _controllers.userController.updateUser(req, res);
-});
 /**
  * @swagger
  *
@@ -137,53 +191,4 @@ router.patch('/:id', (req, res) => {
  *         description: 서버 에러
  */
 
-router.delete('/:id', (req, res) => {
-  _controllers.userController.deleteUser(req, res);
-});
-/**
- * @swagger
- *
- * /user:
- *   get:
- *     tags:
- *       - user
- *     summary: 유저 조건별 조회 
- *     parameters:
- *       - in: query
- *         name: academyId
- *         schema:
- *           type: integer
- *         required: false
- *         description: 학원 ID
- *     responses:
- *       SUCCESS:
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
- *                 data:
- *                   type: object
- *                   properties:
- *                     user:
- *                       $ref: '#/components/schemas/User'
- *                   required:
- *                     - user
- *               required:
- *                 - success
- *                 - data
- *       'ecode: 201':
- *         description: 유효하지 않은 토큰
- *       'ecode: 100':
- *         description: Request Body Validation 실패
- *       'ecode: 700':
- *         description: 서버 에러
- */
-
-router.get('/', (req, res) => {
-  _controllers.userController.searchUser(req, res);
-});
 module.exports = router;

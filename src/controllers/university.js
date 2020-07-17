@@ -5,21 +5,22 @@ import { createErrorResponse } from '../utils/functions'
 
 export default class UniversityController {
 
-    static async createUniversity ( req, res) {
+    static async create ( req, res) {
 
         try { 
 
             const result = await Joi.validate(req.body , {
-                name : Joi.string().required(),
-                min : Joi.number().required(),
-                max : Joi.number().required(),
-                location : Joi.string().required(),
-                group : Joi.string().required()
+                name : Joi.string(),
+                min : Joi.number(),
+                max : Joi.number(),
+                line : Joi.string(),
+                location : Joi.string(),
+                group : Joi.string()
             })
 
-            const { name , min , max , location, group } = result 
+            const { name , min , max , location, group, line  } = result 
 
-            const exist_university = await universityService.findByName(name)
+            const exist_university = await universityService.findOne({name})
             
             if ( exist_university != null) throw Error('UNIVERSITY_ALREADY_EXISTS')
 
@@ -28,7 +29,8 @@ export default class UniversityController {
                 min,
                 max,
                 location,
-                group
+                group,
+                line
             }
 
             const university = await universityService.create(modelObj)
@@ -54,7 +56,27 @@ export default class UniversityController {
 
         try {
 
-            const university = await universityService.findAll()
+            const result = await Joi.validate(req.query , {
+                name : Joi.string(),
+                min : Joi.number(),
+                max : Joi.number(),
+                location : Joi.string(),
+                group : Joi.string(),
+                line : Joi.string()
+            })
+
+            const { name , min , max , location, group , line} = result 
+
+            const modelObj = {
+                name,
+                min,
+                max,
+                location,
+                group,
+                line
+            }
+
+            const university = await universityService.findList(modelObj)
 
             if ( university == null ) throw Error('UNIVERSITY NOT FOUND')
 
@@ -76,7 +98,30 @@ export default class UniversityController {
     }
 
 
-    static async updateUniversity ( req, res ) {
+    static async findOne(req,res) {
+        try {
+
+            const id = req.params.id
+
+            const university = await universityService.findOne({id})
+
+            if ( university == null ) throw Error('UNIVERSITY_NOT_FOUND')
+
+            const response = {
+                success : true ,
+                data : {
+                    university
+                }
+            }
+            res.send(response)
+
+        } catch ( e ) {
+            res.send(createErrorResponse(e))
+        }
+    }
+
+
+    static async update ( req, res ) {
 
         try { 
             const id = req.params.id 
@@ -87,17 +132,19 @@ export default class UniversityController {
                 max : Joi.number(),
                 min : Joi.number(),
                 location : Joi.string(), 
-                group : Joi.string()
+                group : Joi.string(),
+                line : Joi.string()
             })
 
-            const { name , max , min , location, group } = result
+            const { name , max , min , location, group ,line} = result
 
             const modelObj = {
                 name,
                 max,
                 min,
                 location,
-                group
+                group,
+                line
             }
 
            
@@ -114,7 +161,7 @@ export default class UniversityController {
 
     }
 
-    static async deleteUniversity ( req, res ) {
+    static async delete ( req, res ) {
 
         try { 
 

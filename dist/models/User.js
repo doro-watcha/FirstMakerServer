@@ -90,7 +90,7 @@ class User extends _sequelize.default.Model {
       foreignKey: 'academyId',
       as: 'academy'
     }), this.hasMany(models.Consulting, {
-      foreignKey: 'studentId',
+      foreignKey: 'userId',
       as: 'consulting'
     });
     this.hasMany(models.PaymentRecord, {
@@ -101,6 +101,16 @@ class User extends _sequelize.default.Model {
       foreignKey: 'userId',
       as: 'score'
     });
+  }
+
+  toJSON() {
+    const object = Object.assign({}, this.dataValues); // delete some (key, value)
+
+    delete object.createdAt;
+    delete object.updatedAt;
+    delete object.password;
+    delete object.academyId;
+    return object;
   }
 
 } // swagger schema
@@ -153,8 +163,11 @@ const schema = {
     predictTimes: {
       type: 'integer',
       example: 3
+    },
+    academy: {
+      $ref: '#/components/schemas/Academy'
     }
   },
-  required: ['id', 'email', 'password', 'name', 'telephone']
+  required: ['id', 'email', 'password', 'name']
 };
 exports.schema = schema;

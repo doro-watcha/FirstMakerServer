@@ -16,7 +16,7 @@ const {
   authenticate
 } = _Authenticator.default;
 const router = new _express.Router();
-const upload = (0, _multer.default)({
+const upload_major = (0, _multer.default)({
   storage: _multer.default.diskStorage({
     // set a localstorage destination
     destination: (req, file, cb) => {
@@ -28,29 +28,44 @@ const upload = (0, _multer.default)({
     }
   })
 });
-router.post('/major', upload.fields([{
+const upload_university = (0, _multer.default)({
+  storage: _multer.default.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, '../excelfile/');
+    },
+    filename: (req, file, cb) => {
+      cb(null, "university" + _path.default.extname(file.originalname));
+    }
+  })
+});
+router.post('/major', upload_major.fields([{
   name: 'excel',
   maxCount: 1
 }]), (req, res) => {
-  console.log("wow");
-
   _controllers.fileController.createMajorFile(req, res);
 });
 router.get('/major', (req, res) => {
-  console.log("tlqkf");
-
   _controllers.fileController.getMajorFile(req, res);
 });
 router.delete('/major', (req, res) => {
   _controllers.fileController.deleteMajorFile(req, res);
 });
-router.post('/university', (req, res) => {
-  _controllers.fileController.createUniversity(req, res);
+router.get('/major/parse', (req, res) => {
+  _controllers.fileController.parseMajor(req, res);
+});
+router.post('/university', upload_university.fields([{
+  name: 'excel',
+  maxCount: 1
+}]), (req, res) => {
+  _controllers.fileController.createUnivFile(req, res);
 });
 router.get('/university', (req, res) => {
-  _controllers.fileController.getUniversity(req, res);
+  _controllers.fileController.getUnivFile(req, res);
 });
 router.delete('/university', (req, res) => {
-  _controllers.fileController.deleteUniversity(req, res);
+  _controllers.fileController.deleteUnivFile(req, res);
+});
+router.get('/university/parse', (req, res) => {
+  _controllers.fileController.parseUniv(req, res);
 });
 module.exports = router;
