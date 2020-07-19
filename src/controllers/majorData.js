@@ -55,7 +55,7 @@ export default class majorDataController {
 
       const id = req.params.id
 
-      const majorData = await majorDataService.findOne({id})
+      const majorData = await majorDataService.findOne({majorId : id})
 
       const response = {
         success : true,
