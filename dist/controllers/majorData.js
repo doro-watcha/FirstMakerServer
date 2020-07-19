@@ -62,7 +62,7 @@ class majorDataController {
     try {
       const id = req.params.id;
       const majorData = await _services.majorDataService.findOne({
-        id
+        majorId: id
       });
       const response = {
         success: true,

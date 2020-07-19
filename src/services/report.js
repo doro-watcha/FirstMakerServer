@@ -1,4 +1,4 @@
-import { Report , Major , User } from '../models'
+import { Report , MajorData , User, Major } from '../models'
 
 let instance = null
 
@@ -13,7 +13,7 @@ class ReportService {
     }
     
     async create ( modelObj) {
-        const { userId , majorId } = modelObj
+        const { userId , majorDataId } = modelObj
 
         const user = await User.findOne({
             where : { id : userId}
@@ -21,11 +21,11 @@ class ReportService {
 
         if ( user == null ) throw Error('USER_NOT_FOUND')
 
-        const major = await Major.findOne({
-            where : { id : majorId }
+        const majorData = await MajorData.findOne({
+            where : { id : majorDataId }
         })
 
-        if ( major == null ) throw Error('MAJOR_NOT_FOUND')
+        if ( majorData == null ) throw Error('MAJOR_DATA_NOT_FOUND')
 
         return await Report.create(modelObj)
     }
@@ -35,8 +35,14 @@ class ReportService {
             where: JSON.parse(JSON.stringify(where)),
             include: [
 				{
-					model: Major,
-					as: 'major',
+					model: MajorData,
+                    as: 'majorData',
+                    include : [
+                        {
+                            model : Major,
+                            as : 'major'
+                        }
+                    ]
                 },
                 
 				{
@@ -55,8 +61,14 @@ class ReportService {
             attributes : ['id','score'],
 			include: [
 				{
-					model: Major,
-					as: 'major',
+                    model: MajorData,
+                    as: 'majorData',
+                    include : [
+                        {
+                            model : Major,
+                            as : 'major'
+                        }
+                    ]
                 },
                 
 				{

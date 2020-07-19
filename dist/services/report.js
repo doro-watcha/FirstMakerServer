@@ -22,7 +22,7 @@ class ReportService {
   async create(modelObj) {
     const {
       userId,
-      majorId
+      majorDataId
     } = modelObj;
     const user = await _models.User.findOne({
       where: {
@@ -30,12 +30,12 @@ class ReportService {
       }
     });
     if (user == null) throw Error('USER_NOT_FOUND');
-    const major = await _models.Major.findOne({
+    const majorData = await _models.MajorData.findOne({
       where: {
-        id: majorId
+        id: majorDataId
       }
     });
-    if (major == null) throw Error('MAJOR_NOT_FOUND');
+    if (majorData == null) throw Error('MAJOR_DATA_NOT_FOUND');
     return await _models.Report.create(modelObj);
   }
 
@@ -43,8 +43,12 @@ class ReportService {
     return await _models.Report.findOne({
       where: JSON.parse(JSON.stringify(where)),
       include: [{
-        model: _models.Major,
-        as: 'major'
+        model: _models.MajorData,
+        as: 'majorData',
+        include: [{
+          model: _models.Major,
+          as: 'major'
+        }]
       }, {
         model: _models.User,
         as: 'user'
@@ -59,8 +63,12 @@ class ReportService {
       },
       attributes: ['id', 'score'],
       include: [{
-        model: _models.Major,
-        as: 'major'
+        model: _models.MajorData,
+        as: 'majorData',
+        include: [{
+          model: _models.Major,
+          as: 'major'
+        }]
       }, {
         model: _models.User,
         as: 'user'

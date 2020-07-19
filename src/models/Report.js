@@ -36,9 +36,9 @@ export default class Report extends Sequelize.Model {
           foreignKey: 'userId',
           as: 'user'
         }),
-        this.belongsTo(models.Major, {
-          foreignKey: 'majorId',
-          as : 'major'
+        this.belongsTo(models.MajorData, {
+          foreignKey: 'majorDataId',
+          as : 'majorData'
         })
       }
 
@@ -51,6 +51,8 @@ export default class Report extends Sequelize.Model {
         delete object.updatedAt
         
         delete object.userId
+        delete object.majorDataId
+        delete object.majorId
     
         
         return object

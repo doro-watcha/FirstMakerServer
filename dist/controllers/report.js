@@ -21,15 +21,15 @@ class reportController {
       } = req;
       const result = await _joi.default.validate(req.body, {
         score: _joi.default.number(),
-        majorId: _joi.default.number()
+        majorDataId: _joi.default.number()
       });
       const {
         score,
-        majorId
+        majorDataId
       } = result;
       const modelObj = {
         score,
-        majorId,
+        majorDataId,
         userId: user.id
       };
       const report = await _services.reportService.create(modelObj);
@@ -86,17 +86,17 @@ class reportController {
       const id = req.params.id;
       const result = await _joi.default.validate(req.body, {
         score: _joi.default.number(),
-        majorId: _joi.default.number(),
+        majorDataId: _joi.default.number(),
         userId: _joi.default.number()
       });
       const {
         score,
-        majorId,
+        majorDataId,
         userId
       } = result;
       const modelObj = {
         score,
-        majorId,
+        majorDataId,
         userId
       };
       const updateReport = await _services.reportService.update(id, modelObj);

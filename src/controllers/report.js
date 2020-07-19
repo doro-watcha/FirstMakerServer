@@ -11,16 +11,16 @@ export default class reportController {
       const { user } = req
       const result = await Joi.validate ( req.body, {
         score : Joi.number(),
-        majorId : Joi.number()
+        majorDataId : Joi.number()
       })
 
-      const { score , majorId  } = result
+      const { score , majorDataId  } = result
 
 
 
       const modelObj = {
         score,
-        majorId,
+        majorDataId,
         userId : user.id
       }
 
@@ -96,14 +96,14 @@ export default class reportController {
 
       const result = await Joi.validate (req.body ,{
         score : Joi.number(),
-        majorId : Joi.number(),
+        majorDataId : Joi.number(),
         userId : Joi.number()
       })
 
-      const { score, majorId, userId } = result
+      const { score, majorDataId, userId } = result
 
       const modelObj = {
-        score , majorId, userId 
+        score , majorDataId, userId 
       }
 
       const updateReport = await reportService.update(id , modelObj )
