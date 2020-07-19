@@ -100,7 +100,7 @@ module.exports = {
 			status : 414,
 			ko : '해당 성적 없음'
 		},
-		REPORT_NOT_FONUD : {
+		REPORT_NOT_FOUND : {
 			status : 415,
 			ko : '해당 예측 리포트 없음'
 		},

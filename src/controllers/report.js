@@ -50,6 +50,8 @@ export default class reportController {
 
       const report = await reportService.findOne({id})
 
+      if ( report == null ) throw Error('REPORT_NOT_FOUND')
+
       const response = {
         success : true,
         data : {
@@ -71,7 +73,6 @@ export default class reportController {
       const { user } = req 
       const reports = await reportService.findList(user.id)
 
-  
 
       const response = {
         success : true,
@@ -126,11 +127,20 @@ export default class reportController {
   static async delete ( req, res ) {
 
     try {
+      const id = req.params.id
+
+      await reportService.delete(id)
+
+      const response = {
+          success : true 
+      }
+
+      res.send(response)
 
 
-    } catch ( e ) { 
+  } catch ( e) {
       res.send(createErrorResponse(e))
-    }
+  }
 
 
   }

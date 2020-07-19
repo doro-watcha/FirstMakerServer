@@ -51,6 +51,7 @@ class reportController {
       const report = await _services.reportService.findOne({
         id
       });
+      if (report == null) throw Error('REPORT_NOT_FOUND');
       const response = {
         success: true,
         data: {
@@ -113,7 +114,14 @@ class reportController {
   }
 
   static async delete(req, res) {
-    try {} catch (e) {
+    try {
+      const id = req.params.id;
+      await _services.reportService.delete(id);
+      const response = {
+        success: true
+      };
+      res.send(response);
+    } catch (e) {
       res.send((0, _functions.createErrorResponse)(e));
     }
   }
