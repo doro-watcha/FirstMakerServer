@@ -39,9 +39,15 @@ class MajorDataService {
 	
   async update (id , modelObj ) {
 
-    return await MajorData.update(modelObj,{
+    await MajorData.update(modelObj,{
       where : { id }
     })
+
+    const majorData = await MajorData.findOne({id})
+
+    if ( majorData == null ) throw Error('MAJOR_DATA_NOT_FOUND')
+
+    return majorData
   }
 
   async delete ( id) {

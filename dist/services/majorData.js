@@ -44,11 +44,16 @@ class MajorDataService {
   }
 
   async update(id, modelObj) {
-    return await _models.MajorData.update(modelObj, {
+    await _models.MajorData.update(modelObj, {
       where: {
         id
       }
     });
+    const majorData = await _models.MajorData.findOne({
+      id
+    });
+    if (majorData == null) throw Error('MAJOR_DATA_NOT_FOUND');
+    return majorData;
   }
 
   async delete(id) {
