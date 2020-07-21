@@ -109,9 +109,10 @@ export default class majorDataController {
 
     try {
 
-      const id = req.params.id
+      const id = req.params.majorId
 
       const result = await Joi.validate ( req.body , {
+        majorId : Joi.number(),
         year : Joi.number(),
         metadata : Joi.object(),
         prediction : Joi.object(),
@@ -120,10 +121,10 @@ export default class majorDataController {
       })
 
       // metadata = initialMember , additionalMember , competitionRate, reflectionSubject, tamguNumber , applicationIndicator, additionalPoint, somethingSpecial
-      const {  year, metadata, prediction, ratio, gradeToScore} = result
+      const { majorId , year, metadata, prediction, ratio, gradeToScore} = result
 
       const modelObj = {
-        majorId : id,
+        majorId,
         year,
         metadata,
         prediction,
