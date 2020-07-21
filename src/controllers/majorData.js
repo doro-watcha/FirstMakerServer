@@ -109,7 +109,7 @@ export default class majorDataController {
 
     try {
 
-      const id = req.params.majorId
+      const id = req.params.id
 
       const result = await Joi.validate ( req.body , {
         majorId : Joi.number(),

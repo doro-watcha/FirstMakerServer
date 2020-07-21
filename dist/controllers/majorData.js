@@ -108,6 +108,7 @@ class majorDataController {
     try {
       const id = req.params.id;
       const result = await _joi.default.validate(req.body, {
+        majorId: _joi.default.number(),
         year: _joi.default.number(),
         metadata: _joi.default.object(),
         prediction: _joi.default.object(),
@@ -116,6 +117,7 @@ class majorDataController {
       }); // metadata = initialMember , additionalMember , competitionRate, reflectionSubject, tamguNumber , applicationIndicator, additionalPoint, somethingSpecial
 
       const {
+        majorId,
         year,
         metadata,
         prediction,
@@ -123,7 +125,7 @@ class majorDataController {
         gradeToScore
       } = result;
       const modelObj = {
-        majorId: id,
+        majorId,
         year,
         metadata,
         prediction,
