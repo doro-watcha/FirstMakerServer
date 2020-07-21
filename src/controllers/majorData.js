@@ -105,14 +105,13 @@ export default class majorDataController {
 
   }
 
-  static async upate(req,res) {
+  static async update(req,res) {
 
     try {
 
       const id = req.params.id
 
       const result = await Joi.validate ( req.body , {
-        majorId : Joi.number(),
         year : Joi.number(),
         metadata : Joi.object(),
         prediction : Joi.object(),
@@ -121,10 +120,10 @@ export default class majorDataController {
       })
 
       // metadata = initialMember , additionalMember , competitionRate, reflectionSubject, tamguNumber , applicationIndicator, additionalPoint, somethingSpecial
-      const { majorId , year, metadata, prediction, ratio, gradeToScore} = result
+      const {  year, metadata, prediction, ratio, gradeToScore} = result
 
       const modelObj = {
-        majorId,
+        majorId : id,
         year,
         metadata,
         prediction,
