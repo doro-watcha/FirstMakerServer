@@ -36,11 +36,16 @@ class MajorService {
   }
 
   async update(id, modelObj) {
-    return await _models.Major.update(modelObj, {
+    await _models.Major.update(modelObj, {
       where: {
         id
       }
     });
+    const major = await _models.Major.findOne({
+      id
+    });
+    if (major == null) throw Error('MAJOR_NOT_FOUND');
+    return major;
   }
 
   async delete(id) {
