@@ -67,10 +67,7 @@ static associate(models) {
     foreignKey: 'majorId',
     as: 'majorData',
   })
-  this.hasMany(models.Report, {
-    foreignKey : 'majorId',
-    as : 'report'
-  })
+
 }
 
 toJSON() {

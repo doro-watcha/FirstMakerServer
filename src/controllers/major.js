@@ -13,7 +13,7 @@ export default class majorController {
 
     try {
 
-      const result = await Joi.validate ( req,body , {
+      const result = await Joi.validate ( req.body , {
         line : Joi.string().required(),
         group : Joi.string().required(),
         location : Joi.string().required(),
@@ -125,7 +125,7 @@ export default class majorController {
 
       const id = req.params.id
 
-      const result = await Joi.validate ( req,body , {
+      const result = await Joi.validate ( req.body , {
         line : Joi.string(),
         group : Joi.string(),
         location : Joi.string(),

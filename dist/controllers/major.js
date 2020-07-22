@@ -22,7 +22,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class majorController {
   static async create(req, res) {
     try {
-      const result = await _joi.default.validate(req, body, {
+      const result = await _joi.default.validate(req.body, {
         line: _joi.default.string().required(),
         group: _joi.default.string().required(),
         location: _joi.default.string().required(),
@@ -125,7 +125,7 @@ class majorController {
   static async update(req, res) {
     try {
       const id = req.params.id;
-      const result = await _joi.default.validate(req, body, {
+      const result = await _joi.default.validate(req.body, {
         line: _joi.default.string(),
         group: _joi.default.string(),
         location: _joi.default.string(),

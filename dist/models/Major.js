@@ -68,10 +68,6 @@ class Major extends _sequelize.default.Model {
       foreignKey: 'majorId',
       as: 'majorData'
     });
-    this.hasMany(models.Report, {
-      foreignKey: 'majorId',
-      as: 'report'
-    });
   }
 
   toJSON() {
