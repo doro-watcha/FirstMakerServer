@@ -42,7 +42,7 @@ router.patch('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req,res) => {
-  majorController.major(req,res)
+  majorController.delete(req,res)
 })
 
 
