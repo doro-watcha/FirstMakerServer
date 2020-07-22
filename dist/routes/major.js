@@ -44,7 +44,7 @@ router.patch('/:id', (req, res) => {
   _controllers.majorController.update(req, res);
 });
 router.delete('/:id', (req, res) => {
-  _controllers.majorController.major(req, res);
+  _controllers.majorController.delete(req, res);
 });
 /**
  * @swagger
