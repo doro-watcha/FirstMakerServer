@@ -58,6 +58,10 @@ class User extends _sequelize.default.Model {
         type: _sequelize.default.INTEGER,
         defaultValue: 0
       },
+      searchScore: {
+        type: _sequelize.default.FLOAT,
+        allowNull: true
+      },
       createdAt: {
         type: _sequelize.default.DATE,
         allowNull: false,
@@ -159,6 +163,10 @@ const schema = {
     graduateYear: {
       type: 'integer',
       example: '2013'
+    },
+    searchScore: {
+      type: 'float',
+      example: '96.3'
     },
     predictTimes: {
       type: 'integer',

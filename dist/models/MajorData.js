@@ -29,6 +29,10 @@ class MajorData extends _sequelize.default.Model {
         type: _sequelize.default.JSON,
         allowNull: true
       },
+      extra: {
+        type: _sequelize.default.JSON,
+        allowNull: true
+      },
       gradeToScore: {
         type: _sequelize.default.JSON,
         allowNull: true

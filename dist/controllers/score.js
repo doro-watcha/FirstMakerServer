@@ -56,6 +56,8 @@ class scoreController {
         naesin,
         naesin_type
       };
+      user.searchScore = (korean.percentile + math.percentile + tamgu1.percentile + tamgu2.percentile) / 4;
+      await _services.userService.update(user.id, user);
       const exist_score = await _services.scoreService.findOne({
         userId: user.id
       });
@@ -135,6 +137,8 @@ class scoreController {
         naesin,
         naesin_type
       };
+      user.searchScore = (korean.percentile + math.percentile + tamgu1.percentile + tamgu2.percentile) / 4;
+      await _services.userService.update(user.id, user);
       const score = await _services.scoreService.update(user.id, modelObj);
       if (score == null) throw Error('SCORE_NOT_FOUND');
       const response = {

@@ -1,4 +1,4 @@
-import { scoreService } from '../services'
+import { scoreService, userService } from '../services'
 import Joi from '@hapi/joi'
 
 import { createErrorResponse } from '../utils/functions'
@@ -39,6 +39,10 @@ export default class scoreController {
                 naesin,
                 naesin_type
             }
+
+            user.searchScore = (korean.percentile + math.percentile + tamgu1.percentile + tamgu2.percentile ) / 4
+
+            await userService.update(user.id, user)
 
             const exist_score = await scoreService.findOne({userId : user.id})
 
@@ -118,6 +122,10 @@ export default class scoreController {
                 naesin,
                 naesin_type
             }
+
+            user.searchScore = (korean.percentile + math.percentile + tamgu1.percentile + tamgu2.percentile ) / 4
+
+            await userService.update(user.id, user)
 
             const score = await scoreService.update(user.id, modelObj)
 
