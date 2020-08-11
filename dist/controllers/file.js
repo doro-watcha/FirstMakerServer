@@ -205,17 +205,18 @@ class fileController {
       const path = '../excelfile/university.xlsx';
 
       let workbook = _xlsx.default.readFile(path, {
-        sheetRows: 43
+        sheetRows: 50
       });
 
       let sheetsList = workbook.SheetNames;
 
-      let sheetData = _xlsx.default.utils.sheet_to_json(workbook.Sheets[sheetsList[0]], {
+      let sheetData = _xlsx.default.utils.sheet_to_json(workbook.Sheets[sheetsList[1]], {
         header: 1,
         defval: '',
         blankrows: true
       });
 
+      console.log(sheetData);
       let data = [];
 
       for (let i = 1; i < 43; i++) {
@@ -225,8 +226,8 @@ class fileController {
           group: sheetData[i][1],
           min: sheetData[i][2],
           max: sheetData[i][3]
-        };
-        await _services.universityService.create(obj1);
+        }; //await universityService.create(obj1)
+
         data.push(obj1); // let obj2 = {
         //   line : '자연',
         //   name : sheetData[i][0],

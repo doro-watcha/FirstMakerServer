@@ -227,13 +227,15 @@ export default class fileController {
 
       const path = ('../excelfile/university.xlsx')
 
-      let workbook = xlsx.readFile(path, {sheetRows: 43})
+      let workbook = xlsx.readFile(path, {sheetRows: 50})
       let sheetsList = workbook.SheetNames
-      let sheetData = xlsx.utils.sheet_to_json(workbook.Sheets[sheetsList[0]], {
+      let sheetData = xlsx.utils.sheet_to_json(workbook.Sheets[sheetsList[1]], {
            header: 1,
            defval: '',
            blankrows: true
       })
+
+      console.log(sheetData)
 
 
       let data = []
@@ -245,7 +247,7 @@ export default class fileController {
           min : sheetData[i][2],
           max : sheetData[i][3]
         }
-        await universityService.create(obj1)
+        //await universityService.create(obj1)
 
         data.push(obj1)
         // let obj2 = {

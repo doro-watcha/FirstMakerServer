@@ -62,7 +62,11 @@ router.delete('/university', (req,res) => {
   fileController.deleteUnivFile(req,res)
 })
 
-router.get('/university/parse' , ( req,res) => {
-  fileController.parseUniv(req,res)
+router.get('/university/parse' , (req,res) => {
+  fileController.parseUnivLocal(req,res)
+})
+
+router.get('/university/parse/:group', (req,res) => {
+  fileController.parseUnivGroup(req,res)
 })
 module.exports = router
