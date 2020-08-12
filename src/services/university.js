@@ -27,7 +27,7 @@ class UniversityService {
 		return await University.findOne({
 			where: JSON.parse(JSON.stringify(where))
 		})
-	}
+	}                           
     async update ( id , modelObj ) {
         await University.update(modelObj, {
             where: { id },

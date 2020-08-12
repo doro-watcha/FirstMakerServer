@@ -16,23 +16,42 @@ class MajorData extends _sequelize.default.Model {
         type: _sequelize.default.INTEGER,
         defaultValue: 0
       },
-      // metadata = initialMember , additionalMember , competitionRate, reflectionSubject, tamguNumber , applicationIndicator, extraPoint,
+
+      /**
+       *  initialMember(모집인원), additionalMember(수시이월인원) , competitionRate(경쟁률), reflectionSubject(반영과목), tamguNumber(탐구반영갯수) , applicationIndicator(수능활용지표), extraPoint(가산점에 대한 설명), perfectScore ( 만점 )
+       **/
       metadata: {
         type: _sequelize.default.JSON,
         allowNull: true
       },
+
+      /**
+       * 유력, 적정, 위험, 스나이핑 점수 4개 ( strong, safe, dangerous , sniping)
+       */
       prediction: {
         type: _sequelize.default.JSON,
         allowNull: true
       },
+
+      /**
+       * 과목별 반영비율 ( korean, math , english , tamgu, foreign, history )
+       */
       ratio: {
         type: _sequelize.default.JSON,
         allowNull: true
       },
+
+      /**
+       * 가산점 
+       */
       extra: {
         type: _sequelize.default.JSON,
         allowNull: true
       },
+
+      /**
+       * 영어, 한국사는 등급밖에 없으므로 등급을 점수화해주는 뱌열
+       */
       gradeToScore: {
         type: _sequelize.default.JSON,
         allowNull: true

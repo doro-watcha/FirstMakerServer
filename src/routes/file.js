@@ -32,41 +32,45 @@ const upload_university = multer({
   }),
 })
 
+/**
+ * 학과 정보 관련 File Upload / Download / Delete / Parsing
+ */
 router.post('/major' , upload_major.fields([{ name: 'excel', maxCount: 1 }]), (req,res) => {
-  fileController.createMajorFile(req,res)
+  fileController.uploadMajor(req,res)
 })
 
-
 router.get('/major', (req,res) => {
-  fileController.getMajorFile(req,res)
+  fileController.downloadMajor(req,res)
 })
 
 router.delete('/major', (req,res) => {
-  fileController.deleteMajorFile(req,res)
+  fileController.deleteMajor(req,res)
 })
 
 router.get('/major/parse' , (req,res) => {
   fileController.parseMajor(req,res)
 })
 
+/**
+ * 대학 정보 관련 File Upload / Download/ Delete / Parsing
+ */
+
 
 router.post('/university', upload_university.fields([{name:'excel', maxCount : 1}]), (req,res) => {
-  fileController.createUnivFile(req,res)
+  fileController.uploadUniv(req,res)
 })
 
 router.get('/university', (req,res) => {
-  fileController.getUnivFile(req,res)
+  fileController.downloadUniv(req,res)
 })
 
 router.delete('/university', (req,res) => {
-  fileController.deleteUnivFile(req,res)
+  fileController.deleteUniv(req,res)
 })
 
 router.get('/university/parse' , (req,res) => {
-  fileController.parseUnivLocal(req,res)
+  fileController.parseUniv(req,res)
 })
 
-router.get('/university/parse/:group', (req,res) => {
-  fileController.parseUnivGroup(req,res)
-})
+
 module.exports = router

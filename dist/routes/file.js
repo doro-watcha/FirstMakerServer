@@ -38,32 +38,40 @@ const upload_university = (0, _multer.default)({
     }
   })
 });
+/**
+ * 학과 정보 관련 File Upload / Download / Delete / Parsing
+ */
+
 router.post('/major', upload_major.fields([{
   name: 'excel',
   maxCount: 1
 }]), (req, res) => {
-  _controllers.fileController.createMajorFile(req, res);
+  _controllers.fileController.uploadMajor(req, res);
 });
 router.get('/major', (req, res) => {
-  _controllers.fileController.getMajorFile(req, res);
+  _controllers.fileController.downloadMajor(req, res);
 });
 router.delete('/major', (req, res) => {
-  _controllers.fileController.deleteMajorFile(req, res);
+  _controllers.fileController.deleteMajor(req, res);
 });
 router.get('/major/parse', (req, res) => {
   _controllers.fileController.parseMajor(req, res);
 });
+/**
+ * 대학 정보 관련 File Upload / Download/ Delete / Parsing
+ */
+
 router.post('/university', upload_university.fields([{
   name: 'excel',
   maxCount: 1
 }]), (req, res) => {
-  _controllers.fileController.createUnivFile(req, res);
+  _controllers.fileController.uploadUniv(req, res);
 });
 router.get('/university', (req, res) => {
-  _controllers.fileController.getUnivFile(req, res);
+  _controllers.fileController.downloadUniv(req, res);
 });
 router.delete('/university', (req, res) => {
-  _controllers.fileController.deleteUnivFile(req, res);
+  _controllers.fileController.deleteUniv(req, res);
 });
 router.get('/university/parse', (req, res) => {
   _controllers.fileController.parseUniv(req, res);
