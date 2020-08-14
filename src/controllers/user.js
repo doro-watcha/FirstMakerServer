@@ -77,10 +77,11 @@ export default class userController {
             gender : Joi.string(),
             haknyeon : Joi.string(),
             academyId : Joi.number(),
-            adminLevel : Joi.number()
+            adminLevel : Joi.number(),
+            telephone : Joi.string()
           })
 
-          const { name , highSchool , line, graduateYear , gender , haknyeon, academyId, adminLevel } = result 
+          const { name , highSchool , line, graduateYear , gender , haknyeon, academyId, adminLevel, telephone} = result 
 
 
           const modelObj = {
@@ -91,7 +92,8 @@ export default class userController {
             gender,
             haknyeon,
             academyId,
-            adminLevel
+            adminLevel,
+            telephone
           }
 
           const user = await userService.update(id, modelObj )

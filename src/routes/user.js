@@ -106,7 +106,7 @@ router.delete('/:id', (req, res) => {
  * @swagger
  *
  * /user/{id}:
- *   post:
+ *   patch:
  *     tags:
  *       - user
  *     summary: 유저 정보 수정

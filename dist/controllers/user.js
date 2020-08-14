@@ -69,7 +69,8 @@ class userController {
         gender: _joi.default.string(),
         haknyeon: _joi.default.string(),
         academyId: _joi.default.number(),
-        adminLevel: _joi.default.number()
+        adminLevel: _joi.default.number(),
+        telephone: _joi.default.string()
       });
       const {
         name,
@@ -79,7 +80,8 @@ class userController {
         gender,
         haknyeon,
         academyId,
-        adminLevel
+        adminLevel,
+        telephone
       } = result;
       const modelObj = {
         name,
@@ -89,7 +91,8 @@ class userController {
         gender,
         haknyeon,
         academyId,
-        adminLevel
+        adminLevel,
+        telephone
       };
       const user = await _services.userService.update(id, modelObj);
       const response = {
