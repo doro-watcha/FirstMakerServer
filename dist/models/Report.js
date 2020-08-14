@@ -13,7 +13,15 @@ class Report extends _sequelize.default.Model {
   static init(sequelize) {
     return super.init({
       score: {
-        type: _sequelize.default.FLOAT,
+        type: _sequelize.default.JSON,
+        allowNull: true
+      },
+      extraScore: {
+        type: _sequelize.default.JSON,
+        allowNull: true
+      },
+      perfectScore: {
+        type: _sequelize.default.JSON,
         allowNull: true
       },
       createdAt: {
@@ -65,8 +73,34 @@ const schema = {
       example: 3
     },
     score: {
-      type: 'float',
-      example: 725.3
+      type: 'json',
+      example: {
+        korean: 198.214,
+        math: 219.643,
+        english: 0,
+        tamgu: 182.357,
+        history: 0
+      }
+    },
+    extraScore: {
+      type: 'json',
+      example: {
+        korean: 0,
+        math: 0,
+        english: 0,
+        tamgu: 0,
+        history: 10
+      }
+    },
+    perfectScore: {
+      type: 'json',
+      example: {
+        korean: 357.1,
+        math: 357.1,
+        english: 0,
+        tamgu: 285.7,
+        history: 0
+      }
     },
     user: {
       $ref: '#/components/schemas/User'

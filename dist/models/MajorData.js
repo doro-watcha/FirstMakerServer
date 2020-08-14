@@ -121,8 +121,14 @@ const schema = {
       example: {
         korean: 40,
         englsih: 30,
-        math: 40,
-        tamgu: 20,
+        math: {
+          ga: 30,
+          na: 30
+        },
+        tamgu: {
+          science: 30,
+          society: 30
+        },
         foreign: 30,
         history: 40
       }

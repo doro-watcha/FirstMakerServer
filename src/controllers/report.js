@@ -1,4 +1,4 @@
-import { reportService } from '../services'
+import { reportService , majorDataService, } from '../services'
 import Joi from '@hapi/joi'
 
 import { createErrorResponse } from '../utils/functions'
@@ -10,12 +10,93 @@ export default class reportController {
     try {
       const { user } = req
       const result = await Joi.validate ( req.body, {
-        score : Joi.number(),
         majorDataId : Joi.number()
       })
 
-      const { score , majorDataId  } = result
+      const { majorDataId  } = result   
 
+      const majorData = await majorDataService.findOne({id : majorDataId})
+      const score = await scoreService.findOne({userId : user.id})
+
+
+      // 과목별 변환 만점 구하기 
+      const major_perfectScore = majorData.metadata.perfectScore
+      const major_ratio = major.ratio
+
+      const perfectScore = {
+        korean : major_perfectScore * ( major_ratio.korean / 100 ),
+        english : major_perfectScore * ( major_ratio.englsih / 100 ),
+        math : 0,
+        tamgu : 0,
+      }
+
+      const math_type = score.math.type
+      const tamgu_type = score.line
+
+      if ( math_type == "가") {
+        perfectScore.math = major_perfectScore * ( major_ratio.math.ga / 100 )
+      } else if ( math_type == "나") {
+        perfectScore.math = major_perfectScore * (major_ratio.math.na / 100 )
+      }
+
+      if ( tamgu_type == "자연"){
+        perfectScore.tamgu = major_perfectScore * ( major_ratio.tamgu.science / 100)
+      } else if ( tamgu_type == "인문") {
+        perfectScore.tamgu = major_perfectScore * ( major_ratio.tamgu.society / 100)
+      }
+
+
+      // 내 변환 점수 구하기
+      const applicationIndicator = majorData.metadata.applicationIndicator
+
+      const english = score.english.grade
+
+      const newScore = {
+        korean : 0 , math : 0 , english : 0 , tamgu : 0 , history : 0
+      }
+
+      newScore.english = majorData.gradeToScore.english.score[english] * ( perfectScore.english / 200 )
+
+      if ( applicationIndicator == "표준점수") {
+
+        newScore.korean = score.korean.score * ( perfectScore.korean / 200 )
+        newScore.math = score.math.score * ( perfectScore.math / 200 )
+        newScore.tamgu = ( score.tamgu1.score + score.tamgu2.score ) * ( perfectScore.tamgu / 200 )
+        
+      }
+      else if ( applicationIndicator == "표+백") {
+        newScore.korean = score.korean.score * ( perfectScore.korean / 200 )
+        newScore.math = score.math.score * ( perfectScore.math / 200 )
+        newScore.tamgu = ( score.tamgu1.grade + score.tamgu2.grade ) * ( perfectScore.tamgu / 200 )
+
+      }
+      else if ( applicationIndicator == "백분위") {
+        newScore.korean = score.korean.grade * ( perfectScore.korean / 200 )
+        newScore.math = score.math.grade * ( perfectScore.math / 200 )
+        newScore.tamgu = ( score.tamgu1.grade + score.tamgu2.grade ) * ( perfectScore.tamgu / 200 )
+
+      }
+
+      // 변환 가산점 구하기 
+
+      const extra = majorData.metadata.extraPoint
+
+      const extra_subject = {
+        math_ga_5 : "수가 5%",
+        math_ga_10 : "수가 10&",
+        science : "과탐",
+        science_1 : "윤리"
+      }
+
+      for ( let i = 0 ; i < 3 ; i++){
+
+        if ( extra.indexOf(extra_subject[i]) >= 0 ) {
+
+
+        }
+
+
+      }
 
 
       const modelObj = {

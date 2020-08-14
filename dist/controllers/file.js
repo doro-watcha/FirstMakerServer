@@ -70,7 +70,7 @@ class fileController {
 
       let data = [];
 
-      for (let i = 3; i < 5657; i++) {
+      for (let i = 3; i < 100; i++) {
         /**
          * 앞부분만 떼가지고 Major를 하나 만들어준다 ( 이거는 연도에 상관없는 metadata이므로 major로 구분 )
          */
@@ -94,7 +94,52 @@ class fileController {
         await _services.majorService.create(obj1);
       }
 
-      for (let i = 3; i < 5657; i++) {
+      for (let i = 3; i < 100; i++) {
+        let korean_ratio = sheetData[i][35];
+        let math_ratio = sheetData[i][37];
+        let english_ratio = sheetData[i][39];
+        let tamgu_ratio = sheetData[i][41];
+        let history_ratio = sheetData[i][45];
+        let parsed_data = {
+          korean: 0,
+          english: 0,
+          math_ga: 0,
+          math_na: 0,
+          tamgu_society: 0,
+          tamgu_science: 0,
+          history: 0
+        };
+
+        if (korean_ratio.length > 0) {
+          parsed_data.korean = korean_ratio.replace(/[^0-9]/g, '');
+        }
+
+        if (english_ratio.length > 0) {
+          parsed_data.english = english_ratio.replace(/[^0-9]/g, '');
+        }
+
+        if (history_ratio.length > 0) {
+          parsed_data.history = history_ratio.replace(/[^0-9]/g, '');
+        } // 수학 반영비율에서 가,나에 대해서 숫자만 파싱
+
+
+        if (math_ratio.indexOf('가') >= 0) {
+          parsed_data.math_ga = math_ratio.replace(/[^0-9]/g, '');
+        }
+
+        if (math_ratio.indexOf('나') >= 0) {
+          parsed_data.math_na = math_ratio.replace(/[^0-9]/g, '');
+        } // 탐구 반영비율에서 사,과에 대해서 숫자만 파싱 
+
+
+        if (tamgu_ratio.indexOf('사') >= 0) {
+          parsed_data.tamgu_society = tamgu_ratio.replace(/[^0-9]/g, '');
+        }
+
+        if (tamgu_ratio.indexOf('과') >= 0) {
+          parsed_data.tamgu_science = tamgu_ratio.replace(/[^0-9]/g, '');
+        }
+
         let obj2 = {
           id: 2 * i - 5,
           year: 2020,
@@ -114,7 +159,8 @@ class fileController {
             // 백분위 
             extraPoint: sheetData[i][69],
             // 특정 영역 가산 
-            perfectScore: sheetData[i][74]
+            perfectScore: sheetData[i][74] // 총 만점 
+
           },
           prediction: {
             strong: sheetData[i][23],
@@ -123,16 +169,22 @@ class fileController {
             sniping: sheetData[i][26]
           },
           ratio: {
-            korean: sheetData[i][35],
+            korean: parsed_data.korean,
             // (40)
-            math: sheetData[i][37],
+            math: {
+              ga: parsed_data.math_ga,
+              na: parsed_data.math_na
+            },
             // 수가나 (40)
-            english: sheetData[i][39],
+            english: parsed_data.english,
             // (40)
-            tamgu: sheetData[i][41],
+            tamgu: {
+              society: parsed_data.tamgu_society,
+              science: parsed_data.tamgu_science
+            },
             // 사과직 10 
             foreign: sheetData[i][43],
-            history: sheetData[i][45] // 10 
+            history: parsed_data.history // 10 
 
           },
           gradeToScore: {
@@ -149,6 +201,9 @@ class fileController {
           }
         };
         await _services.majorDataService.create(obj2);
+      }
+
+      for (let i = 3; i < 100; i++) {
         let obj3 = {
           id: 2 * i - 4,
           year: 2021,
@@ -187,8 +242,7 @@ class fileController {
           //   }
           // }
 
-        };
-        await _services.majorDataService.create(obj3);
+        }; //await majorDataService.create(obj3)
       }
 
       const response = {
