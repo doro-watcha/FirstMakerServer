@@ -1,4 +1,4 @@
-import { reportService , majorDataService, } from '../services'
+import { reportService , majorDataService, scoreService } from '../services'
 import Joi from '@hapi/joi'
 
 import { createErrorResponse } from '../utils/functions'
@@ -15,13 +15,21 @@ export default class reportController {
 
       const { majorDataId  } = result   
 
+      const already_report = await reportService.findOne({ majorDataId, userId : user.id})
+
+      if ( already_report != null) throw Error ('REPORT_ALREADY_EXISTS')
+
       const majorData = await majorDataService.findOne({id : majorDataId})
+
+      if ( majorData == null ) throw Error('MAJOR_DATA_NOT_FOUND')
       const score = await scoreService.findOne({userId : user.id})
+
+      if ( score == null ) throw Error('SCORE_NOT_FOUND')
 
 
       // 과목별 변환 만점 구하기 
       const major_perfectScore = majorData.metadata.perfectScore
-      const major_ratio = major.ratio
+      const major_ratio = majorData.ratio
 
       const perfectScore = {
         korean : major_perfectScore * ( major_ratio.korean / 100 ),

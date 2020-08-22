@@ -25,15 +25,22 @@ class reportController {
       const {
         majorDataId
       } = result;
+      const already_report = await _services.reportService.findOne({
+        majorDataId,
+        userId: user.id
+      });
+      if (already_report != null) throw Error('REPORT_ALREADY_EXISTS');
       const majorData = await _services.majorDataService.findOne({
         id: majorDataId
       });
-      const score = await scoreService.findOne({
+      if (majorData == null) throw Error('MAJOR_DATA_NOT_FOUND');
+      const score = await _services.scoreService.findOne({
         userId: user.id
-      }); // 과목별 변환 만점 구하기 
+      });
+      if (score == null) throw Error('SCORE_NOT_FOUND'); // 과목별 변환 만점 구하기 
 
       const major_perfectScore = majorData.metadata.perfectScore;
-      const major_ratio = major.ratio;
+      const major_ratio = majorData.ratio;
       const perfectScore = {
         korean: major_perfectScore * (major_ratio.korean / 100),
         english: major_perfectScore * (major_ratio.englsih / 100),
