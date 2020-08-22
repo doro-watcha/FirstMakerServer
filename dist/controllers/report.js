@@ -88,16 +88,18 @@ class reportController {
         math_ga_10: "수가 10&",
         science: "과탐",
         science_1: "윤리"
-      };
-
-      for (let i = 0; i < 3; i++) {
-        if (extra.indexOf(extra_subject[i]) >= 0) {}
-      }
+      }; // for ( let i = 0 ; i < 3 ; i++){
+      //   if ( extra.indexOf(extra_subject[i]) >= 0 ) {
+      //   }
+      // }
 
       const modelObj = {
         score,
         majorDataId,
-        userId: user.id
+        userId: user.id,
+        perfectScore,
+        score: newScore,
+        extraScore: null
       };
       const report = await _services.reportService.create(modelObj);
       const response = {
