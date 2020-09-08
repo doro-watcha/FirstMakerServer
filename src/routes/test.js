@@ -32,7 +32,7 @@ router.post('/file', upload_test.fields([{ name: 'excel', maxCount: 1 }]) , (req
   testController.uploadFile(req,res)
 })
 
-router.get('/parse', authenticate, (req,res) => {
+router.get('/parse', (req,res) => {
   testController.parse(req,res)
 })
 

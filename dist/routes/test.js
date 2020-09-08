@@ -40,7 +40,7 @@ router.post('/file', upload_test.fields([{
 
   _controllers.testController.uploadFile(req, res);
 });
-router.get('/parse', authenticate, (req, res) => {
+router.get('/parse', (req, res) => {
   _controllers.testController.parse(req, res);
 });
 router.get('/', authenticate, (req, res) => {
