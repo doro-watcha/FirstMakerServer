@@ -102,10 +102,13 @@ export default class testController {
           const answer = parseFloat(sheetData[i][7])
           var determinant = 0
 
-          if ( value - answer < answer * 0.05 || answer - value < answer * 0.05) {
+          if ( value < answer && answer - value < answer * 0.1) {
             determinant = 1
           }
 
+          if ( value > answer && value - answer < answer * 0.1 ) {
+            determinant = 1
+          }
           console.log("zxcvzxvxzcvz")
             let obj1 = {
               id : i-2,
