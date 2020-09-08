@@ -16,13 +16,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class UniversityController {
   static async create(req, res) {
     try {
+      /**
+       * type은 필터 조건인데 location 이라고 하면 지역별, 
+       */
       const result = await _joi.default.validate(req.body, {
         name: _joi.default.string(),
         min: _joi.default.number(),
         max: _joi.default.number(),
         line: _joi.default.string(),
         location: _joi.default.string(),
-        group: _joi.default.string()
+        group: _joi.default.string(),
+        type: _joi.default.string()
       });
       const {
         name,
@@ -30,7 +34,8 @@ class UniversityController {
         max,
         location,
         group,
-        line
+        line,
+        type
       } = result;
       const exist_university = await _services.universityService.findOne({
         name
@@ -42,7 +47,8 @@ class UniversityController {
         max,
         location,
         group,
-        line
+        line,
+        type
       };
       const university = await _services.universityService.create(modelObj);
       const response = {

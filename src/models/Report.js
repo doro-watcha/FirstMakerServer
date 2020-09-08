@@ -18,6 +18,14 @@ export default class Report extends Sequelize.Model {
                 type : Sequelize.JSON,
                 allowNull : true,
               },
+              recommendations : {
+                type : Sequelize.JSON,
+                allowNull : true
+              },
+              totalScore : {
+                type : Sequelize.FLOAT,
+                allowNull : true 
+              },
               createdAt: {
                   type: Sequelize.DATE,
                   allowNull: true,

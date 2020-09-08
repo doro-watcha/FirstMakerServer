@@ -10,6 +10,7 @@ import MajorModel from './Major'
 import ConsultingModel from './Consulting'
 import AcademyModel from './Academy'
 import MajorDataModel from './MajorData'
+import TestModel from './Test'
 
 const env = process.env.NODE_ENV || 'development'
 const config = dbConfig[env]
@@ -25,7 +26,8 @@ const models = {
   Major : MajorModel.init(sequelize , Sequelize),
   Consulting : ConsultingModel.init(sequelize, Sequelize),
   Academy : AcademyModel.init(sequelize, Sequelize),
-  MajorData : MajorDataModel.init(sequelize, Sequelize)
+  MajorData : MajorDataModel.init(sequelize, Sequelize),
+  Test : TestModel.init(sequelize, Sequelize)
 }
 
 Object.values(models)

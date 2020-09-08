@@ -9,6 +9,7 @@ import paymentRecordController from './paymentRecord'
 import academyController from './academy'
 import fileController from './file'
 import majorDataController from './majorData'
+import testController from './test'
 
 module.exports = {
 
@@ -22,5 +23,6 @@ module.exports = {
     paymentRecordController,
     academyController,
     fileController,
-    majorDataController
+    majorDataController,
+    testController
 }

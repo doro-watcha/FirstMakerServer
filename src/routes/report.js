@@ -21,8 +21,8 @@ router.get('/', authenticate, (req,res) => {
 })
 
 
-router.patch('/:id', (req, res) => {
-  reportController.update(req.res)
+router.patch('/:id', authenticate, (req, res) => {
+  reportController.update(req,res)
 })
 
 

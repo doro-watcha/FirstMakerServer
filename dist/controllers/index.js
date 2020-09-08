@@ -22,6 +22,8 @@ var _file = _interopRequireDefault(require("./file"));
 
 var _majorData = _interopRequireDefault(require("./majorData"));
 
+var _test = _interopRequireDefault(require("./test"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
@@ -35,5 +37,6 @@ module.exports = {
   paymentRecordController: _paymentRecord.default,
   academyController: _academy.default,
   fileController: _file.default,
-  majorDataController: _majorData.default
+  majorDataController: _majorData.default,
+  testController: _test.default
 };

@@ -24,6 +24,14 @@ class Report extends _sequelize.default.Model {
         type: _sequelize.default.JSON,
         allowNull: true
       },
+      recommendations: {
+        type: _sequelize.default.JSON,
+        allowNull: true
+      },
+      totalScore: {
+        type: _sequelize.default.FLOAT,
+        allowNull: true
+      },
       createdAt: {
         type: _sequelize.default.DATE,
         allowNull: true,

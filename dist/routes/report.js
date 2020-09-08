@@ -22,8 +22,8 @@ router.get('/:id', (req, res) => {
 router.get('/', authenticate, (req, res) => {
   _controllers.reportController.findList(req, res);
 });
-router.patch('/:id', (req, res) => {
-  _controllers.reportController.update(req.res);
+router.patch('/:id', authenticate, (req, res) => {
+  _controllers.reportController.update(req, res);
 });
 router.delete('/:id', (req, res) => {
   _controllers.reportController.delete(req, res);

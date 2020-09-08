@@ -20,6 +20,8 @@ var _file = _interopRequireDefault(require("./file"));
 
 var _majorData = _interopRequireDefault(require("./majorData"));
 
+var _test = _interopRequireDefault(require("./test"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
@@ -32,5 +34,6 @@ module.exports = {
   paymentRecordService: _paymentRecord.default,
   academyService: _academy.default,
   fileService: _file.default,
-  majorDataService: _majorData.default
+  majorDataService: _majorData.default,
+  testService: _test.default
 };

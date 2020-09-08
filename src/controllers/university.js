@@ -9,16 +9,20 @@ export default class UniversityController {
 
         try { 
 
+            /**
+             * type은 필터 조건인데 location 이라고 하면 지역별, 
+             */
             const result = await Joi.validate(req.body , {
                 name : Joi.string(),
                 min : Joi.number(),
                 max : Joi.number(),
                 line : Joi.string(),
                 location : Joi.string(),
-                group : Joi.string()
+                group : Joi.string(),
+                type : Joi.string()
             })
 
-            const { name , min , max , location, group, line  } = result 
+            const { name , min , max , location, group, line, type  } = result 
 
             const exist_university = await universityService.findOne({name})
             
@@ -30,7 +34,7 @@ export default class UniversityController {
                 max,
                 location,
                 group,
-                line
+                line,type 
             }
 
             const university = await universityService.create(modelObj)

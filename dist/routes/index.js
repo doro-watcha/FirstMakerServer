@@ -22,6 +22,8 @@ var _file = _interopRequireDefault(require("./file"));
 
 var _majorData = _interopRequireDefault(require("./majorData"));
 
+var _test = _interopRequireDefault(require("./test"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var express = require('express');
@@ -45,4 +47,5 @@ router.use('/paymentRecord', _paymentRecord.default);
 router.use('/academy', _academy.default);
 router.use('/file', _file.default);
 router.use('/majorData', _majorData.default);
+router.use('/test', _test.default);
 module.exports = router;
