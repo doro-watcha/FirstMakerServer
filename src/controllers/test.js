@@ -103,7 +103,7 @@ export default class testController {
           const answer = parseFloat(sheetData[i][7])
           var determinant = 0
 
-          if ( value - answer < answer * 0.05) {
+          if ( value - answer < answer * 0.05 || answer - vale < answer * 0.05) {
             determinant = 1
           }
 
