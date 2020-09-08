@@ -51,9 +51,18 @@ export default class testController {
 
     try {
 
+      await testService.deleteAll()
+
+      const result = await Joi.validate(req.query, {
+        societyUserId : Joi.number().required(),
+        scienceUserId : Joi.number().required()
+      })
+
+
+      const { societyUserId , scienceUserId } = result
+
       const user = { req }
 
-      await testService.deleteAll()
 
       const path = ('../excelfile/test.xlsx')
       let workbook = xlsx.readFile(path, {sheetRows: 5603})
@@ -67,9 +76,10 @@ export default class testController {
 
 
 
-      const score = await scoreService.findOne({userId : user.id})
+      const scienceScore = await scoreService.findOne({userId : scienceUserId})
+      const societyScore = await scoreService.findOne({userId : societyUserId})
 
-
+      let data = []
 
         // 파싱을 해보자 
         for ( let i = 3 ; i < 5603 ; i++) {
@@ -77,10 +87,14 @@ export default class testController {
           const majorData = await majorDataService.findOne({id: 2*i-5})
 
           var value = -1
-          if ( sheetData[i][0] == score.line) {
+          if ( sheetData[i][0] == societyScore) {
 
-            value = await reportController.getScore(score,majorData)
+            value = await reportController.getScore(societyScore, majorData)
 
+          } else {
+
+            value = await reportController.getScore(scienceScore, majorData)
+          
           }
 
             let obj1 = {
@@ -95,6 +109,7 @@ export default class testController {
               test : value,
               result : 1
             }
+            data.push(obj1)
 
           await testService.create(obj1)
         }
@@ -103,7 +118,8 @@ export default class testController {
 
 
       const response = {
-        success : true
+        success : true,
+        data : data
         
       }
 

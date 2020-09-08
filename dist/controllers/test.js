@@ -52,10 +52,18 @@ class testController {
 
   static async parse(req, res) {
     try {
+      await _services.testService.deleteAll();
+      const result = await _joi.default.validate(req.query, {
+        societyUserId: _joi.default.number().required(),
+        scienceUserId: _joi.default.number().required()
+      });
+      const {
+        societyUserId,
+        scienceUserId
+      } = result;
       const user = {
         req
       };
-      await _services.testService.deleteAll();
       const path = '../excelfile/test.xlsx';
 
       let workbook = _xlsx.default.readFile(path, {
@@ -70,9 +78,13 @@ class testController {
         blankrows: true
       });
 
-      const score = await _services.scoreService.findOne({
-        userId: user.id
-      }); // 파싱을 해보자 
+      const scienceScore = await _services.scoreService.findOne({
+        userId: scienceUserId
+      });
+      const societyScore = await _services.scoreService.findOne({
+        userId: societyUserId
+      });
+      let data = []; // 파싱을 해보자 
 
       for (let i = 3; i < 5603; i++) {
         const majorData = await _services.majorDataService.findOne({
@@ -80,8 +92,10 @@ class testController {
         });
         var value = -1;
 
-        if (sheetData[i][0] == score.line) {
-          value = await _report.default.getScore(score, majorData);
+        if (sheetData[i][0] == societyScore) {
+          value = await _report.default.getScore(societyScore, majorData);
+        } else {
+          value = await _report.default.getScore(scienceScore, majorData);
         }
 
         let obj1 = {
@@ -101,11 +115,13 @@ class testController {
           test: value,
           result: 1
         };
+        data.push(obj1);
         await _services.testService.create(obj1);
       }
 
       const response = {
-        success: true
+        success: true,
+        data: data
       };
       res.send(response);
     } catch (e) {}
