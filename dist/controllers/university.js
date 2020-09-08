@@ -69,6 +69,7 @@ class UniversityController {
         name: _joi.default.string(),
         min: _joi.default.number(),
         max: _joi.default.number(),
+        type: _joi.default.string(),
         location: _joi.default.string(),
         group: _joi.default.string(),
         line: _joi.default.string()
@@ -79,12 +80,14 @@ class UniversityController {
         max,
         location,
         group,
-        line
+        line,
+        type
       } = result;
       const modelObj = {
         name,
         min,
         max,
+        type,
         location,
         group,
         line
