@@ -634,8 +634,6 @@ export default class reportController {
       history : newScore.history + extraScore.history
     }
 
-    console.log("시발것")
-
 
 
     // 반영 과목에 따라서 점수 재배치 

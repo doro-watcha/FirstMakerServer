@@ -461,8 +461,7 @@ class reportController {
       english: newScore.english + extraScore.english,
       tamgu: newScore.tamgu + extraScore.tamgu,
       history: newScore.history + extraScore.history
-    };
-    console.log("시발것"); // 반영 과목에 따라서 점수 재배치 
+    }; // 반영 과목에 따라서 점수 재배치 
 
     if (reflectionSubject.indexOf("탐,한+국,수,영중 택2") >= 0 || reflectionSubject.indexOf("탐+국,수,영중 택2") >= 0) {
       var scores = [totalScore.korean, totalScore.math, totalScore.englsih];
