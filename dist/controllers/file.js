@@ -390,12 +390,12 @@ class fileController {
       const path = '../excelfile/university.xlsx';
 
       let workbook = _xlsx.default.readFile(path, {
-        sheetRows: 50
+        sheetRows: 1574
       });
 
       let sheetsList = workbook.SheetNames;
 
-      let sheetData = _xlsx.default.utils.sheet_to_json(workbook.Sheets[sheetsList[1]], {
+      let sheetData = _xlsx.default.utils.sheet_to_json(workbook.Sheets[sheetsList[0]], {
         header: 1,
         defval: '',
         blankrows: true
@@ -403,30 +403,22 @@ class fileController {
 
       let data = [];
 
-      for (let i = 1; i < 43; i++) {
+      for (let i = 1; i < 1574; i++) {
         let obj1 = {
           id: i,
-          line: '인문',
           name: sheetData[i][0],
-          group: sheetData[i][1],
-          min: sheetData[i][2],
-          max: sheetData[i][3]
+          line: sheetData[i][1],
+          group: sheetData[i][2],
+          location: sheetData[i][3],
+          type: sheetData[i][4],
+          min: sheetData[i][5],
+          max: sheetData[i][6]
         };
         await _services.universityService.create(obj1);
-        data.push(obj1); // let obj2 = {
-        //   line : '자연',
-        //   name : sheetData[i][0],
-        //   group : sheetData[i][4],
-        //   min : sheetData[i][5],
-        //   max : sheetData[i][6]
-        // }
-        //await universityService.create(obj2)
-        //data.push(obj1)
       }
 
       const response = {
-        success: true,
-        data
+        success: true
       };
       res.send(response);
     } catch (e) {

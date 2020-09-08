@@ -55,9 +55,7 @@ class testController {
       const user = {
         req
       };
-
-      _services.testService.deleteAll();
-
+      await _services.testService.deleteAll();
       const path = '../excelfile/test.xlsx';
 
       let workbook = _xlsx.default.readFile(path, {
@@ -100,7 +98,7 @@ class testController {
           // 세부전공
           total: sheetData[i][6],
           score: sheetData[i][7],
-          difference: value,
+          test: value,
           result: 1
         };
         await _services.testService.create(obj1);
@@ -111,6 +109,21 @@ class testController {
       };
       res.send(response);
     } catch (e) {}
+  }
+
+  static async getList(req, res) {
+    try {
+      const list = await _services.testService.findAll();
+      const response = {
+        success: true,
+        data: {
+          list
+        }
+      };
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
   }
 
   static async test(req, res) {

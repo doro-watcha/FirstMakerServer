@@ -40,6 +40,10 @@ class University extends _sequelize.default.Model {
         type: _sequelize.default.STRING,
         allowNull: true
       },
+      type: {
+        type: _sequelize.default.STRING,
+        allowNull: true
+      },
       createdAt: {
         type: _sequelize.default.DATE,
         allowNull: true,

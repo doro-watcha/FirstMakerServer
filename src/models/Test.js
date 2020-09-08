@@ -34,7 +34,7 @@ export default class Test extends Sequelize.Model {
                 type : Sequelize.STRING,
                 allowNull : true
               },
-              difference : {
+              test : {
                 type : Sequelize.FLOAT,
                 alloNull : true 
               },
@@ -66,7 +66,11 @@ export default class Test extends Sequelize.Model {
       toJSON() {
         const object = Object.assign({}, this.dataValues)
       
-
+        // delete some (key, value)
+       
+        delete object.createdAt
+        delete object.updatedAt
+    
         
         return object
       }

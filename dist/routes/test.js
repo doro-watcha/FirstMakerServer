@@ -46,4 +46,7 @@ router.get('/parse', authenticate, (req, res) => {
 router.get('/', authenticate, (req, res) => {
   _controllers.testController.test(req, res);
 });
+router.get('/list', (req, res) => {
+  _controllers.testController.getList(req, res);
+});
 module.exports = router;

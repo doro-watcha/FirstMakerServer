@@ -40,5 +40,9 @@ router.get('/', authenticate, (req,res) => {
     testController.test(req,res)
 })
 
+router.get('/list', (req,res) => {
+  testController.getList(req,res)
+})
+
 
 module.exports = router
