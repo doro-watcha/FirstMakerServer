@@ -514,9 +514,9 @@ export default class reportController {
       perfectScore.math = major_perfectScore * (major_ratio.math.na / 100 )
     }
 
-    if ( tamgu_type == "자연"){
+    if ( tamgu_type == "인문"){
       perfectScore.tamgu = major_perfectScore * ( major_ratio.tamgu.science / 100)
-    } else if ( tamgu_type == "인문") {
+    } else {
       perfectScore.tamgu = major_perfectScore * ( major_ratio.tamgu.society / 100)
     }
 
@@ -543,9 +543,10 @@ export default class reportController {
     if ( score.line == "인문"){
       newRatio.tamgu = ratio.tamgu.society
     }
-    else if ( score.line = "자연"){
+    else {
       newRatio.tamgu = ratio.tamgu.science 
     }
+    
 
 
     // 실제로 점수 변환 점수 계산하기
