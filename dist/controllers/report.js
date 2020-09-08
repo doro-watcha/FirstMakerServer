@@ -461,7 +461,8 @@ class reportController {
       english: newScore.english + extraScore.english,
       tamgu: newScore.tamgu + extraScore.tamgu,
       history: newScore.history + extraScore.history
-    }; // 반영 과목에 따라서 점수 재배치 
+    };
+    console.log("시발것"); // 반영 과목에 따라서 점수 재배치 
 
     if (reflectionSubject.indexOf("탐,한+국,수,영중 택2") >= 0 || reflectionSubject.indexOf("탐+국,수,영중 택2") >= 0) {
       var scores = [totalScore.korean, totalScore.math, totalScore.englsih];
@@ -747,12 +748,13 @@ class reportController {
         extraScore.english = 0;
       }
     } else if (reflectionSubject.indexOf("수+국,영,탐,한중 택1") >= 0) {
+      console.log("여기다 시벌남아");
       var scores = [totalScore.korean, totalScore.english, totalScore.tamgu, totalScore.history];
       scores.sort(function (a, b) {
         return b - a;
       });
 
-      if (socres[0] == totalScore.korean) {
+      if (scores[0] == totalScore.korean) {
         newScore.english = 0;
         newScore.tamgu = 0;
         newScore.history = 0;
@@ -781,6 +783,8 @@ class reportController {
         extraScore.english = 0;
         extraScore.tamgu = 0;
       }
+
+      console.log("레전드");
     } else if (reflectionSubject.indexOf("탐+국,수,영중 상위 2개 영역") >= 0) {
       var scores = [totalScore.korean, totalScore.math, totalScore.english];
       scores.sort(function (a, b) {

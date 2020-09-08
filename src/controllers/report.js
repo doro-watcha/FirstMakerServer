@@ -634,6 +634,8 @@ export default class reportController {
       history : newScore.history + extraScore.history
     }
 
+    console.log("시발것")
+
 
 
     // 반영 과목에 따라서 점수 재배치 
@@ -1039,6 +1041,8 @@ export default class reportController {
 
     else if ( reflectionSubject.indexOf("수+국,영,탐,한중 택1") >= 0 ) {
 
+      console.log("여기다 시벌남아")
+
       var scores = [totalScore.korean, totalScore.english , totalScore.tamgu , totalScore.history]
 
       scores.sort(function(a,b){
@@ -1046,7 +1050,7 @@ export default class reportController {
       })
  
 
-      if ( socres[0] == totalScore.korean) {
+      if ( scores[0] == totalScore.korean) {
         newScore.english = 0
         newScore.tamgu = 0
         newScore.history = 0
@@ -1086,6 +1090,7 @@ export default class reportController {
         extraScore.english = 0
         extraScore.tamgu = 0
       }
+      console.log("레전드")
 
     }
     else if ( reflectionSubject.indexOf("탐+국,수,영중 상위 2개 영역") >= 0 ) {
