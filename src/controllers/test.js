@@ -100,6 +100,13 @@ export default class testController {
           
           }
 
+          const answer = parseFloat(sheetData[i][7])
+          var determinant = 0
+
+          if ( value - answer < answer * 0.05) {
+            determinant = 1
+          }
+
           console.log("zxcvzxvxzcvz")
             let obj1 = {
               id : i-2,
@@ -111,7 +118,7 @@ export default class testController {
               total : sheetData[i][6],
               score : sheetData[i][7],
               test : value,
-              result : 1
+              result : determinant
             }
             data.push(obj1)
 
