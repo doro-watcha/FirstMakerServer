@@ -84,17 +84,16 @@ export default class testController {
         // 파싱을 해보자 
         for ( let i = 3 ; i < 5603 ; i++) {
 
-          console.log("123")
+      
           const majorData = await majorDataService.findOne({id: 2*i-5})
 
           var value = -1
           if ( sheetData[i][0] == "인문") {
-            console.log("446")
+      
     
             value = await reportController.getScore(societyScore, majorData)
     
           } else {
-            console.log("zxcv")
 
             value = await reportController.getScore(scienceScore, majorData)
           
@@ -103,7 +102,7 @@ export default class testController {
           const answer = parseFloat(sheetData[i][7])
           var determinant = 0
 
-          if ( value - answer < answer * 0.05 || answer - vale < answer * 0.05) {
+          if ( value - answer < answer * 0.05 || answer - value < answer * 0.05) {
             determinant = 1
           }
 
