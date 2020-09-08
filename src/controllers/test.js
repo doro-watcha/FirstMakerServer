@@ -72,7 +72,7 @@ export default class testController {
 
 
         // 파싱을 해보자 
-        for ( let i = 3 ; i < 5000 ; i++) {
+        for ( let i = 3 ; i < 5603 ; i++) {
 
           const majorData = await majorDataService.findOne({id: 2*i-5})
 

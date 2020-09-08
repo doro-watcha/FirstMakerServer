@@ -74,7 +74,7 @@ class testController {
         userId: user.id
       }); // 파싱을 해보자 
 
-      for (let i = 3; i < 5000; i++) {
+      for (let i = 3; i < 5603; i++) {
         const majorData = await _services.majorDataService.findOne({
           id: 2 * i - 5
         });
