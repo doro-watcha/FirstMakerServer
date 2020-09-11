@@ -83,6 +83,8 @@ export default class reportController {
     try {
 
       const { user } = req 
+
+      console.log(user)
       const reports = await reportService.findList(user.id)
 
 
