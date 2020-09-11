@@ -174,6 +174,7 @@ export default class fileController {
             dangerous : sheetData[i][25],
             sniping : sheetData[i][26]
           },
+          recommendationScore : ( sheetData[i][23] + sheetData[i][24] ) / 2,
 
           ratio : {
             korean : parsed_data.korean, // (40)
@@ -295,6 +296,7 @@ export default class fileController {
             dangerous : sheetData[i][21],
             sniping : sheetData[i][22]
           },
+          recommendationScore : ( sheetData[i][23] + sheetData[i][24] ) / 2,
           ratio : {
             korean : parsed_data.korean,
             math : {

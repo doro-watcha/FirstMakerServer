@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _models = require("../models");
 
+var _majorData = require("./majorData");
+
 let instance = null;
 
 class ReportService {
@@ -22,7 +24,8 @@ class ReportService {
   async create(modelObj) {
     const {
       userId,
-      majorDataId
+      majorDataId,
+      totalScore
     } = modelObj;
     const user = await _models.User.findOne({
       where: {

@@ -1,4 +1,5 @@
 import { Report , MajorData , User, Major } from '../models'
+import { majorDataService } from './majorData'
 
 let instance = null
 
@@ -13,7 +14,7 @@ class ReportService {
     }
     
     async create ( modelObj) {
-        const { userId , majorDataId } = modelObj
+        const { userId , majorDataId, totalScore } = modelObj
 
         const user = await User.findOne({
             where : { id : userId}
@@ -26,6 +27,8 @@ class ReportService {
         })
 
         if ( majorData == null ) throw Error('MAJOR_DATA_NOT_FOUND')
+
+        
 
         return await Report.create(modelObj)
     }

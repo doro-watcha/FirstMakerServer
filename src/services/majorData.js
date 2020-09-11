@@ -1,5 +1,5 @@
 import { MajorData , Major} from  '../models'
-
+import Sequelize from 'sequelize'
 let instance = null
 
 class MajorDataService {
@@ -35,7 +35,25 @@ class MajorDataService {
 					as: 'major',
       }
 		})
-	}
+  }
+  
+  async findRecommendations ( score ) {
+
+    const Op = Sequelize.Op
+
+
+    return await MajorData.findAll({
+      limit : 5,
+      where : {
+        recommendationScore: {     
+          [Op.and]: {
+             [Op.lt]: (score+10),
+             [Op.gt]: (score-10)
+          }
+        }
+      }
+    })
+  }
 	
   async update (id , modelObj ) {
 

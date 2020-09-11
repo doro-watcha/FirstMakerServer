@@ -26,6 +26,7 @@ export default class Report extends Sequelize.Model {
                 type : Sequelize.FLOAT,
                 allowNull : true 
               },
+
               createdAt: {
                   type: Sequelize.DATE,
                   allowNull: true,

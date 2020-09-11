@@ -7,6 +7,10 @@ exports.default = void 0;
 
 var _models = require("../models");
 
+var _sequelize = _interopRequireDefault(require("sequelize"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 let instance = null;
 
 class MajorDataService {
@@ -39,6 +43,21 @@ class MajorDataService {
       include: {
         model: _models.Major,
         as: 'major'
+      }
+    });
+  }
+
+  async findRecommendations(score) {
+    const Op = _sequelize.default.Op;
+    return await _models.MajorData.findAll({
+      limit: 5,
+      where: {
+        recommendationScore: {
+          [Op.and]: {
+            [Op.lt]: score + 10,
+            [Op.gt]: score - 10
+          }
+        }
       }
     });
   }

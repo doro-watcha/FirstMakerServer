@@ -44,6 +44,10 @@ export default class MajorData extends Sequelize.Model {
               gradeToScore : {
                 type : Sequelize.JSON,
                 allowNull : true
+              },
+              recommendationScore : {
+                type : Sequelize.FLOAT,
+                allowNull : true 
               }
             },
             {

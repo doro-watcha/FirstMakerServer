@@ -20,7 +20,7 @@ class reportController {
         user
       } = req;
       const result = await _joi.default.validate(req.body, {
-        majorDataId: _joi.default.number()
+        majorDataId: _joi.default.number().required()
       });
       const {
         majorDataId
@@ -37,79 +37,11 @@ class reportController {
       const score = await _services.scoreService.findOne({
         userId: user.id
       });
-      if (score == null) throw Error('SCORE_NOT_FOUND'); // 과목별 변환 만점 구하기 ex) 700 ,1000
-
-      const major_perfectScore = majorData.metadata.perfectScore; // 과목별 반영비율 구하기
-
-      const major_ratio = majorData.ratio;
-      const perfectScore = {
-        korean: major_perfectScore * (major_ratio.korean / 100),
-        english: major_perfectScore * (major_ratio.englsih / 100),
-        math: 0,
-        tamgu: major_perfectScore * (major_ratio.tamgu.science / 100)
-      };
-      const math_type = score.math.type;
-      const tamgu_type = score.line;
-
-      if (math_type == "가") {
-        perfectScore.math = major_perfectScore * (major_ratio.math.ga / 100);
-      } else if (math_type == "나") {
-        perfectScore.math = major_perfectScore * (major_ratio.math.na / 100);
-      }
-
-      if (tamgu_type == "자연") {
-        perfectScore.tamgu = major_perfectScore * (major_ratio.tamgu.science / 100);
-      } else if (tamgu_type == "인문") {
-        perfectScore.tamgu = major_perfectScore * (major_ratio.tamgu.society / 100);
-      } // 내 변환 점수 구하기
-
-
-      const applicationIndicator = majorData.metadata.applicationIndicator;
-      const english = score.english.grade;
-      const newScore = {
-        korean: 0,
-        math: 0,
-        english: 0,
-        tamgu: 0,
-        history: 0
-      };
-      newScore.english = majorData.gradeToScore.english.score[english] * (perfectScore.english / 200);
-
-      if (applicationIndicator == "표준점수") {
-        newScore.korean = score.korean.score * (perfectScore.korean / 200);
-        newScore.math = score.math.score * (perfectScore.math / 200);
-        newScore.tamgu = (score.tamgu1.score + score.tamgu2.score) * (perfectScore.tamgu / 200);
-      } else if (applicationIndicator == "표+백") {
-        newScore.korean = score.korean.score * (perfectScore.korean / 200);
-        newScore.math = score.math.score * (perfectScore.math / 200);
-        newScore.tamgu = (score.tamgu1.grade + score.tamgu2.grade) * (perfectScore.tamgu / 200);
-      } else if (applicationIndicator == "백분위") {
-        newScore.korean = score.korean.grade * (perfectScore.korean / 200);
-        newScore.math = score.math.grade * (perfectScore.math / 200);
-        newScore.tamgu = (score.tamgu1.grade + score.tamgu2.grade) * (perfectScore.tamgu / 200);
-      } // 변환 가산점 구하기 
-
-
-      const extra = majorData.metadata.extraPoint;
-      const extra_subject = {
-        math_ga_5: "수가 5%",
-        math_ga_10: "수가 10&",
-        science: "과탐",
-        science_1: "윤리"
-      }; // for ( let i = 0 ; i < 3 ; i++){
-      //   if ( extra.indexOf(extra_subject[i]) >= 0 ) {
-      //   }
-      // }
-
-      const modelObj = {
-        score,
-        majorDataId,
-        userId: user.id,
-        perfectScore,
-        score: newScore,
-        extraScore: null
-      };
+      if (score == null) throw Error('SCORE_NOT_FOUND');
+      console.log("zxcvzxcv");
+      const modelObj = await reportController.getScore(score, majorData, true);
       const report = await _services.reportService.create(modelObj);
+      console.log("FUCK");
       const response = {
         success: true,
         data: {
@@ -161,164 +93,8 @@ class reportController {
 
   static async update(req, res) {
     try {
-      const {
-        user
-      } = req;
-      const result = await _joi.default.validate(req.body, {
-        majorDataId: _joi.default.number()
-      });
-      const {
-        majorDataId
-      } = result;
-      const reportId = req.params.id;
-      const majorData = await _services.majorDataService.findOne({
-        id: majorDataId
-      });
-      if (majorData == null) throw Error('MAJOR_DATA_NOT_FOUND');
-      const score = await _services.scoreService.findOne({
-        userId: user.id
-      });
-      if (score == null) throw Error('SCORE_NOT_FOUND'); // ApplicationIndicator로 반영점수 구하기 ( ex: 백분위,표준점수 등등)
-      // 과목별 변환 만점 구하기 ex) 700 ,1000
-
-      const major_perfectScore = majorData.metadata.perfectScore;
-      const major_ratio = majorData.ratio;
-      const perfectScore = {
-        korean: major_perfectScore * (major_ratio.korean / 100),
-        english: major_perfectScore * (major_ratio.english / 100),
-        math: 0,
-        tamgu: 0,
-        history: major_perfectScore * (major_ratio.history / 100)
-      };
-      const math_type = score.math.type;
-      const tamgu_type = score.line;
-
-      if (math_type == "가") {
-        perfectScore.math = major_perfectScore * (major_ratio.math.ga / 100);
-      } else if (math_type == "나") {
-        perfectScore.math = major_perfectScore * (major_ratio.math.na / 100);
-      }
-
-      if (tamgu_type == "자연") {
-        perfectScore.tamgu = major_perfectScore * (major_ratio.tamgu.science / 100);
-      } else if (tamgu_type == "인문") {
-        perfectScore.tamgu = major_perfectScore * (major_ratio.tamgu.society / 100);
-      } // 반영 방법에 따라서 반영 비율 구하기 
-
-
-      const ratio = majorData.ratio;
-      const reflectionSubject = majorData.metadata.reflectionSubject;
-      const newRatio = {
-        korean: ratio.korean,
-        math: 0,
-        englsih: ratio.english,
-        tamgu: 0,
-        history: ratio.history
-      }; // 수학 과목별로 비율 구하기 
-
-      if (score.math.type == "가") {
-        newRatio.math = ratio.math.ga;
-      } else if (score.math.type == "나") {
-        newRatio.math = ratio.math.na;
-      } // 과학 과목별로 비율 구하기
-
-
-      if (score.line == "인문") {
-        newRatio.tamgu = ratio.tamgu.society;
-      } else if (score.line = "자연") {
-        newRatio.tamgu = ratio.tamgu.science;
-      } // 실제로 점수 변환 점수 계산하기
-
-
-      const applicationIndicator = majorData.metadata.applicationIndicator;
-      const newScore = {
-        korean: 0,
-        english: 0,
-        tamgu: 0,
-        math: 0,
-        history: 0
-      };
-
-      if (applicationIndicator == "표준점수") {
-        newScore.korean = score.korean.score * perfectScore.korean / 200;
-        newScore.math = score.math.score * perfectScore.math / 200;
-        newScore.tamgu = (score.tamgu1.score + score.tamgu2.score) * perfectScore.tamgu / 200;
-        newScore.english = majorData.gradeToScore.english.score[score.english.grade - 1] * perfectScore.english / 200;
-        newScore.history = majorData.gradeToScore.history.score[score.history.grade - 1] * perfectScore.history / 200;
-      } else if (applicationIndicator == "표+백") {
-        newScore.korean = score.korean.score * (perfectScore.korean / 200);
-        newScore.math = score.math.score * (perfectScore.math / 200);
-        newScore.tamgu = (score.tamgu1.grade + score.tamgu2.grade) * (perfectScore.tamgu / 200);
-        newScore.english = majorData.gradeToScore.english.score[score.english.grade - 1] * perfectScore.english / 200;
-        newScore.history = majorData.gradeToScore.history.score[score.history.grade - 1] * perfectScore.history / 200;
-      } else if (applicationIndicator == "백분위") {
-        newScore.korean = score.korean.percentile * perfectScore.korean / 100;
-        newScore.math = score.math.percentile * perfectScore.math / 100;
-        newScore.tamgu = (score.tamgu1.percentile + score.tamgu2.percentile) / 2 * perfectScore.tamgu / 100;
-        newScore.english = majorData.gradeToScore.english.score[score.english.grade - 1] * perfectScore.english / 100;
-        newScore.history = majorData.gradeToScore.history.score[score.history.grade - 1] * perfectScore.history / 100;
-      } // 반영 과목에 따라서 점수 재배치 
-
-
-      if (reflectionSubject.indexOf("탐,한+국,수,영중 택2") >= 0) {
-        var scores = [newScore.tamgu];
-      } else if (reflectionSubject.indexOf("탐+국,수,영중 택2") >= 0) {} else if (reflectionSubject.indexOf("탐+국,수,영중 택1") >= 0) {} else if (reflectionSubject.indexOf("국,수,영,탐중 상위 3개 영역") >= 0) {} else if (reflectionSubject.indexOf("영+국,수,탐중 택2") >= 0) {} else if (reflectionSubject.indexOf("영,탐+국,수중 택1") >= 0) {} else if (reflectionSubject.indexOf("영+탐+국,수중 택1") >= 0) {} else if (reflectionSubject.indexOf("국,수,영,탐,한중 택4") >= 0) {} else if (reflectionSubject.indexOf("국,수,영,탐중 택2") >= 0) {} else if (reflectionSubject.indexOf("국,수,영,탐중 택3") >= 0) {} else if (reflectionSubject.indexOf("국,영+수,탐중 택1") >= 0) {} else if (reflectionSubject.indexOf("국,수,영,탐 중 택3") >= 0) {} else if (reflectionSubject.indexOf("수,탐+국,영중 택1") >= 0) {} else if (reflectionSubject.indexOf("영,한중 택1+국,수,탐중 택2") >= 0) {} else if (reflectionSubject.indexOf("수,영+국,탐중 택1") >= 0) {} else if (reflectionSubject.indexOf("국+수,영,탐,한중 택1") >= 0) {} else if (reflectionSubject.indexOf("수+국,영,탐중 택1") >= 0) {} else if (reflectionSubject.indexOf("수+국,영,탐,한중 택1") >= 0) {} else if (reflectionSubject.indexOf("탐+국,수,영중 상위 2개 영역") >= 0) {} else if (reflectionSubject.indexOf("탐+수+국,영중 상위1개영역") >= 0) {} else if (reflectionSubject.indexOf("국,수,영,탐,제2외국어중 택3") >= 0) {} else {
-        console.log("simpleType");
-      }
-
-      console.log(score);
-      console.log(newScore.english);
-      console.log(newScore.korean);
-      console.log(newScore.math);
-      console.log(newScore.tamgu);
-      const score_sum = newScore.korean + newScore.math + newScore.tamgu + newScore.english; // 변환 가산점 구하기 
-
-      const extra = majorData.metadata.extraPoint;
-      const extraScore = {
-        korean: 0,
-        english: 0,
-        math: 0,
-        tamgu: 0,
-        history: 0
-      };
-
-      if (extra.indexOf("수가") >= 0 && math_type == "가") {
-        if (extra.indexOf("%") >= 0) {
-          const number = extra.replace(/[^0-9]/g, '');
-          extraScore.math = newScore.math * number / 100;
-        }
-      }
-
-      if (extra.indexOf("수나") >= 0 && extra.indexOf("%") >= 0 && math_type == "나") {
-        const number = extra.replace(/[^0-9]/g, '');
-        extraScore.math = -newScore.math * number / 100;
-      }
-
-      if (extra.indexOf("과탐") >= 0 && score.line == "자연") {
-        if (extra.indexOf("과탐Ⅱ") >= 0) {}
-
-        if (extra.indexOf("%") >= 0) {
-          const number = extra.replace(/[^0-9]/g, '');
-          extraScore.tamgu = newScore.tamgu * number / 100;
-        }
-      }
-
-      console.log(newScore.korean + newScore.math + newScore.english + newScore.tamgu + newScore.history + extraScore.korean + extraScore.math + extraScore.english + extraScore.tamgu + extraScore.history);
-      const modelObj = {
-        score,
-        majorDataId,
-        userId: user.id,
-        perfectScore,
-        score: newScore,
-        extraScore: extraScore //totalScore : newScore.korean + newScore.math + newScore.english + newScore.tamgu + newScore.history + extraScore.korean + extraScore.math + extraScore.english + extraScore.tamgu + extraScore.history
-
-      };
-      const report = await _services.reportService.update(reportId, modelObj);
       const response = {
-        success: true,
-        data: {
-          report
-        }
+        success: true
       };
       res.send(response);
     } catch (e) {
@@ -343,7 +119,7 @@ class reportController {
     return b - a;
   }
 
-  static async getScore(score, majorData) {
+  static async getScore(score, majorData, create) {
     // ApplicationIndicator로 반영점수 구하기 ( ex: 백분위,표준점수 등등)
     // 과목별 변환 만점 구하기 ex) 700 ,1000
     const major_perfectScore = majorData.metadata.perfectScore;
@@ -810,7 +586,26 @@ class reportController {
     console.log(newScore.english);
     console.log(newScore.tamgu);
     console.log(newScore.history);
-    return total;
+    console.log(score.userId);
+    console.log(majorData.id);
+
+    if (create == true) {
+      const recommendations = await _services.majorDataService.findRecommendations(total);
+      console.log(recommendations);
+      const modelObj = {
+        score,
+        majorDataId: majorData.id,
+        userId: score.userId,
+        perfectScore,
+        score: newScore,
+        extraScore: extraScore,
+        totalScore: total,
+        recommendations
+      };
+      return modelObj;
+    } else {
+      return total;
+    }
   }
 
 }

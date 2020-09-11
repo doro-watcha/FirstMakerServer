@@ -93,9 +93,9 @@ class testController {
         var value = -1;
 
         if (sheetData[i][0] == "인문") {
-          value = await _report.default.getScore(societyScore, majorData);
+          value = await _report.default.getScore(societyScore, majorData, false);
         } else {
-          value = await _report.default.getScore(scienceScore, majorData);
+          value = await _report.default.getScore(scienceScore, majorData, false);
         }
 
         const answer = parseFloat(sheetData[i][7]);

@@ -91,11 +91,11 @@ export default class testController {
           if ( sheetData[i][0] == "인문") {
       
     
-            value = await reportController.getScore(societyScore, majorData)
+            value = await reportController.getScore(societyScore, majorData,false)
     
           } else {
 
-            value = await reportController.getScore(scienceScore, majorData)
+            value = await reportController.getScore(scienceScore, majorData, false)
           
           }
 
