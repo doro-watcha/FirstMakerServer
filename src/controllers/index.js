@@ -19,6 +19,6 @@ module.exports = {
     smallChapterController,
     problemController,
     homeworkController,
-    notecontroller
+    noteController
 
 }
