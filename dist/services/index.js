@@ -12,6 +12,8 @@ var _smallChapter = _interopRequireDefault(require("./smallChapter"));
 
 var _problem = _interopRequireDefault(require("./problem"));
 
+var _note = _interopRequireDefault(require("./note"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
@@ -20,5 +22,6 @@ module.exports = {
   bigChapterService: _bigChapter.default,
   middleChapterService: _middleChapter.default,
   smallChapterService: _smallChapter.default,
-  problemService: _problem.default
+  problemService: _problem.default,
+  noteService: _note.default
 };

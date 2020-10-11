@@ -44,7 +44,10 @@ class problemController {
       };
       const newProblem = await _services.problemService.create(modelObj);
       const response = {
-        success: true
+        success: true,
+        data: {
+          problem: newProblem
+        }
       };
       res.send(response);
     } catch {

@@ -43,7 +43,8 @@ class homeworkController {
       for (var i = 0; i < problemIdList.length(); i++) {
         const modelObj = {
           problemId: problemIdList[i],
-          homeworkId: newHomework.id
+          homeworkId: newHomework.id,
+          status: "READY"
         };
         await _services.noteService.create(modelObj);
       }

@@ -12,8 +12,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class Note extends _sequelize.default.Model {
   static init(sequelize) {
     return super.init({
-      // 문제 Image Url
+      // 문제 상태
       status: {
+        type: _sequelize.default.STRING,
+        allowNull: true
+      },
+      submit: {
         type: _sequelize.default.STRING,
         allowNull: true
       }
