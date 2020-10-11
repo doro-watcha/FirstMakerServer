@@ -128,6 +128,41 @@ module.exports = {
 			status : 420,
 			ko : '해당 학원 없음'
 		},
+		SUBJECT_NOT_FOUND : {
+			status : 421,
+			ko : '해당 과목 없음'
+		},
+		BIG_CHAPTER_NOT_FOUND : {
+			status : 422,
+			ko : '해당 대단원 없음'
+		},
+		MIDDLE_CHAPTER_NOT_FOUND : {
+			status : 423,
+			ko : '해당 중단원 없음'
+		},
+		SMALL_CHAPTER_NOT_FOUND : {
+			status : 424,
+			ko : '해당 소단원 없음'
+		},
+		HOMEWORK_NOT_FOUND : {
+			status : 425,
+			ko : '해당 숙제 없음'
+		},
+		EXAM_NOT_FOUND : {
+			status : 426,
+			ko : '해당 시험 없음'
+		},
+		PROBLEM_NOT_FOUND : {
+			status : 427,
+			ko : '해당 문제 없음'
+		},
+		NOTE_NOT_FOUND : {
+			status : 428,
+			ko : '해당 문제 기록 없음'
+		},
+
+
+
 		// 409
 		USER_ALREADY_EXISTS: {
 			status: 500,
@@ -176,6 +211,38 @@ module.exports = {
 		ACADEMY_ALREADY_EXISTS : {
 			status : 510,
 			ko : '이미 존재하는 학원입니다'
+		},
+		SUBJECT_ALREADY_EXISTS : {
+			status : 511,
+			ko : '이미 존재하는 과목입니다'
+		},
+		BIG_CHAPTER_ALREADY_EXISTS : {
+			status : 512,
+			ko : '이미 존재하는 대단원입니다'
+		},
+		MIDDLE_CHAPTER_ALREADY_EXISTS : {
+			status : 513,
+			ko : '이미 존재하는 중단원입니다'
+		},
+		SMALL_CHAPTER_ALREADY_EXISTS: {
+			status : 514,
+			ko : '이미 존재하는 소단원입니다'
+		},
+		HOMEWORK_ALREADY_EXISTS : {
+			status : 515,
+			ko : '이미 존재하는 숙제입니다'
+		},
+		EXAM_ALREADY_EXISTS : {
+			status : 516,
+			ko : '이미 존재하는 시험입니다'
+		},
+		PROBLEM_ALREADY_EXISTS : {
+			status : 517,
+			ko : '이미 존재하는 문제입니다'
+		},
+		NOTE_ALREADY_EXISTS : {
+			status : 518,
+			ko : '이미 존재하는 문제기록입니다.'
 		},
 
 		// 410

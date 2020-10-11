@@ -62,28 +62,16 @@ class AuthController {
       const result = await _joi.default.validate(req.body, {
         email: _joi.default.string().required(),
         password: _joi.default.string().regex(_variables.passwordRegex).required(),
-        name: _joi.default.string().required(),
-        haknyeon: _joi.default.string(),
-        highSchool: _joi.default.string(),
-        line: _joi.default.string(),
-        graduateYear: _joi.default.number(),
-        telephone: _joi.default.string(),
-        gender: _joi.default.string(),
-        academyId: _joi.default.number(),
-        adminLevel: _joi.default.number()
+        school: _joi.default.string().required(),
+        grade: _joi.default.string().required(),
+        mathGrade: _joi.default.number().required()
       });
       const {
         email,
         password,
-        name,
-        haknyeon,
-        highSchool,
-        line,
-        graduateYear,
-        telephone,
-        gender,
-        academyId,
-        adminLevel
+        school,
+        grade,
+        mathGrade
       } = result; // check if user already exists
 
       const user = await _services.userService.findOne({
@@ -93,17 +81,12 @@ class AuthController {
       if (user) throw Error('USER_ALREADY_EXISTS'); // create user
 
       const success = await _services.userService.create({
-        name,
         email,
         password,
-        highSchool,
-        haknyeon,
-        line,
-        graduateYear,
-        telephone,
-        gender,
-        academyId,
-        adminLevel
+        school,
+        grade,
+        mathGrade,
+        type: "student"
       }); // create response
 
       const response = {
@@ -152,44 +135,6 @@ class AuthController {
       res.send(response);
     } catch (e) {
       console.log(e);
-      res.send((0, _functions.createErrorResponse)(e));
-    }
-  }
-
-  static async academyIn(req, res) {
-    try {
-      const result = await _joi.default.validate(req.body, {
-        name: _joi.default.string().required(),
-        password: _joi.default.string().regex(_variables.passwordRegex).required()
-      });
-      const {
-        name,
-        password
-      } = result;
-      let academy = await _services.academyService.findOne({
-        name
-      });
-      if (!academy) throw Error('ACADEMY_NOT_FOUND'); // [ERROR] PASSWORD_MISMATCH
-
-      if (!academy.isValidPassword(password)) throw Error('PASSWORD_MISMATCH'); // issue token
-
-      const token = _jsonwebtoken.default.sign({
-        id: academy.id,
-        name: academy.name
-      }, 'token-secret-staging', {
-        expiresIn: '60 days'
-      }); // create response
-
-
-      const response = {
-        success: true,
-        data: {
-          token,
-          academy
-        }
-      };
-      res.send(response);
-    } catch (e) {
       res.send((0, _functions.createErrorResponse)(e));
     }
   }

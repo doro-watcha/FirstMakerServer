@@ -1,39 +1,24 @@
 "use strict";
 
-var _university = _interopRequireDefault(require("./university"));
-
-var _score = _interopRequireDefault(require("./score"));
+var _subject = _interopRequireDefault(require("./subject"));
 
 var _user = _interopRequireDefault(require("./user"));
 
-var _report = _interopRequireDefault(require("./report"));
+var _bigChapter = _interopRequireDefault(require("./bigChapter"));
 
-var _major = _interopRequireDefault(require("./major"));
+var _middleChapter = _interopRequireDefault(require("./middleChapter"));
 
-var _consulting = _interopRequireDefault(require("./consulting"));
+var _smallChapter = _interopRequireDefault(require("./smallChapter"));
 
-var _paymentRecord = _interopRequireDefault(require("./paymentRecord"));
-
-var _academy = _interopRequireDefault(require("./academy"));
-
-var _file = _interopRequireDefault(require("./file"));
-
-var _majorData = _interopRequireDefault(require("./majorData"));
-
-var _test = _interopRequireDefault(require("./test"));
+var _problem = _interopRequireDefault(require("./problem"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
-  universityService: _university.default,
-  scoreService: _score.default,
+  subjectService: _subject.default,
   userService: _user.default,
-  reportService: _report.default,
-  majorService: _major.default,
-  consultingService: _consulting.default,
-  paymentRecordService: _paymentRecord.default,
-  academyService: _academy.default,
-  fileService: _file.default,
-  majorDataService: _majorData.default,
-  testService: _test.default
+  bigChapterService: _bigChapter.default,
+  middleChapterService: _middleChapter.default,
+  smallChapterService: _smallChapter.default,
+  problemService: _problem.default
 };

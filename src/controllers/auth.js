@@ -52,19 +52,12 @@ export default class AuthController {
 				password: Joi.string()
 					.regex(passwordRegex)
 					.required(),
-				name : Joi.string().required(),
-				haknyeon : Joi.string(),
-				highSchool : Joi.string(),
-				line : Joi.string(),
-				graduateYear : Joi.number(),
-				telephone : Joi.string(),
-				gender : Joi.string(),
-				academyId : Joi.number(),
-				adminLevel : Joi.number()
-
+				school : Joi.string().required(),
+				grade : Joi.string().required(),
+				mathGrade : Joi.number().required()
 			})
 		
-			const { email , password , name , haknyeon , highSchool , line, graduateYear , telephone, gender, academyId , adminLevel} = result 
+			const { email , password, school, grade, mathGrade} = result 
 			// check if user already exists
 			const user = await userService.findOne({
 				email
@@ -75,17 +68,12 @@ export default class AuthController {
 
 			// create user
 			const success = await userService.create({
-				name,
 				email,
 				password,
-				highSchool,
-				haknyeon,
-				line,
-				graduateYear,
-				telephone ,
-				gender,
-				academyId,
-				adminLevel
+				school,
+				grade,
+				mathGrade,
+				type : "student"
 			})
 
 			// create response
@@ -140,48 +128,6 @@ export default class AuthController {
 			res.send(response)
 		} catch (e) {
 			console.log(e)
-			res.send(createErrorResponse(e))
-		}
-	}
-
-	static async academyIn (req,res) {
-		try {
-
-			const result = await Joi.validate(req.body, {
-				name: Joi.string()
-					.required(),
-				password: Joi.string()
-					.regex(passwordRegex)
-					.required()
-			})
-
-			const { name , password } = result 
-
-			let academy = await academyService.findOne({
-				name
-			})
-
-			if ( !academy ) throw Error('ACADEMY_NOT_FOUND')
-
-			// [ERROR] PASSWORD_MISMATCH
-			if (!academy.isValidPassword(password)) throw Error('PASSWORD_MISMATCH')
-
-			// issue token
-			const token = jwt.sign({ id: academy.id, name: academy.name }, 'token-secret-staging', {
-				expiresIn: '60 days',
-			})
-
-			// create response
-			const response = {
-				success: true,
-				data: {
-					token,
-					academy
-				},
-			}
-			res.send(response)
-
-		} catch ( e ) {
 			res.send(createErrorResponse(e))
 		}
 	}

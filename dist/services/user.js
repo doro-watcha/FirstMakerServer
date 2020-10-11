@@ -41,27 +41,13 @@ class UserService {
 
   async findOne(where) {
     return await _models.User.findOne({
-      where: JSON.parse(JSON.stringify(where)),
-      include: {
-        model: _models.Academy,
-        as: 'academy'
-      }
+      where: JSON.parse(JSON.stringify(where))
     });
   }
 
   async findList(where) {
     return await _models.User.findAll({
-      where: JSON.parse(JSON.stringify(where)),
-      include: [{
-        model: _models.Academy,
-        as: 'academy'
-      }, {
-        model: _models.Score,
-        as: 'score'
-      }, {
-        model: _models.Report,
-        as: 'report'
-      }]
+      where: JSON.parse(JSON.stringify(where))
     });
   }
 
@@ -74,10 +60,6 @@ class UserService {
     const updatedUser = await _models.User.findOne({
       where: {
         id
-      },
-      include: {
-        model: _models.Academy,
-        as: 'academy'
       }
     });
     if (updatedUser === null) throw Error('USER_NOT_FOUND');

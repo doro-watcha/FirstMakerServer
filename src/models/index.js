@@ -1,16 +1,16 @@
 import Sequelize from 'sequelize'
 import dbConfig from '../config/db-config'
-
-import UniversityModel from './University'
-import ScoreModel from './Score'
+import ProblemModel from './Problem'
+import ExamModel from './Exam'
+import HomeworkModel from './Homework'
+// import ClassModel from './Class'
+import SubjectModel from './Subject'
+import BigChapterModel from './BigChapter'
+import MiddleChapterModel from './MiddleChapter'
+import SmallChapterModel from './SmallChapter'
 import UserModel from './User'
-import PaymentRecordModel from './PaymentRecord'
-import ReportModel from './Report'
-import MajorModel from './Major'
-import ConsultingModel from './Consulting'
-import AcademyModel from './Academy'
-import MajorDataModel from './MajorData'
-import TestModel from './Test'
+import NoteModel from './Note'
+
 
 const env = process.env.NODE_ENV || 'development'
 const config = dbConfig[env]
@@ -18,16 +18,17 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 
 
 const models = {
-  University : UniversityModel.init(sequelize, Sequelize),
-  Score : ScoreModel.init(sequelize, Sequelize),
+  Problem : ProblemModel.init(sequelize, Sequelize),
+  Exam : ExamModel.init(sequelize,Sequelize),
+  Homework : HomeworkModel.init(sequelize,Sequelize),
+  // Class : ClassModel.init(sequelize, Sequelize),
+  Subject : SubjectModel.init(sequelize, Sequelize),
+  BigChapter : BigChapterModel.init(sequelize, Sequelize),
+  MiddleChapter : MiddleChapterModel.init(sequelize, Sequelize),
+  SmallChapter : SmallChapterModel.init(sequelize, Sequelize),
   User : UserModel.init(sequelize, Sequelize),
-  PaymentRecord : PaymentRecordModel.init(sequelize , Sequelize),
-  Report : ReportModel.init(sequelize, Sequelize),
-  Major : MajorModel.init(sequelize , Sequelize),
-  Consulting : ConsultingModel.init(sequelize, Sequelize),
-  Academy : AcademyModel.init(sequelize, Sequelize),
-  MajorData : MajorDataModel.init(sequelize, Sequelize),
-  Test : TestModel.init(sequelize, Sequelize)
+  Note : NoteModel.init(sequelize, Sequelize)
+
 }
 
 Object.values(models)
