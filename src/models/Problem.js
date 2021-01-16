@@ -20,6 +20,11 @@ export default class Problem extends Sequelize.Model {
             type : Sequelize.STRING,
             allowNull : true 
           },
+
+          source : {
+            type : Sequelize.STRING,
+            allowNull : true
+          },
           
           createdAt: {
             type: Sequelize.DATE,

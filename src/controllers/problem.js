@@ -11,25 +11,41 @@ export default class problemController {
 
     try { 
 
+      console.log("wow")
+
       const result = await Joi.validate( req.body, {
-        problemUrl : Joi.string().required(),
         subjectId : Joi.number().required(),
         bigChapterId : Joi.number().required(),
         middleChapterId : Joi.number().required(),
         smallChapterId : Joi.number().required(),
         level : Joi.string().required(),
+        answer : Joi.string().required(),
+        source : Joi.optional()
 
       })
+
+      const files = await Joi.validate(req.files, {
+				problem: Joi.array()
+					.min(1)
+					.required(),
+				solution: Joi.array()
+					.min(1)
+					.required(),
+			})
       
-      const { problemUrl, subjectId, bigChapterId, middleChapterId, smallChapterId, level} = result 
+      const { subjectId, bigChapterId, middleChapterId, smallChapterId, level, source } = result 
+
+      const { problem ,solution } = files 
 
       const modelObj = {
-        problemUrl,
+        problemUrl : problem[0].storage,
+        solutionUrl : solution[0].storage,
         subjectId,
         bigChapterId,
         middleChapterId,
         smallChapterId,
-        level
+        level,
+        source 
       }
 
       const newProblem = await problemService.create(modelObj)
@@ -45,7 +61,7 @@ export default class problemController {
 
     }
 
-    catch {
+    catch (e){
       res.send(createErrorResponse(e))
     }
 

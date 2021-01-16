@@ -26,6 +26,10 @@ class Problem extends _sequelize.default.Model {
         type: _sequelize.default.STRING,
         allowNull: true
       },
+      source: {
+        type: _sequelize.default.STRING,
+        allowNull: true
+      },
       createdAt: {
         type: _sequelize.default.DATE,
         allowNull: false,

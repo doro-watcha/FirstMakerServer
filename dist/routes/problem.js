@@ -1,5 +1,13 @@
 "use strict";
 
+var _multer = _interopRequireDefault(require("multer"));
+
+var _multerS = _interopRequireDefault(require("multer-s3"));
+
+var _path = _interopRequireDefault(require("path"));
+
+var _awsSdk = _interopRequireDefault(require("aws-sdk"));
+
 var _Authenticator = _interopRequireDefault(require("../Authenticator"));
 
 var _controllers = require("../controllers");
@@ -11,8 +19,34 @@ var express = require('express');
 const {
   authenticate
 } = _Authenticator.default;
+const s3 = new _awsSdk.default.S3({
+  accessKeyId: 'AKIAIX4FWDLCK3FVJGIA',
+  secretAccessKey: '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'
+});
+const upload = (0, _multer.default)({
+  storage: (0, _multerS.default)({
+    s3,
+    bucket: 'mathproblem',
+    acl: 'public-read',
+    key: (req, file, cb) => {
+      const extension = _path.default.extname(file.originalname);
+
+      const filename = `${Math.random().toString(36).substring(2, 15)}`;
+      const timestamp = Date.now();
+      cb(null, `problem/${filename}_${timestamp}${extension}`);
+    }
+  })
+});
 var router = express.Router();
-router.post('/', (req, res) => {
+router.post('/', authenticate, upload.fields([{
+  name: 'problem',
+  maxCount: 1
+}, {
+  name: 'solution',
+  maxCount: 1
+}]), (req, res) => {
+  console.log("why");
+
   _controllers.problemController.create(req, res);
 });
 router.post('/find', authenticate, (req, res) => {

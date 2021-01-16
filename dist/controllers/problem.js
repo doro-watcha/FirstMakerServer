@@ -18,29 +18,41 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class problemController {
   static async create(req, res) {
     try {
+      console.log("wow");
       const result = await _joi.default.validate(req.body, {
-        problemUrl: _joi.default.string().required(),
         subjectId: _joi.default.number().required(),
         bigChapterId: _joi.default.number().required(),
         middleChapterId: _joi.default.number().required(),
         smallChapterId: _joi.default.number().required(),
-        level: _joi.default.string().required()
+        level: _joi.default.string().required(),
+        answer: _joi.default.string().required(),
+        source: _joi.default.optional()
+      });
+      const files = await _joi.default.validate(req.files, {
+        problem: _joi.default.array().min(1).required(),
+        solution: _joi.default.array().min(1).required()
       });
       const {
-        problemUrl,
         subjectId,
         bigChapterId,
         middleChapterId,
         smallChapterId,
-        level
+        level,
+        source
       } = result;
+      const {
+        problem,
+        solution
+      } = files;
       const modelObj = {
-        problemUrl,
+        problemUrl: problem[0].storage,
+        solutionUrl: solution[0].storage,
         subjectId,
         bigChapterId,
         middleChapterId,
         smallChapterId,
-        level
+        level,
+        source
       };
       const newProblem = await _services.problemService.create(modelObj);
       const response = {
@@ -50,7 +62,7 @@ class problemController {
         }
       };
       res.send(response);
-    } catch {
+    } catch (e) {
       res.send((0, _functions.createErrorResponse)(e));
     }
   }
