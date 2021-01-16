@@ -10,6 +10,10 @@ export default class Problem extends Sequelize.Model {
             type: Sequelize.STRING,
             allowNull : true,
           },
+          solutionUrl : {
+            type : Sequelize.STRING,
+            allowNull : true
+          },
           // 문제의 정답 
           answer: {
             type: Sequelize.STRING,
