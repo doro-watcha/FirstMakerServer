@@ -4,6 +4,8 @@ import multerS3 from 'multer-s3'
 import path from 'path'
 import aws from 'aws-sdk'
 import Authenticator from '../Authenticator'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const { authenticate } = Authenticator
 

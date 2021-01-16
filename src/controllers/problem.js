@@ -13,6 +13,9 @@ export default class problemController {
 
       console.log("wow")
 
+
+      console.log(req.body)
+
       const result = await Joi.validate( req.body, {
         subjectId : Joi.number().required(),
         bigChapterId : Joi.number().required(),
@@ -33,19 +36,20 @@ export default class problemController {
 					.required(),
 			})
       
-      const { subjectId, bigChapterId, middleChapterId, smallChapterId, level, source } = result 
+      const { subjectId, bigChapterId, middleChapterId, smallChapterId, level, source ,answer } = result 
 
       const { problem ,solution } = files 
 
       const modelObj = {
-        problemUrl : problem[0].storage,
-        solutionUrl : solution[0].storage,
+        problemUrl : "https://mathproblem.s3.us-east-2.amazonaws.com/" + problem[0].key,
+        solutionUrl : "https://mathproblem.s3.us-east-2.amazonaws.com/" + solution[0].key,
         subjectId,
         bigChapterId,
         middleChapterId,
         smallChapterId,
         level,
-        source 
+        source,
+        answer
       }
 
       const newProblem = await problemService.create(modelObj)

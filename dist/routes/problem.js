@@ -10,11 +10,15 @@ var _awsSdk = _interopRequireDefault(require("aws-sdk"));
 
 var _Authenticator = _interopRequireDefault(require("../Authenticator"));
 
+var _dotenv = _interopRequireDefault(require("dotenv"));
+
 var _controllers = require("../controllers");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var express = require('express');
+
+_dotenv.default.config();
 
 const {
   authenticate

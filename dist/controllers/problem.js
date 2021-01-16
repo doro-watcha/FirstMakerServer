@@ -19,6 +19,7 @@ class problemController {
   static async create(req, res) {
     try {
       console.log("wow");
+      console.log(req.body);
       const result = await _joi.default.validate(req.body, {
         subjectId: _joi.default.number().required(),
         bigChapterId: _joi.default.number().required(),
@@ -38,21 +39,23 @@ class problemController {
         middleChapterId,
         smallChapterId,
         level,
-        source
+        source,
+        answer
       } = result;
       const {
         problem,
         solution
       } = files;
       const modelObj = {
-        problemUrl: problem[0].storage,
-        solutionUrl: solution[0].storage,
+        problemUrl: "https://mathproblem.s3.us-east-2.amazonaws.com/" + problem[0].key,
+        solutionUrl: "https://mathproblem.s3.us-east-2.amazonaws.com/" + solution[0].key,
         subjectId,
         bigChapterId,
         middleChapterId,
         smallChapterId,
         level,
-        source
+        source,
+        answer
       };
       const newProblem = await _services.problemService.create(modelObj);
       const response = {
