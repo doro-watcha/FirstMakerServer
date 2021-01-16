@@ -18,8 +18,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class problemController {
   static async create(req, res) {
     try {
-      console.log("wow");
-      console.log(req.body);
       const result = await _joi.default.validate(req.body, {
         subjectId: _joi.default.number().required(),
         bigChapterId: _joi.default.number().required(),

@@ -17,6 +17,10 @@ class Problem extends _sequelize.default.Model {
         type: _sequelize.default.STRING,
         allowNull: true
       },
+      solutionUrl: {
+        type: _sequelize.default.STRING,
+        allowNull: true
+      },
       // 문제의 정답 
       answer: {
         type: _sequelize.default.STRING,

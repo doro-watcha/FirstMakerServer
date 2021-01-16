@@ -11,10 +11,7 @@ export default class problemController {
 
     try { 
 
-      console.log("wow")
 
-
-      console.log(req.body)
 
       const result = await Joi.validate( req.body, {
         subjectId : Joi.number().required(),

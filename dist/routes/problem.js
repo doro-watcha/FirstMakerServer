@@ -42,7 +42,7 @@ const upload = (0, _multer.default)({
   })
 });
 var router = express.Router();
-router.post('/', authenticate, upload.fields([{
+router.post('/', upload.fields([{
   name: 'problem',
   maxCount: 1
 }, {

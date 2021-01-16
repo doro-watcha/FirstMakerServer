@@ -34,7 +34,7 @@ const upload = multer({
 
 var router = express.Router();
 
-router.post('/', authenticate, upload.fields([{ name: 'problem', maxCount: 1 }, { name : 'solution', maxCount : 1}]), (req,res) => {
+router.post('/', upload.fields([{ name: 'problem', maxCount: 1 }, { name : 'solution', maxCount : 1}]), (req,res) => {
   console.log("why")
   problemController.create(req,res)
 })
