@@ -1,9 +1,11 @@
 import moment from 'moment-timezone'
-import sequelize from 'sequelize'
 
-import { User} from '../models'
+import { User, Student, Teacher  } from '../models'
 
+import Sequelize from 'sequelize'
 let instance = null
+
+const Op = Sequelize.Op;
 
 class UserService {
 	constructor() {
@@ -20,16 +22,31 @@ class UserService {
 
 		await User.create(user)
 
-		const newUser = User.findOne({ email : user.email})
+		const newUser = User.findOne(
+			{ 
+				where : {
+					email : user.email
+				}
+		})
 
 		if ( newUser == null ) throw Error('USER_NOT_FOUND')
 		else {
-			return true
+			return newUser
 		}
   }
 	async findOne(where) {
 		return await User.findOne({
 			where: JSON.parse(JSON.stringify(where)),
+			include : [
+				{
+					model : Teacher,
+					as : 'teacher'
+				},
+				{
+					model : Student,
+					as : 'student'
+				}
+			]
 		})
 	}
 
@@ -66,6 +83,24 @@ class UserService {
 
             await user.destroy()
         }
+	}
+
+	async findUserByStudentName ( studentName ) {
+
+
+		return await User.findAll({
+			where : {
+				name :  {
+					[Op.like]: "%" + studentName + "%"
+				},
+				type : "student"
+			},
+			include : {
+				model : Student,
+				as : 'student'
+			}
+		})
+
 	}
 }
 

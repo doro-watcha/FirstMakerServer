@@ -7,13 +7,14 @@ exports.default = void 0;
 
 var _momentTimezone = _interopRequireDefault(require("moment-timezone"));
 
-var _sequelize = _interopRequireDefault(require("sequelize"));
-
 var _models = require("../models");
+
+var _sequelize = _interopRequireDefault(require("sequelize"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 let instance = null;
+const Op = _sequelize.default.Op;
 
 class UserService {
   constructor() {
@@ -31,17 +32,26 @@ class UserService {
     await _models.User.create(user);
 
     const newUser = _models.User.findOne({
-      email: user.email
+      where: {
+        email: user.email
+      }
     });
 
     if (newUser == null) throw Error('USER_NOT_FOUND');else {
-      return true;
+      return newUser;
     }
   }
 
   async findOne(where) {
     return await _models.User.findOne({
-      where: JSON.parse(JSON.stringify(where))
+      where: JSON.parse(JSON.stringify(where)),
+      include: [{
+        model: _models.Teacher,
+        as: 'teacher'
+      }, {
+        model: _models.Student,
+        as: 'student'
+      }]
     });
   }
 
@@ -78,6 +88,21 @@ class UserService {
     } else {
       await user.destroy();
     }
+  }
+
+  async findUserByStudentName(studentName) {
+    return await _models.User.findAll({
+      where: {
+        name: {
+          [Op.like]: "%" + studentName + "%"
+        },
+        type: "student"
+      },
+      include: {
+        model: _models.Student,
+        as: 'student'
+      }
+    });
   }
 
 }

@@ -39,8 +39,12 @@ class BigChapterService {
     return await _models.BigChapter.findAll({
       where: JSON.parse(JSON.stringify(where)),
       include: {
-        model: SmallChapter,
-        as: 'smallChapters'
+        model: _models.MiddleChapter,
+        as: 'middleChapter',
+        include: {
+          model: _models.SmallChapter,
+          as: 'smallChapter'
+        }
       }
     });
   }

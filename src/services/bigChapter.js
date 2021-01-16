@@ -1,7 +1,7 @@
 
 import sequelize from 'sequelize'
 
-import { BigChapter } from '../models'
+import { BigChapter, SmallChapter, MiddleChapter } from '../models'
 
 let instance = null
 
@@ -37,8 +37,12 @@ class BigChapterService {
     return await BigChapter.findAll({
       where: JSON.parse(JSON.stringify(where)),
       include : {
-        model : SmallChapter,
-        as : 'smallChapters'
+        model : MiddleChapter,
+        as : 'middleChapter',
+        include: {
+          model : SmallChapter,
+          as : 'smallChapter'
+        }
       }
     })
 

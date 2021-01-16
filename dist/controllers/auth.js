@@ -21,6 +21,8 @@ var _variables = require("../utils/variables");
 
 var _services = require("../services");
 
+var _Teacher = _interopRequireDefault(require("../models/Teacher"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _dotenv.default.config();
@@ -62,35 +64,61 @@ class AuthController {
       const result = await _joi.default.validate(req.body, {
         email: _joi.default.string().required(),
         password: _joi.default.string().regex(_variables.passwordRegex).required(),
-        school: _joi.default.string().required(),
-        grade: _joi.default.string().required(),
-        mathGrade: _joi.default.number().required()
+        name: _joi.default.string().required(),
+        school: _joi.default.string().optional(),
+        grade: _joi.default.string().optional(),
+        mathGrade: _joi.default.number().optional(),
+        type: _joi.default.string().optional(),
+        teacherCode: _joi.default.string().optional()
       });
       const {
         email,
         password,
         school,
         grade,
-        mathGrade
-      } = result; // check if user already exists
+        mathGrade,
+        type,
+        teacherCode,
+        name
+      } = result;
+      if (teacherCode !== undefined && type == "teacher" && teacherCode !== "DH1222") throw Error('WRONG_TEACHER_CODE');
+      console.log(type); // check if user already exists
 
-      const user = await _services.userService.findOne({
+      const alreadyUser = await _services.userService.findOne({
         email
       }); // [ERROR] USER_ALREADY_EXISTS
 
-      if (user) throw Error('USER_ALREADY_EXISTS'); // create user
+      if (alreadyUser) throw Error('USER_ALREADY_EXISTS'); // create user
 
-      const success = await _services.userService.create({
+      const user = await _services.userService.create({
         email,
         password,
-        school,
-        grade,
-        mathGrade,
-        type: "student"
-      }); // create response
+        type,
+        name
+      });
+      console.log(user.id);
+
+      if (type == "student") {
+        const student = {
+          school,
+          grade,
+          mathGrade,
+          userId: user.id,
+          name
+        };
+        await _services.studentService.create(student);
+      } else if (type == "teacher") {
+        const teacher = {
+          subject: "math",
+          userId: user.id,
+          name
+        };
+        await _services.teacherService.create(teacher);
+      } // create response
+
 
       const response = {
-        success: success
+        success: true
       };
       res.send(response);
     } catch (e) {

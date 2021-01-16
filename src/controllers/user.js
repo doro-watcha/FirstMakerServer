@@ -135,5 +135,38 @@ export default class userController {
 
 
     }
+
+    static async searchByStudentName ( req, res) {
+
+
+      try {
+
+        const result = await Joi.validate ( req.query, {
+          studentName : Joi.optional()
+        })
+
+        const { studentName } = result 
+
+        console.log(studentName)
+        if ( studentName === "") throw Error('STUDENT_NOT_FOUND')
+        const students = await userService.findUserByStudentName(studentName)
+
+        console.log(students.length)
+
+
+        const response = {
+          success : true ,
+          data : {
+            students
+          }
+        }
+
+        res.send(response)
+
+
+      } catch ( e ) {
+        res.send(createErrorResponse(e))
+      }
+    }
 }
 

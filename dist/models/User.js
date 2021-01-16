@@ -27,18 +27,6 @@ class User extends _sequelize.default.Model {
         type: _sequelize.default.STRING,
         allowNull: true
       },
-      school: {
-        type: _sequelize.default.STRING,
-        allowNull: true
-      },
-      grade: {
-        type: _sequelize.default.STRING,
-        allowNull: true
-      },
-      mathGrade: {
-        type: _sequelize.default.STRING,
-        allowNull: true
-      },
       type: {
         type: _sequelize.default.STRING,
         allowNull: true
@@ -56,12 +44,13 @@ class User extends _sequelize.default.Model {
     return _bcrypt.default.compareSync(unencryptedPwd, this.password);
   }
 
-  static associate(models) {}
-
   static associate(models) {
-    this.hasMany(models.Homework, {
+    this.hasOne(models.Student, {
       foreignKey: 'userId',
-      as: 'homework'
+      as: 'student'
+    }), this.hasOne(models.Teacher, {
+      foreignKey: 'userId',
+      as: 'teacher'
     });
   }
 

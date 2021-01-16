@@ -1,8 +1,8 @@
-import { homeworkService , noteService } from '../services'
+import { homeworkService , noteService , teacherService} from '../services'
 import Joi from '@hapi/joi'
 
 import { createErrorResponse } from '../utils/functions'
-import Homework from '../models/Homework'
+import { Homework } from '../models'
 
 export default class homeworkController {
 
@@ -11,41 +11,49 @@ export default class homeworkController {
 
     try { 
 
+      console.log("숙제를 만들어보자")
+
       const result = await Joi.validate ( req.body, {
 
-        problemIdList : Joi.array.required(),
-        dueDate : Joi.date.required(),
-        name : Joi.string()
-
+        problemIdList : Joi.array().required(),
+        title : Joi.string().required(),
+        numChapters : Joi.number().required(),
+        mainChapter : Joi.string().required(),
+        studentIdList : Joi.array().required()
       })
 
-      const { user } = req.user
+      const { user } = req
 
-      const { problemIdList, dueDate } = result 
+      const teacher = await teacherService.findOne({userId : user.id})
 
-      const homeworkObj = {
-        name,
-        dueDate,
-        authorId : user.id
-      }
+      const { problemIdList ,title, numChapters , mainChapter, studentIdList} = result 
 
-      const oldHomework = await homeworkService.findOne(homeworkObj)
-
-      // 마감날짜와 숙제 이름이 같으면 이미 존재한다고 판단
-      if ( oldHomework ) throw Error('HOMEWORK_ALREADY_EXISTS')
-
-      const newHomework = await homeworkService.create(homeworkObj)
-    
-      for ( var i = 0 ; i < problemIdList.length(); i++) {
+      for ( let i = 0 ; i < studentIdList.length ; i++) {
 
         const modelObj = {
-          problemId : problemIdList[i],
-          homeworkId : newHomework.id,
-          status : "READY"
+          title,
+          teacherId : teacher.id,
+          studentId : studentIdList[i],
+          numChapters,
+          mainChapter
         }
+        
+        const newHomework = await homeworkService.create(modelObj)
 
-        await noteService.create(modelObj)
+        for ( let j = 0 ; j < problemIdList.length; j++) {
+
+          const modelObj = {
+            problemId : problemIdList[j],
+            homeworkId : newHomework.id,
+            studentId : studentIdList[j]
+          }
+  
+          await noteService.create(modelObj)
+        }
+        
       }
+
+
 
       const response = {
         success : true 
@@ -64,8 +72,77 @@ export default class homeworkController {
 
     try {
 
+      const result = await Joi.validate(req.query,{
+
+        studentId : Joi.number().required()
+      })
+
+      const { studentId } = result 
+
+      const homeworkList = await homeworkService.findList({studentId})
+
+      const response = {
+        success : true,
+        data : {
+          homeworkList
+        }
+      }
+
+      res.send(response)
+
 
     } catch ( e ) {
+      res.send(createErrorResponse(e))
+    }
+  }
+
+  static async findOne ( req, res) {
+
+    try {
+
+      const id = req.params.id
+
+      const homework = await homeworkService.findOne({id})
+
+      if ( homework == null ) throw Error('HOMEWORK_NOT_FOUND')
+
+      const response = {
+        success : true,
+        data : {
+          homework
+        }
+      }
+
+      res.send(response)
+
+
+    } catch ( e) {
+      res.send(createErrorResponse(E))
+    }
+  }
+
+  static async update ( req, res) {
+
+
+    try {
+
+      const result = await Joi.validate ( req.body, {
+        status : Joi.optional()
+      })
+
+      const { status } = result 
+
+      await homeworkService.update({status})
+
+      const response = {
+        success : true
+      }
+
+      res.send(response)
+
+
+    } catch ( e ) {
+
       res.send(createErrorResponse(e))
     }
   }

@@ -19,18 +19,6 @@ export default class User extends Sequelize.Model {
             type : Sequelize.STRING,
             allowNull : true 
           },
-          school : {
-            type : Sequelize.STRING,
-            allowNull : true 
-          },
-          grade : {
-            type : Sequelize.STRING,
-            allowNull : true 
-          },
-          mathGrade : {
-            type : Sequelize.STRING,
-            allowNull : true 
-          },
           type : {
             type : Sequelize.STRING,
             allowNull : true 
@@ -51,14 +39,17 @@ export default class User extends Sequelize.Model {
     return bycrypt.compareSync(unencryptedPwd, this.password)
   }	
 
-  static associate(models) {
 
-  }
   static associate(models) {
-    this.hasMany(models.Homework, {
+    this.hasOne( models.Student,{
       foreignKey : 'userId',
-      as : 'homework'
+      as :'student'
+    }),
+    this.hasOne(models.Teacher,{
+      foreignKey : 'userId',
+      as : 'teacher'
     })
+
   }
 
   toJSON() {

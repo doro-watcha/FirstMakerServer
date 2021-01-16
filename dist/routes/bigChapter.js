@@ -1,10 +1,10 @@
 "use strict";
 
+var _express = require("express");
+
 var _controllers = require("../controllers");
 
-var express = require('express');
-
-var router = express.Router();
+var router = new _express.Router();
 router.post('/', (req, res) => {
   _controllers.bigChapterController.create(req, res);
 });

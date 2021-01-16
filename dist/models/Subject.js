@@ -27,6 +27,14 @@ class Subject extends _sequelize.default.Model {
       foreignKey: 'subjectId',
       as: 'bigChapter'
     });
+    this.hasMany(models.Problem, {
+      foreignKey: 'subjectId',
+      as: 'problem'
+    });
+    this.hasMany(models.WorkBook, {
+      foreignKey: 'subjectId',
+      as: 'workBooks'
+    });
   }
 
   toJSON() {
@@ -34,6 +42,7 @@ class Subject extends _sequelize.default.Model {
 
     delete object.createdAt;
     delete object.updatedAt;
+    delete object.workBookId;
     return object;
   }
 

@@ -40,6 +40,7 @@ class MiddleChapter extends _sequelize.default.Model {
 
     delete object.createdAt;
     delete object.updatedAt;
+    delete object.bigChapterId;
     return object;
   }
 

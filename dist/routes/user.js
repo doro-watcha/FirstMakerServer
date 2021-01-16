@@ -1,13 +1,10 @@
 "use strict";
 
+var _express = require("express");
+
 var _controllers = require("../controllers");
 
-var express = require('express');
-
-var router = express.Router();
-router.get('/:id', (req, res) => {
-  _controllers.userController.findOne(req, res);
-});
+var router = new _express.Router();
 router.get('/', (req, res) => {
   _controllers.userController.findList(req, res);
 });
@@ -16,6 +13,9 @@ router.patch('/:id', (req, res) => {
 });
 router.delete('/:id', (req, res) => {
   _controllers.userController.delete(req, res);
+});
+router.get('/searchStudent', (req, res) => {
+  _controllers.userController.searchByStudentName(req, res);
 });
 /**
  * @swagger

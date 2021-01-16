@@ -16,6 +16,14 @@ class BigChapter extends _sequelize.default.Model {
       name: {
         type: _sequelize.default.STRING,
         allowNull: true
+      },
+      numMiddle: {
+        type: _sequelize.default.INTEGER,
+        defaultValue: 0
+      },
+      numSmall: {
+        type: _sequelize.default.INTEGER,
+        defaultValue: 0
       }
     }, {
       sequelize
@@ -33,6 +41,10 @@ class BigChapter extends _sequelize.default.Model {
       foreignKey: 'bigChapterId',
       as: 'problem'
     });
+    this.hasMany(models.WorkBookRecord, {
+      foreignKey: 'bigChapterId',
+      as: 'workBookRecords'
+    });
   }
 
   toJSON() {
@@ -40,6 +52,7 @@ class BigChapter extends _sequelize.default.Model {
 
     delete object.createdAt;
     delete object.updatedAt;
+    delete object.subjectId;
     return object;
   }
 

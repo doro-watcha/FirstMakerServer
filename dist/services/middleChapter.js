@@ -37,7 +37,11 @@ class MiddleChapterService {
 
   async findList(where) {
     return await _models.MiddleChapter.findAll({
-      where: JSON.parse(JSON.stringify(where))
+      where: JSON.parse(JSON.stringify(where)),
+      include: {
+        model: _models.SmallChapter,
+        as: 'smallChapter'
+      }
     });
   }
 

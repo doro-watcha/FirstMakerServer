@@ -5,7 +5,17 @@ import middleChapterService from './middleChapter'
 import smallChapterService from './smallChapter'
 import problemService from './problem'
 import noteService from './note'
-
+import collectionService from './collection'
+import workPaperService from './workPaper'
+import workBookService from './workBook'
+import workBookRecordService from './workBookRecord'
+import examService from './exam'
+import homeworkService from './homework'
+import teacherService from './teacher'
+import studentService from './student'
+import classService from './class'
+import classBelongsService from './classBelongs'
+import blackListService from './blackList'
 
 module.exports = {
     subjectService,
@@ -14,5 +24,16 @@ module.exports = {
     middleChapterService,
     smallChapterService,
     problemService,
-    noteService
+    noteService,
+    collectionService,
+    workPaperService,
+    workBookService,
+    workBookRecordService,
+    examService,
+    homeworkService,
+    teacherService,
+    studentService,
+    classService,
+    classBelongsService,
+    blackListService
 }

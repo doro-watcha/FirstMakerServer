@@ -160,6 +160,34 @@ module.exports = {
       status: 428,
       ko: '해당 문제 기록 없음'
     },
+    SCORING_NOT_FOUND: {
+      status: 429,
+      ko: '채점 과정 오류'
+    },
+    WRONG_TEACHER_CODE: {
+      status: 430,
+      ko: '선생님 비밀번호 오류입니다'
+    },
+    CLASS_NOT_FONUD: {
+      status: 431,
+      ko: '해당 클래스 없음'
+    },
+    STUDENT_NOT_FOUND: {
+      status: 432,
+      ko: '해당 학생 없음'
+    },
+    WORK_BOOK_NOT_FOUND: {
+      status: 433,
+      ko: '해당 문제집 없음'
+    },
+    BLACK_LSIST_NOT_FOUND: {
+      status: 434,
+      ko: '해당 블랙 리스트 없음'
+    },
+    TIME_LIMIT_NOT_FOUND: {
+      status: 435,
+      ko: '제한 시간 없음'
+    },
     // 409
     USER_ALREADY_EXISTS: {
       status: 500,
@@ -239,6 +267,10 @@ module.exports = {
     NOTE_ALREADY_EXISTS: {
       status: 518,
       ko: '이미 존재하는 문제기록입니다.'
+    },
+    STUDENT_ALREADY_EXISTS: {
+      status: 519,
+      ko: '이미 존재하는 학생입니다.'
     },
     // 410
     USER_DELETED: {

@@ -120,6 +120,30 @@ class userController {
     }
   }
 
+  static async searchByStudentName(req, res) {
+    try {
+      const result = await _joi.default.validate(req.query, {
+        studentName: _joi.default.optional()
+      });
+      const {
+        studentName
+      } = result;
+      console.log(studentName);
+      if (studentName === "") throw Error('STUDENT_NOT_FOUND');
+      const students = await _services.userService.findUserByStudentName(studentName);
+      console.log(students.length);
+      const response = {
+        success: true,
+        data: {
+          students
+        }
+      };
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
+  }
+
 }
 
 exports.default = userController;

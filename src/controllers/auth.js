@@ -7,7 +7,8 @@ dotenv.config()
 
 import { createErrorResponse} from '../utils/functions'
 import { passwordRegex } from '../utils/variables'
-import { userService, academyService } from '../services'
+import { userService, studentService, teacherService } from '../services'
+import Teacher from '../models/Teacher'
 
 // aws s3
 const s3 = new aws.S3({
@@ -52,33 +53,63 @@ export default class AuthController {
 				password: Joi.string()
 					.regex(passwordRegex)
 					.required(),
-				school : Joi.string().required(),
-				grade : Joi.string().required(),
-				mathGrade : Joi.number().required()
+				name : Joi.string().required(),
+				school : Joi.string().optional(),
+				grade : Joi.string().optional(),
+				mathGrade : Joi.number().optional(),
+				type : Joi.string().optional(),
+				teacherCode : Joi.string().optional()
 			})
+
+
+			const { email , password, school, grade, mathGrade, type , teacherCode, name} = result 
+			if ( teacherCode !== undefined && type == "teacher" &&  teacherCode !== "DH1222") throw Error('WRONG_TEACHER_CODE')
 		
-			const { email , password, school, grade, mathGrade} = result 
+
+			console.log(type)
 			// check if user already exists
-			const user = await userService.findOne({
+			const alreadyUser = await userService.findOne({
 				email
 			})
 
 			// [ERROR] USER_ALREADY_EXISTS
-			if (user) throw Error('USER_ALREADY_EXISTS')
+			if (alreadyUser) throw Error('USER_ALREADY_EXISTS')
 
 			// create user
-			const success = await userService.create({
+			const user = await userService.create({
 				email,
 				password,
-				school,
-				grade,
-				mathGrade,
-				type : "student"
+				type,
+				name
 			})
+
+			console.log(user.id)
+
+			if ( type == "student") {
+
+				const student = {
+					school,
+					grade,
+					mathGrade,
+					userId : user.id,
+					name
+				}
+
+				await studentService.create(student)
+			} else if( type == "teacher") {
+
+				const teacher = {
+					subject : "math",
+					userId : user.id,
+					name
+				}
+				await teacherService.create(teacher)
+				
+			}
 
 			// create response
 			const response = {
-				success: success
+				success: true
 			}
 
 			res.send(response)

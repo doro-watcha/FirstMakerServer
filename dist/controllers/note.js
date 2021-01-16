@@ -13,25 +13,26 @@ var _functions = require("../utils/functions");
 
 var _Note = _interopRequireDefault(require("../models/Note"));
 
+var _sequelize = _interopRequireDefault(require("sequelize"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Op = _sequelize.default.Op;
 
 class noteController {
   static async create(req, res) {
     try {
       const result = await _joi.default.validate(req.body, {
-        homeworkId: _joi.default.number(),
-        examId: _joi.default.number(),
+        collectionId: _joi.default.numbeer().required(),
         problemId: _joi.default.number().required()
       });
       const {
-        homeworkId,
-        examId,
+        collectionId,
         problemId
       } = result;
       const modelObj = {
-        homeworkId,
-        examId,
-        problemId
+        problemId,
+        collectionId
       };
       const newNote = await _services.noteService.create(modelObj);
       const response = {
@@ -47,7 +48,228 @@ class noteController {
   }
 
   static async findList(req, res) {
-    try {} catch (e) {
+    try {
+      const result = await _joi.default.validate(req.query, {
+        startDate: _joi.default.string().optional(),
+        endDate: _joi.default.string().optional()
+      });
+      const {
+        startDate,
+        endDate
+      } = result;
+      var notes = [];
+      const {
+        user
+      } = req;
+      const student = await _services.studentService.findOne({
+        userId: user.id
+      });
+      if (student == null) throw Error('STUDENT_NOT_FOUND');
+      if (startDate !== undefined) notes = await _services.noteService.findWeeklyList(student.id, startDate, endDate);else notes = await _services.noteService.findList({
+        studentId: student.id
+      });
+      const response = {
+        success: true,
+        data: {
+          notes
+        }
+      };
+      notes.filter(note => {
+        note.status === "맞음" || notes.status == "틀림";
+      });
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
+  }
+
+  static async findOne(req, res) {
+    try {
+      const id = req.params.id;
+      const note = await _services.noteService.findOne({
+        id
+      });
+      if (note == null) throw Error('NOTE_NOT_FOUND');
+      const response = {
+        success: true,
+        data: {
+          note
+        }
+      };
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
+  }
+
+  static async update(req, res) {
+    try {
+      const result = await _joi.default.validate(req.body, {
+        submitList: _joi.default.array().required(),
+        noteIdList: _joi.default.array().required(),
+        spendingTimeList: _joi.default.array().required(),
+        greenStarClickedList: _joi.default.array().required(),
+        wholeTime: _joi.default.number().required(),
+        type: _joi.default.string().required(),
+        id: _joi.default.number().required()
+      });
+      const {
+        submitList,
+        noteIdList,
+        spendingTimeList,
+        greenStarClickedList,
+        type,
+        id,
+        wholeTime
+      } = result;
+      if (submitList.length !== noteIdList.length) throw Error('SCORING_NOT_FOUND');
+      var notes = [];
+      var correct = 0;
+
+      for (let i = 0; i < submitList.length; i++) {
+        const note = await _services.noteService.findOne({
+          id: noteIdList[i]
+        });
+        var status = "틀림";
+        var unConfirmed = 0;
+
+        if (submitList[i] == note.problem.answer) {
+          status = "맞음";
+          correct++;
+        } else if (submitList[i] == "0" && type != "시험") {
+          unConfirmed++;
+          status = "채점안됨";
+        }
+
+        const _newNote = {
+          status,
+          submit: submitList[i],
+          spendingTime: spendingTimeList[i],
+          isGreenStar: greenStarClickedList[i]
+        };
+        const newNote = await _services.noteService.update(note.id, _newNote);
+        notes.push(newNote);
+      }
+
+      var collectionStatus = "완료";
+      if (unConfirmed > 0 && type != "시험") collectionStatus = "진행중";
+      const accurateRate = (correct / notes.length * 100).toFixed(2);
+      const collectionModel = {
+        status: collectionStatus,
+        accurateRate,
+        spendingTime: wholeTime
+      };
+      if (type === "숙제") await _services.homeworkService.update(id, collectionModel);else if (type == "문제지") await _services.workPaperService.update(id, collectionModel);
+      const response = {
+        success: true,
+        data: {
+          notes,
+          status: collectionStatus,
+          accurateRate,
+          spendingTime: wholeTime
+        }
+      };
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
+  }
+
+  static async findWrongList(req, res) {
+    try {
+      const result = await _joi.default.validate(req.query, {
+        subject: _joi.default.string().required()
+      });
+      const {
+        subject
+      } = result;
+      const {
+        user
+      } = req;
+      const student = await _services.studentService.findOne({
+        userId: user.id
+      });
+      if (student == null) throw Error('STUDENT_NOT_FOUND');
+      const wrongNotes = await _services.noteService.findList({
+        status: "틀림",
+        studentId: student.id
+      });
+      wrongNotes.filter(note => {
+        if (note.problem.subject != null) note.problem.subject.name == subject;
+      });
+      const response = {
+        success: true,
+        data: {
+          notes: wrongNotes
+        }
+      };
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
+  }
+
+  static async findStarList(req, res) {
+    try {
+      const result = await _joi.default.validate(req.query, {
+        subject: _joi.default.string().required()
+      });
+      const {
+        subject
+      } = result;
+      const {
+        user
+      } = req;
+      const student = await _services.studentService.findOne({
+        userId: user.id
+      });
+      if (student == null) throw Error('STUDENT_NOT_FOUND');
+      const starNotes = await _services.noteService.findList({
+        isGreenStar: true,
+        studentId: student.id
+      });
+      starNotes.filter(note => {
+        if (note.problem.subject != null) note.problem.subject.name == subject;
+      });
+      const response = {
+        success: true,
+        data: {
+          notes: starNotes
+        }
+      };
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
+  }
+
+  static async findLongList(req, res) {
+    try {
+      const result = await _joi.default.validate(req.query, {
+        subject: _joi.default.string().required()
+      });
+      const {
+        subject
+      } = result;
+      const {
+        user
+      } = req;
+      const student = await _services.studentService.findOne({
+        userId: user.id
+      });
+      if (student == null) throw Error('STUDENT_NOT_FOUND');
+      const longNotes = await _services.noteService.findLongList(student.id);
+      longNotes.filter(note => {
+        if (note.problem.subject != null) note.problem.subject.name == subject;
+      });
+      const response = {
+        success: true,
+        data: {
+          notes: longNotes
+        }
+      };
+      res.send(response);
+    } catch (e) {
       res.send((0, _functions.createErrorResponse)(e));
     }
   }

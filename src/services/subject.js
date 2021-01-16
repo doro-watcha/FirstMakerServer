@@ -1,7 +1,7 @@
 
 import sequelize from 'sequelize'
 
-import { Subject } from '../models'
+import { Subject,BigChapter } from '../models'
 
 let instance = null
 
@@ -36,7 +36,10 @@ class SubjectService {
 	async findList(where) {
 
     return await Subject.findAll({
-			
+      include : {
+        model: BigChapter,
+					as: 'bigChapter',
+      }
 		})
 
   }

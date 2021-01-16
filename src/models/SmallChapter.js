@@ -37,6 +37,8 @@ export default class SmallChapter extends Sequelize.Model {
     delete object.createdAt
     delete object.updatedAt
 
+    delete object.middleChapterId
+
     return object
   }
 }

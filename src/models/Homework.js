@@ -5,16 +5,32 @@ export default class Homework extends Sequelize.Model {
   static init(sequelize) {
     return super.init (
       {
-        // 숙제 이름 
-        name : {
-          type : Sequelize.STRING,
-          alloNull : true 
-        },
-        // 숙제 마감날짜 
-        dueDate: {
-          type: Sequelize.DATE,
-          allowNull : true,
-        }
+
+            // 문제지 이름 
+            title : {
+              type : Sequelize.STRING,
+              alloNull : true 
+            },
+            status : {
+              type : Sequelize.STRING,
+              defaultValue : "준비됨"
+            },
+            numChapters: {
+              type : Sequelize.INTEGER,
+              defaultValue : 1
+            },
+            mainChapter : {
+              type : Sequelize.STRING,
+              allowNull : false
+            },
+            spendingTime : {
+              type : Sequelize.INTEGER,
+              defaultValue : 0
+            },
+            accurateRate : {
+              type : Sequelize.FLOAT,
+              defaultValue : 0.0
+            }
 
 
       },
@@ -26,9 +42,13 @@ export default class Homework extends Sequelize.Model {
 
 
   static associate(models) {
-    this.belongsTo(models.User, {
-      foreignKey: 'userId',
+    this.belongsTo(models.Student, {
+      foreignKey: 'studentId',
       as: 'author'
+    }),
+    this.belongsTo(models.Teacher,{
+      foreignKey : 'teacherId',
+      as : 'teacher'
     }),
     this.hasMany(models.Note,{
       foreignKey : 'homeworkId',
@@ -41,8 +61,10 @@ export default class Homework extends Sequelize.Model {
   
     // delete some (key, value)
    
-    delete object.createdAt
+    //delete object.createdAt
     delete object.updatedAt
+    delete object.teacherId
+    delete object.studentId
 
     return object
   }

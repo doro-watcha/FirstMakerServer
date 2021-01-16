@@ -1,14 +1,10 @@
-var express = require('express');
+import { Router }  from 'express'
 
 import { userController } from '../controllers'
 
 
-var router = express.Router();
+var router = new Router()
 
-
-router.get('/:id', (req,res) => {
-  userController.findOne(req,res)
-})
 
 router.get('/', (req,res) => {
   userController.findList(req,res)
@@ -21,6 +17,10 @@ router.patch('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   userController.delete(req,res)
+})
+
+router.get('/searchStudent', (req,res) => {
+  userController.searchByStudentName(req,res)
 })
 
 

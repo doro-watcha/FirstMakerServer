@@ -1,9 +1,9 @@
-var express = require('express');
+import { Router } from 'express'
 
 import { bigChapterController } from '../controllers'
 
 
-var router = express.Router();
+var router = new Router()
 
 router.post('/', (req,res) => {
   bigChapterController.create(req,res)

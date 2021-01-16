@@ -37,6 +37,7 @@ class SmallChapter extends _sequelize.default.Model {
 
     delete object.createdAt;
     delete object.updatedAt;
+    delete object.middleChapterId;
     return object;
   }
 

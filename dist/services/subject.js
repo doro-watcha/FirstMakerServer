@@ -36,7 +36,12 @@ class SubjectService {
   }
 
   async findList(where) {
-    return await _models.Subject.findAll({});
+    return await _models.Subject.findAll({
+      include: {
+        model: _models.BigChapter,
+        as: 'bigChapter'
+      }
+    });
   }
 
   async findOne(where) {

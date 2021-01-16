@@ -13,6 +13,7 @@ var _crypto = require("crypto");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+const Op = _sequelize.default.Op;
 let instance = null;
 
 class ProblemService {
@@ -34,6 +35,39 @@ class ProblemService {
       where: {
         smallChapterId
       },
+      include: [{
+        model: _models.BigChapter,
+        as: 'bigChapter'
+      }, {
+        model: _models.MiddleChapter,
+        as: 'middleChapter'
+      }, {
+        model: _models.SmallChapter,
+        as: 'smallChapter'
+      }],
+      limit: number,
+      order: _sequelize.default.literal('rand()')
+    });
+  }
+
+  async findAdditionalList(smallChapterId, number, duplicatedIdList) {
+    return await _models.Problem.findAll({
+      where: {
+        smallChapterId,
+        id: {
+          [Op.notIn]: duplicatedIdList
+        }
+      },
+      include: [{
+        model: _models.BigChapter,
+        as: 'bigChapter'
+      }, {
+        model: _models.MiddleChapter,
+        as: 'middleChapter'
+      }, {
+        model: _models.SmallChapter,
+        as: 'smallChapter'
+      }],
       limit: number,
       order: _sequelize.default.literal('rand()')
     });
@@ -41,7 +75,17 @@ class ProblemService {
 
   async findOne(where) {
     return await _models.Problem.findOne({
-      where: JSON.parse(JSON.stringify(where))
+      where: JSON.parse(JSON.stringify(where)),
+      include: [{
+        model: _models.BigChapter,
+        as: 'bigChapter'
+      }, {
+        model: _models.MiddleChapter,
+        as: 'middleChapter'
+      }, {
+        model: _models.SmallChapter,
+        as: 'smallChapter'
+      }]
     });
   }
 

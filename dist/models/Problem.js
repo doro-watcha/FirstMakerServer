@@ -57,9 +57,13 @@ class Problem extends _sequelize.default.Model {
       foreingKey: 'subjectId',
       as: 'subject'
     });
-    this.hasMany(models.Note, {
+    this.hasOne(models.Note, {
       foreignKey: 'problemId',
       as: 'note'
+    });
+    this.belongsTo(models.WorkBook, {
+      foreignKey: 'workBookId',
+      as: 'workBook'
     });
   }
 
@@ -68,6 +72,12 @@ class Problem extends _sequelize.default.Model {
 
     delete object.createdAt;
     delete object.updatedAt;
+    delete object.subjectId;
+    delete object.problemId;
+    delete object.bigChapterId;
+    delete object.middleChapterId;
+    delete object.smallChapterId;
+    delete object.workBookId;
     return object;
   }
 
