@@ -105,6 +105,8 @@ class ProblemService {
       where : JSON.parse(JSON.stringify(modelObj))
     })
 
+    console.log(problemUrl)
+
     if ( problemUrl !== undefined) {
       problems = problems.filter( item => {
         return item.problemUrl.includes(problemUrl)

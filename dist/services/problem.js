@@ -93,6 +93,7 @@ class ProblemService {
     var problems = await _models.Problem.findAll({
       where: JSON.parse(JSON.stringify(modelObj))
     });
+    console.log(problemUrl);
 
     if (problemUrl !== undefined) {
       problems = problems.filter(item => {
