@@ -21,16 +21,8 @@ const upload = multer({
 		bucket: 'mathproblem',
 		acl: 'public-read',
 		key: (req, file, cb) => {
-			const extension = path.extname(file.originalname)
-			const filename = `${Math.random()
-				.toString(36)
-				.substring(2, 15)}`
-			const timestamp = Date().format('yyyy-MM-dd HH:mm:ss')
-
-			console.log(timestamp)
-
-			console.log(file.originalname)
-			console.log(extension)
+	
+			const timestamp = date_to_str(new Date())
 			cb(null, `problem/${timestamp}_${file.originalname}`)
 		},
 	}),
@@ -52,5 +44,37 @@ router.get('/replace', authenticate , (req,res) => {
   problemController.replace(req,res)
 })
 
+
+function date_to_str(format)
+
+{
+
+    var year = format.getFullYear();
+
+    var month = format.getMonth() + 1;
+
+    if(month<10) month = '0' + month;
+
+    var date = format.getDate();
+
+    if(date<10) date = '0' + date;
+
+    var hour = format.getHours();
+
+    if(hour<10) hour = '0' + hour;
+
+    var min = format.getMinutes();
+
+    if(min<10) min = '0' + min;
+
+    var sec = format.getSeconds();
+
+    if(sec < 10) sec = '0' + sec;
+
+    
+
+    return year + "-" + month + "-" + date + "_" + hour + ":" + min + ":" + sec;
+
+}
 
 module.exports = router
