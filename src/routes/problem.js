@@ -25,7 +25,7 @@ const upload = multer({
 			const filename = `${Math.random()
 				.toString(36)
 				.substring(2, 15)}`
-			const timestamp = Date.now().format('yyyy-MM-dd HH:mm:ss')
+			const timestamp = Date.format('yyyy-MM-dd HH:mm:ss')
 
 			console.log(timestamp)
 
