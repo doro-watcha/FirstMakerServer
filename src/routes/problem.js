@@ -22,7 +22,9 @@ const upload = multer({
 		acl: 'public-read',
 		key: (req, file, cb) => {
 	
-			const timestamp = date_to_str(new Date())
+			const today = new Date()
+			today.setHours(	today.getHours+9)
+			const timestamp = date_to_str(today)
 			cb(null, `problem/${timestamp}_${file.originalname}`)
 		},
 	}),
