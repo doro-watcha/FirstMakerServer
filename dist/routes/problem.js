@@ -39,7 +39,7 @@ const upload = (0, _multer.default)({
       const timestamp = Date.now();
       console.log(file.originalname);
       console.log(extension);
-      cb(null, `problem/${timestamp}_${extension}`);
+      cb(null, `problem/${timestamp}_${file.originalname}`);
     }
   })
 });

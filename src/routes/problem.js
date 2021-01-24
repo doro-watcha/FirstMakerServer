@@ -29,7 +29,7 @@ const upload = multer({
 
 			console.log(file.originalname)
 			console.log(extension)
-			cb(null, `problem/${timestamp}_${extension}`)
+			cb(null, `problem/${timestamp}_${file.originalname}`)
 		},
 	}),
 })
