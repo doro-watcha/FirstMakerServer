@@ -230,25 +230,7 @@ class problemController {
         source,
         level
       } = result;
-      var problems = await _services.problemService.search(problemUrl);
-      if (subjectId !== undefined) problems = problems.filter(item => {
-        return item.subjectId === subjectId;
-      });
-      if (bigChapterId !== undefined) problems = problems.filter(item => {
-        return item.bigChapterId === bigChapterId;
-      });
-      if (middleChapterId !== undefined) problems = problems.filter(item => {
-        return item.middleChapterId === middleChapterId;
-      });
-      if (smallChapterId !== undefined) problems = problems.filter(item => {
-        return item.smallChapterId === smallChapterId;
-      });
-      if (source !== undefined) problems = problems.filter(item => {
-        return item.source === source;
-      });
-      if (level !== undefined) problems = problems.filter(item => {
-        return item.level === level;
-      });
+      const problems = await _services.problemService.search(problemUrl, subjectId, bigChapterId, middleChapterId, smallChapterId, source, level);
       const response = {
         success: true,
         data: {

@@ -89,16 +89,20 @@ class ProblemService {
     });
   }
 
-  async search(problemUrl) {
-    if (problemUrl === undefined) return await _models.Problem.findAll({});else {
-      return await _models.Problem.findAll({
-        where: {
-          problemUrl: {
-            [Op.like]: "%" + problemUrl + "%"
-          }
-        }
-      });
-    }
+  async search(problemUrl, subjectId, bigChapterId, middleChapterId, smallChapterId, source, level) {
+    return await _models.Problem.findAll({
+      where: {
+        problemUrl: {
+          [Op.like]: "%" + problemUrl + "%"
+        },
+        subjectId: subjectId,
+        bigChapterId: bigChapterId,
+        middleChapterId: middleChapterId,
+        smallChapterId: smallChapterId,
+        source: source,
+        level: level
+      }
+    });
   }
 
 }

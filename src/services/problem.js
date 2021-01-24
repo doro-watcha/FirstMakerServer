@@ -98,24 +98,26 @@ class ProblemService {
     })
   }
 
-  async search ( problemUrl) {
-
-    if ( problemUrl === undefined) return await Problem.findAll({})
-
-    else {
-
-      return await Problem.findAll({
+  async search ( problemUrl, subjectId , bigChapterId, middleChapterId, smallChapterId, source, level ) {
 
 
-        where : {
-          problemUrl :  {
-            [Op.like]: "%" + problemUrl + "%"
-          }
-        }
-      })
-    }
-    
+    return await Problem.findAll({
+
+
+      where : {
+        problemUrl :  {
+					[Op.like]: "%" + problemUrl + "%"
+        },
+        subjectId : subjectId ,
+        bigChapterId : bigChapterId ,
+        middleChapterId : middleChapterId ,
+        smallChapterId : smallChapterId ,
+        source : source,
+        level : level  
+      }
+    })
   }
+  
 }
 
 export default new ProblemService()
