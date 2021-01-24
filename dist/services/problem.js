@@ -85,13 +85,29 @@ class ProblemService {
       }, {
         model: _models.SmallChapter,
         as: 'smallChapter'
+      }, {
+        model: _models.Subject,
+        as: 'subject'
       }]
     });
   }
 
   async search(problemUrl, modelObj) {
     var problems = await _models.Problem.findAll({
-      where: JSON.parse(JSON.stringify(modelObj))
+      where: JSON.parse(JSON.stringify(modelObj)),
+      include: [{
+        model: _models.BigChapter,
+        as: 'bigChapter'
+      }, {
+        model: _models.MiddleChapter,
+        as: 'middleChapter'
+      }, {
+        model: _models.SmallChapter,
+        as: 'smallChapter'
+      }, {
+        model: _models.Subject,
+        as: 'subject'
+      }]
     });
     console.log(problemUrl);
 

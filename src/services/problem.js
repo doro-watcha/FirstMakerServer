@@ -1,7 +1,7 @@
 
 import sequelize from 'sequelize'
 
-import { Problem ,BigChapter, MiddleChapter,SmallChapter } from '../models'
+import { Problem ,BigChapter, MiddleChapter,SmallChapter , Subject} from '../models'
 import { randomBytes } from 'crypto'
 
 import Sequelize from 'sequelize'
@@ -93,6 +93,9 @@ class ProblemService {
         },{
           model : SmallChapter,
           as : 'smallChapter'
+        },{
+          model : Subject,
+          as : 'subject'
         }
       ],
     })
@@ -102,7 +105,23 @@ class ProblemService {
 
 
     var problems = await Problem.findAll({
-      where : JSON.parse(JSON.stringify(modelObj))
+      where : JSON.parse(JSON.stringify(modelObj)),
+      include : [
+        {
+          model : BigChapter,
+          as : 'bigChapter'
+        },
+        {
+          model : MiddleChapter,
+          as : 'middleChapter'
+        },{
+          model : SmallChapter,
+          as : 'smallChapter'
+        },{
+          model : Subject,
+          as : 'subject'
+        }
+      ],
     })
 
     console.log(problemUrl)
