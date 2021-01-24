@@ -35,8 +35,7 @@ const upload = (0, _multer.default)({
     key: (req, file, cb) => {
       console.log(file.fieldname);
       const timestamp = getToday();
-      console.log(timestamp);
-      cb(null, `problem/${timestamp}_${file.originalname}`);
+      cb(null, `${file.fieldname}/${timestamp}_${file.originalname}`);
     }
   })
 });
@@ -48,8 +47,6 @@ router.post('/', upload.fields([{
   name: 'solution',
   maxCount: 1
 }]), (req, res) => {
-  console.log("why");
-
   _controllers.problemController.create(req, res);
 });
 router.post('/find', authenticate, (req, res) => {

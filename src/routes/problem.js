@@ -21,9 +21,10 @@ const upload = multer({
 		bucket: 'mathproblem',
 		acl: 'public-read',
 		key: (req, file, cb) => {
-			const field = file.fieldname
+	
+			console.log(file.fieldname)
 			const timestamp = getToday()
-			cb(null, `${field}/${timestamp}_${file.originalname}`)
+			cb(null, `${file.fieldname}/${timestamp}_${file.originalname}`)
 		},
 	}),
 })
@@ -32,7 +33,6 @@ const upload = multer({
 var router = express.Router();
 
 router.post('/', upload.fields([{ name: 'problem', maxCount: 1 }, { name : 'solution', maxCount : 1}]), (req,res) => {
-  console.log("why")
   problemController.create(req,res)
 })
 
