@@ -27,8 +27,10 @@ const upload = multer({
 			console.log(file.originalname)
 
 			const fileName = escape(file.originalname)
+
+			console.log(file.filename)
 	
-			console.log(file.fieldname)
+			console.log(fileName)
 			const timestamp = getToday()
 			cb(null, `${file.fieldname}/${timestamp}_${fileName}`)
 		},
@@ -52,6 +54,10 @@ router.get('/replace', authenticate , (req,res) => {
 
 router.get('/search' , (req,res) => {
 	problemController.search(req,res)
+})
+
+router.patch('/:id', (req,res) => {
+	problemController.update(req,res)
 })
 
 

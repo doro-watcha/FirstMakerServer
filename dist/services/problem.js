@@ -105,6 +105,21 @@ class ProblemService {
     return problems;
   }
 
+  async update(id, modelObj) {
+    await _models.Problem.update(modelObj, {
+      where: {
+        id
+      }
+    });
+    const updatedProblem = await _models.Problem.findOne({
+      where: {
+        id
+      }
+    });
+    if (updatedProblem === null) throw Error('PROBLEM_NOT_FOUOND');
+    return updatedProblem;
+  }
+
 }
 
 var _default = new ProblemService();

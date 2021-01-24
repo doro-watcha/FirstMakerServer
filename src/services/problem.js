@@ -119,6 +119,18 @@ class ProblemService {
 
   }
   
+	async update(id, modelObj) {
+	
+		await Problem.update(modelObj, {
+			where: { id },
+		})
+		const updatedProblem = await Problem.findOne({
+      where: { id },
+		})
+		if (updatedProblem === null) throw Error('PROBLEM_NOT_FOUOND')
+
+		return updatedProblem
+  }
 }
 
 export default new ProblemService()

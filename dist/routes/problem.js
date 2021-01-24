@@ -35,7 +35,8 @@ const upload = (0, _multer.default)({
     key: (req, file, cb) => {
       console.log(file.originalname);
       const fileName = escape(file.originalname);
-      console.log(file.fieldname);
+      console.log(file.filename);
+      console.log(fileName);
       const timestamp = getToday();
       cb(null, `${file.fieldname}/${timestamp}_${fileName}`);
     }
@@ -59,6 +60,9 @@ router.get('/replace', authenticate, (req, res) => {
 });
 router.get('/search', (req, res) => {
   _controllers.problemController.search(req, res);
+});
+router.patch('/:id', (req, res) => {
+  _controllers.problemController.update(req, res);
 });
 
 function getToday() {

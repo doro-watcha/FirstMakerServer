@@ -275,4 +275,44 @@ export default class problemController {
     }
   }
 
+  static async update ( req , res) {
+
+    try {
+      
+      const id = req.params.id
+
+      const result = await Joi.validate(req.body,{
+        subjectId : Joi.number(),
+        bigChapterId : Joi.number(),
+        middleChapterId : Joi.number(),
+        smallChapterId : Joi.number(),
+        source : Joi.string(),
+        level : Joi.number()
+      })
+
+      const { subjectId , bigChapterId, middleChapterId, smallChapterId, source, level } = result 
+
+      const modelObj = {
+        subjectId,
+        bigChapterId,
+        middleChapterId,
+        smallChapterId,
+        source,
+        level
+      }
+
+      await problemService.update(id,modelObj)
+
+      const response = {
+        success : true
+      }
+      
+      res.send(response)
+
+
+    } catch ( e) {
+      res.send(createErrorResponse(e))
+    }
+  }
+
 }

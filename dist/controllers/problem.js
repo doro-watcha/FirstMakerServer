@@ -253,6 +253,43 @@ class problemController {
     }
   }
 
+  static async update(req, res) {
+    try {
+      const id = req.params.id;
+      const result = await _joi.default.validate(req.body, {
+        subjectId: _joi.default.number(),
+        bigChapterId: _joi.default.number(),
+        middleChapterId: _joi.default.number(),
+        smallChapterId: _joi.default.number(),
+        source: _joi.default.string(),
+        level: _joi.default.number()
+      });
+      const {
+        subjectId,
+        bigChapterId,
+        middleChapterId,
+        smallChapterId,
+        source,
+        level
+      } = result;
+      const modelObj = {
+        subjectId,
+        bigChapterId,
+        middleChapterId,
+        smallChapterId,
+        source,
+        level
+      };
+      await _services.problemService.update(id, modelObj);
+      const response = {
+        success: true
+      };
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
+  }
+
 }
 
 exports.default = problemController;
