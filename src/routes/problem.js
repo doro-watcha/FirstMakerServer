@@ -22,9 +22,10 @@ const upload = multer({
 		acl: 'public-read',
 		key: (req, file, cb) => {
 	
-			const today = new Date()
-			today.setHours(	today.getHours+9)
-			const timestamp = date_to_str(today)
+			console.log(Date().toLocaleLowerCase())
+			const timestamp = getToday(Date().toLocaleLowerCase())
+
+			console.log(timestamp)
 			cb(null, `problem/${timestamp}_${file.originalname}`)
 		},
 	}),
@@ -47,36 +48,13 @@ router.get('/replace', authenticate , (req,res) => {
 })
 
 
-function date_to_str(format)
+function getToday(){
+	var date = new Date();
+	var year = date.getFullYear();
+	var month = ("0" + (1 + date.getMonth())).slice(-2);
+	var day = ("0" + date.getDate()).slice(-2);
 
-{
-
-    var year = format.getFullYear();
-
-    var month = format.getMonth() + 1;
-
-    if(month<10) month = '0' + month;
-
-    var date = format.getDate();
-
-    if(date<10) date = '0' + date;
-
-    var hour = format.getHours();
-
-    if(hour<10) hour = '0' + hour;
-
-    var min = format.getMinutes();
-
-    if(min<10) min = '0' + min;
-
-    var sec = format.getSeconds();
-
-    if(sec < 10) sec = '0' + sec;
-
-    
-
-    return year + "-" + month + "-" + date + "_" + hour + ":" + min + ":" + sec;
-
+	return year + "-" + month + "-" + day;
 }
 
 module.exports = router
