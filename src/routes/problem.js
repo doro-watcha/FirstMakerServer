@@ -26,7 +26,7 @@ const upload = multer({
 
 			console.log(file.originalname)
 
-			const fileName = file.originalname 
+			const fileName = escape(file.originalname)
 	
 			console.log(file.fieldname)
 			const timestamp = getToday()

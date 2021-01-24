@@ -34,7 +34,7 @@ const upload = (0, _multer.default)({
     acl: 'public-read',
     key: (req, file, cb) => {
       console.log(file.originalname);
-      const fileName = file.originalname;
+      const fileName = escape(file.originalname);
       console.log(file.fieldname);
       const timestamp = getToday();
       cb(null, `${file.fieldname}/${timestamp}_${fileName}`);
