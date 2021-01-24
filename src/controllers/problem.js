@@ -245,6 +245,9 @@ export default class problemController {
         level : Joi.number().optional()
       })
 
+      console.log("무제")
+      console.log("무제")
+
       const  { problemUrl, subjectId, bigChapterId, middleChapterId, smallChapterId, source, level  } = result
 
       const modelObj = {
