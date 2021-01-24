@@ -37,6 +37,8 @@ const upload = (0, _multer.default)({
 
       const filename = `${Math.random().toString(36).substring(2, 15)}`;
       const timestamp = Date.now();
+      console.log(file.originalname);
+      console.log(extension);
       cb(null, `problem/${timestamp}_${extension}`);
     }
   })
