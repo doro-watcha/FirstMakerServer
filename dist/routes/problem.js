@@ -33,9 +33,11 @@ const upload = (0, _multer.default)({
     bucket: 'mathproblem',
     acl: 'public-read',
     key: (req, file, cb) => {
+      console.log(file.originalname);
+      const fileName = file.originalname;
       console.log(file.fieldname);
       const timestamp = getToday();
-      cb(null, `${file.fieldname}/${timestamp}_${file.originalname}`);
+      cb(null, `${file.fieldname}/${timestamp}_${fileName}`);
     }
   })
 });
