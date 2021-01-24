@@ -89,6 +89,16 @@ class ProblemService {
     });
   }
 
+  async search(query) {
+    return await _models.Problem.findAll({
+      where: {
+        problemUrl: {
+          [Op.like]: "%" + query + "%"
+        }
+      }
+    });
+  }
+
 }
 
 var _default = new ProblemService();

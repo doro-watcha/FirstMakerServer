@@ -210,6 +210,27 @@ class problemController {
     }
   }
 
+  static async search(req, res) {
+    try {
+      const result = await _joi.default.validate(req.query, {
+        query: _joi.default.string().optional()
+      });
+      const {
+        query
+      } = result;
+      const problems = await _services.problemService.search(query);
+      const response = {
+        success: true,
+        data: {
+          problems
+        }
+      };
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
+  }
+
 }
 
 exports.default = problemController;

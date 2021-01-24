@@ -55,6 +55,9 @@ router.post('/find', authenticate, (req, res) => {
 router.get('/replace', authenticate, (req, res) => {
   _controllers.problemController.replace(req, res);
 });
+router.get('/search', (req, res) => {
+  _controllers.problemController.search(req, res);
+});
 
 function getToday() {
   var date = new Date();

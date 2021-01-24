@@ -230,4 +230,32 @@ export default class problemController {
     }
   }
 
+  static async search ( req, res) {
+
+    try {
+
+      const result = await Joi.validate(req.query,{
+
+        query : Joi.string().optional()
+      })
+
+      const  {query } = result
+
+
+      const problems = await problemService.search(query)
+
+      const response = {
+        success  : true,
+        data : {
+          problems
+        }
+      }
+
+      res.send(response)
+
+    } catch ( e ) {
+      res.send(createErrorResponse(e))
+    }
+  }
+
 }

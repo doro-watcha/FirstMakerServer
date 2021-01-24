@@ -44,6 +44,10 @@ router.get('/replace', authenticate , (req,res) => {
   problemController.replace(req,res)
 })
 
+router.get('/search' , (req,res) => {
+	problemController.search(req,res)
+})
+
 
 function getToday(){
 	var date = new Date();

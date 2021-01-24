@@ -97,6 +97,18 @@ class ProblemService {
       ],
     })
   }
+
+  async search ( query ) {
+
+    return await Problem.findAll({
+
+      where : {
+        problemUrl :  {
+					[Op.like]: "%" + query + "%"
+				}
+      } 
+    })
+  }
   
 }
 
