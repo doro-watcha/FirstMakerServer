@@ -98,7 +98,7 @@ class ProblemService {
     })
   }
 
-  async search ( problemUrl, subjectId, bigChapterId, middleChapterId, smallChapterId, source, level ) {
+  async search ( problemUrl) {
 
 
     return await Problem.findAll({
@@ -107,13 +107,7 @@ class ProblemService {
       where : {
         problemUrl :  {
 					[Op.like]: "%" + problemUrl + "%"
-        },
-        subjectId,
-        bigChapterId,
-        middleChapterId,
-        smallChapterId,
-        source,
-        level 
+        }
       }
     })
   }
