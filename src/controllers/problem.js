@@ -30,7 +30,7 @@ export default class problemController {
 					.required(),
 				solution: Joi.array()
 					.min(1)
-					.required(),
+					.optional(),
 			})
       
       const { subjectId, bigChapterId, middleChapterId, smallChapterId, level, source ,answer } = result 
@@ -236,13 +236,42 @@ export default class problemController {
 
       const result = await Joi.validate(req.query,{
 
-        query : Joi.string().optional()
+        problemUrl : Joi.string().optional(),
+        subjectId : Joi.number().optional(),
+        bigChapterId : Joi.number().optional(),
+        middleChapterId : Joi.number().optional(),
+        smallChapterId : Joi.number().optional(),
+        source : Joi.string().optional(),
+        level : Joi.number().optional()
       })
 
-      const  {query } = result
+      const  { problemUrl, subjectId, bigChapterId, middleChapterId, smallChapterId, source, level  } = result
 
+      var problems = await problemService.search(problemUrl)
 
-      const problems = await problemService.search(query)
+      if ( subjectId !== undefined) problems = problems.filter( item => {
+        return item.subjectId === subjectId 
+      })
+
+      if ( bigChapterId !== undefined) problems = problems.filter( item => {
+        return item.bigChapterId === bigChapterId 
+      })
+
+      if ( middleChapterId !== undefined) problems = problems.filter( item => {
+        return item.middleChapterId === middleChapterId 
+      })
+
+      if ( smallChapterId !== undefined) problems = problems.filter( item => {
+        return item.smallChapterId === smallChapterId 
+      })
+
+      if ( source !== undefined) problems = problems.filter( item => {
+        return item.source === source 
+      })
+
+      if ( level !== undefined) problems = problems.filter( item => {
+        return item.level === level 
+      })
 
       const response = {
         success  : true,

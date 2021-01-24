@@ -29,7 +29,7 @@ class problemController {
       });
       const files = await _joi.default.validate(req.files, {
         problem: _joi.default.array().min(1).required(),
-        solution: _joi.default.array().min(1).required()
+        solution: _joi.default.array().min(1).optional()
       });
       const {
         subjectId,
@@ -213,12 +213,42 @@ class problemController {
   static async search(req, res) {
     try {
       const result = await _joi.default.validate(req.query, {
-        query: _joi.default.string().optional()
+        problemUrl: _joi.default.string().optional(),
+        subjectId: _joi.default.number().optional(),
+        bigChapterId: _joi.default.number().optional(),
+        middleChapterId: _joi.default.number().optional(),
+        smallChapterId: _joi.default.number().optional(),
+        source: _joi.default.string().optional(),
+        level: _joi.default.number().optional()
       });
       const {
-        query
+        problemUrl,
+        subjectId,
+        bigChapterId,
+        middleChapterId,
+        smallChapterId,
+        source,
+        level
       } = result;
-      const problems = await _services.problemService.search(query);
+      var problems = await _services.problemService.search(problemUrl);
+      if (subjectId !== undefined) problems = problems.filter(item => {
+        return item.subjectId === subjectId;
+      });
+      if (bigChapterId !== undefined) problems = problems.filter(item => {
+        return item.bigChapterId === bigChapterId;
+      });
+      if (middleChapterId !== undefined) problems = problems.filter(item => {
+        return item.middleChapterId === middleChapterId;
+      });
+      if (smallChapterId !== undefined) problems = problems.filter(item => {
+        return item.smallChapterId === smallChapterId;
+      });
+      if (source !== undefined) problems = problems.filter(item => {
+        return item.source === source;
+      });
+      if (level !== undefined) problems = problems.filter(item => {
+        return item.level === level;
+      });
       const response = {
         success: true,
         data: {
