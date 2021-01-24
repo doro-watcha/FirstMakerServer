@@ -97,6 +97,7 @@ class ProblemService {
 
     if (problemUrl !== undefined) {
       problems = problems.filter(item => {
+        console.log(item.problemUrl);
         return item.problemUrl.includes(problemUrl);
       });
     }
