@@ -293,6 +293,14 @@ export default class problemController {
 
       const { subjectId , bigChapterId, middleChapterId, smallChapterId, source, level, answer  } = result 
 
+      console.log(subjectId)
+      console.log(bigChapterId)
+      console.log(middleChapterId)
+      console.log(smallChapterId)
+      console.log(source)
+      console.log(level)
+      console.log(answer)
+
       const modelObj = {
         subjectId,
         bigChapterId,
