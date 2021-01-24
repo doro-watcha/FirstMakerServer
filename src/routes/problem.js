@@ -21,12 +21,9 @@ const upload = multer({
 		bucket: 'mathproblem',
 		acl: 'public-read',
 		key: (req, file, cb) => {
-	
-			console.log(Date().toLocaleLowerCase())
-			const timestamp = getToday(Date().toLocaleLowerCase())
-
-			console.log(timestamp)
-			cb(null, `problem/${timestamp}_${file.originalname}`)
+			const field = file.fieldname
+			const timestamp = getToday()
+			cb(null, `${field}/${timestamp}_${file.originalname}`)
 		},
 	}),
 })

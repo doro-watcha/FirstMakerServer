@@ -33,8 +33,8 @@ const upload = (0, _multer.default)({
     bucket: 'mathproblem',
     acl: 'public-read',
     key: (req, file, cb) => {
-      console.log(Date().toLocaleLowerCase());
-      const timestamp = getToday(Date().toLocaleLowerCase());
+      console.log(file.fieldname);
+      const timestamp = getToday();
       console.log(timestamp);
       cb(null, `problem/${timestamp}_${file.originalname}`);
     }
