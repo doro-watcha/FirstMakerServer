@@ -247,7 +247,16 @@ export default class problemController {
 
       const  { problemUrl, subjectId, bigChapterId, middleChapterId, smallChapterId, source, level  } = result
 
-      const problems = await problemService.search(problemUrl, subjectId, bigChapterId, middleChapterId, smallChapterId, source, level )
+      const modelObj = {
+        subjectId,
+        bigChapterId,
+        middleChapterId,
+        smallChapterId,
+        source,
+        level
+      }
+
+      const problems = await problemService.search(problemUrl, modelObj )
 
       const response = {
         success  : true,

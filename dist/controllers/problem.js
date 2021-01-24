@@ -230,7 +230,15 @@ class problemController {
         source,
         level
       } = result;
-      const problems = await _services.problemService.search(problemUrl, subjectId, bigChapterId, middleChapterId, smallChapterId, source, level);
+      const modelObj = {
+        subjectId,
+        bigChapterId,
+        middleChapterId,
+        smallChapterId,
+        source,
+        level
+      };
+      const problems = await _services.problemService.search(problemUrl, modelObj);
       const response = {
         success: true,
         data: {

@@ -89,20 +89,14 @@ class ProblemService {
     });
   }
 
-  async search(problemUrl, subjectId, bigChapterId, middleChapterId, smallChapterId, source, level) {
-    return await _models.Problem.findAll({
-      where: {
-        problemUrl: {
-          [Op.like]: "%" + problemUrl + "%"
-        },
-        subjectId: subjectId,
-        bigChapterId: bigChapterId,
-        middleChapterId: middleChapterId,
-        smallChapterId: smallChapterId,
-        source: source,
-        level: level
-      }
+  async search(problemUrl, modelObj) {
+    var problems = await _models.Problem.findAll({
+      where: JSON.parse(JSON.stringify(modelObj))
     });
+    problems = problems.filter(item => {
+      return item.problemUrl.includes(problemUrl);
+    });
+    return problems;
   }
 
 }
