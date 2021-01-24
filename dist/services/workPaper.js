@@ -24,18 +24,23 @@ class WorkPaperService {
   }
 
   async create(modelObj) {
-    await _models.WorkPaper.create(modelObj);
-
-    const newWorkPaper = _models.WorkPaper.findOne({
+    const alreadyWorkPaper = await _models.WorkPaper.findOne({
       where: modelObj
     });
-
+    console.log(alreadyWorkPaper);
+    if (alreadyWorkPaper !== null) throw Error('WORK_PAPER_ALREADY_EXISTS');
+    await _models.WorkPaper.create(modelObj);
+    const newWorkPaper = await _models.WorkPaper.findOne({
+      where: modelObj
+    });
+    if (newWorkPaper === null) throw Error('WORK_PAPER_NOT_FOUND');
     return newWorkPaper;
   }
 
   async findList(where) {
     return await _models.WorkPaper.findAll({
       where: JSON.parse(JSON.stringify(where)),
+      order: [['id', 'desc']],
       include: [{
         model: _models.Note,
         as: 'note',

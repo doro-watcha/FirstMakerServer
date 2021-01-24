@@ -39,7 +39,8 @@ export default class examController {
           teacherId : teacher.id,
           studentId : studentIdList[i],
           numChapters,
-          mainChapter
+          mainChapter,
+          timeLimit
         }
         
         const newExam = await examService.create(modelObj)

@@ -35,6 +35,10 @@ class Subject extends _sequelize.default.Model {
       foreignKey: 'subjectId',
       as: 'workBooks'
     });
+    this.hasMany(models.WorkBookRecord, {
+      foreignKey: 'subjectId',
+      as: 'subject'
+    });
   }
 
   toJSON() {

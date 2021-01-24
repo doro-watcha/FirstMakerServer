@@ -28,6 +28,7 @@ class ExamService {
 
     return await Exam.findAll({
       where : JSON.parse(JSON.stringify(where)),
+      order : [['id', 'desc']],
       include :[
         {
             model: Note,
@@ -109,7 +110,21 @@ class ExamService {
     } else {
         await Exam.destroy()
     }
-	}
+  }
+  
+  async update ( id, modelObj ) {
+
+    await Exam.update(modelObj,{
+      where : { id }
+    })
+
+    const exam = await Exam.findOne({id})
+
+    if ( exam == null ) throw Error('EXAM_NOT_FOUND')
+
+    return exam
+
+  }
   
 
 

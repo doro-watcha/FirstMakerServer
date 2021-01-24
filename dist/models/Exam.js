@@ -33,6 +33,10 @@ class Exam extends _sequelize.default.Model {
         type: _sequelize.default.FLOAT,
         defaultValue: 0.0
       },
+      spendingTime: {
+        type: _sequelize.default.INTEGER,
+        defaultValue: 0
+      },
       timeLimit: {
         type: _sequelize.default.INTEGER,
         defaultValue: 0

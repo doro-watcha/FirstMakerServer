@@ -11,8 +11,6 @@ var _moment = _interopRequireDefault(require("moment"));
 
 var _models = require("../models");
 
-var _Problem = _interopRequireDefault(require("../models/Problem"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 let instance = null;
@@ -55,6 +53,22 @@ class ClassBelongsService {
     return await _models.ClassBelongs.findOne({
       where: {
         studentId
+      },
+      include: {
+        model: _models.Class,
+        as: 'class'
+      }
+    });
+  }
+
+  async findListByStudentId(studentId) {
+    return await _models.ClassBelongs.findAll({
+      where: {
+        studentId
+      },
+      include: {
+        model: _models.Class,
+        as: 'class'
       }
     });
   }

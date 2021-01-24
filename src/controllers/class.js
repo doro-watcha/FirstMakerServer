@@ -109,6 +109,33 @@ export default class classController {
     }
   }
 
+  static async findListByStudentId( req,res) {
+
+    try {
+
+      const studentId = req.params.studentId 
+
+      var classBelongs = await classBelongsService.findListByStudentId(studentId)
+
+      console.log(classBelongs)
+      if ( classBelongs !== null ) {
+        classBelongs = classBelongs.map ( it => it.class)
+
+      }
+      const response = {
+        success : true,
+        data : {
+          classes : classBelongs
+        }
+      }
+
+      res.send(response)
+
+      
+    } catch ( e ) {
+      res.send(createErrorResponse(e))
+    }
+  }
   static async addStudent ( req, res) {
 
     try { 

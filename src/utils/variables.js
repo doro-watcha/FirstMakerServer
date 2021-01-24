@@ -189,6 +189,10 @@ module.exports = {
 			status : 435,
 			ko : '제한 시간 없음'
 		},
+		WORK_PAPER_NOT_FOUND : {
+			status : 436,
+			ko : '해당 문제지 없음'
+		},
 
 
 
@@ -276,6 +280,10 @@ module.exports = {
 		STUDENT_ALREADY_EXISTS : {
 			status : 519,
 			ko : '이미 존재하는 학생입니다.'
+		},
+		WORK_PAPER_ALREADY_EXISTS : {
+			stuats : 520,
+			ko : '이미 존재하는 문제지입니다'
 		},
 
 		// 410

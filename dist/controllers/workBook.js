@@ -69,19 +69,41 @@ class workBookController {
     }
   }
 
+  static async findMyList(req, res) {
+    try {
+      const studentId = req.params.studentId;
+      var myWorkBooks = await _services.workBookRecordService.findList({
+        studentId
+      });
+      myWorkBooks = myWorkBooks.map(it => it.workBook);
+      const response = {
+        success: true,
+        data: {
+          workBooks: myWorkBooks
+        }
+      };
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
+  }
+
   static async buy(req, res) {
     try {
       const result = await _joi.default.validate(req.body, {
         studentId: _joi.default.number().required(),
-        workBookId: _joi.default.number().required()
+        workBookId: _joi.default.number().required(),
+        bigChapterId: _joi.default.number().required()
       });
       const {
         studentId,
-        workBookId
+        workBookId,
+        bigChapterId
       } = result;
       const modelObj = {
         studentId,
-        workBookId
+        workBookId,
+        bigChapterId
       };
       await _services.workBookRecordService.create(modelObj);
       const response = {
@@ -114,22 +136,24 @@ class workBookController {
 
   static async findMyChapterList(req, res) {
     try {
+      const studentId = req.params.studentId;
       const result = await _joi.default.validate(req.query, {
-        subjectId: _joi.default.number().required(),
-        studentId: _joi.default.number().required()
+        subjectId: _joi.default.number().required()
       });
       const {
-        subjectId,
-        studentId
+        subjectId
       } = result;
-      const myChapterList = await _services.workBookRecordService.findList({
+      var myChapterList = await _services.workBookRecordService.findList({
         subjectId,
         studentId
       });
+      console.log(myChapterList.length);
+      myChapterList = myChapterList.map(it => it.bigChapter);
+      console.log(myChapterList.length);
       const response = {
         success: true,
-        dat: {
-          myChapterList
+        data: {
+          bigChapters: myChapterList
         }
       };
       res.send(response);

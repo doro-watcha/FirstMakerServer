@@ -43,10 +43,14 @@ class WorkBookRecordService {
 
     return await WorkBookRecord.findOne({
       where : JSON.parse(JSON.stringify(where)),
-      include : {
+      include : [{
         model : WorkBook,
         as : 'workBook'
-      }
+      },{
+        model : BigChapter,
+        as : 'bigChapter'
+
+      }]
     })
   }
   

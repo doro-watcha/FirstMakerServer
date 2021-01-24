@@ -2,8 +2,7 @@
 import sequelize from 'sequelize'
 import moment from 'moment'
 
-import { ClassBelongs , Student } from '../models'
-import Problem from '../models/Problem'
+import { ClassBelongs , Student, Class, Teacher } from '../models'
 let instance = null
 
 class ClassBelongsService {
@@ -48,8 +47,26 @@ class ClassBelongsService {
     return await ClassBelongs.findOne({
       where : {
         studentId
+      },
+      include :{
+        model : Class,
+        as : 'class'
       }
     })
+  }
+
+  async findListByStudentId ( studentId ) {
+
+    return await ClassBelongs.findAll({
+      where : {
+        studentId
+      },
+      include : {
+        model : Class,
+        as: 'class'
+      }
+    })
+
   }
 
   async delete ( studentId , classId  ) {

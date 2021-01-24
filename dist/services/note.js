@@ -66,9 +66,15 @@ class NoteService {
     });
   }
 
-  async findList(where) {
+  async findList(where, startDate, endDate) {
     return await _models.Note.findAll({
       where: JSON.parse(JSON.stringify(where)),
+      where: {
+        updatedAt: {
+          [Op.lt]: endDate,
+          [Op.gt]: startDate
+        }
+      },
       include: {
         model: _models.Problem,
         as: 'problem',
@@ -118,12 +124,76 @@ class NoteService {
     return updatedNote;
   }
 
-  async findLongList(studentId) {
+  async findLongList(studentId, startDate, endDate) {
     return await _models.Note.findAll({
       where: {
         studentId,
         spendingTime: {
           [Op.gte]: 3000
+        },
+        updatedAt: {
+          [Op.lt]: endDate,
+          [Op.gt]: startDate
+        }
+      },
+      include: {
+        model: _models.Problem,
+        as: 'problem',
+        include: [{
+          model: _models.BigChapter,
+          as: 'bigChapter'
+        }, {
+          model: _models.MiddleChapter,
+          as: 'middleChapter'
+        }, {
+          model: _models.SmallChapter,
+          as: 'smallChapter'
+        }, {
+          model: _models.Subject,
+          as: 'subject'
+        }]
+      }
+    });
+  }
+
+  async findWrongList(studentId, startDate, endDate) {
+    return await _models.Note.findAll({
+      where: {
+        studentId,
+        status: "틀림",
+        updatedAt: {
+          [Op.lt]: endDate,
+          [Op.gt]: startDate
+        }
+      },
+      include: {
+        model: _models.Problem,
+        as: 'problem',
+        include: [{
+          model: _models.BigChapter,
+          as: 'bigChapter'
+        }, {
+          model: _models.MiddleChapter,
+          as: 'middleChapter'
+        }, {
+          model: _models.SmallChapter,
+          as: 'smallChapter'
+        }, {
+          model: _models.Subject,
+          as: 'subject'
+        }]
+      }
+    });
+  }
+
+  async findStarList(studentId, startDate, endDate) {
+    return await _models.Note.findAll({
+      where: {
+        studentId,
+        isGreenStar: 1,
+        updatedAt: {
+          [Op.lt]: endDate,
+          [Op.gt]: startDate
         }
       },
       include: {

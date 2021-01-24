@@ -27,6 +27,10 @@ export default class Exam extends Sequelize.Model {
               type : Sequelize.FLOAT,
               defaultValue : 0.0
             },
+            spendingTime : {
+              type : Sequelize.INTEGER,
+              defaultValue : 0
+            },
             timeLimit : {
               type : Sequelize.INTEGER,
               defaultValue : 0

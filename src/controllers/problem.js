@@ -142,6 +142,7 @@ export default class problemController {
           }
         }
 
+        // 선생님의 경우에는 blacklist는 제외하고 보내준다 
         while ( blackList.length > 0 ) {
 
           var filteredList = []

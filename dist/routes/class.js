@@ -14,6 +14,9 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   _controllers.classController.findOne(req, res);
 });
+router.get('/:studentId/list', (req, res) => {
+  _controllers.classController.findListByStudentId(req, res);
+});
 router.post('/addStudent', (req, res) => {
   _controllers.classController.addStudent(req, res);
 });

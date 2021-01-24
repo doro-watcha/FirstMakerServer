@@ -26,7 +26,7 @@ const upload = multer({
 				.toString(36)
 				.substring(2, 15)}`
 			const timestamp = Date.now()
-			cb(null, `problem/${filename}_${timestamp}${extension}`)
+			cb(null, `problem/${timestamp}_${extension}`)
 		},
 	}),
 })

@@ -49,7 +49,8 @@ class examController {
           teacherId: teacher.id,
           studentId: studentIdList[i],
           numChapters,
-          mainChapter
+          mainChapter,
+          timeLimit
         };
         const newExam = await _services.examService.create(modelObj);
 

@@ -16,10 +16,13 @@ router.post('/buy', (req, res) => {
 router.get('/:id', (req, res) => {
   _controllers.workBookController.findOne(req, res);
 });
+router.get('/:studentId/list', (req, res) => {
+  _controllers.workBookController.findMyList(req, res);
+});
 router.get('/', (req, res) => {
   _controllers.workBookController.findList(req, res);
 });
-router.get('/myChapter/list', (req, res) => {
+router.get('/myChapter/:studentId/list', (req, res) => {
   _controllers.workBookController.findMyChapterList(req, res);
 });
 router.patch('/:id', (req, res) => {

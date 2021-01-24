@@ -81,20 +81,48 @@ export default class workBookController {
     }
   }
 
+  static async findMyList( req, res ) {
+
+
+    try {
+
+      const studentId = req.params.studentId 
+
+      var myWorkBooks = await workBookRecordService.findList({studentId})
+
+      myWorkBooks = myWorkBooks.map ( it => it.workBook)
+
+      const response = {
+        success : true,
+        data : {
+          workBooks : myWorkBooks
+        
+        }
+      }
+
+      res.send(response)
+
+    } catch ( e ) {
+      res.send(createErrorResponse(e))
+    }
+  }
+
   static async buy ( req, res) {
 
     try {
 
       const result = await Joi.validate ( req.body, {
         studentId : Joi.number().required(),
-        workBookId : Joi.number().required()
+        workBookId : Joi.number().required(),
+        bigChapterId : Joi.number().required()
       })
 
-      const { studentId , workBookId } = result 
+      const { studentId , workBookId, bigChapterId } = result 
 
       const modelObj = {
         studentId,
-        workBookId
+        workBookId,
+        bigChapterId 
       }
 
       await workBookRecordService.create (modelObj )
@@ -139,22 +167,29 @@ export default class workBookController {
 
     try {
 
+      const studentId = req.params.studentId 
+
       const result = await Joi.validate ( req.query,{
         subjectId : Joi.number().required(),
-        studentId : Joi.number().required()
+
       })
 
-      const { subjectId , studentId } = result  
+      const { subjectId } = result  
 
-      const myChapterList = await workBookRecordService.findList({
+      var myChapterList = await workBookRecordService.findList({
         subjectId,
         studentId
       })
 
+      console.log(myChapterList.length)
+      myChapterList = myChapterList.map( it => it.bigChapter)
+
+
+      console.log(myChapterList.length)
       const response = {
         success : true,
-        dat : {
-          myChapterList
+        data : {
+          bigChapters : myChapterList
         }
       }
 

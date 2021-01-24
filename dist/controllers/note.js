@@ -65,18 +65,22 @@ class noteController {
         userId: user.id
       });
       if (student == null) throw Error('STUDENT_NOT_FOUND');
-      if (startDate !== undefined) notes = await _services.noteService.findWeeklyList(student.id, startDate, endDate);else notes = await _services.noteService.findList({
+
+      if (startDate !== undefined) {
+        notes = await _services.noteService.findWeeklyList(student.id, startDate, endDate);
+        console.log(notes.map(it => it.status));
+        notes = notes.filter(note => note.status === "맞음" || note.status === "틀림");
+        console.log(notes.length);
+      } else notes = await _services.noteService.findList({
         studentId: student.id
       });
+
       const response = {
         success: true,
         data: {
           notes
         }
       };
-      notes.filter(note => {
-        note.status === "맞음" || notes.status == "틀림";
-      });
       res.send(response);
     } catch (e) {
       res.send((0, _functions.createErrorResponse)(e));
@@ -159,7 +163,7 @@ class noteController {
         accurateRate,
         spendingTime: wholeTime
       };
-      if (type === "숙제") await _services.homeworkService.update(id, collectionModel);else if (type == "문제지") await _services.workPaperService.update(id, collectionModel);
+      if (type === "숙제") await _services.homeworkService.update(id, collectionModel);else if (type == "시험") await _services.examService.update(id, collectionModel);else if (type == "문제지") await _services.workPaperService.update(id, collectionModel);
       const response = {
         success: true,
         data: {
@@ -178,10 +182,14 @@ class noteController {
   static async findWrongList(req, res) {
     try {
       const result = await _joi.default.validate(req.query, {
-        subject: _joi.default.string().required()
+        subject: _joi.default.string().required(),
+        startDate: _joi.default.string().required(),
+        endDate: _joi.default.string().required()
       });
       const {
-        subject
+        subject,
+        startDate,
+        endDate
       } = result;
       const {
         user
@@ -190,10 +198,7 @@ class noteController {
         userId: user.id
       });
       if (student == null) throw Error('STUDENT_NOT_FOUND');
-      const wrongNotes = await _services.noteService.findList({
-        status: "틀림",
-        studentId: student.id
-      });
+      const wrongNotes = await _services.noteService.findWrongList(student.id, startDate, endDate);
       wrongNotes.filter(note => {
         if (note.problem.subject != null) note.problem.subject.name == subject;
       });
@@ -212,10 +217,14 @@ class noteController {
   static async findStarList(req, res) {
     try {
       const result = await _joi.default.validate(req.query, {
-        subject: _joi.default.string().required()
+        subject: _joi.default.string().required(),
+        startDate: _joi.default.string().required(),
+        endDate: _joi.default.string().required()
       });
       const {
-        subject
+        subject,
+        startDate,
+        endDate
       } = result;
       const {
         user
@@ -224,10 +233,7 @@ class noteController {
         userId: user.id
       });
       if (student == null) throw Error('STUDENT_NOT_FOUND');
-      const starNotes = await _services.noteService.findList({
-        isGreenStar: true,
-        studentId: student.id
-      });
+      const starNotes = await _services.noteService.findStarList(student.id, startDate, endDate);
       starNotes.filter(note => {
         if (note.problem.subject != null) note.problem.subject.name == subject;
       });
@@ -246,10 +252,14 @@ class noteController {
   static async findLongList(req, res) {
     try {
       const result = await _joi.default.validate(req.query, {
-        subject: _joi.default.string().required()
+        subject: _joi.default.string().required(),
+        startDate: _joi.default.string().required(),
+        endDate: _joi.default.string().required()
       });
       const {
-        subject
+        subject,
+        startDate,
+        endDate
       } = result;
       const {
         user
@@ -258,7 +268,7 @@ class noteController {
         userId: user.id
       });
       if (student == null) throw Error('STUDENT_NOT_FOUND');
-      const longNotes = await _services.noteService.findLongList(student.id);
+      const longNotes = await _services.noteService.findLongList(student.id, startDate, endDate);
       longNotes.filter(note => {
         if (note.problem.subject != null) note.problem.subject.name == subject;
       });

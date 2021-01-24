@@ -19,11 +19,15 @@ router.get('/:id', (req,res) => {
   workBookController.findOne(req,res)
 })
 
+router.get('/:studentId/list' ,(req,res) => {
+  workBookController.findMyList(req,res)
+})
+
 router.get('/', (req,res) => {
   workBookController.findList(req,res)
 })
 
-router.get('/myChapter/list' , (req,res) => {
+router.get('/myChapter/:studentId/list' , (req,res) => {
   workBookController.findMyChapterList(req,res)
 })
 

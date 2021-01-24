@@ -44,10 +44,13 @@ class WorkBookRecordService {
   async findOne(where) {
     return await _models.WorkBookRecord.findOne({
       where: JSON.parse(JSON.stringify(where)),
-      include: {
+      include: [{
         model: _models.WorkBook,
         as: 'workBook'
-      }
+      }, {
+        model: _models.BigChapter,
+        as: 'bigChapter'
+      }]
     });
   }
 

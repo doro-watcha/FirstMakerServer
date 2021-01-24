@@ -21,7 +21,13 @@ export default class Note extends Sequelize.Model {
           isGreenStar : {
             type : Sequelize.BOOLEAN,
             defaultValue : false 
-          }
+          },
+          updatedAt: {
+            type: Sequelize.DATE,
+            allowNull: false,
+            defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+            onUpdate: Sequelize.literal('CURRENT_TIMESTAMP')
+          },
 
       },
       {

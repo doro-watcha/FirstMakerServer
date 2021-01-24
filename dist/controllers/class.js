@@ -96,6 +96,28 @@ class classController {
     }
   }
 
+  static async findListByStudentId(req, res) {
+    try {
+      const studentId = req.params.studentId;
+      var classBelongs = await _services.classBelongsService.findListByStudentId(studentId);
+      console.log(classBelongs);
+
+      if (classBelongs !== null) {
+        classBelongs = classBelongs.map(it => it.class);
+      }
+
+      const response = {
+        success: true,
+        data: {
+          classes: classBelongs
+        }
+      };
+      res.send(response);
+    } catch (e) {
+      res.send((0, _functions.createErrorResponse)(e));
+    }
+  }
+
   static async addStudent(req, res) {
     try {
       const result = await _joi.default.validate(req.body, {

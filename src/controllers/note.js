@@ -1,4 +1,4 @@
-import { noteService , homeworkService, workPaperService, studentService} from '../services'
+import { noteService , homeworkService, workPaperService, studentService, examService} from '../services'
 import Joi from '@hapi/joi'
 
 import { createErrorResponse } from '../utils/functions'
@@ -63,8 +63,19 @@ export default class noteController {
 
       if ( student == null ) throw Error('STUDENT_NOT_FOUND')
       
-      if ( startDate !== undefined ) notes = await noteService.findWeeklyList(student.id, startDate, endDate)
+      if ( startDate !== undefined ) {
+        notes = await noteService.findWeeklyList(student.id, startDate, endDate)
+
+        console.log(notes.map(it => it.status))
+        notes = notes.filter( note => 
+          note.status === "맞음" || note.status === "틀림"
+        )
+
+        console.log(notes.length)
+      }
       else notes = await noteService.findList({studentId : student.id})
+
+
 
       const response = {
         success : true,
@@ -73,9 +84,6 @@ export default class noteController {
         }
       }
 
-      notes.filter( note => {
-        note.status === "맞음" || notes.status == "틀림"
-      })
 
       res.send(response)
 
@@ -171,6 +179,7 @@ export default class noteController {
       }
 
       if ( type === "숙제") await homeworkService.update(id,collectionModel )
+      else if ( type == "시험") await examService.update(id, collectionModel)
       else if ( type == "문제지") await workPaperService.update(id, collectionModel)
 
 
@@ -199,10 +208,12 @@ export default class noteController {
     try {
 
       const result = await Joi.validate(req.query,{
-        subject : Joi.string().required()
+        subject : Joi.string().required(),
+        startDate : Joi.string().required(),
+        endDate : Joi.string().required()
       })
 
-      const { subject } = result 
+      const { subject , startDate , endDate} = result 
 
       const { user } = req
 
@@ -210,10 +221,7 @@ export default class noteController {
 
       if ( student == null ) throw Error('STUDENT_NOT_FOUND')
 
-      const wrongNotes = await noteService.findList({
-        status : "틀림",
-        studentId : student.id 
-      })
+      const wrongNotes = await noteService.findWrongList(student.id, startDate, endDate)
 
       wrongNotes.filter( note => {
           if ( note.problem.subject != null)note.problem.subject.name == subject
@@ -241,10 +249,12 @@ export default class noteController {
     try {
 
       const result = await Joi.validate(req.query,{
-        subject : Joi.string().required()
+        subject : Joi.string().required(),
+        startDate : Joi.string().required(),
+        endDate : Joi.string().required()
       })
 
-      const { subject } = result 
+      const { subject, startDate , endDate  } = result 
 
       const { user } = req
 
@@ -252,10 +262,9 @@ export default class noteController {
 
       if ( student == null ) throw Error('STUDENT_NOT_FOUND')
 
-      const starNotes = await noteService.findList({
-        isGreenStar : true,
-        studentId : student.id
-      })
+      const starNotes = await noteService.findStarList(
+        student.id, startDate, endDate 
+      )
 
       starNotes.filter( note => {
         if ( note.problem.subject != null)note.problem.subject.name == subject
@@ -281,10 +290,12 @@ export default class noteController {
     try {
 
       const result = await Joi.validate(req.query,{
-        subject : Joi.string().required()
+        subject : Joi.string().required(),
+        startDate : Joi.string().required(),
+        endDate : Joi.string().required()
       })
 
-      const { subject } = result 
+      const { subject , startDate , endDate} = result 
 
       const { user } = req
 
@@ -292,7 +303,7 @@ export default class noteController {
 
       if ( student == null ) throw Error('STUDENT_NOT_FOUND')
 
-      const longNotes = await noteService.findLongList(student.id)
+      const longNotes = await noteService.findLongList(student.id,startDate, endDate)
       longNotes.filter( note => {
         if ( note.problem.subject != null)note.problem.subject.name == subject
       })

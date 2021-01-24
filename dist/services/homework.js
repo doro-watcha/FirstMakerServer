@@ -34,6 +34,7 @@ class HomeworkService {
   async findList(where) {
     return await _models.Homework.findAll({
       where: JSON.parse(JSON.stringify(where)),
+      order: [['id', 'desc']],
       include: [{
         model: _models.Note,
         as: 'note',

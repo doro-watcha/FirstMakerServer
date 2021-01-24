@@ -33,6 +33,7 @@ class HomeworkService {
 
     return await Homework.findAll({
       where : JSON.parse(JSON.stringify(where)),
+      order : [['id', 'desc']],
       include :[
         {
             model: Note,

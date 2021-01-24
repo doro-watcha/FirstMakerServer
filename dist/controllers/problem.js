@@ -131,7 +131,8 @@ class problemController {
             var additionalProblems = await _services.problemService.findAdditionalList(smallChapterIdList[i], duplicatedNum, duplicatedList);
             problems.push(additionalProblems);
           }
-        }
+        } // 선생님의 경우에는 blacklist는 제외하고 보내준다 
+
 
         while (blackList.length > 0) {
           var filteredList = [];
