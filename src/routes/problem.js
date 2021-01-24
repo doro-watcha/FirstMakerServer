@@ -25,14 +25,13 @@ const upload = multer({
 	
 
 			console.log(file.originalname)
+		
 
 			const fileName = escape(file.originalname)
-
-			console.log(file.filename)
 	
 			console.log(fileName)
 			const timestamp = getToday()
-			cb(null, `${file.fieldname}/${timestamp}_${fileName}`)
+			cb(null, `${file.fieldname}/${timestamp}_${file.originalname}`)
 		},
 	}),
 })

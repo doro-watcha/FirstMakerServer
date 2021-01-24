@@ -38,7 +38,7 @@ const upload = (0, _multer.default)({
       console.log(file.filename);
       console.log(fileName);
       const timestamp = getToday();
-      cb(null, `${file.fieldname}/${timestamp}_${fileName}`);
+      cb(null, `${file.fieldname}/${timestamp}_${file.originalname}`);
     }
   })
 });
