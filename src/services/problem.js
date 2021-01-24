@@ -100,18 +100,22 @@ class ProblemService {
 
   async search ( problemUrl) {
 
+    if ( problemUrl === undefined) return await Problem.findAll({})
 
-    return await Problem.findAll({
+    else {
+
+      return await Problem.findAll({
 
 
-      where : {
-        problemUrl :  {
-					[Op.like]: "%" + problemUrl + "%"
+        where : {
+          problemUrl :  {
+            [Op.like]: "%" + problemUrl + "%"
+          }
         }
-      }
-    })
+      })
+    }
+    
   }
-  
 }
 
 export default new ProblemService()

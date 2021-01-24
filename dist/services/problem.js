@@ -90,13 +90,15 @@ class ProblemService {
   }
 
   async search(problemUrl) {
-    return await _models.Problem.findAll({
-      where: {
-        problemUrl: {
-          [Op.like]: "%" + problemUrl + "%"
+    if (problemUrl === undefined) return await _models.Problem.findAll({});else {
+      return await _models.Problem.findAll({
+        where: {
+          problemUrl: {
+            [Op.like]: "%" + problemUrl + "%"
+          }
         }
-      }
-    });
+      });
+    }
   }
 
 }
