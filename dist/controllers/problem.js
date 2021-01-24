@@ -262,7 +262,8 @@ class problemController {
         middleChapterId: _joi.default.number(),
         smallChapterId: _joi.default.number(),
         source: _joi.default.string(),
-        level: _joi.default.number()
+        level: _joi.default.number(),
+        answer: _joi.default.string()
       });
       const {
         subjectId,
@@ -270,7 +271,8 @@ class problemController {
         middleChapterId,
         smallChapterId,
         source,
-        level
+        level,
+        answer
       } = result;
       const modelObj = {
         subjectId,
@@ -278,7 +280,8 @@ class problemController {
         middleChapterId,
         smallChapterId,
         source,
-        level
+        level,
+        answer
       };
       await _services.problemService.update(id, modelObj);
       const response = {

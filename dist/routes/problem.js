@@ -35,7 +35,6 @@ const upload = (0, _multer.default)({
     key: (req, file, cb) => {
       console.log(file.originalname);
       const fileName = escape(file.originalname);
-      console.log(file.filename);
       console.log(fileName);
       const timestamp = getToday();
       cb(null, `${file.fieldname}/${timestamp}_${file.originalname}`);

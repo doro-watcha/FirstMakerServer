@@ -287,10 +287,11 @@ export default class problemController {
         middleChapterId : Joi.number(),
         smallChapterId : Joi.number(),
         source : Joi.string(),
-        level : Joi.number()
+        level : Joi.number(),
+        answer : Joi.string()
       })
 
-      const { subjectId , bigChapterId, middleChapterId, smallChapterId, source, level } = result 
+      const { subjectId , bigChapterId, middleChapterId, smallChapterId, source, level, answer  } = result 
 
       const modelObj = {
         subjectId,
@@ -298,7 +299,8 @@ export default class problemController {
         middleChapterId,
         smallChapterId,
         source,
-        level
+        level,
+        answer
       }
 
       await problemService.update(id,modelObj)
