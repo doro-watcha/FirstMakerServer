@@ -31,9 +31,6 @@ class WorkBookRecord extends _sequelize.default.Model {
     }), this.belongsTo(models.BigChapter, {
       foreignKey: 'bigChapterId',
       as: 'bigChapter'
-    }), this.belongsTo(models.Subject, {
-      foreignKey: 'subjectId',
-      as: 'subject'
     });
     this.hasMany(models.Note, {
       foreignKey: 'workBookRecordId',

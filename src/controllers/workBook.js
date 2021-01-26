@@ -170,14 +170,14 @@ export default class workBookController {
       const studentId = req.params.studentId 
 
       const result = await Joi.validate ( req.query,{
-        subjectId : Joi.number().required(),
+        workBookId : Joi.number().required(),
 
       })
 
-      const { subjectId } = result  
+      const { workBookId } = result  
 
       var myChapterList = await workBookRecordService.findList({
-        subjectId,
+        workBookId,
         studentId
       })
 

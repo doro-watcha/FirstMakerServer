@@ -138,13 +138,13 @@ class workBookController {
     try {
       const studentId = req.params.studentId;
       const result = await _joi.default.validate(req.query, {
-        subjectId: _joi.default.number().required()
+        workBookId: _joi.default.number().required()
       });
       const {
-        subjectId
+        workBookId
       } = result;
       var myChapterList = await _services.workBookRecordService.findList({
-        subjectId,
+        workBookId,
         studentId
       });
       console.log(myChapterList.length);
