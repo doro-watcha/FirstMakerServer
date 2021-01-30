@@ -101,7 +101,13 @@ export default class problemController {
 
         const student = await studentService.findOne({userId : user.id})
         myProblemList = await noteService.findList({studentId : student.id})
+
+        console.log("검색한다음에 바로 찍어보는것")
+        console.log(myProblemList)
         myProblemList = myProblemList.map( myProblem => myProblem.problem.id)
+
+        console.log("map 한 번 함")
+        console.log(myProblemList)
       }
 
       console.log(user.teacherId)
@@ -127,7 +133,9 @@ export default class problemController {
 
           problems.forEach(function(problem ,index) {
 
+            console.log("forEach에 있는 현재 문제")
             console.log(problem.id)
+            console.log("내가 지금까지 풀엇던 문제 ")
             console.log(myProblemList)
 
             if ( myProblemList.includes(problem.id)) {
@@ -135,13 +143,14 @@ export default class problemController {
               duplicatedList.push(problem.id)
               problems.splice(index,1)
             }
-            
           })
 
           if ( duplicatedNum === 0 ) break;
           else {
             var additionalProblems = await problemService.findAdditionalList(smallChapterIdList[i], duplicatedNum, duplicatedList)
-            problems.push(additionalProblems)
+
+            if ( additionalProblems == null ) break;
+            problems.concat(additionalProblems)
           }
         }
 
@@ -165,7 +174,7 @@ export default class problemController {
           if ( filteredNum == 0 ) break;
           else {
             var additionalProblems = await problemService.findAdditionalList(smallChapteridList[i], filteredNum, filteredList)
-            problems.push(additionalProblems)
+            problems.concat(additionalProblems)
           }
         }
         

@@ -100,7 +100,11 @@ class problemController {
         myProblemList = await _services.noteService.findList({
           studentId: student.id
         });
+        console.log("검색한다음에 바로 찍어보는것");
+        console.log(myProblemList);
         myProblemList = myProblemList.map(myProblem => myProblem.problem.id);
+        console.log("map 한 번 함");
+        console.log(myProblemList);
       }
 
       console.log(user.teacherId); // 선생님들은 블랙리스트 문제 제외하고 검색하자 
@@ -120,7 +124,9 @@ class problemController {
           var duplicatedList = [];
           var duplicatedNum = 0;
           problems.forEach(function (problem, index) {
+            console.log("forEach에 있는 현재 문제");
             console.log(problem.id);
+            console.log("내가 지금까지 풀엇던 문제 ");
             console.log(myProblemList);
 
             if (myProblemList.includes(problem.id)) {
@@ -131,7 +137,8 @@ class problemController {
           });
           if (duplicatedNum === 0) break;else {
             var additionalProblems = await _services.problemService.findAdditionalList(smallChapterIdList[i], duplicatedNum, duplicatedList);
-            problems.push(additionalProblems);
+            if (additionalProblems == null) break;
+            problems.concat(additionalProblems);
           }
         } // 선생님의 경우에는 blacklist는 제외하고 보내준다 
 
@@ -148,7 +155,7 @@ class problemController {
           });
           if (filteredNum == 0) break;else {
             var additionalProblems = await _services.problemService.findAdditionalList(smallChapteridList[i], filteredNum, filteredList);
-            problems.push(additionalProblems);
+            problems.concat(additionalProblems);
           }
         }
 

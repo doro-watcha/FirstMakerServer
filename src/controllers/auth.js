@@ -50,7 +50,7 @@ export default class AuthController {
 			const result = await Joi.validate(req.body, {
 				email: Joi.string()
 					.required(),
-				password: Joi.string()
+				password: Joi.string().min(8)
 					.required(),
 				name : Joi.string().required(),
 				school : Joi.string().optional(),
@@ -126,7 +126,6 @@ export default class AuthController {
 				email: Joi.string()
 					.required(),
 				password: Joi.string()
-					.regex(passwordRegex)
 					.required()
 			})
 

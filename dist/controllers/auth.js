@@ -63,7 +63,7 @@ class AuthController {
       // validation
       const result = await _joi.default.validate(req.body, {
         email: _joi.default.string().required(),
-        password: _joi.default.string().required(),
+        password: _joi.default.string().min(8).required(),
         name: _joi.default.string().required(),
         school: _joi.default.string().optional(),
         grade: _joi.default.string().optional(),
@@ -130,7 +130,7 @@ class AuthController {
     try {
       const result = await _joi.default.validate(req.body, {
         email: _joi.default.string().required(),
-        password: _joi.default.string().regex(_variables.passwordRegex).required()
+        password: _joi.default.string().required()
       });
       const {
         email,

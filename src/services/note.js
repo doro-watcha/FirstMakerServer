@@ -67,16 +67,10 @@ class NoteService {
 
   }
 
-  async findList ( where , startDate, endDate ) {
+  async findList ( where ) {
 
     return await Note.findAll({
       where: JSON.parse(JSON.stringify(where)),
-      where : {
-        updatedAt: {
-          [Op.lt]: endDate ,
-          [Op.gt]: startDate
-        }
-      },
       include : {
         model : Problem,
         as : 'problem',
