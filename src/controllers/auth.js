@@ -51,7 +51,6 @@ export default class AuthController {
 				email: Joi.string()
 					.required(),
 				password: Joi.string()
-					.regex(passwordRegex)
 					.required(),
 				name : Joi.string().required(),
 				school : Joi.string().optional(),
