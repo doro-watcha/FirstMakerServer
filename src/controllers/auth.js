@@ -63,7 +63,7 @@ export default class AuthController {
 
 
 			const { email , password, school, grade, mathGrade, type , teacherCode, name} = result 
-			if ( teacherCode !== undefined && type == "teacher" &&  teacherCode !== "DH1222") throw Error('WRONG_TEACHER_CODE')
+			if ( teacherCode !== undefined && type == "teacher" &&  teacherCode !== "34526555") throw Error('WRONG_TEACHER_CODE')
 		
 
 			console.log(type)
