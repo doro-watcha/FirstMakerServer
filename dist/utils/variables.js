@@ -3,7 +3,7 @@
 module.exports = {
   // regular expressions
   usernameRegex: /^(?=.{6,24}$)([a-zA-Z0-9]+[.]{0,1}[a-zA-Z0-9]+)$/,
-  passwordRegex: /{8,20}/,
+  passwordRegex: /^(?=.{8,20}$)([a-zA-Z0-9]+[.]{0,1}[a-zA-Z0-9]+)$/,
   // errors
   errors: {
     // 400 Bad Request
