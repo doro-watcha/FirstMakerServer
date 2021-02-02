@@ -68,7 +68,7 @@ class noteController {
 
       if (startDate !== undefined) {
         notes = await _services.noteService.findWeeklyList(student.id, startDate, endDate);
-        console.log(notes.map(it => it.status));
+        console.log(notes.map(it => it.updatedAt));
         notes = notes.filter(note => note.status === "맞음" || note.status === "틀림");
         console.log(notes.length);
       } else notes = await _services.noteService.findList({

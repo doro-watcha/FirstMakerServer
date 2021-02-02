@@ -11,13 +11,7 @@ var _models = require("../models");
 
 var _crypto = require("crypto");
 
-var _moment = _interopRequireDefault(require("moment"));
-
-var _momentTimezone = _interopRequireDefault(require("moment-timezone"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-_moment.default.tz.setDefault("Asia/Seoul");
 
 const Op = _sequelize.default.Op;
 let instance = null;

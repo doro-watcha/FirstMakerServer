@@ -66,7 +66,7 @@ export default class noteController {
       if ( startDate !== undefined ) {
         notes = await noteService.findWeeklyList(student.id, startDate, endDate)
 
-        console.log(notes.map(it => it.status))
+        console.log(notes.map(it => it.updatedAt))
         notes = notes.filter( note => 
           note.status === "맞음" || note.status === "틀림"
         )

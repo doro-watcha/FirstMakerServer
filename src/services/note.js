@@ -3,11 +3,6 @@ import sequelize from 'sequelize'
 
 import { Note , Problem, BigChapter, MiddleChapter,SmallChapter, Subject} from '../models'
 import { randomBytes } from 'crypto'
-import moment from 'moment' 
-import tz from 'moment-timezone'
-
-moment.tz.setDefault("Asia/Seoul");
-
 
 import Sequelize from 'sequelize'
 const Op = Sequelize.Op;
