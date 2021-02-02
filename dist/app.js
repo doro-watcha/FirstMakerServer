@@ -47,7 +47,6 @@ _models.default.sequelize.sync({
   const passport = _Authenticator.default.initialize(app);
 
   app.use(passport.initialize());
-  process.env.TZ = 'Asia/Seoul';
   console.log("good");
   app.listen(process.env.PORT, () => console.log(`App listening on port 3000`));
 }).catch(error => {
