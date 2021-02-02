@@ -25,7 +25,8 @@ class problemController {
         smallChapterId: _joi.default.number().required(),
         level: _joi.default.string().required(),
         answer: _joi.default.string().required(),
-        source: _joi.default.optional()
+        source: _joi.default.optional(),
+        isMultipleQuestion: _joi.default.number().optional()
       });
       const files = await _joi.default.validate(req.files, {
         problem: _joi.default.array().min(1).required(),
@@ -38,7 +39,8 @@ class problemController {
         smallChapterId,
         level,
         source,
-        answer
+        answer,
+        isMultipleQuestion
       } = result;
       const {
         problem,
@@ -55,7 +57,8 @@ class problemController {
         smallChapterId,
         level,
         source,
-        answer
+        answer,
+        isMultipleQuestion
       };
       const newProblem = await _services.problemService.create(modelObj);
       const response = {

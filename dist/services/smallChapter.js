@@ -47,6 +47,14 @@ class SmallChapterService {
     });
   }
 
+  async delete(id) {
+    return await SmallCHapter.destroy({
+      where: {
+        id
+      }
+    });
+  }
+
 }
 
 var _default = new SmallChapterService();

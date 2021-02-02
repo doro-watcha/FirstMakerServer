@@ -76,4 +76,25 @@ export default class smallChapterController {
     }
   }
 
+  static async delete ( req, res) {
+
+    try {
+
+      const id = req.params.id 
+
+      await smallChapterService.delete(id)
+
+      const response = {
+        success : ture
+      }
+
+      res.send(response)
+
+
+    } catch ( e ) {
+
+      res.send(createErrorResponse(e))
+    }
+  }
+
 }

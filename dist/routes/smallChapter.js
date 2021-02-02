@@ -11,4 +11,7 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
   _controllers.smallChapterController.findList(req, res);
 });
+router.delete('/:id', (req, res) => {
+  _controllers.smallChapterController.delete(req, res);
+});
 module.exports = router;

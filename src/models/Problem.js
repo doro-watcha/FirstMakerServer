@@ -29,6 +29,11 @@ export default class Problem extends Sequelize.Model {
             type : Sequelize.STRING,
             allowNull : true
           },
+
+          isMultipleQuestion : {
+            type : Sequelize.INTEGER,
+            defaultValue : 1
+          },
           
           createdAt: {
             type: Sequelize.DATE,

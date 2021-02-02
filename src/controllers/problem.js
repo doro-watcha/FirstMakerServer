@@ -20,7 +20,8 @@ export default class problemController {
         smallChapterId : Joi.number().required(),
         level : Joi.string().required(),
         answer : Joi.string().required(),
-        source : Joi.optional()
+        source : Joi.optional(),
+        isMultipleQuestion : Joi.number().optional()
 
       })
 
@@ -33,7 +34,7 @@ export default class problemController {
 					.optional(),
 			})
       
-      const { subjectId, bigChapterId, middleChapterId, smallChapterId, level, source ,answer } = result 
+      const { subjectId, bigChapterId, middleChapterId, smallChapterId, level, source ,answer, isMultipleQuestion } = result 
 
       const { problem ,solution } = files 
 
@@ -49,7 +50,8 @@ export default class problemController {
         smallChapterId,
         level,
         source,
-        answer
+        answer,
+        isMultipleQuestion
       }
 
       const newProblem = await problemService.create(modelObj)

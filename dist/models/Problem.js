@@ -34,6 +34,10 @@ class Problem extends _sequelize.default.Model {
         type: _sequelize.default.STRING,
         allowNull: true
       },
+      isMultipleQuestion: {
+        type: _sequelize.default.INTEGER,
+        defaultValue: 1
+      },
       createdAt: {
         type: _sequelize.default.DATE,
         allowNull: false,

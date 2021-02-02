@@ -46,6 +46,17 @@ class SmallChapterService {
       where : JSON.parse(JSON.stringify(where))
     })
   }
+
+  async delete ( id ) {
+
+
+
+    return await SmallCHapter.destroy({
+      where : {
+        id
+      }
+    })
+  }
   
 }
 
