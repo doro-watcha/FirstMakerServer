@@ -38,8 +38,6 @@ models.sequelize
 		const passport = Authenticator.initialize(app)
     app.use(passport.initialize())
 
-
-    process.env.TZ = 'Asia/Seoul'
     console.log("good")
 
 		app.listen(process.env.PORT, () => console.log(`App listening on port 3000`))

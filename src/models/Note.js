@@ -24,9 +24,7 @@ export default class Note extends Sequelize.Model {
           },
           updatedAt: {
             type: Sequelize.DATE,
-            allowNull: false,
-            defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-            onUpdate: Sequelize.literal('CURRENT_TIMESTAMP')
+            allowNull: false
           },
 
       },
