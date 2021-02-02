@@ -21,11 +21,7 @@ export default class Note extends Sequelize.Model {
           isGreenStar : {
             type : Sequelize.BOOLEAN,
             defaultValue : false 
-          },
-          updatedAt: {
-            type: Sequelize.DATE,
-            allowNull: false
-          },
+          }
 
       },
       {
