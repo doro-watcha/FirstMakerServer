@@ -54,8 +54,8 @@ class WorkPaper extends _sequelize.default.Model {
 
   toJSON() {
     const object = Object.assign({}, this.dataValues); // delete some (key, value)
+    //delete object.updatedAt
 
-    delete object.updatedAt;
     return object;
   }
 

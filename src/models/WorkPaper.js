@@ -54,7 +54,7 @@ export default class WorkPaper extends Sequelize.Model {
   
     // delete some (key, value)
    
-    delete object.updatedAt
+    //delete object.updatedAt
 
     return object
   }

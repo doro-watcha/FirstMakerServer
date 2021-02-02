@@ -62,8 +62,8 @@ class Exam extends _sequelize.default.Model {
   toJSON() {
     const object = Object.assign({}, this.dataValues); // delete some (key, value)
     //delete object.createdAt
+    //delete object.updatedAt
 
-    delete object.updatedAt;
     delete object.teacherId;
     delete object.studentId;
     return object;

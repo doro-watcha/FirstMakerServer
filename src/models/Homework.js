@@ -62,7 +62,7 @@ export default class Homework extends Sequelize.Model {
     // delete some (key, value)
    
     //delete object.createdAt
-    delete object.updatedAt
+    //delete object.updatedAt
     delete object.teacherId
     delete object.studentId
 
