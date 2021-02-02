@@ -146,6 +146,9 @@ export default class noteController {
         var status = "틀림" 
         var unConfirmed = 0
 
+        console.log('submitList[i]')
+        console.log(submitList[i])
+
         if ( submitList[i] == note.problem.answer) {
           status = "맞음"
           correct++
