@@ -85,7 +85,7 @@ export default class smallChapterController {
       await smallChapterService.delete(id)
 
       const response = {
-        success : ture
+        success : true
       }
 
       res.send(response)

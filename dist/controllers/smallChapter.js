@@ -74,7 +74,7 @@ class smallChapterController {
       const id = req.params.id;
       await _services.smallChapterService.delete(id);
       const response = {
-        success: ture
+        success: true
       };
       res.send(response);
     } catch (e) {
