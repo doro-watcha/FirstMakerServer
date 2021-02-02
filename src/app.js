@@ -15,7 +15,6 @@ import models from './models'
 
 var app = express();
 
-process.env.TZ = 'Asia/Seoul'
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -39,6 +38,8 @@ models.sequelize
 		const passport = Authenticator.initialize(app)
     app.use(passport.initialize())
 
+
+    process.env.TZ = 'Asia/Seoul'
     console.log("good")
 
 		app.listen(process.env.PORT, () => console.log(`App listening on port 3000`))

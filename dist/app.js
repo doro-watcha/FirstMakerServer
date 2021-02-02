@@ -22,8 +22,7 @@ var _models = _interopRequireDefault(require("./models"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var app = (0, _express.default)();
-process.env.TZ = 'Asia/Seoul'; // view engine setup
+var app = (0, _express.default)(); // view engine setup
 
 app.set('views', _path.default.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -48,6 +47,7 @@ _models.default.sequelize.sync({
   const passport = _Authenticator.default.initialize(app);
 
   app.use(passport.initialize());
+  process.env.TZ = 'Asia/Seoul';
   console.log("good");
   app.listen(process.env.PORT, () => console.log(`App listening on port 3000`));
 }).catch(error => {
