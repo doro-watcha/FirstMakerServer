@@ -22,7 +22,8 @@ var _models = _interopRequireDefault(require("./models"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var app = (0, _express.default)(); // view engine setup
+var app = (0, _express.default)();
+process.env.TZ = 'Asia/Seoul'; // view engine setup
 
 app.set('views', _path.default.join(__dirname, 'views'));
 app.set('view engine', 'jade');

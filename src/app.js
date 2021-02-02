@@ -15,6 +15,8 @@ import models from './models'
 
 var app = express();
 
+process.env.TZ = 'Asia/Seoul'
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
