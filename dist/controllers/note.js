@@ -129,13 +129,13 @@ class noteController {
       if (submitList.length !== noteIdList.length) throw Error('SCORING_NOT_FOUND');
       var notes = [];
       var correct = 0;
+      var unConfirmed = 0;
 
       for (let i = 0; i < submitList.length; i++) {
         const note = await _services.noteService.findOne({
           id: noteIdList[i]
         });
         var status = "틀림";
-        var unConfirmed = 0;
         console.log('submitList[i]');
         console.log(submitList[i]);
 
