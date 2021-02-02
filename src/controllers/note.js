@@ -153,7 +153,7 @@ export default class noteController {
           status = "맞음"
           correct++
         }
-        else if ( submitList[i] == "0" && type != "시험") {
+        else if ( submitList[i] === "0" && type != "시험") {
           unConfirmed++
           status = "채점안됨"
         }
