@@ -51,7 +51,7 @@ class SmallChapterService {
 
 
 
-    return await SmallCHapter.destroy({
+    return await SmallChapter.destroy({
       where : {
         id
       }

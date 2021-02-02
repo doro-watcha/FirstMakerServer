@@ -48,7 +48,7 @@ class SmallChapterService {
   }
 
   async delete(id) {
-    return await SmallCHapter.destroy({
+    return await _models.SmallChapter.destroy({
       where: {
         id
       }
