@@ -156,6 +156,10 @@ class noteController {
       }
 
       var collectionStatus = "완료";
+      console.log("채점안됨갯수");
+      console.log(unConfirmed);
+      console.log("type");
+      console.log(type);
       if (unConfirmed > 0 && type != "시험") collectionStatus = "진행중";
       const accurateRate = (correct / notes.length * 100).toFixed(2);
       const collectionModel = {
