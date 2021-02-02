@@ -50,7 +50,7 @@ export default class examController {
           const modelObj = {
             problemId : problemIdList[j],
             examId : newExam.id,
-            studentId : studentIdList[j]
+            studentId : studentIdList[i]
           }
   
           await noteService.create(modelObj)

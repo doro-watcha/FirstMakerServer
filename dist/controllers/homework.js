@@ -54,7 +54,7 @@ class homeworkController {
           const modelObj = {
             problemId: problemIdList[j],
             homeworkId: newHomework.id,
-            studentId: studentIdList[j]
+            studentId: studentIdList[i]
           };
           await _services.noteService.create(modelObj);
         }
