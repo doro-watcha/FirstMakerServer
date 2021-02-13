@@ -46,20 +46,7 @@ class Student extends _sequelize.default.Model {
     }), this.hasOne(models.ClassBelongs, {
       foreignKey: 'studentId',
       as: 'classBelongs'
-    }), this.hasMany(models.WorkPaper, {
-      foreignKey: 'studentId',
-      as: 'workPaper'
-    }), this.hasMany(models.Homework, {
-      foreignKey: 'studentId',
-      as: 'Homework'
-    }), this.hasMany(models.Exam, {
-      foreignKey: 'studentId',
-      as: 'Exam'
-    }), this.hasMany(models.Note, {
-      foreignKey: 'studentId',
-      as: 'Note'
-    });
-    this.belongsToMany(models.WorkBook, {
+    }), this.belongsToMany(models.WorkBook, {
       through: 'StudentWorkBook',
       as: 'workbooks'
     });

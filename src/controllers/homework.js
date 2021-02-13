@@ -19,21 +19,21 @@ export default class homeworkController {
         title : Joi.string().required(),
         numChapters : Joi.number().required(),
         mainChapter : Joi.string().required(),
-        studentIdList : Joi.array().required()
+        userIdList : Joi.array().required()
       })
 
       const { user } = req
 
       const teacher = await teacherService.findOne({userId : user.id})
 
-      const { problemIdList ,title, numChapters , mainChapter, studentIdList} = result 
+      const { problemIdList ,title, numChapters , mainChapter, userIdList} = result 
 
-      for ( let i = 0 ; i < studentIdList.length ; i++) {
+      for ( let i = 0 ; i < userIdList.length ; i++) {
 
         const modelObj = {
           title,
           teacherId : teacher.id,
-          studentId : studentIdList[i],
+          userId : userIdList[i],
           numChapters,
           mainChapter
         }
@@ -45,7 +45,7 @@ export default class homeworkController {
           const modelObj = {
             problemId : problemIdList[j],
             homeworkId : newHomework.id,
-            studentId : studentIdList[i]
+            userId : userIdList[i]
           }
   
           await noteService.create(modelObj)
@@ -74,12 +74,12 @@ export default class homeworkController {
 
       const result = await Joi.validate(req.query,{
 
-        studentId : Joi.number().required()
+        userId : Joi.number().required()
       })
 
-      const { studentId } = result 
+      const { userId } = result 
 
-      const homeworkList = await homeworkService.findList({studentId})
+      const homeworkList = await homeworkService.findList({userId})
 
       const response = {
         success : true,

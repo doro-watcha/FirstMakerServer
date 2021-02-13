@@ -161,6 +161,43 @@ export default class AuthController {
 		}
 	}
 
+	static async resetPassword( req, res) {
+
+
+		try {
+
+			const result = await Joi.validate ( req.query, {
+				email : Joi.string().required(),
+				resetPassword : Joi.string().required(),
+				newPassword : Joi.string().required()
+			})
+
+			const { email , resetPassword, newPassword } = result 
+
+			const user = await userService.findOne({email})
+
+			if ( user == null ) throw Error('USER_NOT_FOUND')
+
+			if ( user.resetPassword !== resetPassword ) throw Error('PASSWORD_MISMATCH')
+
+			const modelObj = {
+				email,
+				password : newPassword 
+			}
+			await userService.update(user.id, modelObj)
+
+			const response = {
+				success : true
+			}
+
+			res.send(response)
+
+
+		} catch ( e) {
+			res.send(createErrorResponse)
+		}
+	}
+
 
 
 }

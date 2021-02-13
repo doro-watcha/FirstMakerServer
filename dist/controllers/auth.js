@@ -167,6 +167,37 @@ class AuthController {
     }
   }
 
+  static async resetPassword(req, res) {
+    try {
+      const result = await _joi.default.validate(req.query, {
+        email: _joi.default.string().required(),
+        resetPassword: _joi.default.string().required(),
+        newPassword: _joi.default.string().required()
+      });
+      const {
+        email,
+        resetPassword,
+        newPassword
+      } = result;
+      const user = await _services.userService.findOne({
+        email
+      });
+      if (user == null) throw Error('USER_NOT_FOUND');
+      if (user.resetPassword !== resetPassword) throw Error('PASSWORD_MISMATCH');
+      const modelObj = {
+        email,
+        password: newPassword
+      };
+      await _services.userService.update(user.id, modelObj);
+      const response = {
+        success: true
+      };
+      res.send(response);
+    } catch (e) {
+      res.send(_functions.createErrorResponse);
+    }
+  }
+
 }
 
 exports.default = AuthController;

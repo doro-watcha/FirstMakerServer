@@ -52,9 +52,9 @@ export default class Note extends Sequelize.Model {
       foreignKey : 'problemId',
       as : 'problem'
     }),
-    this.belongsTo(models.Student,{
-      foreignKey : 'studentId',
-      as : 'student'
+    this.belongsTo(models.User,{
+      foreignKey : 'userId',
+      as : 'user'
     })
   }
 

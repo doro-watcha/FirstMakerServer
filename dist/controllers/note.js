@@ -157,7 +157,7 @@ class noteController {
         notes.push(newNote);
       }
 
-      var collectionStatus = "완료";
+      var collectionStatus = "완료됨";
       console.log("채점안됨갯수");
       console.log(unConfirmed);
       console.log("type");

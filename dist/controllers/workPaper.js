@@ -27,9 +27,6 @@ class workPaperController {
       const {
         user
       } = req;
-      const student = await _services.studentService.findOne({
-        userId: user.id
-      });
       const {
         problemIdList,
         title,
@@ -38,7 +35,7 @@ class workPaperController {
       } = result;
       const modelObj = {
         title,
-        studentId: student.id,
+        userId: user.id,
         numChapters,
         mainChapter
       };
@@ -48,7 +45,7 @@ class workPaperController {
         const modelObj = {
           problemId: problemIdList[i],
           workPaperId: newWorkPaper.id,
-          studentId: student.id
+          userId: user.id
         };
         await _services.noteService.create(modelObj);
       }
@@ -85,12 +82,8 @@ class workPaperController {
       const {
         user
       } = req;
-      const student = await _services.studentService.findOne({
-        userId: user.id
-      });
-      if (student == null) throw Error('STUDENT_NOT_FOUND');
       const workPapers = await _services.workPaperService.findList({
-        studentId: student.id
+        userId: user.id
       });
       const response = {
         success: true,

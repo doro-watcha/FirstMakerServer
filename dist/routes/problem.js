@@ -60,7 +60,13 @@ router.get('/replace', authenticate, (req, res) => {
 router.get('/search', (req, res) => {
   _controllers.problemController.search(req, res);
 });
-router.patch('/:id', (req, res) => {
+router.patch('/:id', upload.fields([{
+  name: 'problem',
+  maxCount: 1
+}, {
+  name: 'solution',
+  maxCount: 1
+}]), (req, res) => {
   _controllers.problemController.update(req, res);
 });
 

@@ -48,6 +48,23 @@ export default class User extends Sequelize.Model {
     this.hasOne(models.Teacher,{
       foreignKey : 'userId',
       as : 'teacher'
+    }),
+    this.hasMany(models.Homework,{
+      foreignKey : 'userId',
+      as : 'Homework'
+    }),
+    this.hasMany(models.Note,{
+      foreignKey : 'userId',
+      as : 'Note'
+    }),
+    this.hasMany(models.WorkPaper,{
+      foreignKey : 'userId',
+      as : 'workPaper'
+    }),
+
+    this.hasMany(models.Exam, {
+      foreignKey : 'userId',
+      as : 'Exam'
     })
 
   }

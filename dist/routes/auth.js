@@ -21,4 +21,7 @@ router.post('/signup', (req, res) => {
 router.post('/signin', (req, res) => {
   _controllers.authController.signIn(req, res);
 });
+router.patch('/reset', (req, res) => {
+  _controllers.authController.resetPassword(req, res);
+});
 module.exports = router;

@@ -50,9 +50,9 @@ class Note extends _sequelize.default.Model {
     }), this.belongsTo(models.Problem, {
       foreignKey: 'problemId',
       as: 'problem'
-    }), this.belongsTo(models.Student, {
-      foreignKey: 'studentId',
-      as: 'student'
+    }), this.belongsTo(models.User, {
+      foreignKey: 'userId',
+      as: 'user'
     });
   }
 

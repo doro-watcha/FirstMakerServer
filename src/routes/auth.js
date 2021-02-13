@@ -20,6 +20,9 @@ router.post('/signin', (req, res) => {
 	authController.signIn(req, res)
 })
 
+router.patch('/reset', (req,res) => {
+	authController.resetPassword(req,res)
+})
 
 
 module.exports = router

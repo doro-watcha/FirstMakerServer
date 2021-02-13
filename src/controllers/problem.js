@@ -80,16 +80,12 @@ export default class problemController {
       const result = await Joi.validate ( req.body, {
         smallChapterIdList : Joi.array().required(),
         numberOfProblems : Joi.array().required(),
-        isNotDuplicated : Joi.boolean().optional()
+        isNotDuplicated : Joi.boolean().optional(),
+        minLevel : Joi.number().required(),
+        maxLevel : Joi.number().required(0)
       })
 
-      const { smallChapterIdList , numberOfProblems , isNotDuplicated } = result
-
-
-      console.log(smallChapterIdList)
-      console.log(numberOfProblems)
-      console.log(isNotDuplicated)
-
+      const { smallChapterIdList , numberOfProblems , isNotDuplicated , minLevel, maxLevel } = result
 
       const { user } = req
 
@@ -123,7 +119,7 @@ export default class problemController {
 
       for ( var i = 0 ; i < smallChapterIdList.length ; i++){
 
-        var problems = await problemService.findList(smallChapterIdList[i], numberOfProblems[i])
+        var problems = await problemService.findList(smallChapterIdList[i], numberOfProblems[i], minLevel, maxLevel )
 
         // 중복 문제를 선택하지 않는 필터를 체크 했으므로, 중복 문제가 있는지 검사를 한다, 검사를 해서 있을 경우 그만금 다시 뽑아준다.
         while ( isNotDuplicated === true ) {
@@ -149,7 +145,7 @@ export default class problemController {
 
           if ( duplicatedNum === 0 ) break;
           else {
-            var additionalProblems = await problemService.findAdditionalList(smallChapterIdList[i], duplicatedNum, duplicatedList)
+            var additionalProblems = await problemService.findAdditionalList(smallChapterIdList[i], duplicatedNum, duplicatedList, minLevel, maxLevel )
 
             if ( additionalProblems == null ) break;
             problems.concat(additionalProblems)
@@ -175,7 +171,7 @@ export default class problemController {
 
           if ( filteredNum == 0 ) break;
           else {
-            var additionalProblems = await problemService.findAdditionalList(smallChapteridList[i], filteredNum, filteredList)
+            var additionalProblems = await problemService.findAdditionalList(smallChapteridList[i], filteredNum, filteredList, minLevel, maxLevel )
             problems.concat(additionalProblems)
           }
         }
@@ -223,12 +219,14 @@ export default class problemController {
       const result = await Joi.validate(req.query,{
         numProblem : Joi.number().required(),
         filterList : Joi.array().required(),
-        smallChapterId : Joi.number().required()
+        smallChapterId : Joi.number().required(),
+        minLevel: Joi.number().required(),
+        maxLevel : Joi.number().required()
       })
 
-      const { numProblem, filterList, smallChapterId} = result 
+      const { numProblem, filterList, smallChapterId, minLevel, maxLevel } = result 
 
-      const problems = await problemService.findAdditionalList(smallChapterId, numProblem, filterList)
+      const problems = await problemService.findAdditionalList(smallChapterId, numProblem, filterList, minLevel, maxLevel )
 
       const response = {
         success : true,
@@ -302,27 +300,38 @@ export default class problemController {
         smallChapterId : Joi.number(),
         source : Joi.string(),
         level : Joi.number(),
-        answer : Joi.string()
+        answer : Joi.string(),
+        isMultipleQuestion : Joi.number()
       })
 
-      const { subjectId , bigChapterId, middleChapterId, smallChapterId, source, level, answer  } = result 
+      const files = await Joi.validate(req.files, {
+				problem: Joi.array()
+					.min(1)
+					.required(),
+				solution: Joi.array()
+					.min(1)
+					.optional(),
+			})
 
-      console.log(subjectId)
-      console.log(bigChapterId)
-      console.log(middleChapterId)
-      console.log(smallChapterId)
-      console.log(source)
-      console.log(level)
-      console.log(answer)
+      const { subjectId , bigChapterId, middleChapterId, smallChapterId, source, level, answer  ,isMultipleQuestion} = result 
+
+
+      const { problem ,solution } = files 
+
+      var solutionUrl = null 
+      if ( solution !== undefined ) solutionUrl = "https://mathproblem.s3.us-east-2.amazonaws.com/" + solution[0].key
 
       const modelObj = {
+        problemUrl : "https://mathproblem.s3.us-east-2.amazonaws.com/" + problem[0].key,
+        solutionUrl,
         subjectId,
         bigChapterId,
         middleChapterId,
         smallChapterId,
         source,
         level,
-        answer
+        answer,
+        isMultipleQuestion
       }
 
       await problemService.update(id,modelObj)

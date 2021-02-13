@@ -78,16 +78,17 @@ class problemController {
       const result = await _joi.default.validate(req.body, {
         smallChapterIdList: _joi.default.array().required(),
         numberOfProblems: _joi.default.array().required(),
-        isNotDuplicated: _joi.default.boolean().optional()
+        isNotDuplicated: _joi.default.boolean().optional(),
+        minLevel: _joi.default.number().required(),
+        maxLevel: _joi.default.number().required(0)
       });
       const {
         smallChapterIdList,
         numberOfProblems,
-        isNotDuplicated
+        isNotDuplicated,
+        minLevel,
+        maxLevel
       } = result;
-      console.log(smallChapterIdList);
-      console.log(numberOfProblems);
-      console.log(isNotDuplicated);
       const {
         user
       } = req;
@@ -120,7 +121,7 @@ class problemController {
       }
 
       for (var i = 0; i < smallChapterIdList.length; i++) {
-        var problems = await _services.problemService.findList(smallChapterIdList[i], numberOfProblems[i]); // 중복 문제를 선택하지 않는 필터를 체크 했으므로, 중복 문제가 있는지 검사를 한다, 검사를 해서 있을 경우 그만금 다시 뽑아준다.
+        var problems = await _services.problemService.findList(smallChapterIdList[i], numberOfProblems[i], minLevel, maxLevel); // 중복 문제를 선택하지 않는 필터를 체크 했으므로, 중복 문제가 있는지 검사를 한다, 검사를 해서 있을 경우 그만금 다시 뽑아준다.
 
         while (isNotDuplicated === true) {
           console.log("Duplicate ComeOn");
@@ -139,7 +140,7 @@ class problemController {
             }
           });
           if (duplicatedNum === 0) break;else {
-            var additionalProblems = await _services.problemService.findAdditionalList(smallChapterIdList[i], duplicatedNum, duplicatedList);
+            var additionalProblems = await _services.problemService.findAdditionalList(smallChapterIdList[i], duplicatedNum, duplicatedList, minLevel, maxLevel);
             if (additionalProblems == null) break;
             problems.concat(additionalProblems);
           }
@@ -157,7 +158,7 @@ class problemController {
             }
           });
           if (filteredNum == 0) break;else {
-            var additionalProblems = await _services.problemService.findAdditionalList(smallChapteridList[i], filteredNum, filteredList);
+            var additionalProblems = await _services.problemService.findAdditionalList(smallChapteridList[i], filteredNum, filteredList, minLevel, maxLevel);
             problems.concat(additionalProblems);
           }
         }
@@ -202,14 +203,18 @@ class problemController {
       const result = await _joi.default.validate(req.query, {
         numProblem: _joi.default.number().required(),
         filterList: _joi.default.array().required(),
-        smallChapterId: _joi.default.number().required()
+        smallChapterId: _joi.default.number().required(),
+        minLevel: _joi.default.number().required(),
+        maxLevel: _joi.default.number().required()
       });
       const {
         numProblem,
         filterList,
-        smallChapterId
+        smallChapterId,
+        minLevel,
+        maxLevel
       } = result;
-      const problems = await _services.problemService.findAdditionalList(smallChapterId, numProblem, filterList);
+      const problems = await _services.problemService.findAdditionalList(smallChapterId, numProblem, filterList, minLevel, maxLevel);
       const response = {
         success: true,
         data: {
@@ -275,7 +280,12 @@ class problemController {
         smallChapterId: _joi.default.number(),
         source: _joi.default.string(),
         level: _joi.default.number(),
-        answer: _joi.default.string()
+        answer: _joi.default.string(),
+        isMultipleQuestion: _joi.default.number()
+      });
+      const files = await _joi.default.validate(req.files, {
+        problem: _joi.default.array().min(1).required(),
+        solution: _joi.default.array().min(1).optional()
       });
       const {
         subjectId,
@@ -284,23 +294,26 @@ class problemController {
         smallChapterId,
         source,
         level,
-        answer
+        answer,
+        isMultipleQuestion
       } = result;
-      console.log(subjectId);
-      console.log(bigChapterId);
-      console.log(middleChapterId);
-      console.log(smallChapterId);
-      console.log(source);
-      console.log(level);
-      console.log(answer);
+      const {
+        problem,
+        solution
+      } = files;
+      var solutionUrl = null;
+      if (solution !== undefined) solutionUrl = "https://mathproblem.s3.us-east-2.amazonaws.com/" + solution[0].key;
       const modelObj = {
+        problemUrl: "https://mathproblem.s3.us-east-2.amazonaws.com/" + problem[0].key,
+        solutionUrl,
         subjectId,
         bigChapterId,
         middleChapterId,
         smallChapterId,
         source,
         level,
-        answer
+        answer,
+        isMultipleQuestion
       };
       await _services.problemService.update(id, modelObj);
       const response = {

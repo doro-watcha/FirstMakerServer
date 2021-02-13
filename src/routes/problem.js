@@ -55,7 +55,7 @@ router.get('/search' , (req,res) => {
 	problemController.search(req,res)
 })
 
-router.patch('/:id', (req,res) => {
+router.patch('/:id', upload.fields([{ name: 'problem', maxCount: 1 }, { name : 'solution', maxCount : 1}]),(req,res) => {
 	problemController.update(req,res)
 })
 

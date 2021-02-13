@@ -47,8 +47,8 @@ class Exam extends _sequelize.default.Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Student, {
-      foreignKey: 'studentId',
+    this.belongsTo(models.User, {
+      foreignKey: 'userId',
       as: 'author'
     }), this.belongsTo(models.Teacher, {
       foreignKey: 'teacherId',

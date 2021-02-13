@@ -24,7 +24,7 @@ class homeworkController {
         title: _joi.default.string().required(),
         numChapters: _joi.default.number().required(),
         mainChapter: _joi.default.string().required(),
-        studentIdList: _joi.default.array().required()
+        userIdList: _joi.default.array().required()
       });
       const {
         user
@@ -37,14 +37,14 @@ class homeworkController {
         title,
         numChapters,
         mainChapter,
-        studentIdList
+        userIdList
       } = result;
 
-      for (let i = 0; i < studentIdList.length; i++) {
+      for (let i = 0; i < userIdList.length; i++) {
         const modelObj = {
           title,
           teacherId: teacher.id,
-          studentId: studentIdList[i],
+          userId: userIdList[i],
           numChapters,
           mainChapter
         };
@@ -54,7 +54,7 @@ class homeworkController {
           const modelObj = {
             problemId: problemIdList[j],
             homeworkId: newHomework.id,
-            studentId: studentIdList[i]
+            userId: userIdList[i]
           };
           await _services.noteService.create(modelObj);
         }
@@ -72,13 +72,13 @@ class homeworkController {
   static async findList(req, res) {
     try {
       const result = await _joi.default.validate(req.query, {
-        studentId: _joi.default.number().required()
+        userId: _joi.default.number().required()
       });
       const {
-        studentId
+        userId
       } = result;
       const homeworkList = await _services.homeworkService.findList({
-        studentId
+        userId
       });
       const response = {
         success: true,

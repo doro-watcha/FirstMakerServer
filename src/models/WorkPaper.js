@@ -39,8 +39,8 @@ export default class WorkPaper extends Sequelize.Model {
 
 
   static associate(models) {
-    this.belongsTo(models.Student, {
-      foreignKey: 'studentId',
+    this.belongsTo(models.User, {
+      foreignKey: 'userId',
       as: 'author'
     }),
     this.hasMany(models.Note,{
@@ -53,6 +53,8 @@ export default class WorkPaper extends Sequelize.Model {
     const object = Object.assign({}, this.dataValues)
   
     // delete some (key, value)
+
+    delete object.userId
    
     //delete object.updatedAt
 

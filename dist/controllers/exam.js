@@ -24,7 +24,7 @@ class examController {
         title: _joi.default.string().required(),
         numChapters: _joi.default.number().required(),
         mainChapter: _joi.default.string().required(),
-        studentIdList: _joi.default.array().required(),
+        userIdList: _joi.default.array().required(),
         timeLimit: _joi.default.number().required()
       });
       const {
@@ -38,16 +38,16 @@ class examController {
         title,
         numChapters,
         mainChapter,
-        studentIdList,
+        userIdList,
         timeLimit
       } = result;
       if (timeLimit === undefined) throw Error('TIME_LIMIT_NOT_FOUND');
 
-      for (let i = 0; i < studentIdList.length; i++) {
+      for (let i = 0; i < userIdList.length; i++) {
         const modelObj = {
           title,
           teacherId: teacher.id,
-          studentId: studentIdList[i],
+          userId: userIdList[i],
           numChapters,
           mainChapter,
           timeLimit
@@ -58,7 +58,7 @@ class examController {
           const modelObj = {
             problemId: problemIdList[j],
             examId: newExam.id,
-            studentId: studentIdList[i]
+            userId: userIdList[i]
           };
           await _services.noteService.create(modelObj);
         }
@@ -76,13 +76,13 @@ class examController {
   static async findList(req, res) {
     try {
       const result = await _joi.default.validate(req.query, {
-        studentId: _joi.default.number().required()
+        userId: _joi.default.number().required()
       });
       const {
-        studentId
+        userId
       } = result;
       const examList = await _services.examService.findList({
-        studentId
+        userId
       });
       const response = {
         success: true,

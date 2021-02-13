@@ -30,10 +30,16 @@ class ProblemService {
     return await _models.Problem.create(modelObj);
   }
 
-  async findList(smallChapterId, number) {
+  async findList(smallChapterId, number, minLevel, maxLevel) {
     return await _models.Problem.findAll({
       where: {
-        smallChapterId
+        smallChapterId,
+        level: {
+          [Op.and]: {
+            [Op.lte]: maxLevel,
+            [Op.gte]: minLevel
+          }
+        }
       },
       include: [{
         model: _models.BigChapter,
@@ -50,12 +56,18 @@ class ProblemService {
     });
   }
 
-  async findAdditionalList(smallChapterId, number, duplicatedIdList) {
+  async findAdditionalList(smallChapterId, number, duplicatedIdList, minLevel, maxLevel) {
     return await _models.Problem.findAll({
       where: {
         smallChapterId,
         id: {
           [Op.notIn]: duplicatedIdList
+        },
+        level: {
+          [Op.and]: {
+            [Op.lte]: maxLevel,
+            [Op.gte]: minLevel
+          }
         }
       },
       include: [{
