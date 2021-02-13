@@ -306,8 +306,8 @@ export default class problemController {
 
       const files = await Joi.validate(req.files, {
 				problem: Joi.array()
-					.min(1)
-					.required(),
+          .min(1)
+          .optional(),
 				solution: Joi.array()
 					.min(1)
 					.optional(),

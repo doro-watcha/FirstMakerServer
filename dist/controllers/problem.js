@@ -284,7 +284,7 @@ class problemController {
         isMultipleQuestion: _joi.default.number()
       });
       const files = await _joi.default.validate(req.files, {
-        problem: _joi.default.array().min(1).required(),
+        problem: _joi.default.array().min(1).optional(),
         solution: _joi.default.array().min(1).optional()
       });
       const {
