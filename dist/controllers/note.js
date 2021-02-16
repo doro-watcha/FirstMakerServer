@@ -61,18 +61,14 @@ class noteController {
       const {
         user
       } = req;
-      const student = await _services.studentService.findOne({
-        userId: user.id
-      });
-      if (student == null) throw Error('STUDENT_NOT_FOUND');
 
       if (startDate !== undefined) {
-        notes = await _services.noteService.findWeeklyList(student.id, startDate, endDate);
+        notes = await _services.noteService.findWeeklyList(user.id, startDate, endDate);
         console.log(notes.map(it => it.updatedAt));
         notes = notes.filter(note => note.status === "맞음" || note.status === "틀림");
         console.log(notes.length);
       } else notes = await _services.noteService.findList({
-        studentId: student.id
+        userId: user.id
       });
 
       const response = {
@@ -200,11 +196,7 @@ class noteController {
       const {
         user
       } = req;
-      const student = await _services.studentService.findOne({
-        userId: user.id
-      });
-      if (student == null) throw Error('STUDENT_NOT_FOUND');
-      const wrongNotes = await _services.noteService.findWrongList(student.id, startDate, endDate);
+      const wrongNotes = await _services.noteService.findWrongList(user.id, startDate, endDate);
       wrongNotes.filter(note => {
         if (note.problem.subject != null) note.problem.subject.name == subject;
       });
@@ -235,11 +227,7 @@ class noteController {
       const {
         user
       } = req;
-      const student = await _services.studentService.findOne({
-        userId: user.id
-      });
-      if (student == null) throw Error('STUDENT_NOT_FOUND');
-      const starNotes = await _services.noteService.findStarList(student.id, startDate, endDate);
+      const starNotes = await _services.noteService.findStarList(user.id, startDate, endDate);
       starNotes.filter(note => {
         if (note.problem.subject != null) note.problem.subject.name == subject;
       });
@@ -270,11 +258,7 @@ class noteController {
       const {
         user
       } = req;
-      const student = await _services.studentService.findOne({
-        userId: user.id
-      });
-      if (student == null) throw Error('STUDENT_NOT_FOUND');
-      const longNotes = await _services.noteService.findLongList(student.id, startDate, endDate);
+      const longNotes = await _services.noteService.findLongList(user.id, startDate, endDate);
       longNotes.filter(note => {
         if (note.problem.subject != null) note.problem.subject.name == subject;
       });

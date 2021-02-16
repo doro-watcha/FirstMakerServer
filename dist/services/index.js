@@ -36,6 +36,8 @@ var _classBelongs = _interopRequireDefault(require("./classBelongs"));
 
 var _blackList = _interopRequireDefault(require("./blackList"));
 
+var _source = _interopRequireDefault(require("./source"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
@@ -56,5 +58,6 @@ module.exports = {
   studentService: _student.default,
   classService: _class.default,
   classBelongsService: _classBelongs.default,
-  blackListService: _blackList.default
+  blackListService: _blackList.default,
+  sourceService: _source.default
 };

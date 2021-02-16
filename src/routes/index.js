@@ -17,6 +17,7 @@ import workBookRouter from './workBook'
 import workPaperRouter from './workPaper'
 import classRouter from './class'
 import blackListRouter from './blackList'
+import sourceRouter from './source'
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -39,4 +40,5 @@ router.use('/workPaper', workPaperRouter)
 router.use('/student', studentRouter)
 router.use('/class', classRouter)
 router.use('/blackList' , blackListRouter)
+router.use('/source', sourceRouter)
 module.exports = router

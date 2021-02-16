@@ -32,6 +32,8 @@ var _class = _interopRequireDefault(require("./class"));
 
 var _blackList = _interopRequireDefault(require("./blackList"));
 
+var _source = _interopRequireDefault(require("./source"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var express = require('express');
@@ -60,4 +62,5 @@ router.use('/workPaper', _workPaper.default);
 router.use('/student', _student.default);
 router.use('/class', _class.default);
 router.use('/blackList', _blackList.default);
+router.use('/source', _source.default);
 module.exports = router;

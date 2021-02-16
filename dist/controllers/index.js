@@ -32,6 +32,8 @@ var _workPaper = _interopRequireDefault(require("./workPaper"));
 
 var _workBook = _interopRequireDefault(require("./workBook"));
 
+var _source = _interopRequireDefault(require("./source"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
@@ -50,5 +52,6 @@ module.exports = {
   workPaperController: _workPaper.default,
   classController: _class.default,
   blackListController: _blackList.default,
-  workBookController: _workBook.default
+  workBookController: _workBook.default,
+  sourceController: _source.default
 };

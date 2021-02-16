@@ -54,10 +54,10 @@ class NoteService {
     });
   }
 
-  async findWeeklyList(studentId, startDate, endDate) {
+  async findWeeklyList(userId, startDate, endDate) {
     return await _models.Note.findAll({
       where: {
-        studentId,
+        userId,
         updatedAt: {
           [Op.lt]: endDate,
           [Op.gt]: startDate
@@ -118,10 +118,10 @@ class NoteService {
     return updatedNote;
   }
 
-  async findLongList(studentId, startDate, endDate) {
+  async findLongList(userId, startDate, endDate) {
     return await _models.Note.findAll({
       where: {
-        studentId,
+        userId,
         spendingTime: {
           [Op.gte]: 3000
         },
@@ -150,10 +150,10 @@ class NoteService {
     });
   }
 
-  async findWrongList(studentId, startDate, endDate) {
+  async findWrongList(userId, startDate, endDate) {
     return await _models.Note.findAll({
       where: {
-        studentId,
+        userId,
         status: "틀림",
         updatedAt: {
           [Op.lt]: endDate,
@@ -180,10 +180,10 @@ class NoteService {
     });
   }
 
-  async findStarList(studentId, startDate, endDate) {
+  async findStarList(userId, startDate, endDate) {
     return await _models.Note.findAll({
       where: {
-        studentId,
+        userId,
         isGreenStar: 1,
         updatedAt: {
           [Op.lt]: endDate,

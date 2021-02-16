@@ -1,4 +1,4 @@
-import { noteService , homeworkService, workPaperService, studentService, examService} from '../services'
+import { noteService , homeworkService, workPaperService, examService} from '../services'
 import Joi from '@hapi/joi'
 
 import { createErrorResponse } from '../utils/functions'
@@ -59,12 +59,9 @@ export default class noteController {
       var notes = []
 
       const { user } = req
-      const student = await studentService.findOne({userId : user.id})
-
-      if ( student == null ) throw Error('STUDENT_NOT_FOUND')
       
       if ( startDate !== undefined ) {
-        notes = await noteService.findWeeklyList(student.id, startDate, endDate)
+        notes = await noteService.findWeeklyList(user.id, startDate, endDate)
 
         console.log(notes.map(it => it.updatedAt))
         notes = notes.filter( note => 
@@ -73,7 +70,7 @@ export default class noteController {
 
         console.log(notes.length)
       }
-      else notes = await noteService.findList({studentId : student.id})
+      else notes = await noteService.findList({userId : user.id})
 
 
 
@@ -227,11 +224,7 @@ export default class noteController {
 
       const { user } = req
 
-      const student = await studentService.findOne({userId : user.id })
-
-      if ( student == null ) throw Error('STUDENT_NOT_FOUND')
-
-      const wrongNotes = await noteService.findWrongList(student.id, startDate, endDate)
+      const wrongNotes = await noteService.findWrongList(user.id, startDate, endDate)
 
       wrongNotes.filter( note => {
           if ( note.problem.subject != null)note.problem.subject.name == subject
@@ -267,13 +260,8 @@ export default class noteController {
       const { subject, startDate , endDate  } = result 
 
       const { user } = req
-
-      const student = await studentService.findOne({userId : user.id})
-
-      if ( student == null ) throw Error('STUDENT_NOT_FOUND')
-
       const starNotes = await noteService.findStarList(
-        student.id, startDate, endDate 
+        user.id, startDate, endDate 
       )
 
       starNotes.filter( note => {
@@ -309,11 +297,7 @@ export default class noteController {
 
       const { user } = req
 
-      const student = await studentService.findOne({userId : user.id})
-
-      if ( student == null ) throw Error('STUDENT_NOT_FOUND')
-
-      const longNotes = await noteService.findLongList(student.id,startDate, endDate)
+      const longNotes = await noteService.findLongList(user.id,startDate, endDate)
       longNotes.filter( note => {
         if ( note.problem.subject != null)note.problem.subject.name == subject
       })

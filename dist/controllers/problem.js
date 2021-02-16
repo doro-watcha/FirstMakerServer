@@ -301,10 +301,12 @@ class problemController {
         problem,
         solution
       } = files;
+      var problemUrl = null;
+      if (problem !== undefined) problemUrl = "https://mathproblem.s3.us-east-2.amazonaws.com/" + problem[0].key;
       var solutionUrl = null;
       if (solution !== undefined) solutionUrl = "https://mathproblem.s3.us-east-2.amazonaws.com/" + solution[0].key;
       const modelObj = {
-        problemUrl: "https://mathproblem.s3.us-east-2.amazonaws.com/" + problem[0].key,
+        problemUrl,
         solutionUrl,
         subjectId,
         bigChapterId,

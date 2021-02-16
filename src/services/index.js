@@ -16,6 +16,7 @@ import studentService from './student'
 import classService from './class'
 import classBelongsService from './classBelongs'
 import blackListService from './blackList'
+import sourceService from './source'
 
 module.exports = {
     subjectService,
@@ -35,5 +36,6 @@ module.exports = {
     studentService,
     classService,
     classBelongsService,
-    blackListService
+    blackListService,
+    sourceService
 }

@@ -13,9 +13,9 @@ import collectionController from './collection'
 import classController from './class'
 import examController from './exam'
 import blackListController from './blackList'
-
 import workPaperController from './workPaper'
 import workBookController from './workBook'
+import sourceController from './source'
 
 module.exports = {
 
@@ -34,6 +34,7 @@ module.exports = {
     workPaperController,
     classController,
     blackListController,
-    workBookController
+    workBookController,
+    sourceController
 
 }

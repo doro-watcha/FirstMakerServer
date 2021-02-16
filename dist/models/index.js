@@ -40,6 +40,8 @@ var _WorkPaper = _interopRequireDefault(require("./WorkPaper"));
 
 var _BlackList = _interopRequireDefault(require("./BlackList"));
 
+var _Source = _interopRequireDefault(require("./Source"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const env = process.env.NODE_ENV || 'development';
@@ -63,7 +65,8 @@ const models = {
   WorkBook: _WorkBook.default.init(sequelize, _sequelize.default),
   WorkBookRecord: _WorkBookRecord.default.init(sequelize, _sequelize.default),
   WorkPaper: _WorkPaper.default.init(sequelize, _sequelize.default),
-  BlackList: _BlackList.default.init(sequelize, _sequelize.default)
+  BlackList: _BlackList.default.init(sequelize, _sequelize.default),
+  Source: _Source.default.init(sequelize, _sequelize.default)
 };
 Object.values(models).filter(model => typeof model.associate === 'function').forEach(model => model.associate(models));
 module.exports = { ...models,

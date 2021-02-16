@@ -18,6 +18,7 @@ import WorkBookModel from './WorkBook'
 import WorkBookRecordModel from './WorkBookRecord'
 import WorkPaperModel from './WorkPaper'
 import BlackListModel from './BlackList'
+import SourceModel from './Source'
 
 
 const env = process.env.NODE_ENV || 'development'
@@ -43,7 +44,8 @@ const models = {
   WorkBook : WorkBookModel.init(sequelize, Sequelize),
   WorkBookRecord : WorkBookRecordModel.init(sequelize, Sequelize),
   WorkPaper : WorkPaperModel.init(sequelize, Sequelize),
-  BlackList : BlackListModel.init(sequelize, Sequelize)
+  BlackList : BlackListModel.init(sequelize, Sequelize),
+  Source : SourceModel.init(sequelize, Sequelize)
 
 }
 
