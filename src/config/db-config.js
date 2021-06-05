@@ -4,7 +4,7 @@
     "development": {
       "username": "root",
       "password": "gusgh0705!",
-      "database": "mathNote",
+      "database": "mathnote",
       "host": "127.0.0.1",
       "timezone": "Asia/Seoul",
       "dialect": "mysql",
