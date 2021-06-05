@@ -21,6 +21,7 @@ export default class Source extends Sequelize.Model {
 
   }
 
+
   toJSON() {
     const object = Object.assign({}, this.dataValues)
   
