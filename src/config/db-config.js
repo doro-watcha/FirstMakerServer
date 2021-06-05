@@ -3,7 +3,7 @@
 
     "development": {
       "username": "root",
-      "password": "gusgh0705",
+      "password": "gusgh0705!",
       "database": "mathNote",
       "host": "127.0.0.1",
       "timezone": "Asia/Seoul",
