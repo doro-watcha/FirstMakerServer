@@ -18,7 +18,7 @@ const s3 = new aws.S3({
 const upload = multer({
 	storage: multerS3({
 		s3,
-		bucket: 'mathproblem',
+		bucket: 'sp-problem-bucket',
 		acl: 'public-read',
 		key: (req, file, cb) => {
 
