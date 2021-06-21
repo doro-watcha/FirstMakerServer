@@ -24,20 +24,20 @@ const {
   authenticate
 } = _Authenticator.default;
 const s3 = new _awsSdk.default.S3({
-  accessKeyId: 'AKIAIX4FWDLCK3FVJGIA',
-  secretAccessKey: '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'
+  accessKeyId: 'AKIATKTQLWDDQ4DVBGH3',
+  secretAccessKey: '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'
 });
 const upload = (0, _multer.default)({
   storage: (0, _multerS.default)({
     s3,
-    bucket: 'mathproblem',
+    bucket: 'sp-problem-bank',
     acl: 'public-read',
     key: (req, file, cb) => {
       console.log(file.originalname);
       const fileName = escape(file.originalname);
       console.log(fileName);
       const timestamp = getToday();
-      cb(null, `${file.fieldname}/${timestamp}_${file.originalname}`);
+      cb(null, `${file.fieldname}/${file.originalname}`);
     }
   })
 });

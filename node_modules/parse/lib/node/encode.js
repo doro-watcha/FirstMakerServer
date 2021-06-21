@@ -36,8 +36,6 @@ function _interopRequireDefault(obj) {
  */
 
 
-const toString = Object.prototype.toString;
-
 function encode(value
 /*: mixed*/
 , disallowObjects
@@ -46,6 +44,8 @@ function encode(value
 /*: boolean*/
 , seen
 /*: Array<mixed>*/
+, offline
+/*: boolean*/
 )
 /*: any*/
 {
@@ -57,11 +57,15 @@ function encode(value
     const seenEntry = value.id ? value.className + ':' + value.id : value;
 
     if (forcePointers || !seen || seen.indexOf(seenEntry) > -1 || value.dirty() || Object.keys(value._getServerData()).length < 1) {
+      if (offline && value._getId().startsWith('local')) {
+        return value.toOfflinePointer();
+      }
+
       return value.toPointer();
     }
 
     seen = seen.concat(seenEntry);
-    return value._toFullJSON(seen);
+    return value._toFullJSON(seen, offline);
   }
 
   if (value instanceof _ParseOp.Op || value instanceof _ParseACL.default || value instanceof _ParseGeoPoint.default || value instanceof _ParsePolygon.default || value instanceof _ParseRelation.default) {
@@ -76,7 +80,7 @@ function encode(value
     return value.toJSON();
   }
 
-  if (toString.call(value) === '[object Date]') {
+  if (Object.prototype.toString.call(value) === '[object Date]') {
     if (isNaN(value)) {
       throw new Error('Tried to encode an invalid date.');
     }
@@ -89,13 +93,13 @@ function encode(value
     };
   }
 
-  if (toString.call(value) === '[object RegExp]' && typeof value.source === 'string') {
+  if (Object.prototype.toString.call(value) === '[object RegExp]' && typeof value.source === 'string') {
     return value.source;
   }
 
   if (Array.isArray(value)) {
     return value.map(v => {
-      return encode(v, disallowObjects, forcePointers, seen);
+      return encode(v, disallowObjects, forcePointers, seen, offline);
     });
   }
 
@@ -103,7 +107,7 @@ function encode(value
     const output = {};
 
     for (const k in value) {
-      output[k] = encode(value[k], disallowObjects, forcePointers, seen);
+      output[k] = encode(value[k], disallowObjects, forcePointers, seen, offline);
     }
 
     return output;
@@ -120,8 +124,10 @@ function _default(value
 /*:: ?: boolean*/
 , seen
 /*:: ?: Array<mixed>*/
+, offline
+/*:: ?: boolean*/
 )
 /*: any*/
 {
-  return encode(value, !!disallowObjects, !!forcePointers, seen || []);
+  return encode(value, !!disallowObjects, !!forcePointers, seen || [], offline);
 }

@@ -37,6 +37,7 @@ function _interopRequireDefault(obj) {
  * relationship.  Each instance of Parse.Relation is associated with a
  * particular parent object and key.
  * </p>
+ *
  * @alias Parse.Relation
  */
 
@@ -50,7 +51,7 @@ class ParseRelation {
 
   /**
    * @param {Parse.Object} parent The parent of this relation.
-   * @param {String} key The key for this relation on the parent.
+   * @param {string} key The key for this relation on the parent.
    */
   constructor(parent
   /*: ?ParseObject*/
@@ -95,7 +96,9 @@ class ParseRelation {
   }
   /**
    * Adds a Parse.Object or an array of Parse.Objects to the relation.
-    * @param {} objects The item or items to add.
+   *
+   * @param {(Parse.Object|Array)} objects The item or items to add.
+   * @returns {Parse.Object} The parent of the relation.
    */
 
 
@@ -115,13 +118,18 @@ class ParseRelation {
       throw new Error('Cannot add to a Relation without a parent');
     }
 
+    if (objects.length === 0) {
+      return parent;
+    }
+
     parent.set(this.key, change);
     this.targetClassName = change._targetClassName;
     return parent;
   }
   /**
    * Removes a Parse.Object or an array of Parse.Objects from this relation.
-    * @param {} objects The item or items to remove.
+   *
+   * @param {(Parse.Object|Array)} objects The item or items to remove.
    */
 
 
@@ -138,12 +146,17 @@ class ParseRelation {
       throw new Error('Cannot remove from a Relation without a parent');
     }
 
+    if (objects.length === 0) {
+      return;
+    }
+
     this.parent.set(this.key, change);
     this.targetClassName = change._targetClassName;
   }
   /**
    * Returns a JSON version of the object suitable for saving to disk.
-    * @return {Object}
+   *
+   * @returns {object} JSON representation of Relation
    */
 
 
@@ -158,7 +171,8 @@ class ParseRelation {
   /**
    * Returns a Parse.Query that is limited to objects in this
    * relation.
-    * @return {Parse.Query}
+   *
+   * @returns {Parse.Query} Relation Query
    */
 
 

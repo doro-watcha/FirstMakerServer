@@ -12,13 +12,13 @@ const { authenticate } = Authenticator
 import { problemController } from '../controllers'
 
 const s3 = new aws.S3({
-	accessKeyId: 'AKIAIX4FWDLCK3FVJGIA',
-	secretAccessKey: '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'
+	accessKeyId: 'AKIATKTQLWDDQ4DVBGH3',
+	secretAccessKey: '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'
 })
 const upload = multer({
 	storage: multerS3({
 		s3,
-		bucket: 'sp-problem-bucket',
+		bucket: 'sp-problem-bank',
 		acl: 'public-read',
 		key: (req, file, cb) => {
 
@@ -31,7 +31,7 @@ const upload = multer({
 	
 			console.log(fileName)
 			const timestamp = getToday()
-			cb(null, `${file.fieldname}/${timestamp}_${file.originalname}`)
+			cb(null, `${file.fieldname}/${file.originalname}`)
 		},
 	}),
 })
